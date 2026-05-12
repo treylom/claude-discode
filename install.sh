@@ -6,15 +6,17 @@
 #   curl -fsSL https://raw.githubusercontent.com/<owner>/claude-discode/main/install.sh | bash
 #   또는 git clone 후 ./install.sh
 #
-# 8 step (Zettelkasten WSL2-tmux 가이드 기반):
-#   1. 환경 detect (OS / WSL / package manager)
-#   2. 필수 패키지 (tmux, git, curl, jq, build-essential)
-#   3. nvm + Node.js LTS
-#   4. Claude Code 전역 설치
-#   5. oh-my-tmux (gpakosz/.tmux) 자동 install
-#   6. (선택) claude-discode tmux.conf.local 적용
-#   7. claude-discode plugin install 안내
-#   8. 첫 봇 wizard 안내 (Claude Code 안 /claude-discode:start)
+# 10 step (Zettelkasten WSL2-tmux 가이드 기반 + Codex + Obsidian CLI 추가):
+#   1.   환경 detect (OS / WSL / package manager)
+#   2.   필수 패키지 (tmux, git, curl, jq, build-essential)
+#   3.   nvm + Node.js LTS
+#   4.   Claude Code 전역 설치
+#   4.5  Codex CLI 전역 설치 (@openai/codex) — codex 호출 layer 의존
+#   5.   oh-my-tmux (gpakosz/.tmux) 자동 install
+#   6.   (선택) claude-discode tmux.conf.local 적용
+#   6.5  Obsidian CLI 환경 분기 안내 — vault 3-Tier 폴백 1순위
+#   7.   claude-discode plugin install 안내 (marketplace + slash 7종)
+#   8.   첫 봇 wizard 안내 (Claude Code 안 /claude-discode:start)
 
 set -euo pipefail
 
@@ -31,7 +33,7 @@ log()  { printf "${BLUE}[claude-discode]${NC} %s\n" "$*"; }
 ok()   { printf "  ${GREEN}✓${NC} %s\n" "$*"; }
 warn() { printf "  ${YELLOW}⚠${NC} %s\n" "$*"; }
 err()  { printf "  ${RED}✗${NC} %s\n" "$*" >&2; }
-step() { printf "\n${BOLD}${BLUE}━━━ Step %s/8 ━━━${NC} ${BOLD}%s${NC}\n" "$1" "$2"; }
+step() { printf "\n${BOLD}${BLUE}━━━ Step %s/10 ━━━${NC} ${BOLD}%s${NC}\n" "$1" "$2"; }
 
 # ---------------------------------------------------------------- globals
 
@@ -222,19 +224,30 @@ install_plugin() {
 
   cat <<'EOF'
 
-  Claude Code 안에서 다음 한 줄 실행:
+  Claude Code 안에서 (REPL 진입 후):
 
-      /plugin marketplace add <owner>/claude-discode-marketplace
+      /plugin marketplace add treylom/claude-discode
       /plugin install claude-discode@claude-discode-marketplace
 
-  또는 로컬 git clone 으로:
+  install 직후 자동 인식되는 슬래시 7종:
 
-      git clone https://github.com/<owner>/claude-discode.git ~/.claude/plugins/cache/local/claude-discode
+      /claude-discode:start          — 메인 wizard (환경 + 봇 + 첫 대화)
+      /claude-discode:install-hooks  — SessionStart + UserPromptSubmit hook merge
+      /claude-discode:create-bot     — 신규 봇 디렉토리 + .env + soul.md 자동 셋업
+      /claude-discode:add-bot        — 추가 봇 1개 신설
+      /claude-discode:open-meeting   — 회의실 폴더 신설 (다 봇 협업 4-file)
+      /claude-discode:codex-check    — Codex CLI 검증 (호출 layer 활성)
+      /claude-discode:self-update    — 자가 업데이트 (git fetch behind 비교)
 
-  install 후 Claude Code 안에서 plugin 자동 인식.
+  또는 로컬 git clone (검증·테스트용):
+
+      git clone https://github.com/treylom/claude-discode.git \
+        ~/.claude/plugins/cache/local/claude-discode
+
+  prereq: jq (Step 2 에서 자동 설치) — slash 의 hook merge 가 settings.json 안전 병합에 사용.
 
 EOF
-  warn "marketplace URL 은 GitHub 공개 레포 신설 후 채워집니다 (현 staging 단계)"
+  warn "순정 Claude Code 라면 /claude-discode:install-hooks 먼저 실행 권장 (SessionStart hook 부재 시 soul.md 고아 회귀 차단)"
 }
 
 # ---------------------------------------------------------------- Step 8

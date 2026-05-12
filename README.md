@@ -21,7 +21,7 @@ git clone https://github.com/treylom/claude-discode.git ~/code/claude-discode
 cd ~/code/claude-discode && bash install.sh
 ```
 
-`install.sh` 가 9 step 자동 수행:
+`install.sh` 가 10 step 자동 수행:
 
 | 단계 | 작업 | 의존 |
 |---|---|---|
@@ -33,15 +33,26 @@ cd ~/code/claude-discode && bash install.sh
 | 5 | oh-my-tmux (`gpakosz/.tmux`) 자동 install | git |
 | 6 | (선택) claude-discode `tmux.conf.local` 적용 | user confirm |
 | 6.5 | **Obsidian CLI** (Mac brew cask / WSL Windows native / Linux snap·flatpak·deb) — 3-Tier 폴백 1순위 | brew / snap / 수동 |
-| 7 | Claude Code plugin install 안내 (marketplace 등록 + 5 슬래시) | (Claude Code 안 슬래시) |
+| 7 | Claude Code plugin install 안내 (marketplace 등록 + 슬래시 7종) | (Claude Code 안 슬래시) |
 | 8 | 첫 봇 wizard 안내 (`/claude-discode:start`) | (Claude Code 안 슬래시) |
 
-플러그인 install 후 자동 인식되는 슬래시 5종:
+플러그인 install 후 자동 인식되는 슬래시 7종:
 - `/claude-discode:start` — 메인 wizard (환경 인식 + 봇 셋업 + 첫 대화)
+- `/claude-discode:install-hooks` — SessionStart + UserPromptSubmit hook merge (~/.claude/settings.json 안전 병합, 기존 hook 보존)
+- `/claude-discode:create-bot` — 신규 봇 디렉토리 + .env + soul.md template 자동 셋업
 - `/claude-discode:add-bot` — 추가 봇 1개 신설
 - `/claude-discode:open-meeting` — 회의실 폴더 신설 (다 봇 협업 4-file)
 - `/claude-discode:codex-check` — Codex CLI 검증 (호출 layer 활성 확인)
 - `/claude-discode:self-update` — 자가 업데이트 체크 (git fetch behind 비교)
+
+순정 Claude Code 부트스트랩 (hook + 봇 없는 상태):
+
+```
+1. /claude-discode:install-hooks   # SessionStart + UserPromptSubmit hook 등록
+2. /claude-discode:create-bot      # 첫 봇 디렉토리 + soul.md 셋업
+3. /claude-discode:start           # 메인 wizard (Discord 페어링 + 첫 대화 검증)
+4. /claude-discode:codex-check     # Codex CLI 활성 확인 (선택)
+```
 
 ## 📦 운영 노하우 가이드 (docs/)
 
@@ -100,17 +111,46 @@ wizard 가 단계별 안내:
 
 ```
 claude-discode/
-├── install.sh                            # 환경 자동 detect + 8-step 자동화
-├── README.md                              # 본 파일
+├── install.sh                            # 환경 자동 detect + 10-step 자동화
+├── README.md                              # 본 파일 (한국어)
+├── README.en.md                           # 영문판 (글로벌 강의 대비)
 ├── LICENSE                                # MIT
+├── CODEX_REVIEW.md                        # Codex 1차 adversarial review
+├── CODEX_VERIFY.md                        # Codex 2차 verify (회복 후)
+├── .claude-plugin/
+│   ├── marketplace.json                   # claude-discode-marketplace
+│   └── plugin.json                        # claude-discode v0.1.0
+├── commands/                              # 슬래시 7종
+│   ├── start.md                           # 메인 wizard (4-step 부트스트랩)
+│   ├── install-hooks.md                   # SessionStart + UserPromptSubmit hook merge
+│   ├── create-bot.md                      # 봇 디렉토리 + soul.md 자동 셋업
+│   ├── add-bot.md
+│   ├── open-meeting.md
+│   ├── codex-check.md
+│   └── self-update.md
 ├── skills/                                # agentskills.io 표준 SKILL.md
-│   └── claude-discode-bootstrap/
-│       ├── SKILL.md                       # core 2 키 (name + description) frontmatter
-│       ├── scripts/                       # wizard helper
-│       └── references/                    # 한국어 reference
+│   ├── claude-discode-bootstrap/
+│   ├── claude-discode-shared-memory/      # 4-tier 메모리 정책
+│   ├── claude-discode-meetings/           # 회의실 4-file protocol
+│   └── claude-discode-codex-bridge/       # /tofu-at-codex 패턴
+├── hooks/                                 # 봇 운영 hook 3종
+│   ├── bot-session-init.sh                # SessionStart → soul.md 자동 inject
+│   ├── discord-slash-cmd.sh               # UserPromptSubmit → 슬래시 강제
+│   └── regression-self-check.sh           # 4-gate self-check 표 주입
+├── templates/                             # 봇 페르소나 template
+│   ├── soul-general-assistant.md          # default 범용 비서
+│   ├── soul-research-bot.md               # 자료조사·교차검증
+│   ├── soul-writing-bot.md                # 글쓰기·퇴고
+│   ├── soul-schedule-bot.md               # 일정·Todo·알람
+│   ├── soul-custom.md                     # 자유 페르소나 + anatomy 가이드
+│   └── discord-state-dir-README.md        # DISCORD_STATE_DIR 환경변수 구조
 ├── configs/                               # 우리 색깔 tmux.conf.local 등
 │   └── tmux.conf.local
 └── docs/                                  # 한국어 친절 가이드 (Zettelkasten 톤)
+    ├── 03-shared-memory.md                # 4-tier 메모리
+    ├── 04-obsidian-cli.md                 # 3-Tier 폴백
+    ├── 06-claude-code-server.md           # headless + MCP server
+    └── 08-debug-노하우.md                  # 디버깅 24+ 카테고리
 ```
 
 ---

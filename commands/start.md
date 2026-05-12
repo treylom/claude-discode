@@ -11,6 +11,23 @@ $ARGUMENTS
 
 ---
 
+## 4-step 부트스트랩 (순정 Claude Code 가정)
+
+```
+Step 0. install-hooks      → SessionStart + UserPromptSubmit hook merge (~/.claude/settings.json)
+Step 1-5. 본 wizard         → 환경 + Discord 봇 + 페어링 (아래 흐름)
+```
+
+순정 Claude Code 에 hook 이 없으면 soul.md 가 단순 markdown 파일로 방치 → 페르소나 inject 안 됨 (5/12 회귀 R5). hooks 먼저 등록.
+
+```bash
+/claude-discode:install-hooks   # 본 wizard 진입 전 실행 권장 (한 번만)
+```
+
+이미 vault 운영 중인 사용자 (기존 hook 존재) 는 본 step skip.
+
+---
+
 ## 진행 흐름 (agent 가 사용자에게 안내)
 
 ### Step 1. 환경 점검 (자동, 사용자 input 0회)
@@ -34,9 +51,26 @@ command -v tmux git curl node claude     # 의존 도구 확인
    - Bot Permissions: Send Messages, Read Messages, Read Message History, Add Reactions, Attach Files, Embed Links
 4. 생성된 URL 로 봇을 본인 Discord 서버 또는 DM 가능 채널에 초대
 
-### Step 3. 봇 토큰 입력 (AskUserQuestion)
+### Step 3-4. 봇 디렉토리 + soul.md 자동 셋업 (자동화 권장)
 
-봇 토큰 입력 → 다음 위치에 저장:
+본 두 step 은 `/claude-discode:create-bot` 슬래시가 일괄 처리합니다 (대화형). 수동으로 하고 싶을 때만 아래 manual 흐름 참고.
+
+```bash
+# 자동화 — 권장
+/claude-discode:create-bot
+```
+
+`create-bot` 가 묻는 항목:
+- 봇 이름 (예: `karpathy`, `mybot`)
+- Discord 토큰 (Step 2 에서 발급)
+- 페르소나 template 선택 (research-bot / writing-bot / schedule-bot / general-assistant / custom)
+
+자동 수행:
+- `~/.claude/channels/discord-<bot-name>/` 디렉토리 신설 (chmod 700)
+- `.env` 작성 (chmod 600) — `DISCORD_BOT_TOKEN`
+- `soul.md` 작성 — 선택 template 안 placeholder 자동 치환
+
+#### (manual) Step 3. 봇 토큰 입력
 
 ```bash
 mkdir -p ~/.claude/channels/discord-<bot-name>
@@ -49,17 +83,17 @@ chmod 600 ~/.claude/channels/discord-<bot-name>/.env
 
 ⚠️ 토큰을 Discord 본문이나 git 에 노출 금지.
 
-### Step 4. soul.md 페르소나 결정 (AskUserQuestion)
+#### (manual) Step 4. soul.md 페르소나 결정
 
-template 중 선택 또는 자유 작성:
+template 5종 중 선택 또는 자유 작성:
 
-| template | 어울리는 사용 |
-|---|---|
-| `general-assistant` | 범용 비서 (default) |
-| `research-bot` | 자료조사·교차검증 (코난 스타일) |
-| `writing-bot` | 글쓰기·퇴고 (글재경 스타일) |
-| `schedule-bot` | 일정·Todo (스트레인지 스타일) |
-| `custom` | 자유 페르소나 (사용자 직접 작성) |
+| template | 어울리는 사용 | 파일 |
+|---|---|---|
+| `general-assistant` | 범용 비서 (default) | `templates/soul-general-assistant.md` |
+| `research-bot` | 자료조사·교차검증 (코난 스타일) | `templates/soul-research-bot.md` |
+| `writing-bot` | 글쓰기·퇴고 (글재경 스타일) | `templates/soul-writing-bot.md` |
+| `schedule-bot` | 일정·Todo (스트레인지 스타일) | `templates/soul-schedule-bot.md` |
+| `custom` | 자유 페르소나 (anatomy 가이드 포함) | `templates/soul-custom.md` |
 
 선택 후 다음 위치 생성:
 ```
@@ -95,8 +129,11 @@ Discord 앱에서 봇에 DM:
 
 ## 다음 step
 
-추가 봇 / 회의실 / 자가 업데이트:
+추가 봇 / 회의실 / 자가 업데이트 / Codex 검증:
 
 - `/claude-discode:add-bot` — 추가 봇 1개 신설
-- `/claude-discode:open-meeting` — 회의실 폴더 신설 (다 봇 협업)
+- `/claude-discode:open-meeting` — 회의실 폴더 신설 (다 봇 협업 4-file)
+- `/claude-discode:codex-check` — Codex CLI 검증 (호출 layer 활성)
 - `/claude-discode:self-update` — 메인봇 시작 시 git pull 체크
+- `/claude-discode:install-hooks` — hook 재정비 (settings.json drift 시)
+- `/claude-discode:create-bot` — 추가 봇 자동 셋업 반복
