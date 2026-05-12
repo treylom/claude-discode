@@ -1,0 +1,25 @@
+name: claude-discode
+version: 0.2.0
+description: KM ingestion + 4-Tier vault search (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). Discord-friendly knowledge manager for individual + team vaults.
+provides_tools:
+  - claude_discode_ingest
+  - claude_discode_search
+provides_hooks:
+  - on_session_start
+provides_commands:
+  - /claude-discode-km
+  - /claude-discode-search
+author: 김재경 (tofukyung)
+homepage: https://github.com/treylom/claude-discode
+license: MIT
+platforms:
+  - macos
+  - linux
+requires_env: []
+metadata:
+  contract_version: "0.1.0"
+  contract_path: "contracts/search-fallback-4tier.md"
+  km_variants:
+    - lite
+    - at
+    - plain

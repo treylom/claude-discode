@@ -1,0 +1,47 @@
+{
+  "name": "@treylom/claude-discode",
+  "version": "0.2.0",
+  "description": "KM ingestion + 4-Tier vault search (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). Multi-harness: Claude Code / Hermes / Gemini / OpenCode.",
+  "keywords": [
+    "claude-code",
+    "hermes-agent",
+    "gemini-cli",
+    "agentskills",
+    "knowledge-manager",
+    "vault-search",
+    "graphrag",
+    "obsidian"
+  ],
+  "homepage": "https://github.com/treylom/claude-discode#readme",
+  "bugs": "https://github.com/treylom/claude-discode/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treylom/claude-discode.git"
+  },
+  "license": "MIT",
+  "author": "tofukyung (김재경)",
+  "files": [
+    "contracts/",
+    "scripts/",
+    "skills/",
+    "commands/",
+    "templates/",
+    "configs/",
+    "hooks/",
+    "hermes-plugin/",
+    ".claude-plugin/",
+    "gemini-extension.json",
+    "GEMINI.md",
+    "AGENTS.md",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "install.sh"
+  ],
+  "bin": {
+    "claude-discode-km-version": "scripts/km-version.sh"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

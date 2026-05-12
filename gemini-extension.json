@@ -1,0 +1,15 @@
+{
+  "name": "claude-discode",
+  "version": "0.2.0",
+  "description": "KM ingestion + 4-Tier vault search packaged for Gemini CLI / OpenCode / multi-harness use.",
+  "contextFileName": "GEMINI.md",
+  "skillsDir": "skills",
+  "commandsDir": "commands",
+  "contractsDir": "contracts",
+  "scriptsDir": "scripts",
+  "compatibility": {
+    "agentskills.io": "1.0",
+    "hermes-agent": ">=0.12",
+    "claude-code": ">=1.0"
+  }
+}
