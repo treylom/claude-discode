@@ -285,12 +285,35 @@ main() {
   install_base_packages
   install_node
   install_claude_code
+  install_codex_cli              # NEW Step 4.5
   install_oh_my_tmux
   apply_our_tmux_conf
   install_plugin
   print_next_steps
 
   log "claude-discode 설치 종료"
+}
+
+# ---------------------------------------------------------------- Step 4.5 (NEW)
+
+install_codex_cli() {
+  step "4.5" "Codex CLI (Codex 호출 layer 의존)"
+
+  if command -v codex >/dev/null 2>&1; then
+    ok "Codex CLI 이미 설치됨: $(codex --version 2>&1 | head -1) → skip"
+    return
+  fi
+
+  # nvm 활성화 (Step 3 에서)
+  export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+  # shellcheck disable=SC1091
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+  npm install -g @openai/codex
+
+  ok "Codex CLI: $(codex --version 2>&1 | head -1)"
+  warn "다음 단계로 가기 전, 다른 터미널에서 'codex login' 으로 OAuth 인증해주세요"
+  warn "Claude Code 안 install 후 /claude-discode:codex-check 슬래시로 검증 가능"
 }
 
 main "$@"

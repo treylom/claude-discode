@@ -1,0 +1,20 @@
+{
+  "name": "claude-discode-marketplace",
+  "description": "Claude Code + Discord 봇 + codex 호출 통합 플러그인 마켓플레이스 — 패스트캠퍼스 강의용",
+  "owner": {
+    "name": "김재경 (treylom)",
+    "email": "treylom@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "claude-discode",
+      "description": "Claude Code 환경 + Discord 봇 1개 + tmux/oh-my-tmux 통합 셋업 플러그인. WSL/Linux/macOS 자동 detect.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "김재경 (treylom)",
+        "email": "treylom@users.noreply.github.com"
+      }
+    }
+  ]
+}

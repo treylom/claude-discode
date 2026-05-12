@@ -1,0 +1,114 @@
+---
+description: 회의실 폴더 신설 (다 봇 협업 4-file 표준 — 00-context / 01-spec / 02-progress / 03-outcome)
+allowedTools: Bash, Read, Write, AskUserQuestion
+---
+
+# /claude-discode:open-meeting — 회의실 신설
+
+> 다 봇 협업 또는 깊은 brainstorming 진행 시 영구 기록용 폴더 신설.
+
+$ARGUMENTS
+
+---
+
+## 회의실 spec (vault 표준)
+
+위치: `<vault-or-project>/.claude-meetings/<YYYY-MM-DD>-<topic>/`
+
+4-file 표준:
+- `00-context.md` — trigger, audience, scope
+- `01-spec.md` — Q&A 진행, decision lock, 미결
+- `02-progress.md` — timeline (KST)
+- `03-outcome.md` — 회의 마감 후 결론 + 후속 action
+
+봇 N 분기:
+- 0 봇 (사용자만) → 공유 memory 직접 등재, 폴더 X
+- 1 봇 → outcome-only.md
+- ≥2 봇 → Full 4-file (본 slash 가 신설)
+
+---
+
+## 진행 흐름
+
+### Step 1. 회의 정보 입력 (AskUserQuestion)
+
+```
+주제 (kebab-case, 영문 또는 한글): 
+audience 봇 mention list (예: <@123>, <@456>): 
+trigger (왜 회의 신설?): 
+예상 시간: 
+```
+
+### Step 2. 폴더 신설
+
+```bash
+TODAY=$(date +%Y-%m-%d)
+TOPIC=<input-topic>
+MEETING_DIR=<vault-or-project>/.claude-meetings/${TODAY}-${TOPIC}
+mkdir -p ${MEETING_DIR}
+```
+
+### Step 3. 4 파일 skeleton 생성
+
+`00-context.md`:
+```yaml
+---
+title: <topic> — context
+date: <today>
+status: in-progress
+audience:
+  - <봇 1>
+  - <봇 2>
+discord_thread: <thread-id-or-pending>
+trigger: <입력>
+---
+
+# 회의 context
+
+## Trigger
+<입력>
+
+## audience 결정
+- <봇 1> — <역할>
+- <봇 2> — <역할>
+
+## scope
+<범위 정의>
+```
+
+`01-spec.md` / `02-progress.md` / `03-outcome.md` 도 skeleton 생성 (frontmatter + 빈 헤더).
+
+### Step 4. Discord 스레드 신설 안내 (선택)
+
+```bash
+# 어벤져스 (또는 적합) 채널 안에 새 스레드 생성
+# Discord REST API 또는 봇 도구로:
+POST /channels/<parent-channel-id>/threads
+{
+  "name": "<topic> — meeting",
+  "type": 11,  # PUBLIC_THREAD
+  "auto_archive_duration": 1440
+}
+```
+
+스레드 ID 받으면 `00-context.md` 의 `discord_thread:` 필드 채워넣기.
+
+### Step 5. audience 봇 mention (필수)
+
+회의 신설 후 audience 봇 들에게 Discord direct mention. 텍스트 명시만으로는 부족:
+
+```
+<@봇1> [회의 신설] <topic>
+- 위치: <vault>/.claude-meetings/<topic>/
+- 00-context.md 참조
+- audience: <봇 list>
+```
+
+---
+
+## 검증
+
+- [ ] 4 파일 모두 존재 (`00-context.md` 외 3개)
+- [ ] audience 봇 list 정확 mention
+- [ ] Discord 스레드 신설 시 thread_id 가 00-context 에 기록
+- [ ] 회의 마감 시 `03-outcome.md` 가 후속 action + 시간 기반 caller (스케쥴 봇) 에 캘린더 등재

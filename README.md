@@ -21,7 +21,7 @@ git clone https://github.com/treylom/claude-discode.git ~/code/claude-discode
 cd ~/code/claude-discode && bash install.sh
 ```
 
-`install.sh` 가 8 step 자동 수행:
+`install.sh` 가 9 step 자동 수행:
 
 | 단계 | 작업 | 의존 |
 |---|---|---|
@@ -29,10 +29,28 @@ cd ~/code/claude-discode && bash install.sh
 | 2 | 필수 패키지 (tmux + git + curl + jq + build-essential) | apt / dnf / yum / brew / pacman |
 | 3 | nvm + Node.js LTS | curl |
 | 4 | Claude Code 전역 설치 | npm |
+| 4.5 | **Codex CLI** (`@openai/codex`) 전역 설치 — codex 호출 layer 의존 | npm |
 | 5 | oh-my-tmux (`gpakosz/.tmux`) 자동 install | git |
 | 6 | (선택) claude-discode `tmux.conf.local` 적용 | user confirm |
-| 7 | Claude Code plugin install 안내 | (Claude Code 안 슬래시) |
+| 7 | Claude Code plugin install 안내 (marketplace 등록 + 5 슬래시) | (Claude Code 안 슬래시) |
 | 8 | 첫 봇 wizard 안내 (`/claude-discode:start`) | (Claude Code 안 슬래시) |
+
+플러그인 install 후 자동 인식되는 슬래시 5종:
+- `/claude-discode:start` — 메인 wizard (환경 인식 + 봇 셋업 + 첫 대화)
+- `/claude-discode:add-bot` — 추가 봇 1개 신설
+- `/claude-discode:open-meeting` — 회의실 폴더 신설 (다 봇 협업 4-file)
+- `/claude-discode:codex-check` — Codex CLI 검증 (호출 layer 활성 확인)
+- `/claude-discode:self-update` — 자가 업데이트 체크 (git fetch behind 비교)
+
+## 📦 운영 노하우 가이드 (docs/)
+
+claude-discode 가 packaging 한 우리 vault 운영 노하우:
+
+- [03-shared-memory.md](docs/03-shared-memory.md) — **공유 메모리 4-tier** (T1 git-tracked / T2 machine-specific / T3 project-meetings / T4 per-bot WD)
+- [06-claude-code-server.md](docs/06-claude-code-server.md) — **Claude Code 서버 기능** (`claude -p` 헤드리스 + MCP server + tmux session vs headless 분리 패턴)
+- [08-debug-노하우.md](docs/08-debug-노하우.md) — **디버깅 24+ 카테고리** (Workflow / Code Review / Vault Path / 회의 protocol / Security / Time / LLM Prompt / Schedule / Plugins / External Apps / Cross-bot SoP)
+- (예정) `05-meeting-thread-protocol.md` — 회의 신설 SOURCE FACT cross-check + Discord REST API thread + audience direct mention + 3-channel 병행 보고
+- (예정) `07-codex-호출-layer.md` — `/tofu-at-codex` v2.2 + codex-exec-bridge 패턴 + Hermes 호환 subprocess plugin
 
 ### Step 2. Claude Code 인증
 
