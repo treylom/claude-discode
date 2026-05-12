@@ -32,6 +32,7 @@ cd ~/code/claude-discode && bash install.sh
 | 4.5 | **Codex CLI** (`@openai/codex`) 전역 설치 — codex 호출 layer 의존 | npm |
 | 5 | oh-my-tmux (`gpakosz/.tmux`) 자동 install | git |
 | 6 | (선택) claude-discode `tmux.conf.local` 적용 | user confirm |
+| 6.5 | **Obsidian CLI** (Mac brew cask / WSL Windows native / Linux snap·flatpak·deb) — 3-Tier 폴백 1순위 | brew / snap / 수동 |
 | 7 | Claude Code plugin install 안내 (marketplace 등록 + 5 슬래시) | (Claude Code 안 슬래시) |
 | 8 | 첫 봇 wizard 안내 (`/claude-discode:start`) | (Claude Code 안 슬래시) |
 
@@ -47,6 +48,7 @@ cd ~/code/claude-discode && bash install.sh
 claude-discode 가 packaging 한 우리 vault 운영 노하우:
 
 - [03-shared-memory.md](docs/03-shared-memory.md) — **공유 메모리 4-tier** (T1 git-tracked / T2 machine-specific / T3 project-meetings / T4 per-bot WD)
+- [04-obsidian-cli.md](docs/04-obsidian-cli.md) — **Obsidian CLI 설정** (Mac brew / WSL Windows native / Linux snap·flatpak·deb) + 3-Tier 폴백 (CLI → MCP → Write/Read/Grep) + 알려진 버그·워크어라운드
 - [06-claude-code-server.md](docs/06-claude-code-server.md) — **Claude Code 서버 기능** (`claude -p` 헤드리스 + MCP server + tmux session vs headless 분리 패턴)
 - [08-debug-노하우.md](docs/08-debug-노하우.md) — **디버깅 24+ 카테고리** (Workflow / Code Review / Vault Path / 회의 protocol / Security / Time / LLM Prompt / Schedule / Plugins / External Apps / Cross-bot SoP)
 - (예정) `05-meeting-thread-protocol.md` — 회의 신설 SOURCE FACT cross-check + Discord REST API thread + audience direct mention + 3-channel 병행 보고

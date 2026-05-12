@@ -285,13 +285,76 @@ main() {
   install_base_packages
   install_node
   install_claude_code
-  install_codex_cli              # NEW Step 4.5
+  install_codex_cli              # Step 4.5
   install_oh_my_tmux
   apply_our_tmux_conf
+  install_obsidian_cli           # NEW Step 6.5
   install_plugin
   print_next_steps
 
   log "claude-discode 설치 종료"
+}
+
+# ---------------------------------------------------------------- Step 6.5 (NEW)
+
+install_obsidian_cli() {
+  step "6.5" "Obsidian CLI (vault 접근 3-Tier 폴백 1순위)"
+
+  if command -v obsidian >/dev/null 2>&1; then
+    ok "Obsidian CLI 이미 설치됨: $(obsidian --version 2>&1 | head -1) → skip"
+    return
+  fi
+
+  case "$ENV_KIND" in
+    macos)
+      log "Obsidian app 설치 시도 (brew cask)"
+      brew install --cask obsidian || warn "brew cask 실패 — https://obsidian.md/download 에서 수동 설치"
+      ;;
+    wsl)
+      warn "WSL 환경 — Windows native Obsidian 호출 권장:"
+      cat <<'EOF'
+
+  1. Windows 에서 https://obsidian.md/download → Obsidian Installer 다운로드 + 실행
+  2. WSL alias 등록:
+       alias obsidian="'/mnt/c/Program Files/Obsidian/Obsidian.com'"
+       # 또는 ~/.bashrc 에 추가
+  3. WSL 안 vault 경로:
+       VAULT="/mnt/c/Users/<windows-user>/Documents/Obsidian/<vault-name>"
+
+  자세히는 docs/04-obsidian-cli.md 참조.
+
+EOF
+      ;;
+    linux)
+      log "Linux 환경 — 3 옵션 안내"
+      cat <<'EOF'
+
+  Option A — Snap (Ubuntu 권장):
+       sudo snap install obsidian --classic
+
+  Option B — Flatpak:
+       flatpak install flathub md.obsidian.Obsidian
+
+  Option C — AppImage / deb:
+       https://obsidian.md/download → 다운로드 후 수동 설치
+
+EOF
+      ;;
+  esac
+
+  # 검증
+  if command -v obsidian >/dev/null 2>&1; then
+    ok "Obsidian CLI: $(obsidian --version 2>&1 | head -1)"
+  else
+    warn "Obsidian CLI 설치 안 됨 — 3-Tier 폴백의 Tier 2 (MCP) 또는 Tier 3 (Write/Read/Grep) 으로 작동"
+    warn "Obsidian 사용 안 하시면 본 단계 skip OK — claude-discode 대부분 작동"
+  fi
+
+  # vault 경로 설정 안내
+  log "Obsidian vault 경로 환경변수 권장 (~/.bashrc 또는 ~/.zshrc 에 추가):"
+  echo "  export OBSIDIAN_VAULT=\"\$HOME/Documents/<vault-name>\""
+  echo "  # WSL: export OBSIDIAN_VAULT=\"/mnt/c/Users/<user>/Documents/Obsidian/<vault-name>\""
+  echo ""
 }
 
 # ---------------------------------------------------------------- Step 4.5 (NEW)
