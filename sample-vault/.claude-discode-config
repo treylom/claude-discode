@@ -1,0 +1,5 @@
+vault_name: NuriFlow Systems Sample Vault
+source_of_truth: Company-Brochure-v1.pdf
+date_range: 2025-05-13..2026-05-13
+language: ko-en mixed
+expected_files: 100+
