@@ -1,36 +1,39 @@
 # Generation Report
 
-Company: NuriFlow Systems / 누리플로우 시스템즈
-Total files: 115
+Legacy PDFs renamed: 0
+Total files: 746
 
 ## Counts
-- .docx: 30
-- .md: 50
-- .pdf: 34
-- [no extension]: 1
+- .docx: 140
+- .md: 212
+- .pdf: 190
+- .py: 1
+- .sh: 1
+- .typ: 201
+- [none]: 1
 
-## Validation
+## Search Validation
 - 회사 미션: 12 sample hits
   - README.md
-  - Company-Brochure-v1.docx
-  - Inbox/2025-06-05-thread-01.md
-  - Inbox/2025-11-16-weekly-status-09.md
-  - Inbox/2025-05-16-weekly-status-01.md
+  - build/2026-03-31-proposal-19/2026-03-31-proposal-19.typ
+  - build/2026-03-31-brochure-11/2026-03-31-brochure-11.typ
+  - build/2025-12-31-policy-14/2025-12-31-policy-14.typ
+  - build/2026-01-31-marketing-05/2026-01-31-marketing-05.typ
 - Q1 2026 매출: 12 sample hits
   - README.md
-  - Company-Brochure-v1.docx
-  - Inbox/2025-06-05-thread-01.md
-  - Inbox/2025-11-16-weekly-status-09.md
-  - Inbox/2025-05-16-weekly-status-01.md
+  - build/2026-03-31-proposal-19/2026-03-31-proposal-19.typ
+  - build/2026-03-31-brochure-11/2026-03-31-brochure-11.typ
+  - build/2025-12-31-policy-14/2025-12-31-policy-14.typ
+  - build/2026-01-31-marketing-05/2026-01-31-marketing-05.typ
 - 신제품 출시: 12 sample hits
   - README.md
-  - Company-Brochure-v1.docx
-  - Inbox/2025-06-05-thread-01.md
-  - Inbox/2025-11-16-weekly-status-09.md
-  - Inbox/2025-05-16-weekly-status-01.md
+  - build/2026-03-31-proposal-19/2026-03-31-proposal-19.typ
+  - build/2026-03-31-brochure-11/2026-03-31-brochure-11.typ
+  - build/2025-12-31-policy-14/2025-12-31-policy-14.typ
+  - build/2026-01-31-marketing-05/2026-01-31-marketing-05.typ
 - HR 정책: 12 sample hits
   - README.md
-  - Company-Brochure-v1.docx
-  - Inbox/2025-06-05-thread-01.md
-  - Inbox/2025-11-16-weekly-status-09.md
-  - Inbox/2025-05-16-weekly-status-01.md
+  - build/2026-03-31-proposal-19/2026-03-31-proposal-19.typ
+  - build/2026-03-31-brochure-11/2026-03-31-brochure-11.typ
+  - build/2025-12-31-policy-14/2025-12-31-policy-14.typ
+  - build/2026-01-31-marketing-05/2026-01-31-marketing-05.typ

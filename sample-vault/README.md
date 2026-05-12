@@ -1,21 +1,18 @@
-# Student Guide
+# NuriFlow Systems Sample Vault
 
-Date: 2026-05-13
+This sample vault models NuriFlow Systems / 누리플로우 시스템즈, a Seoul B2B SaaS company with 186 employees, USD 28.4M ARR, HQ Seoul plus Singapore and Austin, and products FlowDesk, DocuLens AI, InsightBridge, LaunchOps, and Marketplace Preview.
 
-Start with the brochure, then triangulate facts through reports, contracts, product files, HR policies, and Inbox notes.
+## Typst Workflow
 
-This document belongs to the one-year operating history of NuriFlow Systems (누리플로우 시스템즈), a Seoul-headquartered B2B SaaS company with 186 employees and USD 28.4M ARR at FY2026 close. Its core products are FlowDesk, DocuLens AI, InsightBridge, LaunchOps onboarding, and regulated-industry workflow consulting. The company serves mid-market firms in logistics, manufacturing, healthcare operations, professional services, and regulated finance. The business model combines annual subscriptions, implementation packages, managed analytics, and limited strategic consulting for customers who need change management. Internal teams use Korean and English interchangeably; therefore some records include Korean search anchors such as 회사 미션, 신제품 출시, Q1 2026 매출, and HR 정책.
+Install Typst, then compile all generated sources:
 
-The main issue in this file is how to research a mixed-format company vault. Executives evaluate it through three lenses: customer confidence, implementation capacity, and measurable operating leverage. Customer confidence means the buyer can trace every automation decision back to a source paragraph or approved workflow rule. Implementation capacity means the services team can deliver without creating unpriced custom work. Operating leverage means recurring revenue grows faster than support load, with product education absorbing repeated questions. These lenses appear in the company brochure, quarterly reviews, launch notes, contract exhibits, and HR policies.
+```bash
+brew install typst
+sample-vault/scripts/build-typst-vault.sh
+```
 
-Related resources: [[Company-Brochure-v1]], [[2026-Q1-Quarterly-Review]], [[HR-Policy-Handbook-2026]].
+PDFs live in `sample-vault/build/<doc-id>/` beside their `.typ` sources. All generated PDFs in this vault are compiled from Typst sources. `design/common.typ` defines Korean typography with Pretendard and Noto Sans CJK KR at the front of the fallback list, `lang: "ko"`, `par(leading: 0.65em)`, A4 pages, and code block monospace fallbacks.
 
-Teams are asked to preserve decision evidence, name owners clearly, and separate confirmed facts from assumptions. Customer-facing versions remove salary details, security-sensitive architecture notes, and draft pricing concessions. The finance team tracks ARR, recognized services revenue, gross retention, expansion pipeline, and onboarding margin. The product team records launch impact by adoption, cited extraction accuracy, workflow completion time, and support deflection. The people team checks whether hiring, onboarding, and manager rituals can support the promised customer experience. The source-of-truth brochure should be treated as the canonical company overview when conflicts appear. Teams are asked to preserve decision evidence, name owners clearly, and separate confirmed facts from assumptions. Customer-facing versions remove salary details, security-sensitive architecture notes, and draft pricing concessions. The finance team tracks ARR, recognized services revenue, gross retention, expansion pipeline, and onboarding margin. The product team records launch impact by adoption, cited extraction accuracy, workflow completion time, and support deflection. The people team checks whether hiring, onboarding, and manager rituals can support the promised customer experience. The source-of-truth brochure should be treated as the canonical company overview when conflicts appear. Teams are asked to preserve decision evidence, name owners clearly, and separate confirmed facts from assumptions. Customer-facing versions remove salary details, security-sensitive architecture notes, and draft pricing concessions. The finance team tracks ARR, recognized services revenue, gross retention, expansion pipeline, and onboarding margin. The product team records launch impact by adoption, cited extraction accuracy, workflow completion time, and support deflection. The people team checks whether hiring, onboarding, and manager rituals can support the promised customer experience. The source-of-truth brochure should be treated as the canonical company overview when conflicts appear. Teams are asked to preserve decision evidence, name owners clearly, and separate confirmed facts from assumptions. Customer-facing versions remove salary details, security-sensitive architecture notes, and draft pricing concessions. The finance team tracks ARR, recognized services revenue, gross retention, expansion pipeline, and onboarding margin. The product team records launch impact by adoption, cited extraction accuracy, workflow completion time, and support deflection. The people team checks whether hiring, onboarding, and manager rituals can support the promised customer experience. The source-of-truth brochure should be treated as the canonical company overview when conflicts appear. Teams are asked to preserve decision evidence, name owners clearly, and separate confirmed facts from assumptions.
+## Search Checks
 
-## Five sample research scenarios
-
-1. Find the company mission and compare how marketing, HR, and finance phrase it.
-2. Reconstruct Q1 2026 revenue using monthly reports, the quarterly review, and finance notes.
-3. Trace every 신제품 출시 from announcement to customer-facing material.
-4. Audit HR 정책 changes after the November 2025 people operations hire.
-5. Identify contract risks created by rapid implementation growth.
+The vault intentionally repeats these research anchors across formats: 회사 미션, Q1 2026 매출, 신제품 출시, HR 정책. The dates are distributed from 2025-05-13 through 2026-05-13.
