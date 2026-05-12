@@ -1,6 +1,8 @@
 # claude-discode
 
 > Claude Code + Discord 봇 + codex 호출 통합 플러그인 — 패스트캠퍼스 강의용
+>
+> 🌐 **English version**: [README.en.md](README.en.md)
 
 WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Claude Code + tmux + oh-my-tmux 까지 세팅하고, Discord 봇 1개 띄워 첫 대화까지 검증하는 플러그인입니다.
 
