@@ -1,0 +1,20 @@
+services:
+  sandbox:
+    build:
+      context: ..
+      dockerfile: sandbox/Dockerfile
+    image: claude-discode-sandbox
+    container_name: claude-discode-sandbox
+    working_dir: /claude-discode
+    volumes:
+      - ..:/claude-discode
+      - sandbox-home:/root
+    environment:
+      CLAUDE_DISCODE_HOME: /claude-discode
+      CLAUDE_DISCODE_VAULT: /claude-discode/sample-vault
+      CLAUDE_DISCODE_HEADLESS: "1"
+    stdin_open: true
+    tty: true
+
+volumes:
+  sandbox-home: {}
