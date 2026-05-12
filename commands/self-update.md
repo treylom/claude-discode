@@ -1,6 +1,7 @@
 ---
 description: claude-discode 플러그인 자가 업데이트 체크 (git fetch + behind 알림) — 메인봇 SessionStart 시 자동 호출 가능
-allowedTools: Bash, Read
+allowed-tools: Bash Read
+disable-model-invocation: true
 ---
 
 # /claude-discode:self-update — 자가 업데이트 체크
@@ -78,6 +79,8 @@ fi
 
 ## SessionStart hook 으로 자동 호출 (선택)
 
+⚠️ **재귀 invoke 차단** — `claude -p` 호출 X (자식 process 가 같은 settings.json 읽고 SessionStart 다시 fire → 무한 재귀 risk). 대신 bash 직접 호출로 lightweight behind-count 만.
+
 `~/.claude/settings.json` 또는 `<vault>/.claude/settings.json` 의 hook 등록:
 
 ```json
@@ -89,7 +92,8 @@ fi
         "hooks": [
           {
             "type": "command",
-            "command": "claude -p '/claude-discode:self-update'"
+            "command": "cd $HOME/.claude/plugins/cache/local/claude-discode 2>/dev/null && git fetch --quiet origin 2>/dev/null && BEHIND=$(git rev-list HEAD..origin/main --count 2>/dev/null) && [ \"${BEHIND:-0}\" -gt 0 ] && echo \"⚠ claude-discode behind by $BEHIND commits — /claude-discode:self-update 실행 권장\" || true",
+            "timeout": 5
           }
         ]
       }
@@ -98,7 +102,7 @@ fi
 }
 ```
 
-→ 매 세션 시작 시 자동 update check. behind 시만 알림.
+→ 매 세션 시작 시 자동 update check (bash 직접, claude 재귀 invoke 회피). behind 시만 stdout 알림 — claude 가 본 알림을 attention pool 에 흡수. `/claude-discode:self-update` 는 사용자 명시 호출 (`disable-model-invocation: true`).
 
 ---
 

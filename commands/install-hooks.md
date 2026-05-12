@@ -1,6 +1,7 @@
 ---
 description: claude-discode 의 SessionStart + UserPromptSubmit hooks 를 ~/.claude/settings.json 에 안전 merge (기존 hook 보존)
-allowedTools: Bash, Read, Write, Edit, AskUserQuestion
+allowed-tools: Bash Read Write Edit AskUserQuestion
+disable-model-invocation: true
 ---
 
 # /claude-discode:install-hooks — hook 등록
@@ -91,7 +92,7 @@ EOF
 )
 
 # 기존 hook 보존 + claude-discode hook append
-jq -s '.[0] * .[1] | .hooks.SessionStart = ((.[0].hooks.SessionStart // []) + (.[1].hooks.SessionStart // []) | unique_by(.hooks[0].command)) | .hooks.UserPromptSubmit = ((.[0].hooks.UserPromptSubmit // []) + (.[1].hooks.UserPromptSubmit // []))' \
+jq -s '.[0] * .[1] | .hooks.SessionStart = ((.[0].hooks.SessionStart // []) + (.[1].hooks.SessionStart // []) | unique_by(.hooks[0].command)) | .hooks.UserPromptSubmit = ((.[0].hooks.UserPromptSubmit // []) + (.[1].hooks.UserPromptSubmit // []) | unique_by(.hooks[0].command))' \
   "$SETTINGS" <(echo "$PATCH") > "$SETTINGS.tmp"
 mv "$SETTINGS.tmp" "$SETTINGS"
 ```

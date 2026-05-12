@@ -1,6 +1,7 @@
 ---
 description: 새 Discord 봇 디렉토리 (~/.claude/channels/discord-<bot-name>/) 생성 + .env + soul.md template 자동 셋업
-allowedTools: Bash, Read, Write, AskUserQuestion
+allowed-tools: Bash Read Write AskUserQuestion
+disable-model-invocation: true
 ---
 
 # /claude-discode:create-bot — 봇 디렉토리 생성

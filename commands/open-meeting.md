@@ -1,6 +1,7 @@
 ---
 description: 회의실 폴더 신설 (다 봇 협업 4-file 표준 — 00-context / 01-spec / 02-progress / 03-outcome)
-allowedTools: Bash, Read, Write, AskUserQuestion
+allowed-tools: Bash Read Write AskUserQuestion
+disable-model-invocation: true
 ---
 
 # /claude-discode:open-meeting — 회의실 신설

@@ -1,6 +1,7 @@
 ---
 description: Codex CLI 설치 + OAuth 인증 + 모델 picker 검증 (claude-discode 의 Codex 호출 layer 가 동작하는지 확인)
-allowedTools: Bash, Read, AskUserQuestion
+allowed-tools: Bash Read AskUserQuestion
+disable-model-invocation: true
 ---
 
 # /claude-discode:codex-check — Codex CLI 검증

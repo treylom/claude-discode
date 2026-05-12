@@ -1,6 +1,7 @@
 ---
 description: 추가 Discord 봇 1개를 기존 셋업에 신설 (soul.md template + token + 페어링)
-allowedTools: Bash, Read, Write, Edit, AskUserQuestion
+allowed-tools: Bash Read Write Edit AskUserQuestion
+disable-model-invocation: true
 ---
 
 # /claude-discode:add-bot — 추가 봇 신설

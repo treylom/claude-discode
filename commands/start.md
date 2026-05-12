@@ -1,6 +1,7 @@
 ---
 description: claude-discode 메인 wizard — 환경 인식 + Discord 봇 셋업 + 첫 대화 검증
-allowedTools: Bash, Read, Write, Edit, AskUserQuestion, Skill
+allowed-tools: Bash Read Write Edit AskUserQuestion Skill
+disable-model-invocation: true
 ---
 
 # /claude-discode:start — 메인 wizard
