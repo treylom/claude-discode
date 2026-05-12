@@ -1,0 +1,25 @@
+---
+name: claude-discode-km-plain
+description: Plain knowledge manager — same as km-lite but never asks the user (headless / non-interactive). Use when $CLAUDE_DISCODE_HEADLESS=1 or user explicitly requests --variant plain.
+allowedTools: Read, Write, WebFetch, Bash, Glob, Grep
+---
+
+# claude-discode-km-plain
+
+> Implements Mode I from `contracts/km-mode-spec.md`. Plain variant per `contracts/km-variant-matrix.md` (no AskUserQuestion).
+
+## Trigger
+- $CLAUDE_DISCODE_HEADLESS=1 + any KM Mode I request
+- `/claude-discode:km --variant plain ...`
+
+## Workflow
+
+1. Read `~/.claude-discode-config` for vault_root. If missing, write to `$HOME/Inbox/` with notice.
+2. Extract (URL/file/text) — same as km-lite Step 2.
+3. Generate frontmatter — same as km-lite Step 3, but auto-derive tags from title only (no AskUserQuestion).
+4. Determine sub-folder: always `Inbox/`.
+5. Write via `Write` tool only (no Obsidian CLI/MCP — even if present, skip for determinism).
+6. Print stored path.
+
+## Why no Obsidian even when present
+Plain variant guarantees byte-identical output regardless of environment — important for batch ingestion and headless CI use.
