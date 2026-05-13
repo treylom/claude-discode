@@ -37,8 +37,8 @@ echo "claude-discode healthcheck v1.0"
 echo "─────────────────────────────────"
 
 check "Tier 4 (ripgrep)"  "command -v rg || command -v grep" required
-check "Tier 3 (MCP)"      "jq -e '.mcpServers.\"vault-search\"' ${HOME}/.config/claude/claude_desktop_config.json" optional
-check "Tier 2 (CLI)"      "command -v obsidian-cli" optional
+check "Tier 2 (MCP)"      "jq -e '.mcpServers.\"vault-search\"' ${HOME}/.config/claude/claude_desktop_config.json" optional
+check "Tier 3 (CLI)"      "command -v obsidian-cli" optional
 check "Tier 1 (GraphRAG)" "curl -fsS http://localhost:8400/health" optional
 
 echo "─────────────────────────────────"
