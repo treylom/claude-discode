@@ -34,7 +34,7 @@ install_obsidian() {
     Linux)
       if [ "$WSL" = "1" ]; then
         echo "WSL detected — install Obsidian on Windows side: https://obsidian.md/download"
-        echo "Skipping Linux install. Tier 3 (MCP) / Tier 4 (grep) will cover search."
+        echo "Skipping Linux install. Tier 2 (MCP) / Tier 4 (grep) will cover search."
         return 1
       fi
       if command -v apt-get >/dev/null; then
