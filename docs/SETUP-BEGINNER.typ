@@ -81,6 +81,23 @@ claude-discode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 
 
 #pagebreak()
 
+= 0단계: wizard 진입 (v2.1 추천)
+
+가장 쉬운 방법은 `claude-discode init` wizard — vault / 도구 / 자원 자동 감지 + 8 Phase 추천.
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/claude-discode-init.sh
+```
+
+wizard 가 물어보는 항목:
+- 어떤 Tier 의 검색 도구를 install?
+- GraphRAG install? (500+ 노트 권장, 단 옵션 언제나)
+- Mode R preflight? (2000+ 노트 권장, read-only)
+
+자세한 단계별 install 은 아래 1~5 단계 참고. (wizard 진입 안 한 사용자 위함)
+
+#pagebreak()
+
 = Step 0 — 환경 점검 (2분)
 
 먼저 컴퓨터에 뭐가 깔려있는지 확인합니다. 터미널을 열고 (Mac = Spotlight `cmd+space` → "터미널" 검색 / WSL = Ubuntu 앱 / Linux = Ctrl+Alt+T) 아래 명령을 한 줄씩 복사 + 붙여넣기 + Enter.
