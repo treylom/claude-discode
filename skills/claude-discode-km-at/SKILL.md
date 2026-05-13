@@ -8,6 +8,18 @@ allowedTools: Read, Write, Bash, Glob, Grep, AskUserQuestion, mcp__vault-search_
 
 > Implements Mode I + R + G full from `contracts/km-mode-spec.md`. At variant per `contracts/km-variant-matrix.md`.
 
+## Mode R Preflight (read-only, Phase 5)
+
+claude-discode init wizard 가 vault 2000+ 노트 detect 시 자동 호출. 진단만, 어떤 이동/rename 도 안 함:
+
+1. **broken_wikilinks** — vault 전체 scan, `[[link]]` 의 target 부재 시 list
+2. **folder_entropy** — 폴더당 노트 분포 + 진입 marker (어떤 폴더가 과밀, 어떤 게 비어있나)
+3. **orphan_notes** — 다른 노트에서 link 안 된 고립 노트
+
+결과: `meetings/{date}-km-at-preflight-report.md` (dry-run report). 사용자 검토 후 명시 동의 시 Mode R apply 진입 (dry_run_required: true).
+
+자세: references/mode-r-preflight.md
+
 ## Prereq check
 
 Before any workflow:
