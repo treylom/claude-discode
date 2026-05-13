@@ -16,3 +16,15 @@ allowedTools:
   - Glob
   - Grep
   - mcp__vault-search__*
+phases:
+  preflight:
+    auto: true
+    scope: read-only
+    checks:
+      - broken_wikilinks
+      - folder_entropy
+      - orphan_notes
+    output: meetings/{date}-km-at-preflight-report.md
+  apply:
+    auto: false
+    dry_run_required: true
