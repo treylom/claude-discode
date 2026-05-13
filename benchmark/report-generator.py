@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RESULTS_DIR = ROOT / "benchmark" / "results"
 README = ROOT / "README.md"
 
-TIER_LABEL = {1: "GraphRAG", 2: "Obsidian CLI", 3: "vault-search MCP", 4: "ripgrep"}
+TIER_LABEL = {1: "GraphRAG", 2: "vault-search MCP", 3: "Obsidian CLI", 4: "ripgrep"}
 
 
 def latest_json() -> Path:
