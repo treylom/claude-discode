@@ -1,5 +1,5 @@
 name: claude-discode-search
-description: 4-Tier vault search (GraphRAG FastAPI → Obsidian CLI → vault-search MCP → ripgrep) with automatic fallback per contracts/search-fallback-4tier.md v0.1.0.
+description: 4-Tier vault search dispatcher — Tier 1 GraphRAG (FastAPI semantic + graph) → Tier 2 vault-search MCP (embedding) → Tier 3 Obsidian CLI (index) → Tier 4 ripgrep (literal). 정확도 우선 fallback. v2.0 정정 — 사용자 spec.
 version: 1.0.0
 license: MIT
 homepage: https://github.com/treylom/claude-discode
