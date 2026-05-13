@@ -1,0 +1,19 @@
+name: claude-discode-model-router
+description: 검색 결과 후 응답 생성 시 task complexity 따라 LLM 모델 선택 (haiku/sonnet/opus 또는 codex). dispatcher 가 query 분석 → 자동 routing.
+version: 1.0.0
+license: MIT
+homepage: https://github.com/treylom/claude-discode
+
+provides_tools:
+  - claude_discode_route_model
+
+tier: external
+model: haiku
+allowedTools:
+  - Bash
+  - Read
+
+gates:
+  - id: routing-latency
+    expr: "latency_ms_p50 < 100"
+    evaluator: simple
