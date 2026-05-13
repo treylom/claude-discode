@@ -21,14 +21,32 @@ python3 benchmark/report-generator.py --print-only
 | Tier | Method | latency_ms (P50) | recall@5 | cost_tokens | setup_time_min | kg_depth (avg) |
 |------|--------|-------------------|----------|-------------|----------------|----------------|
 | 1 | GraphRAG | 1500-3000 | 0.80-0.95 | ~2400 | 25 | 3-5 |
-| 2 | Obsidian CLI | 200-500 | 0.50-0.70 | 0 | 5 | 0 |
-| 3 | vault-search MCP | 500-1000 | 0.60-0.80 | ~800 | 10 | 0 |
+| 2 | vault-search MCP | 500-1000 | 0.60-0.80 | ~800 | 10 | 0 |
+| 3 | Obsidian CLI | 200-500 | 0.50-0.70 | 0 | 5 | 0 |
 | 4 | ripgrep | 30-100 | 0.30-0.50 | 0 | 0 | 0 |
 
 > 측정 방법 + 해석 가이드 + 본인 vault fixture 작성: [docs/BENCHMARK.md](docs/BENCHMARK.md)
 > CI 자동 측정 결과 (Tier 4 ripgrep + sample fixture only): [benchmark/results/](benchmark/results/)
 >
 > 본 표 의 수치는 다양한 vault 측정 데이터 합산 추정. CI 가 측정한 sample 결과는 strawman — 본인 vault 에서 의미 있는 수치 확인.
+
+---
+
+## 🧠 LLM 모델 routing (v2.0 신규)
+
+claude-discode 는 검색 결과 받은 후 응답 생성 시 task complexity 따라 모델을 자동 선택:
+
+| Task | Claude 사용자 | GPT/[Codex](docs/GLOSSARY.md#codex) 사용자 |
+|---|---|---|
+| 단순 (factual lookup) | Haiku | gpt-5.5 |
+| 중간 (요약 / 분류) | Sonnet | gpt-5.5-codex |
+| 종합 (multi-doc 추론) | Opus[1m] | gpt-5.5-opus |
+
+`scripts/route-model.mjs` heuristic — query length / 키워드 기반. user override `--model haiku|sonnet|opus`.
+
+## 📚 용어 모르겠으면? → [GLOSSARY.md](docs/GLOSSARY.md)
+
+30+ 용어 풀이 (LLM / MCP / CEL / embedding / recall@5 / kg_depth / fallback / dispatcher / 등).
 
 ---
 
