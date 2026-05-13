@@ -6,6 +6,34 @@
 
 WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Claude Code + tmux + oh-my-tmux 까지 세팅하고, Discord 봇 1개 띄워 첫 대화까지 검증하는 플러그인입니다.
 
+## 🚀 Quickstart (vault-first, v2.1)
+
+```bash
+# 1. claude-discode 설치 (Claude Code plugin)
+git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+
+# 2. wizard 진입 — env 자동 감지 + Phase 추천
+bash ~/.claude/plugins/claude-discode/scripts/claude-discode-init.sh
+
+# 또는 Claude Code 안에서
+/claude-discode:init
+```
+
+wizard 가 vault 상태 / 도구 / 자원 detect 후 **8 Phase progressive journey** 추천:
+- **Phase 1-2**: 즉시 (ripgrep + obsidian-cli)
+- **Phase 3**: 100+ 노트 → vault-search MCP 권유
+- **Phase 4**: 500+ 노트 권유 / 1000+ strong / 옵션 언제나 (GraphRAG)
+- **Phase 5**: 2000+ 노트 → km-at Mode R preflight (read-only 진단)
+- **Phase 6-7**: advanced (Dashboard / 하이브리드 4채널)
+
+> **GraphRAG = 환경 감지 + 선택사항** (사용자 spec). 노트 수 미충족 시도 force install 가능.
+
+## 선택: Discord 봇 + Agent Teams
+
+본 플러그인의 Discord 봇 및 Agent Teams 통합은 선택사항입니다. vault-first 검색만으로도 완전히 작동하며, Discord 페어링 및 tmux 세션은 advanced use case 용입니다.
+
+---
+
 ## 📊 4-Tier Search Benchmark
 
 claude-discode 의 4-Tier search 가 일반 `obsidian-cli` / `/search` / `/vault-search` 대비 어떤 trade-off 를 보이는지 5-axis 로 측정합니다. **본인 vault 에서 직접 측정** 하면 본인 환경의 실제 trade-off 가 보입니다.
