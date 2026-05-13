@@ -40,8 +40,8 @@ CLAUDE_DISCODE_VAULT=~/your-vault \
 | Tier | 기대 범위 | 이유 |
 |---|---|---|
 | 4 (ripgrep) | 30-100 ms | local file scan, no network |
-| 2 (obsidian-cli) | 200-500 ms | local index lookup |
-| 3 (vault-search MCP) | 500-1000 ms | MCP 호출 + embedding lookup |
+| 3 (obsidian-cli) | 200-500 ms | local index lookup |
+| 2 (vault-search MCP) | 500-1000 ms | MCP 호출 + embedding lookup |
 | 1 (GraphRAG) | 1500-3000 ms | LLM call + graph traversal |
 
 ### 2. `recall_at_5` — top-5 결과의 expected_hit 비율
@@ -49,10 +49,10 @@ CLAUDE_DISCODE_VAULT=~/your-vault \
 20 queries 각각의 `expected_hits` (ground truth) 가 top-5 에 들어있는 비율. 높을수록 좋음.
 
 기대 범위:
-- ripgrep: 0.3-0.5 (literal string 만)
-- obsidian-cli: 0.5-0.7 (light fuzzy)
-- MCP: 0.6-0.8 (embedding)
-- GraphRAG: 0.8-0.95 (semantic + graph)
+- ripgrep (Tier 4): 0.3-0.5 (literal string 만)
+- obsidian-cli (Tier 3): 0.5-0.7 (light fuzzy)
+- vault-search MCP (Tier 2): 0.6-0.8 (embedding)
+- GraphRAG (Tier 1): 0.8-0.95 (semantic + graph)
 
 **Ground truth 큐레이션 (Round 2 outcome)**: query 작성자 (1차) + 외부 LLM evaluator (2차, Opus + Sonnet cross-check) + 사용자 spot-check 5개 (3차).
 
@@ -67,8 +67,8 @@ LLM 사용 시점만 발생. ripgrep/CLI = 0, MCP/GraphRAG > 0.
 | Tier | 기본 | 도구 |
 |---|---|---|
 | 4 | 0 min | (기본 시스템) |
-| 2 | ~5 min | obsidian-cli 설치 |
-| 3 | ~10 min | npm install + MCP config |
+| 3 | ~5 min | obsidian-cli 설치 |
+| 2 | ~10 min | npm install + MCP config |
 | 1 | ~25 min | Python/Docker + embedding generation |
 
 **측정 (Round 2 outcome)**: GitHub Actions 자동 측정 불가 — cohort metric. 강의 수강생 self-report N=30 평균 + GitHub Discussions Feedback category (Round 3 CC3). bias 인정, "self-reported" footnote.
@@ -129,7 +129,7 @@ VAULT=~/Documents/Obsidian/MyVault bash benchmark/runners/run-all.sh
 
 - **"왜 GraphRAG 가 느린가요?"** → LLM 호출 + graph traversal 때문. 단 recall + kg_depth 우위
 - **"ripgrep 만으로 충분?"** → literal 검색은 OK. 단 "ARR 증가 추세" 같은 semantic query 는 recall < 0.3
-- **"MCP vs CLI 차이는?"** → MCP 는 embedding 으로 fuzzy match. CLI 는 light index, 빠르지만 semantic 약함
+- **"Tier 3 vs Tier 2 차이는?"** → Tier 2 (MCP) 는 embedding 으로 fuzzy match. Tier 3 (CLI) 는 light index, 빠르지만 semantic 약함
 - **"kg_depth = 0 은 왜?"** → Tier 2/3/4 는 graph 가 없음. Tier 1 만 의미
 - **"내 vault 에서 직접 측정?"** → `VAULT=~/path bash benchmark/runners/run-all.sh` (fixture 수정 필요)
 
