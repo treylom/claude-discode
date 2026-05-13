@@ -78,12 +78,15 @@ def build_table(data: dict) -> str:
 
 def inject_readme(table: str) -> None:
     if not README.exists():
-        sys.exit("README.md not found")
+        print("README.md not found — skipping inject", file=sys.stderr)
+        return
     txt = README.read_text(encoding="utf-8")
     start = "<!-- BENCHMARK-TABLE-START -->"
     end = "<!-- BENCHMARK-TABLE-END -->"
     if start not in txt or end not in txt:
-        sys.exit(f"README missing markers {start} / {end} — add them first")
+        # v1.0.2 — markers removed from README (sample fixture results not auto-injected)
+        print(f"README missing markers — auto-inject skipped (v1.0.2 generic policy)", file=sys.stderr)
+        return
     pre, _, rest = txt.partition(start)
     _, _, post = rest.partition(end)
     new = pre + start + "\n" + table + "\n" + end + post
