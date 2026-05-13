@@ -1,0 +1,135 @@
+fixture_version: 1
+vault: sample-vault
+description: 20 standard benchmark queries — factual 8 / concept 6 / cross-doc 4 / temporal 2
+queries:
+  # ─── factual (8) ───
+  - id: q01-nuriflow-arr
+    text: "NuriFlow ARR"
+    expected_hits:
+      - 40-Reports
+      - 00-About
+    category: factual
+
+  - id: q02-team-size
+    text: "186 employees team"
+    expected_hits:
+      - 00-About
+      - 70-HR
+    category: factual
+
+  - id: q03-offices
+    text: "Seoul Singapore Austin"
+    expected_hits:
+      - 00-About
+    category: factual
+
+  - id: q04-product-flowdesk
+    text: "FlowDesk product"
+    expected_hits:
+      - 50-Products
+    category: factual
+
+  - id: q05-product-doculens
+    text: "DocuLens AI"
+    expected_hits:
+      - 50-Products
+    category: factual
+
+  - id: q06-product-marketplace
+    text: "Marketplace Preview"
+    expected_hits:
+      - 50-Products
+      - 20-Proposals
+    category: factual
+
+  - id: q07-monthly-revenue
+    text: "monthly revenue 2026"
+    expected_hits:
+      - 40-Reports
+    category: factual
+
+  - id: q08-ceo-team
+    text: "NuriFlow leadership"
+    expected_hits:
+      - 00-About
+    category: factual
+
+  # ─── concept (6) ───
+  - id: q09-doc-turnaround
+    text: "document turnaround improvement"
+    expected_hits:
+      - 20-Proposals
+    category: concept
+
+  - id: q10-hybrid-work
+    text: "hybrid work policy"
+    expected_hits:
+      - 90-Policies
+    category: concept
+
+  - id: q11-data-security
+    text: "data security policy"
+    expected_hits:
+      - 90-Policies
+    category: concept
+
+  - id: q12-onboarding
+    text: "onboarding new hire"
+    expected_hits:
+      - 70-HR
+    category: concept
+
+  - id: q13-marketing-funnel
+    text: "marketing B2B SaaS"
+    expected_hits:
+      - 60-Marketing
+    category: concept
+
+  - id: q14-vendor-msa
+    text: "vendor MSA service"
+    expected_hits:
+      - 10-Contracts
+    category: concept
+
+  # ─── cross-doc (4) ───
+  - id: q15-arr-team-correlation
+    text: "ARR growth team size"
+    expected_hits:
+      - 40-Reports
+      - 70-HR
+      - 00-About
+    category: cross-doc
+
+  - id: q16-product-customer-fit
+    text: "Marketplace Preview customer financial"
+    expected_hits:
+      - 50-Products
+      - 20-Proposals
+    category: cross-doc
+
+  - id: q17-policy-incident-trace
+    text: "security incident response"
+    expected_hits:
+      - 90-Policies
+      - 30-Meetings
+    category: cross-doc
+
+  - id: q18-marketing-product-launch
+    text: "LaunchOps GTM marketing"
+    expected_hits:
+      - 50-Products
+      - 60-Marketing
+    category: cross-doc
+
+  # ─── temporal (2) ───
+  - id: q19-monthly-revenue-trend
+    text: "monthly revenue trend"
+    expected_hits:
+      - 40-Reports
+    category: temporal
+
+  - id: q20-quarterly-comparison
+    text: "quarterly performance"
+    expected_hits:
+      - 40-Reports
+    category: temporal
