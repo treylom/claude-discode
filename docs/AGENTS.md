@@ -92,6 +92,25 @@ benchmark:
 3. `npm run index` — `agents.yaml` index 갱신
 4. PR 생성 — `.github/workflows/validate-agents.yml` 가 자동 검증
 
+## v2.0 신규 — `claude-discode-model-router`
+
+검색 결과 받은 후 응답 생성 시 task complexity 따라 LLM 모델 선택:
+
+- 단순 query → Haiku (Claude) / gpt-5.5 (Codex)
+- 중간 query → Sonnet / gpt-5.5-codex
+- 종합 query → Opus[1m] / gpt-5.5-opus
+
+`scripts/route-model.mjs` heuristic. user override `--model haiku|sonnet|opus`.
+
+## Tier 순서 (v2.0 정정)
+
+| Tier | Method | 이유 |
+|---|---|---|
+| 1 | GraphRAG | LLM + graph, recall 0.80-0.95 |
+| 2 | vault-search MCP | embedding semantic |
+| 3 | Obsidian CLI | Obsidian index light fuzzy |
+| 4 | ripgrep | literal baseline |
+
 ## Tier 의미 (Round 2 outcome — 4개 enum)
 
 | tier | 의미 | 학생 노출 | 비고 |
