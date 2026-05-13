@@ -16,7 +16,7 @@ claude-discode 의 4-Tier search 가 일반 `obsidian-cli` / `/search` / `/vault
 | 1 | GraphRAG | — | — | — | — | — | SKIPPED (BENCHMARK_SKIP_TIER1=1 (CI mode — measur) |
 | 2 | Obsidian CLI | — | — | — | — | — | SKIPPED (obsidian-cli not installed) |
 | 3 | vault-search MCP | — | — | — | — | — | SKIPPED (vault-search MCP not configured) |
-| 4 | ripgrep | 31 | 0.0 | 0 | 0 | 0 |  |
+| 4 | ripgrep | 28 | 0.0 | 0 | 0 | 0 |  |
 
 Last updated: 2026-05-13 — [results JSON](benchmark/results/2026-05-13.json)
 
