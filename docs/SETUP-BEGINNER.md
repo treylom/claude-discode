@@ -52,37 +52,7 @@ Receiving objects: 100% (...), done.
 
 ---
 
-## 2단계: Obsidian 쓰시나요? 🤔
-
-**예** → [2-A. Obsidian CLI 설치] 로 이동 (3분)
-**아니오** → [2-B. Skip — Obsidian 없이도 잘 작동] 로 이동
-
-### 2-A. Obsidian CLI 설치 (Obsidian 사용자만)
-
-```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
-```
-
-**✅ 성공 모습:** 마지막 줄에 `obsidian-cli installed at /usr/local/bin/obsidian-cli` 비슷한 출력
-
-```bash
-which obsidian-cli
-```
-
-**✅ 성공 모습:** path 출력 (예: `/usr/local/bin/obsidian-cli`)
-**❌ 실패 시:** brew/npm 설치 권한 → `sudo` 추가 시도, 또는 README 의 manual install 참고
-
-### 2-B. Skip — Obsidian 없이도 잘 작동 ✅
-
-- 4-Tier 중 Tier 2 (Obsidian CLI) 만 SKIP
-- 나머지 Tier 1 (GraphRAG) / Tier 3 (MCP) / Tier 4 (ripgrep) 정상 작동
-- 기능 80% 동일, 단 Obsidian graph view 와 연동 X
-
-→ 바로 3단계로 진행
-
----
-
-## 3단계: 검색 MCP 설치 (5분, 권장)
+## 2단계: 검색 MCP 설치 (5분, 권장)
 
 ```bash
 bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
@@ -101,6 +71,36 @@ claude mcp list | grep vault-search
 - npm install 실패 → `nvm use 18` 또는 `nvm install 18` 시도
 
 **중요:** 설치 후 Claude Code 를 한 번 재시작하세요 (`exit` 후 재실행).
+
+---
+
+## 3단계: Obsidian 쓰시나요? 🤔
+
+**예** → [3-A. Obsidian CLI 설치] 로 이동 (3분)
+**아니오** → [3-B. Skip — Obsidian 없이도 잘 작동] 로 이동
+
+### 3-A. Obsidian CLI 설치 (Obsidian 사용자만)
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+```
+
+**✅ 성공 모습:** 마지막 줄에 `obsidian-cli installed at /usr/local/bin/obsidian-cli` 비슷한 출력
+
+```bash
+which obsidian-cli
+```
+
+**✅ 성공 모습:** path 출력 (예: `/usr/local/bin/obsidian-cli`)
+**❌ 실패 시:** brew/npm 설치 권한 → `sudo` 추가 시도, 또는 README 의 manual install 참고
+
+### 3-B. Skip — Obsidian 없이도 잘 작동 ✅
+
+- 4-Tier 중 Tier 3 (Obsidian CLI) 만 SKIP
+- 나머지 Tier 1 (GraphRAG) / Tier 2 (MCP) / Tier 4 (ripgrep) 정상 작동
+- 기능 80% 동일, 단 Obsidian graph view 와 연동 X
+
+→ 바로 4단계로 진행
 
 ---
 

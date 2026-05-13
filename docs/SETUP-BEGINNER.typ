@@ -53,7 +53,7 @@
 
 #v(0.3em)
 #box(fill: rgb("#fffaf0"), inset: 10pt, radius: 4pt, width: 100%)[
-  #text(weight: "bold")[0. 환경 점검] $arrow$ #text(weight: "bold")[1. 플러그인 설치] $arrow$ #text(weight: "bold")[2. Obsidian 분기] $arrow$ #text(weight: "bold")[3. 검색 MCP] $arrow$ #text(weight: "bold")[4. GraphRAG (선택)] $arrow$ #text(weight: "bold")[5. healthcheck]
+  #text(weight: "bold")[0. 환경 점검] $arrow$ #text(weight: "bold")[1. 플러그인 설치] $arrow$ #text(weight: "bold")[2. 검색 MCP] $arrow$ #text(weight: "bold")[3. Obsidian 분기] $arrow$ #text(weight: "bold")[4. GraphRAG (선택)] $arrow$ #text(weight: "bold")[5. healthcheck]
 ]
 
 #v(0.5em)
@@ -68,8 +68,8 @@ claude-discode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 
 
 #box(fill: rgb("#f8f9fa"), inset: 10pt, radius: 4pt, width: 100%)[
   - #text(weight: "bold")[Tier 4 — ripgrep] (기본, 0분 셋업) — 문자열 일치, 매우 빠름
-  - #text(weight: "bold")[Tier 3 — vault-search MCP] (5분 셋업) — embedding semantic 검색
-  - #text(weight: "bold")[Tier 2 — obsidian-cli] (3분 셋업, Obsidian 사용자만) — Obsidian index 활용
+  - #text(weight: "bold")[Tier 3 — obsidian-cli] (3분 셋업, Obsidian 사용자만) — Obsidian index 활용
+  - #text(weight: "bold")[Tier 2 — vault-search MCP] (5분 셋업) — embedding semantic 검색
   - #text(weight: "bold")[Tier 1 — GraphRAG] (25분 셋업, advanced) — LLM + graph + 가장 정확
 ]
 
@@ -161,38 +161,7 @@ git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-dis
   - "already exists" → 이미 설치됨. `cd ~/.claude/plugins/claude-discode && git pull` 로 update
 ]
 
-= Step 2 — Obsidian 쓰시나요? 🤔
-
-#box(fill: rgb("#fff8e1"), inset: 12pt, radius: 6pt, width: 100%)[
-  #text(weight: "bold")[예] $arrow$ 2-A (Obsidian CLI 설치, 3분)
-  #v(0.3em)
-  #text(weight: "bold")[아니오] $arrow$ 2-B (SKIP, 바로 Step 3)
-]
-
-== 2-A. Obsidian CLI 설치 (Obsidian 사용자만)
-
-```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
-which obsidian-cli
-```
-
-#box(fill: rgb("#e8f5e9"), inset: 8pt, radius: 4pt)[
-  #text(weight: "bold", fill: rgb("#2c8a3d"))[✓ 성공 모습] — `/usr/local/bin/obsidian-cli` path 출력
-]
-
-#box(fill: rgb("#fde8e8"), inset: 8pt, radius: 4pt)[
-  #text(weight: "bold", fill: rgb("#c53030"))[❌ 실패 시] — `sudo` 추가 또는 README 의 manual install 참고
-]
-
-== 2-B. SKIP — Obsidian 없이도 잘 작동 ✅
-
-- 4-Tier 중 Tier 2 (Obsidian CLI) 만 SKIP
-- 나머지 Tier 1 / 3 / 4 정상 작동, 기능 80% 동일
-- 바로 Step 3 으로 진행
-
-#pagebreak()
-
-= Step 3 — 검색 MCP 설치 (5분, 권장)
+= Step 2 — 검색 MCP 설치 (5분, 권장)
 
 ```bash
 bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
@@ -212,6 +181,37 @@ claude mcp list | grep vault-search
 #box(fill: rgb("#fff8e1"), inset: 10pt, radius: 4pt)[
   #text(weight: "bold")[중요] — 설치 후 Claude Code 를 한 번 재시작하세요 (`exit` 후 재실행).
 ]
+
+= Step 3 — Obsidian 쓰시나요? 🤔
+
+#box(fill: rgb("#fff8e1"), inset: 12pt, radius: 6pt, width: 100%)[
+  #text(weight: "bold")[예] $arrow$ 3-A (Obsidian CLI 설치, 3분)
+  #v(0.3em)
+  #text(weight: "bold")[아니오] $arrow$ 3-B (SKIP, 바로 Step 4)
+]
+
+== 3-A. Obsidian CLI 설치 (Obsidian 사용자만)
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+which obsidian-cli
+```
+
+#box(fill: rgb("#e8f5e9"), inset: 8pt, radius: 4pt)[
+  #text(weight: "bold", fill: rgb("#2c8a3d"))[✓ 성공 모습] — `/usr/local/bin/obsidian-cli` path 출력
+]
+
+#box(fill: rgb("#fde8e8"), inset: 8pt, radius: 4pt)[
+  #text(weight: "bold", fill: rgb("#c53030"))[❌ 실패 시] — `sudo` 추가 또는 README 의 manual install 참고
+]
+
+== 3-B. SKIP — Obsidian 없이도 잘 작동 ✅
+
+- 4-Tier 중 Tier 3 (Obsidian CLI) 만 SKIP
+- 나머지 Tier 1 / 2 / 4 정상 작동, 기능 80% 동일
+- 바로 Step 4 로 진행
+
+#pagebreak()
 
 = Step 4 — GraphRAG 까지 가실래요? 🚀
 
@@ -281,8 +281,8 @@ bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
   claude-discode healthcheck v1.0
   ─────────────────────────────────
   ✓ Tier 4 (ripgrep)  : OK
-  ✓ Tier 3 (MCP)      : OK
-  ○ Tier 2 (CLI)      : SKIP (Obsidian 미사용 — 2-B 선택)
+  ✓ Tier 2 (MCP)      : OK
+  ○ Tier 3 (CLI)      : SKIP (Obsidian 미사용 — 3-B 선택)
   ○ Tier 1 (GraphRAG) : SKIP (4-A 선택)
   ─────────────────────────────────
   all required checks passed ✅
@@ -329,8 +329,8 @@ macOS / Linux / WSL 은 검증 완료. Windows native 는 추후 지원 예정 (
 
 == Q3. 학생인데 비용 걱정?
 
-- Tier 4 (ripgrep) + Tier 2 (Obsidian) = 100% 무료
-- Tier 3 (MCP) = 무료 (Claude Code 구독 안에)
+- Tier 4 (ripgrep) + Tier 3 (Obsidian) = 100% 무료
+- Tier 2 (MCP) = 무료 (Claude Code 구독 안에)
 - Tier 1 (GraphRAG) = OpenAI/Anthropic API 호출 → 본인 vault 크기에 따라 1회 indexing \$0.5\~5
 
 == Q4. 이미 obsidian-cli 만 쓰고 있는데 차이는?
