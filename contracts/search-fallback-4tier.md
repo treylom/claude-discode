@@ -13,8 +13,8 @@ Both `claude-discode-search` (plugin) and `.claude/commands/search.md` (vault) M
 | Tier | Engine | Trigger Check | Timeout | Failure → |
 |---|---|---|---|---|
 | 1 | GraphRAG FastAPI | `curl --connect-timeout 3 http://127.0.0.1:8400/health` returns 200 | 3s | Tier 2 |
-| 2 | Obsidian CLI | `obsidian --version` exits 0 (vault root resolvable) | 2s | Tier 3 |
-| 3 | vault-search MCP | `mcp__vault-search__list_notes({})` returns array | 5s | Tier 4 |
+| 2 | vault-search MCP | `mcp__vault-search__list_notes({})` returns array | 5s | Tier 3 |
+| 3 | Obsidian CLI | `obsidian --version` exits 0 (vault root resolvable) | 2s | Tier 4 |
 | 4 | ripgrep / grep | `rg --version` exits 0 (or `grep` fallback) | 10s | Final fail |
 
 ## Tier 1 — GraphRAG call
@@ -26,21 +26,21 @@ curl -s "http://127.0.0.1:8400/api/search?q=${QUERY_ENCODED}&top_k=${TOP_K}&mode
 
 Response: `{ "results": [{ "source_note": "<path>", "score": <float>, "snippet": "..." }, ...] }`
 
-## Tier 2 — Obsidian CLI call
-
-```bash
-obsidian search --vault "$VAULT_ROOT" --query "$QUERY" --json
-```
-
-Response: JSON array of `{ path, line, snippet }`.
-
-## Tier 3 — vault-search MCP call
+## Tier 2 — vault-search MCP call
 
 ```
 mcp__vault-search__search({ "q": "$QUERY", "top_k": N })
 ```
 
 Response: array of `{ note_path, snippet, score }`.
+
+## Tier 3 — Obsidian CLI call
+
+```bash
+obsidian search --vault "$VAULT_ROOT" --query "$QUERY" --json
+```
+
+Response: JSON array of `{ path, line, snippet }`.
 
 ## Tier 4 — ripgrep fallback
 
