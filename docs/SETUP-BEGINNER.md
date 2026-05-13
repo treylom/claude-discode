@@ -1,0 +1,224 @@
+# 🚀 claude-discode 처음이세요? 5단계로 끝납니다
+
+> 이 가이드는 컴퓨터 기초만 있으면 따라할 수 있습니다.
+> 막히면 각 step 의 "❓ 실패 시" 박스 참고. 그래도 안 되면 마지막 단계에서 GitHub Issue 등록 (1분).
+
+## 0단계: 시작 전 환경 점검 (2분)
+
+먼저 컴퓨터에 뭐가 깔려있는지 확인합니다. 아래 명령을 터미널에 한 줄씩 복사 + 붙여넣기 + Enter.
+
+```bash
+node --version
+```
+
+**✅ 성공 모습:** `v18.17.0` 같은 숫자가 보이면 OK
+**❌ 실패 시:** "command not found" 가 나오면 → https://nodejs.org 에서 LTS 버전 (v18 또는 v20) 설치 후 터미널 재시작
+
+```bash
+jq --version
+```
+
+**✅ 성공 모습:** `jq-1.6` 같은 출력
+**❌ 실패 시:** macOS = `brew install jq` / Ubuntu/WSL = `sudo apt install jq`
+
+```bash
+git --version
+```
+
+**✅ 성공 모습:** `git version 2.x.x`
+**❌ 실패 시:** macOS = `xcode-select --install` / Ubuntu/WSL = `sudo apt install git`
+
+---
+
+## 1단계: 플러그인 설치 (2분)
+
+```bash
+mkdir -p ~/.claude/plugins
+git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+```
+
+**✅ 성공 모습:**
+
+```
+Cloning into '/Users/.../claude-discode'...
+remote: Enumerating objects: ...
+Receiving objects: 100% (...), done.
+```
+
+**❌ 실패 시:**
+
+- "Permission denied" → `mkdir ~/.claude/plugins` 권한 확인
+- "already exists" → 이미 설치됨. `cd ~/.claude/plugins/claude-discode && git pull` 로 update
+
+---
+
+## 2단계: Obsidian 쓰시나요? 🤔
+
+**예** → [2-A. Obsidian CLI 설치] 로 이동 (3분)
+**아니오** → [2-B. Skip — Obsidian 없이도 잘 작동] 로 이동
+
+### 2-A. Obsidian CLI 설치 (Obsidian 사용자만)
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+```
+
+**✅ 성공 모습:** 마지막 줄에 `obsidian-cli installed at /usr/local/bin/obsidian-cli` 비슷한 출력
+
+```bash
+which obsidian-cli
+```
+
+**✅ 성공 모습:** path 출력 (예: `/usr/local/bin/obsidian-cli`)
+**❌ 실패 시:** brew/npm 설치 권한 → `sudo` 추가 시도, 또는 README 의 manual install 참고
+
+### 2-B. Skip — Obsidian 없이도 잘 작동 ✅
+
+- 4-Tier 중 Tier 2 (Obsidian CLI) 만 SKIP
+- 나머지 Tier 1 (GraphRAG) / Tier 3 (MCP) / Tier 4 (ripgrep) 정상 작동
+- 기능 80% 동일, 단 Obsidian graph view 와 연동 X
+
+→ 바로 3단계로 진행
+
+---
+
+## 3단계: 검색 MCP 설치 (5분, 권장)
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
+```
+
+**✅ 성공 모습:** `vault-search added to claude config` 메시지
+
+```bash
+claude mcp list | grep vault-search
+```
+
+**✅ 성공 모습:** `vault-search` 항목 1줄 출력
+**❌ 실패 시:**
+
+- `claude: command not found` → Claude Code 미설치. https://claude.com/code 에서 설치
+- npm install 실패 → `nvm use 18` 또는 `nvm install 18` 시도
+
+**중요:** 설치 후 Claude Code 를 한 번 재시작하세요 (`exit` 후 재실행).
+
+---
+
+## 4단계: GraphRAG 까지 가실래요? 🚀
+
+3가지 옵션 중 선택:
+
+| 선택 | 누가? | 시간 |
+|---|---|---|
+| **A. 지금은 패스** | 빠르게 강의 따라가기, Tier 3 까지만 | 0분 |
+| **B. 도커로 간편 설치** | 도커 익숙한 사용자 | 10분 |
+| **C. Python 로컬 설치** | 직접 디버깅 원하는 사용자 | 25분 |
+
+### 4-A. 지금은 패스 ✅
+
+→ 바로 5단계로
+
+### 4-B. 도커로 간편 설치
+
+```bash
+docker --version   # 검증: Docker 설치 확인
+docker pull ghcr.io/treylom/claude-discode-graphrag:v1.0
+docker run -d -p 8400:8400 -v ~/vault:/vault --name claude-discode-graphrag ghcr.io/treylom/claude-discode-graphrag:v1.0
+```
+
+**✅ 성공 모습:**
+
+```bash
+curl localhost:8400/health
+# {"status":"ok"}
+```
+
+**❌ 실패 시:**
+
+- Docker 미설치 → https://docs.docker.com/get-docker/
+- port 8400 충돌 → `-p 8401:8400` 으로 변경 후 `GRAPHRAG_URL=http://localhost:8401` env 설정
+
+### 4-C. Python 로컬 설치
+
+```bash
+python3 --version   # 검증: 3.10+
+bash ~/.claude/plugins/claude-discode/scripts/install-graphrag.sh --apply
+```
+
+설치 시간 5-10분 + 첫 indexing 15분 = 총 ~25분.
+
+**✅ 성공 모습:** `curl localhost:8400/health` → `{"status":"ok"}`
+
+**❌ 실패 시:**
+
+- Python 3.10 미설치 → macOS: `brew install python@3.11` / Ubuntu: `sudo apt install python3.11`
+- pip install 실패 → `pip3 install --upgrade pip` 후 재시도
+
+---
+
+## 🎉 마지막 단계: 모든 게 잘 됐는지 확인
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
+```
+
+**✅ 성공 모습 (예시 — 본인 선택에 따라 SKIP 표기):**
+
+```
+claude-discode healthcheck v1.0
+─────────────────────────────────
+✓ Tier 4 (ripgrep)  : OK
+✓ Tier 3 (MCP)      : OK
+○ Tier 2 (CLI)      : SKIP (Obsidian 미사용 — 2-B 선택)
+○ Tier 1 (GraphRAG) : SKIP (4-A 선택)
+─────────────────────────────────
+all required checks passed ✅
+```
+
+**❌ 실패 시:**
+
+```bash
+cat ~/.claude-discode-setup.log
+```
+
+이 파일 내용을 복사해서 GitHub Issue 등록:
+👉 https://github.com/treylom/claude-discode/issues/new?template=setup-failure.yml
+
+## 잘 됐나요? 첫 사용 해보기
+
+Claude Code 안에서:
+
+```
+/claude-discode:search "안녕 첫 검색"
+```
+
+또는 sample-vault 에서 테스트:
+
+```
+/claude-discode:search "NuriFlow ARR" --vault ~/.claude/plugins/claude-discode/sample-vault
+```
+
+축하합니다! 🎉
+
+---
+
+## ❓ 자주 묻는 질문
+
+**Q. 셋업 도중 중간에 멈춰도 되나요?**
+A. 네. 각 단계가 독립적이라 1-3단계까지만 해도 Tier 4 (ripgrep) 검색은 작동합니다.
+
+**Q. macOS / Linux / Windows / WSL 다 됩니까?**
+A. macOS / Linux / WSL 은 검증 완료. Windows native 는 추후 지원 예정 (현재 WSL 권장).
+
+**Q. 학생인데 비용 걱정?**
+A. Tier 4 (ripgrep) + Tier 2 (Obsidian) 는 100% 무료. Tier 3 (MCP) 도 무료 (Claude Code 구독 안에). Tier 1 (GraphRAG) 만 OpenAI/Anthropic API 호출 → 본인 vault 크기에 따라 1회 indexing $0.5-5 정도.
+
+**Q. 이미 obsidian-cli 만 쓰고 있는데 차이는?**
+A. README 의 5-axis benchmark 표 참고. 짧게: Tier 1 GraphRAG 는 recall +44% / Tier 2 obsidian-cli 단독 대비.
+
+**Q. 피드백 / 강의 후기 어디 남기나요?**
+A. GitHub Discussions Feedback category: https://github.com/treylom/claude-discode/discussions/categories/feedback (Round 3 outcome). 5 질문 schema 로 2분 응답 → v1.1 graduate decision 에 반영.
+
+**Q. 도움이 필요해요!**
+A. GitHub Issue: https://github.com/treylom/claude-discode/issues
+   강의 학생: 강의 Discord 채널
