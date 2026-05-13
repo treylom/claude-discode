@@ -158,5 +158,49 @@ if [ "$RECOMMEND" = "1" ]; then
   exit 0
 fi
 
-echo "claude-discode init — Phase recommend + wizard (Task 2~3 에서 구현)"
-detect_env
+# Phase 추천 + wizard
+ENV_JSON=$(detect_env)
+PHASES_JSON=$(recommend_phases "$ENV_JSON")
+
+print_summary() {
+  echo "🔍 환경 감지..."
+  echo "$ENV_JSON" | jq -r '
+    "  OS: \(.os)\n  Vault: \(.vault.path // "(미설정)") (\(.vault.note_count) 노트)\n  Tools: obsidian-cli=\(.tools.obsidian_cli // "✗") python=\(.tools.python_version // "✗") docker=\(.tools.docker // "✗") rg=\(.tools.ripgrep // "✗")\n  Resources: RAM \(.resources.ram_gb)GB / disk \(.resources.disk_free_gb)GB"
+  '
+  echo ""
+  echo "📊 Phase 추천:"
+  echo "$PHASES_JSON" | jq -r '
+    "  현재 가능:    \(.current | join(", "))\n  권장:        \(.recommended | join(", "))\n  나중/조건부:  \(.later | join(", "))"
+  '
+}
+
+print_summary
+
+if [ "$NON_INTERACTIVE" = "1" ]; then
+  echo ""
+  if [ -n "$AUTO_PHASES" ]; then
+    echo "🤖 non-interactive — auto: $AUTO_PHASES (CLAUDE_DISCODE_INIT_AUTO env)"
+    # 실제 install dispatch 는 Task 4 의 commands/init.md 가 처리
+    echo "$AUTO_PHASES" | tr ',' '\n' | while read -r phase; do
+      [ -n "$phase" ] && echo "  → $phase install (CI/script invocation 영역)"
+    done
+  else
+    echo "🤖 non-interactive — Phase 추천만 출력 (install skip)"
+  fi
+  exit 0
+fi
+
+# interactive wizard
+echo ""
+echo "⚙️ 권장 Phase 선택 (y/n, 여러 개 진행 가능):"
+echo "$PHASES_JSON" | jq -r '.recommended[]' | while read -r phase; do
+  printf "  %s install? [y/N]: " "$phase"
+  read -r ANS
+  if [ "${ANS:-N}" = "y" ]; then
+    echo "    → $phase install dispatch (commands/init.md 가 실제 install)"
+    # 실제 dispatch 는 Task 4
+  fi
+done
+
+echo ""
+echo "wizard 종료. 자세한 설치: docs/SETUP.md 또는 docs/SETUP-BEGINNER.md"
