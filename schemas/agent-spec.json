@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://github.com/treylom/claude-discode/schemas/agent-spec.json",
+  "title": "claude-discode Agent Spec (Custom Hybrid v1.0)",
+  "description": "Per-agent contract registry. agentskills.io base + Hermes provides_* + claude-discode classroom policy + dynamic gates + benchmark integration.",
+  "type": "object",
+  "required": ["name", "description", "version", "tier"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]+$",
+      "description": "kebab-case identifier; matches .agents/<name>.yaml filename"
+    },
+    "description": { "type": "string", "minLength": 10 },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "semver MAJOR.MINOR.PATCH"
+    },
+    "license": { "type": "string" },
+    "homepage": { "type": "string", "format": "uri" },
+    "provides_tools": { "type": "array", "items": { "type": "string" } },
+    "provides_hooks": { "type": "array", "items": { "type": "string" } },
+    "provides_commands": { "type": "array", "items": { "type": "string" } },
+    "tier": {
+      "type": "string",
+      "enum": ["external", "internal", "experimental", "deprecated"],
+      "description": "external = 학생/사용자 안전 / internal = 운영 / experimental = PoC / deprecated = graduate inverse"
+    },
+    "model": { "type": "string" },
+    "allowedTools": { "type": "array", "items": { "type": "string" } },
+    "gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "expr"],
+        "properties": {
+          "id": { "type": "string" },
+          "expr": { "type": "string" },
+          "evaluator": {
+            "type": "string",
+            "enum": ["simple", "cel"],
+            "default": "simple",
+            "description": "simple = self-parsed (<, >, ==, &&, ||); cel = Common Expression Language fallback"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "benchmark": {
+      "type": "object",
+      "properties": {
+        "fixtures": { "type": "string" },
+        "axes": {
+          "type": "array",
+          "items": { "enum": ["latency_ms", "recall_at_k", "cost_tokens", "setup_time_min", "kg_depth"] }
+        },
+        "baseline_tier": { "type": "integer", "minimum": 1, "maximum": 4 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
