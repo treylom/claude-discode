@@ -1,5 +1,5 @@
 ---
-name: claude-discode-meetings
+name: meetings
 description: Use when launching multi-bot collaboration meetings with permanent records. Defines the 4-file standard (00-context/01-spec/02-progress/03-outcome), SOURCE FACT cross-check before folder creation, Discord REST API thread creation (POST /channels/{id}/threads, type=11, python urllib pattern), mandatory audience direct mention, and 3-channel parallel reporting (meeting outcome + Avengers main + initiator bot mention).
 license: MIT
 compatibility: Discord 봇 운영 환경 + 회의 polled audience ≥2 봇

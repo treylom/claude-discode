@@ -1,5 +1,5 @@
 ---
-name: claude-discode-bootstrap
+name: bootstrap
 description: Use when setting up a fresh Claude Code environment with Discord bot integration on WSL/Linux/macOS. Guides the user through environment detection, package installation, tmux setup with oh-my-tmux, Claude Code installation, and first bot wizard initialization.
 license: MIT
 compatibility: WSL Ubuntu 20.04+ / Linux native (Debian, Ubuntu, Fedora, Arch) / macOS (tmux >= 2.6 required)

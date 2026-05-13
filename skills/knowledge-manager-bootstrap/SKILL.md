@@ -1,5 +1,5 @@
 ---
-name: claude-discode-km-bootstrap
+name: knowledge-manager-bootstrap
 description: One-shot environment installer for the 4-Tier search stack — installs Obsidian CLI (optional), vault-search MCP, GraphRAG server (optional), and records vault_root. Use on first run or when user reports "search Tier X 실패".
 allowedTools: Bash, AskUserQuestion, Write, Read
 ---

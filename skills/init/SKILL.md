@@ -1,5 +1,5 @@
 ---
-name: claude-discode-init
+name: init
 description: 환경 감지 + 8 Phase progressive install wizard — claude-discode 첫 install 시 vault 상태 / 도구 / 자원 자동 detect 후 추천. Use when user runs /claude-discode:init or first-time install.
 allowedTools: Bash, AskUserQuestion, Read
 ---

@@ -1,5 +1,5 @@
 ---
-name: claude-discode-shared-memory
+name: shared-memory
 description: Use when designing or migrating shared memory across bots and machines. Defines the 4-tier policy (T1 git-tracked shared / T2 machine-specific / T3 project-meetings / T4 per-bot WD) and Read-before-Edit + concurrent-write safety patterns derived from the vault SHARED-INDEX.md model.
 license: MIT
 compatibility: Obsidian vault 사용자 + plain markdown folder 사용자 양쪽 호환

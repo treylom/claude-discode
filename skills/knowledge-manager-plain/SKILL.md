@@ -1,5 +1,5 @@
 ---
-name: claude-discode-km-plain
+name: knowledge-manager-plain
 description: Plain knowledge manager — same as km-lite but never asks the user (headless / non-interactive). Use when $CLAUDE_DISCODE_HEADLESS=1 or user explicitly requests --variant plain.
 allowedTools: Read, Write, WebFetch, Bash, Glob, Grep
 ---
