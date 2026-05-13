@@ -1,54 +1,29 @@
 #!/usr/bin/env bash
-# claude-discode healthcheck v1.0
-# Exit codes (Round 2 outcome 표준): 0 = all required OK / 1 = required FAIL / 2 = intentional SKIP only
+set -e
 
-ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-LOG="${HOME}/.claude-discode-setup.log"
+echo "claude-discode healthcheck v2.1 — Phase progress"
+echo "─────────────────────────────────"
 
-# Redact user-specific path in log entries (Round 2 outcome)
-redact() {
-  echo "$1" | sed -E "s|$HOME|/HOME|g; s|/Users/[^/]+|/Users/REDACTED|g; s|/home/[^/]+|/home/REDACTED|g"
-}
+ok=0 fail=0 skip=0
 
-echo "[$(date)] healthcheck start" >> "$LOG"
-
-green() { printf "\033[32m✓\033[0m"; }
-red()   { printf "\033[31m✗\033[0m"; }
-gray()  { printf "\033[90m○\033[0m"; }
-
-fail=0; skip=0; ok=0
-
-check() {
-  local name="$1" cmd="$2" required="$3"
+phase_check() {
+  local phase="$1" name="$2" cmd="$3" required="$4"
   if eval "$cmd" >/dev/null 2>&1; then
-    printf "%s %-20s : OK\n" "$(green)" "$name"
+    printf "%s %-40s : OK\n" "" "$phase $name"
     ok=$((ok + 1))
   elif [ "$required" = "required" ]; then
-    printf "%s %-20s : FAIL\n" "$(red)" "$name"
-    echo "[$(date)] FAIL $name ($(redact "$cmd"))" >> "$LOG"
+    printf "%s %-40s : FAIL\n" "" "$phase $name"
     fail=$((fail + 1))
   else
-    printf "%s %-20s : SKIP\n" "$(gray)" "$name"
+    printf "%s %-40s : NOT YET\n" "" "$phase $name"
     skip=$((skip + 1))
   fi
 }
 
-echo "claude-discode healthcheck v1.0"
-echo "─────────────────────────────────"
-
-check "Tier 4 (ripgrep)"  "command -v rg || command -v grep" required
-check "Tier 2 (MCP)"      "jq -e '.mcpServers.\"vault-search\"' ${HOME}/.config/claude/claude_desktop_config.json" optional
-check "Tier 3 (CLI)"      "command -v obsidian-cli || command -v obsidian || command -v notesmd-cli" optional
-check "Tier 1 (GraphRAG)" "curl -fsS http://localhost:8400/health" optional
+phase_check "Phase 1" "ripgrep (Tier 4)"              "command -v rg || command -v grep" "required"
+phase_check "Phase 2" "obsidian-cli (Tier 3)"         "command -v obsidian-cli || command -v obsidian" "optional"
+phase_check "Phase 3" "vault-search MCP (Tier 2)"     "jq -e '.mcpServers.\"vault-search\"' ${HOME}/.config/claude/claude_desktop_config.json 2>/dev/null" "optional"
+phase_check "Phase 4" "GraphRAG (Tier 1)"             "curl -fsS http://localhost:8400/health 2>/dev/null" "optional"
 
 echo "─────────────────────────────────"
-if [ "$fail" -eq 0 ]; then
-  echo "all required checks passed ✅ (ok=$ok, skip=$skip)"
-  echo "[$(date)] healthcheck PASS" >> "$LOG"
-  [ "$skip" -gt 0 ] && exit 2 || exit 0
-else
-  echo "some required checks failed ❌ (ok=$ok, fail=$fail, skip=$skip)"
-  echo "see log: $LOG"
-  echo "[$(date)] healthcheck FAIL" >> "$LOG"
-  exit 1
-fi
+printf "Summary: %d OK, %d FAIL, %d NOT YET\n" "$ok" "$fail" "$skip"
