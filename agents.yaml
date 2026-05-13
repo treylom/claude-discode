@@ -1,0 +1,89 @@
+index_version: 1
+generated_at: '2026-05-13'
+count: 13
+agents:
+  - name: claude-discode-bootstrap
+    version: 1.0.0
+    tier: external
+    description: >-
+      Plugin first-run bootstrap — verifies tools, registers vault_root, prints status table. Triggered on
+      /claude-discode:setup or first session_start.
+    file: .agents/claude-discode-bootstrap.yaml
+  - name: claude-discode-codex-bridge
+    version: 1.0.0
+    tier: experimental
+    description: >-
+      Codex CLI / Codex Exec bridge — invokes OpenAI Codex with shared runtime, captures task output to .claude-bridge/,
+      returns to caller.
+    file: .agents/claude-discode-codex-bridge.yaml
+  - name: claude-discode-km-at
+    version: 1.0.0
+    tier: experimental
+    description: >-
+      Knowledge Manager Agent Teams variant — Mode R (Reorganization) workflow with category lead + worker split via
+      tofu-at pattern. Advanced KM for team vaults.
+    file: .agents/claude-discode-km-at.yaml
+  - name: claude-discode-km-bootstrap
+    version: 1.0.0
+    tier: external
+    description: >-
+      One-shot environment installer for the 4-Tier search stack — installs Obsidian CLI (optional), vault-search MCP,
+      GraphRAG server (optional), records vault_root.
+    file: .agents/claude-discode-km-bootstrap.yaml
+  - name: claude-discode-km-lite
+    version: 1.0.0
+    tier: external
+    description: >-
+      Knowledge Manager lite — Phase 1 (ingestion) + Phase 2 (extract/classify) for individual vault. Default KM variant
+      per docs/01-mode-i.md.
+    file: .agents/claude-discode-km-lite.yaml
+  - name: claude-discode-km-plain
+    version: 1.0.0
+    tier: internal
+    description: Knowledge Manager headless variant — no AskUserQuestion prompts, suitable for CI/cron unattended ingestion.
+    file: .agents/claude-discode-km-plain.yaml
+  - name: claude-discode-meetings
+    version: 1.0.0
+    tier: external
+    description: >-
+      Meeting room scaffolder — creates .claude-meetings/<date>-<topic>/ with 00-agenda + outcome templates.
+      Discord-native team workflow.
+    file: .agents/claude-discode-meetings.yaml
+  - name: claude-discode-search
+    version: 1.0.0
+    tier: external
+    description: >-
+      4-Tier vault search (GraphRAG FastAPI → Obsidian CLI → vault-search MCP → ripgrep) with automatic fallback per
+      contracts/search-fallback-4tier.md v0.1.0.
+    file: .agents/claude-discode-search.yaml
+  - name: claude-discode-shared-memory
+    version: 1.0.0
+    tier: internal
+    description: >-
+      Shared memory index manager — maintains .claude-memory/shared/SHARED-INDEX.md across machines, append-only writes
+      with conflict markers.
+    file: .agents/claude-discode-shared-memory.yaml
+  - name: cmd-claude-discode-km-bootstrap
+    version: 1.0.0
+    tier: external
+    description: Slash command /claude-discode:km-bootstrap — one-shot installer wrapper for the 4-Tier search stack.
+    file: .agents/cmd-claude-discode-km-bootstrap.yaml
+  - name: cmd-claude-discode-km
+    version: 1.0.0
+    tier: external
+    description: >-
+      Slash command /claude-discode:km — dispatches to km-lite (default) / km-at / km-plain based on flags. Wizard if no
+      args.
+    file: .agents/cmd-claude-discode-km.yaml
+  - name: cmd-claude-discode-search
+    version: 1.0.0
+    tier: external
+    description: Slash command /claude-discode:search — 4-Tier search dispatcher (forwards to claude-discode-search skill).
+    file: .agents/cmd-claude-discode-search.yaml
+  - name: cmd-claude-discode-setup
+    version: 1.0.0
+    tier: external
+    description: >-
+      Slash command /claude-discode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes
+      claude-discode-bootstrap skill.
+    file: .agents/cmd-claude-discode-setup.yaml

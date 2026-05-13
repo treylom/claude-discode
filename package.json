@@ -1,6 +1,7 @@
 {
   "name": "@treylom/claude-discode",
-  "version": "0.2.0",
+  "version": "1.0.0",
+  "type": "module",
   "description": "KM ingestion + 4-Tier vault search (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). Multi-harness: Claude Code / Hermes / Gemini / OpenCode.",
   "keywords": [
     "claude-code",
@@ -40,6 +41,17 @@
   ],
   "bin": {
     "claude-discode-km-version": "scripts/km-version.sh"
+  },
+  "scripts": {
+    "validate": "bash scripts/validate-agents.sh",
+    "index": "node scripts/generate-agents-index.mjs --apply",
+    "index:check": "node scripts/check-agents-index.mjs",
+    "test:agents": "bash tests/agents/test-schema-validation.sh && bash tests/agents/test-all-yamls.sh && bash tests/agents/test-index-roundtrip.sh"
+  },
+  "devDependencies": {
+    "ajv-cli": "^5.0.0",
+    "ajv-formats": "^2.1.1",
+    "js-yaml": "^4.1.0"
   },
   "engines": {
     "node": ">=18"
