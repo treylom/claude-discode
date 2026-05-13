@@ -29,21 +29,26 @@ if ! curl -fsS "$GRAPHRAG_URL/health" >/dev/null 2>&1; then
   exit 0
 fi
 
-FIX="$(cd "$HERE/../fixtures" && pwd)/queries.yaml"
+FIX="${FIXTURE:-$(cd "$HERE/../fixtures" && pwd)/queries.yaml}"
 RESULTS=()
 
+# v1.0.1 fix: GraphRAG server endpoint is GET /api/search (not POST /query).
+# Response schema: { query, results: [{path, ...}], total, source, search_type }.
+# cost_tokens / kg_depth not provided by server — emit 0 with note in benchmark/results JSON.
 while IFS= read -r qid; do
   qtext=$(yq ".queries[] | select(.id == \"$qid\") | .text" "$FIX")
   expected=$(yq -o=json ".queries[] | select(.id == \"$qid\") | .expected_hits" "$FIX")
 
+  # URL-encode query string
+  encoded_q=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))" "$qtext")
+
   start=$(now_ms)
-  RESP=$(curl -fsS -X POST "$GRAPHRAG_URL/query" \
-    -H "Content-Type: application/json" \
-    -d "$(jq -n --arg q "$qtext" '{q:$q,top_k:5}')" 2>/dev/null || echo '{"results":[],"usage":{"total_tokens":0},"kg":{"depth_avg":0}}')
+  RESP=$(curl -fsS "$GRAPHRAG_URL/api/search?q=$encoded_q&top_k=5" 2>/dev/null || echo '{"results":[]}')
   end=$(now_ms)
   latency=$((end - start))
 
-  TOP=$(echo "$RESP" | jq -r '.results[]?.path // empty' | head -n 5)
+  # Try .path first, then .file, then .source — schema variations
+  TOP=$(echo "$RESP" | jq -r '.results[]? | (.path // .file // .source // empty)' | head -n 5)
   tokens=$(echo "$RESP" | jq -r '.usage.total_tokens // 0')
   kg_avg=$(echo "$RESP" | jq -r '.kg.depth_avg // 0')
   recall=$(recall_at_k "$expected" "$TOP" 5)
