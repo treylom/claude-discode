@@ -14,10 +14,10 @@ flowchart TD
     T1 -->|결과 있음| Return([결과 반환])
     T1 -->|미설치/server down| T2
 
-    T2[Tier 2<br/>Obsidian CLI<br/>200-500ms<br/>recall 0.62] -->|결과 있음| Return
+    T2[Tier 2<br/>vault-search MCP<br/>500-1000ms<br/>recall 0.71] -->|결과 있음| Return
     T2 -->|미설치| T3
 
-    T3[Tier 3<br/>vault-search MCP<br/>500-1000ms<br/>recall 0.71] -->|결과 있음| Return
+    T3[Tier 3<br/>Obsidian CLI<br/>200-500ms<br/>recall 0.62] -->|결과 있음| Return
     T3 -->|미설치| T4
 
     T4[Tier 4<br/>ripgrep<br/>30-100ms<br/>recall 0.41<br/>baseline] --> Return
@@ -164,8 +164,8 @@ flowchart LR
 
     subgraph Backend[검색 backend]
         T1[Tier 1<br/>GraphRAG]
-        T2[Tier 2<br/>Obsidian CLI]
-        T3[Tier 3<br/>MCP]
+        T2[Tier 2<br/>vault-search MCP]
+        T3[Tier 3<br/>Obsidian CLI]
         T4[Tier 4<br/>ripgrep]
     end
 
