@@ -2,9 +2,26 @@
 
 > Claude Code + Discord 봇 + codex 호출 통합 플러그인 — 패스트캠퍼스 강의용
 >
-> 🌐 **English version**: [README.en.md](README.en.md)
+> 🌐 **English version**: [README.en.md](README.en.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (개발자) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (초보자) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0)
 
 WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Claude Code + tmux + oh-my-tmux 까지 세팅하고, Discord 봇 1개 띄워 첫 대화까지 검증하는 플러그인입니다.
+
+## 📊 4-Tier Search Benchmark
+
+claude-discode 의 4-Tier search 가 일반 `obsidian-cli` / `/search` / `/vault-search` 대비 어떤 trade-off 를 보이는지 5-axis 로 측정합니다. 매 main push 시 GitHub Actions 가 자동 측정 + 표 갱신합니다.
+
+<!-- BENCHMARK-TABLE-START -->
+| Tier | Method | latency_ms (P50) | recall@5 | cost_tokens | setup_time_min | kg_depth (avg) | note |
+|------|--------|-------------------|----------|-------------|----------------|----------------|------|
+| 1 | GraphRAG | — | — | — | — | — | SKIPPED (BENCHMARK_SKIP_TIER1=1 (CI mode — measur) |
+| 2 | Obsidian CLI | — | — | — | — | — | SKIPPED (obsidian-cli not installed) |
+| 3 | vault-search MCP | — | — | — | — | — | SKIPPED (vault-search MCP not configured) |
+| 4 | ripgrep | 31 | 0.0 | 0 | 0 | 0 |  |
+
+Last updated: 2026-05-13 — [results JSON](benchmark/results/2026-05-13.json)
+
+> 측정 방법 + 해석 가이드: [docs/BENCHMARK.md](docs/BENCHMARK.md)
+<!-- BENCHMARK-TABLE-END -->
 
 ---
 
