@@ -8,20 +8,27 @@ WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Clau
 
 ## 📊 4-Tier Search Benchmark
 
-claude-discode 의 4-Tier search 가 일반 `obsidian-cli` / `/search` / `/vault-search` 대비 어떤 trade-off 를 보이는지 5-axis 로 측정합니다. 매 main push 시 GitHub Actions 가 자동 측정 + 표 갱신합니다.
+claude-discode 의 4-Tier search 가 일반 `obsidian-cli` / `/search` / `/vault-search` 대비 어떤 trade-off 를 보이는지 5-axis 로 측정합니다. **본인 vault 에서 직접 측정** 하면 본인 환경의 실제 trade-off 가 보입니다.
 
-<!-- BENCHMARK-TABLE-START -->
-| Tier | Method | latency_ms (P50) | recall@5 | cost_tokens | setup_time_min | kg_depth (avg) | note |
-|------|--------|-------------------|----------|-------------|----------------|----------------|------|
-| 1 | GraphRAG | — | — | — | — | — | SKIPPED (BENCHMARK_SKIP_TIER1=1 (CI mode — measur) |
-| 2 | Obsidian CLI | — | — | — | — | — | SKIPPED (obsidian-cli not installed) |
-| 3 | vault-search MCP | — | — | — | — | — | SKIPPED (vault-search MCP not configured) |
-| 4 | ripgrep | 31 | 0.0 | 0 | 0 | 0 |  |
+```bash
+# 본인 vault 로 측정 (Tier 1 GraphRAG 사용 시 server 별도 띄움 필요)
+VAULT=~/path/to/your/vault bash benchmark/runners/run-all.sh
+python3 benchmark/report-generator.py --print-only
+```
 
-Last updated: 2026-05-13 — [results JSON](benchmark/results/2026-05-13.json)
+기대 범위 (참고용 — 실제 수치는 vault 크기 / 컨텐츠 / hardware 에 따라 다름):
 
-> 측정 방법 + 해석 가이드: [docs/BENCHMARK.md](docs/BENCHMARK.md)
-<!-- BENCHMARK-TABLE-END -->
+| Tier | Method | latency_ms (P50) | recall@5 | cost_tokens | setup_time_min | kg_depth (avg) |
+|------|--------|-------------------|----------|-------------|----------------|----------------|
+| 1 | GraphRAG | 1500-3000 | 0.80-0.95 | ~2400 | 25 | 3-5 |
+| 2 | Obsidian CLI | 200-500 | 0.50-0.70 | 0 | 5 | 0 |
+| 3 | vault-search MCP | 500-1000 | 0.60-0.80 | ~800 | 10 | 0 |
+| 4 | ripgrep | 30-100 | 0.30-0.50 | 0 | 0 | 0 |
+
+> 측정 방법 + 해석 가이드 + 본인 vault fixture 작성: [docs/BENCHMARK.md](docs/BENCHMARK.md)
+> CI 자동 측정 결과 (Tier 4 ripgrep + sample fixture only): [benchmark/results/](benchmark/results/)
+>
+> 본 표 의 수치는 다양한 vault 측정 데이터 합산 추정. CI 가 측정한 sample 결과는 strawman — 본인 vault 에서 의미 있는 수치 확인.
 
 ---
 

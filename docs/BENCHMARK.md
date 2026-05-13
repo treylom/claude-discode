@@ -2,6 +2,35 @@
 
 본 benchmark 는 claude-discode 의 4-Tier search 가 `obsidian-cli` 단독 / Claude `/search` / vault-search MCP 단독 대비 어떤 trade-off 를 보이는지 5 차원으로 측정합니다.
 
+## ⚠ 본인 vault 측정이 정공법
+
+`benchmark/fixtures/queries.yaml` 의 20 query 는 **데모용 sample fixture** (가상의 NuriFlow Systems 회사 시나리오) 입니다. 본인 vault 에서 의미 있는 수치를 보려면 본인 fixture 작성이 권장됩니다:
+
+```bash
+# 1. fixture template 복사
+cp benchmark/fixtures/queries.yaml benchmark/fixtures/my-vault.yaml
+
+# 2. my-vault.yaml 의 expected_hits 를 본인 vault 의 실제 path 로 수정
+#    (예: "40-Reports" → "Library/Reports" 등)
+
+# 3. 본인 vault 로 측정
+FIXTURE=$(pwd)/benchmark/fixtures/my-vault.yaml VAULT=~/your-vault bash benchmark/runners/run-all.sh
+
+# 4. 결과 확인 (README 표 inject 안 함 — 본인 vault 수치는 personal)
+python3 benchmark/report-generator.py --print-only
+```
+
+## GraphRAG (Tier 1) 본인 vault 사용
+
+Tier 1 GraphRAG 가 본인 vault 를 인덱싱해야 의미 있는 recall + kg_depth 측정 가능. claude-discode 의 `scripts/install-graphrag.sh` 는 본인 vault 인덱싱 + 서버 띄움까지 자동화 (CLAUDE_DISCODE_VAULT env 또는 `--vault` flag).
+
+```bash
+CLAUDE_DISCODE_VAULT=~/your-vault \
+  bash scripts/install-graphrag.sh --apply
+```
+
+별도 포트 (예: 8401) 사용 시 `GRAPHRAG_PORT=8401` env + `GRAPHRAG_URL=http://localhost:8401` env (benchmark/runners/tier1.sh 가 받음).
+
 ## 5 Axes
 
 ### 1. `latency_ms` — 응답 시간 (P50, milliseconds)
