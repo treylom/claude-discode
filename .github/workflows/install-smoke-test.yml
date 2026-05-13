@@ -77,5 +77,20 @@ jobs:
             echo "install-dense-embedding.sh --check unexpected exit code: $rc"; exit 1
           fi
 
-      - name: Show ATTRIBUTIONS.md (15+ deps matrix)
-        run: head -100 ATTRIBUTIONS.md
+      - name: Show ATTRIBUTIONS.md (16 deps matrix)
+        run: head -n 100 ATTRIBUTIONS.md
+
+      - name: Dump graphrag.log on failure (v2.3.1 debug visibility)
+        if: failure()
+        run: |
+          echo "=== graphrag.log ==="
+          cat ~/.cache/claude-discode/graphrag/run/graphrag.log 2>&1 || echo "(no graphrag.log)"
+          echo ""
+          echo "=== setup log (last 50 lines) ==="
+          tail -n 50 ~/.claude-discode-setup.log 2>&1 || echo "(no setup log)"
+          echo ""
+          echo "=== uvicorn process check ==="
+          ps aux | grep -i uvicorn || echo "(no uvicorn process)"
+          echo ""
+          echo "=== port 8400 check ==="
+          (nc -z localhost 8400 && echo "port 8400 listening") || echo "port 8400 not listening"

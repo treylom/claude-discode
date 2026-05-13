@@ -4,6 +4,7 @@ Usage: uvicorn search_server:app --host 127.0.0.1 --port 8400
 """
 from __future__ import annotations
 
+import os
 import sqlite3
 import threading
 from contextlib import asynccontextmanager
@@ -19,8 +20,15 @@ from community_detector import build_networkx_graph
 from graphrag_core import close_connection
 
 PROJECT_DIR = Path(__file__).resolve().parents[3]
-DEFAULT_DB_PATH = PROJECT_DIR / ".team-os/graphrag/index/vault_graph.db"
-DEFAULT_INDEX_DIR = PROJECT_DIR / graph_search.DEFAULT_INDEX_DIR
+# v2.3.1: env override + CI fresh env 안 graceful start (vault_graph.db anchor 없어도 server up)
+DEFAULT_DB_PATH = Path(os.environ.get(
+    "GRAPHRAG_DB_PATH",
+    str(PROJECT_DIR / ".team-os/graphrag/index/vault_graph.db"),
+))
+DEFAULT_INDEX_DIR = Path(os.environ.get(
+    "GRAPHRAG_INDEX_DIR",
+    str(PROJECT_DIR / graph_search.DEFAULT_INDEX_DIR),
+))
 ALLOWED_ORIGINS = [
     "http://127.0.0.1:3748",
     "http://localhost:3748",
@@ -55,10 +63,12 @@ def _open_readonly_connection(db_path: Path | str) -> sqlite3.Connection:
 
 
 def _load_runtime_state(db_path: Path = DEFAULT_DB_PATH) -> dict[str, Any]:
-    conn = _open_readonly_connection(db_path)
+    # v2.3.1: db_path 안 graceful — anchor 없으면 conn = None (CI fresh env / vault 미index 환경 안 startup 통과)
+    db_p = Path(db_path)
+    conn = _open_readonly_connection(db_p) if db_p.exists() else None
     # P1: Don't call _warm_models() here — moved to background thread
     return {
-        "db_path": str(db_path),
+        "db_path": str(db_p),
         "index_dir": str(DEFAULT_INDEX_DIR),
         "conn": conn,
         "graph": None,
@@ -86,6 +96,10 @@ async def lifespan(app: FastAPI):
 
     # P1+P2: Background model warmup + diverse query warmup for CV stability
     def _background_warmup():
+        # v2.3.1: conn None 시 (anchor 없음, CI fresh env) early return — server 는 up, warmup skip
+        if state["conn"] is None:
+            _models_ready.set()
+            return
         _warm_models()
         # P2: Run diverse warmup queries to prime FTS5/embedding/reranker caches
         warmup_queries = ["GraphRAG", "프롬프트 엔지니어링", "AI 에이전트", "얼룩소"]
