@@ -202,11 +202,19 @@ claude-discode/
 │   ├── open-meeting.md
 │   ├── codex-check.md
 │   └── self-update.md
-├── skills/                                # agentskills.io 표준 SKILL.md
-│   ├── claude-discode-bootstrap/
-│   ├── claude-discode-shared-memory/      # 4-tier 메모리 정책
-│   ├── claude-discode-meetings/           # 회의실 4-file protocol
-│   └── claude-discode-codex-bridge/       # /tofu-at-codex 패턴
+├── skills/                                # 12 skill (v2.2 vault-mirror 정책)
+│   ├── knowledge-manager/                 # vault 풀 7-Layer Fusion (1161 줄)
+│   ├── knowledge-manager-at/              # Agent Teams 변종 (1189 줄)
+│   ├── knowledge-manager-lite/            # Lite 단일 에이전트 (530 줄)
+│   ├── knowledge-manager-bootstrap/       # 4-Tier install 합본
+│   ├── knowledge-manager-plain/           # headless variant
+│   ├── search/                            # 4-Tier vault search
+│   ├── search-lite/                       # 3-Tier (GraphRAG 의존 없음)
+│   ├── codex-exec-bridge/                 # vault skill mirror (폴더)
+│   ├── init/                              # v2.1 wizard skill
+│   ├── bootstrap/                         # plugin 설치 wizard
+│   ├── meetings/                          # 회의실 4-file protocol
+│   └── shared-memory/                     # 4-tier 메모리 정책
 ├── hooks/                                 # 봇 운영 hook 3종
 │   ├── bot-session-init.sh                # SessionStart → soul.md 자동 inject
 │   ├── discord-slash-cmd.sh               # UserPromptSubmit → 슬래시 강제

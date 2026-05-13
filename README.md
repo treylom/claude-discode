@@ -185,13 +185,19 @@ claude-discode/
 │   ├── marketplace.json                   # claude-discode-marketplace
 │   └── plugin.json
 ├── commands/                              # Slash commands (incl. /claude-discode:init)
-├── skills/                                # agentskills.io-standard SKILL.md
-│   ├── claude-discode-init/               # v2.1 wizard skill
-│   ├── claude-discode-bootstrap/
-│   ├── claude-discode-shared-memory/      # 4-tier memory policy
-│   ├── claude-discode-meetings/           # 4-file meeting protocol
-│   ├── claude-discode-codex-bridge/       # /tofu-at-codex pattern
-│   └── claude-discode-km-at/              # km-at Mode R preflight (v2.1)
+├── skills/                                # 12 skill (v2.2 vault-mirror policy)
+│   ├── knowledge-manager/                 # vault 풀 7-Layer Fusion (1161 lines)
+│   ├── knowledge-manager-at/              # Agent Teams variant (1189 lines)
+│   ├── knowledge-manager-lite/            # Lite single-agent (530 lines)
+│   ├── knowledge-manager-bootstrap/       # 4-Tier install 합본
+│   ├── knowledge-manager-plain/           # headless variant
+│   ├── search/                            # 4-Tier vault search
+│   ├── search-lite/                       # 3-Tier (no GraphRAG)
+│   ├── codex-exec-bridge/                 # vault skill mirror (folder)
+│   ├── init/                              # v2.1 wizard skill
+│   ├── bootstrap/                         # plugin install wizard
+│   ├── meetings/                          # 4-file meeting protocol
+│   └── shared-memory/                     # 4-tier memory policy
 ├── hooks/                                 # Bot operations hooks
 ├── templates/                             # 5 soul.md personas
 ├── configs/                               # tmux.conf.local
