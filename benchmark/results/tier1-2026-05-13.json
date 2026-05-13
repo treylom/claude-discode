@@ -1,0 +1,4 @@
+{
+  "skipped": true,
+  "reason": "BENCHMARK_SKIP_TIER1=1 (CI mode — measured separately via biweekly Docker job)"
+}

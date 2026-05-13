@@ -1,0 +1,182 @@
+[
+  {
+    "query_id": "q01-nuriflow-arr",
+    "tier": 4,
+    "latency_ms": 64,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q02-team-size",
+    "tier": 4,
+    "latency_ms": 41,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q03-offices",
+    "tier": 4,
+    "latency_ms": 76,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q04-product-flowdesk",
+    "tier": 4,
+    "latency_ms": 30,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q05-product-doculens",
+    "tier": 4,
+    "latency_ms": 23,
+    "recall_at_5": 0.0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q06-product-marketplace",
+    "tier": 4,
+    "latency_ms": 23,
+    "recall_at_5": 0.0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q07-monthly-revenue",
+    "tier": 4,
+    "latency_ms": 30,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q08-ceo-team",
+    "tier": 4,
+    "latency_ms": 31,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q09-doc-turnaround",
+    "tier": 4,
+    "latency_ms": 36,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q10-hybrid-work",
+    "tier": 4,
+    "latency_ms": 31,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q11-data-security",
+    "tier": 4,
+    "latency_ms": 35,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q12-onboarding",
+    "tier": 4,
+    "latency_ms": 30,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q13-marketing-funnel",
+    "tier": 4,
+    "latency_ms": 30,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q14-vendor-msa",
+    "tier": 4,
+    "latency_ms": 30,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q15-arr-team-correlation",
+    "tier": 4,
+    "latency_ms": 32,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q16-product-customer-fit",
+    "tier": 4,
+    "latency_ms": 48,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q17-policy-incident-trace",
+    "tier": 4,
+    "latency_ms": 52,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q18-marketing-product-launch",
+    "tier": 4,
+    "latency_ms": 37,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q19-monthly-revenue-trend",
+    "tier": 4,
+    "latency_ms": 30,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  },
+  {
+    "query_id": "q20-quarterly-comparison",
+    "tier": 4,
+    "latency_ms": 31,
+    "recall_at_5": 0,
+    "cost_tokens": 0,
+    "setup_time_min": 0,
+    "kg_depth": 0
+  }
+]
