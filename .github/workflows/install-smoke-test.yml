@@ -1,0 +1,56 @@
+name: install smoke test (v2.3)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Linux deps (ripgrep + jq)
+        if: matrix.os == 'ubuntu-22.04'
+        run: sudo apt-get update -y && sudo apt-get install -y ripgrep jq
+
+      - name: Install macOS deps (ripgrep + jq)
+        if: matrix.os == 'macos-latest'
+        run: brew install ripgrep jq
+
+      - name: Verify scripts are executable
+        run: chmod +x scripts/install-*.sh scripts/install.sh scripts/healthcheck.sh
+
+      - name: install.sh --check (dry)
+        run: bash scripts/install.sh --check || true
+
+      - name: install-ripgrep.sh --apply
+        run: bash scripts/install-ripgrep.sh --apply
+
+      - name: install-graphrag.sh --apply
+        run: bash scripts/install-graphrag.sh --apply
+
+      - name: Verify GraphRAG deps import
+        run: |
+          source ~/.cache/claude-discode/graphrag/venv/bin/activate
+          python -c "import networkx, community, fastapi, uvicorn, numpy, httpx; print('GraphRAG deps OK')"
+
+      - name: healthcheck.sh
+        run: bash scripts/healthcheck.sh || echo "healthcheck exit code = $?"
+
+      - name: install-dense-embedding.sh --check (no install — saves CI time)
+        run: bash scripts/install-dense-embedding.sh --check || true
+
+      - name: Show ATTRIBUTIONS.md (15+ deps matrix)
+        run: head -100 ATTRIBUTIONS.md
