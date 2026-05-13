@@ -25,16 +25,7 @@ advanced (1-line installer): `curl -fsSL https://raw.githubusercontent.com/treyl
 
 troubleshooting: `~/.claude/plugins/` 디렉토리 없으면 `mkdir -p ~/.claude/plugins` 먼저
 
-## 3. Tier 2 — obsidian-cli (3분, 선택)
-
-```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
-which obsidian-cli      # 검증: path 출력
-```
-
-Obsidian 미사용 시 skip — Tier 3/4 로만 작동 (기능 80%)
-
-## 4. Tier 3 — vault-search MCP (5분, 권장)
+## 3. Tier 2 — vault-search MCP (5분, 권장)
 
 ```bash
 bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
@@ -42,6 +33,15 @@ claude mcp list | grep vault-search   # 검증: vault-search 항목 출력
 ```
 
 Claude Code 재시작 필요. troubleshooting: `npm install` 실패 시 `nvm use 18`
+
+## 4. Tier 3 — obsidian-cli (3분, Obsidian 사용자만)
+
+```bash
+bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+which obsidian-cli      # 검증: path 출력
+```
+
+Obsidian 미사용 시 skip.
 
 ## 5. Tier 1 — GraphRAG (20-30분, advanced)
 
