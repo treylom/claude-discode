@@ -6,6 +6,30 @@
 
 claude-discode is a single `bash install.sh` plugin that boots a working Claude Code + tmux + oh-my-tmux environment on WSL / Linux / macOS and pairs a Discord bot end-to-end — but its core value is a **4-Tier vault search fallback** (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) with **LLM model routing** (Haiku/Sonnet/Opus + Codex path). Discord is secondary; vault-first.
 
+## 🛠️ v2.3 Zero-config Install (NEW — 2026-05-13)
+
+For learners who prefer **single-command setup** (no wizard, no choices):
+
+```bash
+git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+cd ~/.claude/plugins/claude-discode
+bash scripts/install.sh --apply
+```
+
+본 single command installs:
+
+1. **superpowers** plugin (via Claude Code plugin manager)
+2. **ripgrep** (Tier 4 baseline — brew / apt / dnf / apk multi-pkg-manager fallback)
+3. **Obsidian CLI** detection (Tier 3 — manual download guide if missing)
+4. **GraphRAG core** (Tier 1 — vendored Python runtime + 7-pkg pip install)
+5. **Dense embedding** (Optional 4-channel — user confirms once, ~1GB)
+
+After install: `bash scripts/healthcheck.sh` (6-phase verification: superpowers + ripgrep + obsidian-cli + vault-search MCP + GraphRAG + Dense embedding).
+
+**Windows users:** WSL 2 (Ubuntu 22.04+) **required**. Native Windows (Cygwin / Git Bash / MSYS) is detected by `install.sh` and instructed to use WSL. PowerShell port is planned for v2.4 cycle.
+
+**Dependency provenance:** full attribution matrix (16 entries — Plugin 1 + Spec doc 2 + External tools 8 + Optional Dense 3 + Vendored Python runtime 1 + claude-discode 1) in [ATTRIBUTIONS.md](ATTRIBUTIONS.md). Cross-license compatibility verified by Phase 1 GPT-5.5 review (MIT + Apache 2.0 + BSD-3 + Unlicense — all permissive, copyleft zero).
+
 ## 🚀 Quickstart (vault-first, v2.1)
 
 ```bash

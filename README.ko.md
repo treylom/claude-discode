@@ -6,6 +6,30 @@
 
 WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Claude Code + tmux + oh-my-tmux 까지 세팅하고, Discord 봇 1개 띄워 첫 대화까지 검증하는 플러그인입니다.
 
+## 🛠️ v2.3 Zero-config 설치 (NEW — 2026-05-13)
+
+wizard 안 거치고 **single command 으로 install** 원하는 learner 용:
+
+```bash
+git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+cd ~/.claude/plugins/claude-discode
+bash scripts/install.sh --apply
+```
+
+본 single command 안 install 되는 5 dep:
+
+1. **superpowers** plugin (Claude Code plugin manager 호출)
+2. **ripgrep** (Tier 4 baseline — brew / apt / dnf / apk 다 pkg manager fallback)
+3. **Obsidian CLI** detect (Tier 3 — 미설치 시 manual download 안내)
+4. **GraphRAG core** (Tier 1 — vendored Python runtime + 7-pkg pip install)
+5. **Dense embedding** (옵션 4-channel — 사용자 confirm 1회, ~1GB)
+
+Install 후: `bash scripts/healthcheck.sh` (6-phase 검증: superpowers + ripgrep + obsidian-cli + vault-search MCP + GraphRAG + Dense embedding).
+
+**Windows 사용자:** WSL 2 (Ubuntu 22.04+) **required**. Native Windows (Cygwin / Git Bash / MSYS) 는 install.sh 안 detect 되며 WSL 사용 안내. PowerShell port = v2.4 후속 cycle.
+
+**Dependency provenance:** 16 entries 매트릭스 (Plugin 1 + Spec doc 2 + External tools 8 + Optional Dense 3 + Vendored Python runtime 1 + claude-discode 1) [ATTRIBUTIONS.md](ATTRIBUTIONS.md) 안 명기. Cross-license compatibility Phase 1 GPT-5.5 review 검증 (MIT + Apache 2.0 + BSD-3 + Unlicense — 모두 permissive, copyleft zero).
+
 ## 🚀 Quickstart (vault-first, v2.1)
 
 ```bash
