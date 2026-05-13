@@ -1,6 +1,6 @@
 index_version: 1
 generated_at: '2026-05-13'
-count: 13
+count: 14
 agents:
   - name: claude-discode-bootstrap
     version: 1.0.0
@@ -49,12 +49,17 @@ agents:
       Meeting room scaffolder — creates .claude-meetings/<date>-<topic>/ with 00-agenda + outcome templates.
       Discord-native team workflow.
     file: .agents/claude-discode-meetings.yaml
+  - name: claude-discode-model-router
+    version: 1.0.0
+    tier: external
+    description: 검색 결과 후 응답 생성 시 task complexity 따라 LLM 모델 선택 (haiku/sonnet/opus 또는 codex). dispatcher 가 query 분석 → 자동 routing.
+    file: .agents/claude-discode-model-router.yaml
   - name: claude-discode-search
     version: 1.0.0
     tier: external
     description: >-
-      4-Tier vault search (GraphRAG FastAPI → Obsidian CLI → vault-search MCP → ripgrep) with automatic fallback per
-      contracts/search-fallback-4tier.md v0.1.0.
+      4-Tier vault search dispatcher — Tier 1 GraphRAG (FastAPI semantic + graph) → Tier 2 vault-search MCP (embedding)
+      → Tier 3 Obsidian CLI (index) → Tier 4 ripgrep (literal). 정확도 우선 fallback. v2.0 정정 — 사용자 spec.
     file: .agents/claude-discode-search.yaml
   - name: claude-discode-shared-memory
     version: 1.0.0
