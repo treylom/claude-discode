@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
-# install-graphrag.sh — set up GraphRAG FastAPI server (port 8400) for Tier 1.
-# v2.1.1: v1.0.0 install logic + v2.1 preflight 통합. vault `.team-os/graphrag/` SoT
-# 호출 (RRF 가중치 α=0.3 / β=0.4 / γ=0.15 / δ=0.15 자동 동등).
+# install-graphrag.sh — claude-discode v2.3
+# GraphRAG FastAPI server (port 8400) — Tier 1 search 백엔드
+# v2.3: v2.1.1 backbone + vault SoT 의존 → claude-discode vendor/graphrag/ 의존 정정
+#       venv 위치 = ~/.cache/claude-discode/graphrag/venv (writable home cache)
+# 출처: claude-discode/vendor/graphrag/ ← obsidian-ai-vault `.team-os/graphrag/` vendor 박제
+# RRF 가중치: α=0.3 (Dense) / β=0.4 (Sparse) / γ=0.15 (Decomposed) / δ=0.15 (Entity)
 set -e
 
-VAULT="${CLAUDE_DISCODE_VAULT:-$HOME/obsidian-ai-vault}"
-GRAPHRAG_DIR="$VAULT/.team-os/graphrag"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLAUDE_DISCODE_HOME="${CLAUDE_DISCODE_HOME:-$(cd "$SCRIPT_DIR/.." && pwd)}"
+GRAPHRAG_VENDOR="$CLAUDE_DISCODE_HOME/vendor/graphrag"
+GRAPHRAG_VENV="${HOME}/.cache/claude-discode/graphrag/venv"
+GRAPHRAG_RUN="${HOME}/.cache/claude-discode/graphrag/run"
 ENTRY_MODULE="search_server:app"
 PORT=8400
 
@@ -14,7 +20,7 @@ usage() {
 Usage: $0 [--check | --apply | --preflight]
   --check      (default) health probe + venv/requirements report
   --apply      preflight → venv → pip install → uvicorn nohup
-  --preflight  preflight only (Python / disk / port / Docker)
+  --preflight  preflight only (Python / disk / port / vendor SoT)
 EOF
 }
 
@@ -37,7 +43,6 @@ preflight() {
     echo "  ✓ $(python3 --version 2>&1)"
   fi
   echo "[preflight] disk 5GB+ check..."
-  # POSIX df -k (1KB blocks) for cross-platform (macOS BSD / Linux GNU)
   local free_kb free_gb
   free_kb=$(df -k "$HOME" 2>/dev/null | tail -1 | awk '{print $4}')
   free_gb=$(( ${free_kb:-0} / 1024 / 1024 ))
@@ -52,11 +57,13 @@ preflight() {
   else
     echo "  ✓ port $PORT free"
   fi
-  echo "[preflight] Docker check (warn only)..."
-  if ! command -v docker >/dev/null 2>&1; then
-    echo "  ⚠ Docker not found (optional)" >&2
+  echo "[preflight] vendor SoT check..."
+  if [ ! -d "$GRAPHRAG_VENDOR/scripts" ]; then
+    echo "  ✗ vendor/graphrag/scripts/ missing at $GRAPHRAG_VENDOR" >&2; fail=1
   else
-    echo "  ✓ docker OK"
+    local n
+    n=$(find "$GRAPHRAG_VENDOR/scripts" -maxdepth 1 -name "*.py" 2>/dev/null | wc -l | tr -d ' ')
+    echo "  ✓ vendor SoT present ($n Python files)"
   fi
   return $fail
 }
@@ -68,10 +75,9 @@ fi
 
 if [ "$MODE" = "check" ]; then
   echo "python3: $(command -v python3 2>/dev/null || echo MISSING)"
-  echo "vault: $VAULT $([ -d "$VAULT" ] && echo present || echo missing)"
-  echo "graphrag dir: $GRAPHRAG_DIR $([ -d "$GRAPHRAG_DIR" ] && echo present || echo missing)"
-  echo "venv: $GRAPHRAG_DIR/.venv $([ -d "$GRAPHRAG_DIR/.venv" ] && echo present || echo missing)"
-  echo "requirements: $GRAPHRAG_DIR/scripts/requirements.txt $([ -f "$GRAPHRAG_DIR/scripts/requirements.txt" ] && echo present || echo missing)"
+  echo "vendor SoT: $GRAPHRAG_VENDOR/scripts $([ -d "$GRAPHRAG_VENDOR/scripts" ] && echo present || echo missing)"
+  echo "venv: $GRAPHRAG_VENV $([ -d "$GRAPHRAG_VENV" ] && echo present || echo missing)"
+  echo "requirements: $GRAPHRAG_VENDOR/scripts/requirements.txt $([ -f "$GRAPHRAG_VENDOR/scripts/requirements.txt" ] && echo present || echo missing)"
   if curl -s --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then
     echo "GraphRAG server: running on port $PORT"
   else
@@ -88,23 +94,17 @@ fi
 
 preflight || { echo "[apply] preflight FAILED — fix issues above" >&2; exit 1; }
 
-if [ ! -d "$GRAPHRAG_DIR" ]; then
-  echo "GraphRAG SoT missing at $GRAPHRAG_DIR" >&2
-  echo "  Expected: vault '.team-os/graphrag/' (set CLAUDE_DISCODE_VAULT to your vault root)" >&2
-  echo "  See: docs/SETUP.md#tier-1 for manual setup" >&2
+if [ ! -d "$GRAPHRAG_VENDOR/scripts" ]; then
+  echo "vendor/graphrag/scripts/ missing — claude-discode repo corrupted?" >&2
+  echo "  Expected: $GRAPHRAG_VENDOR/scripts/ (vendored from vault SoT)" >&2
   exit 5
 fi
 
-if [ ! -f "$GRAPHRAG_DIR/scripts/requirements.txt" ]; then
-  echo "requirements.txt missing at $GRAPHRAG_DIR/scripts/" >&2
-  exit 5
-fi
-
-cd "$GRAPHRAG_DIR"
-[ -d .venv ] || { echo "[apply] creating venv..."; python3 -m venv .venv; }
+mkdir -p "$GRAPHRAG_RUN"
+[ -d "$GRAPHRAG_VENV" ] || { echo "[apply] creating venv at $GRAPHRAG_VENV..."; python3 -m venv "$GRAPHRAG_VENV"; }
 echo "[apply] pip install requirements (quiet)..."
-.venv/bin/pip install --quiet --upgrade pip
-.venv/bin/pip install --quiet -r scripts/requirements.txt
+"$GRAPHRAG_VENV/bin/pip" install --quiet --upgrade pip
+"$GRAPHRAG_VENV/bin/pip" install --quiet -r "$GRAPHRAG_VENDOR/scripts/requirements.txt"
 
 if curl -s --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then
   echo "[apply] GraphRAG server already running on port $PORT — skip start"
@@ -112,8 +112,8 @@ if curl -s --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | gre
 fi
 
 echo "[apply] starting GraphRAG server (uvicorn, background)..."
-nohup .venv/bin/python -m uvicorn --app-dir scripts "$ENTRY_MODULE" \
-  --host 127.0.0.1 --port "$PORT" >graphrag.log 2>&1 &
+nohup "$GRAPHRAG_VENV/bin/python" -m uvicorn --app-dir "$GRAPHRAG_VENDOR/scripts" "$ENTRY_MODULE" \
+  --host 127.0.0.1 --port "$PORT" >"$GRAPHRAG_RUN/graphrag.log" 2>&1 &
 PID=$!
 echo "[apply] pid=$PID — waiting for health (10s)..."
 
@@ -125,7 +125,7 @@ for _ in 1 2 3 4 5 6 7 8 9 10; do
   fi
 done
 
-echo "[apply] ⚠ server not responding after 10s — check $GRAPHRAG_DIR/graphrag.log" >&2
+echo "[apply] ⚠ server not responding after 10s — check $GRAPHRAG_RUN/graphrag.log" >&2
 echo "[apply] last 5 lines of graphrag.log:" >&2
-tail -5 "$GRAPHRAG_DIR/graphrag.log" 2>/dev/null >&2 || true
+tail -5 "$GRAPHRAG_RUN/graphrag.log" 2>/dev/null >&2 || true
 exit 6
