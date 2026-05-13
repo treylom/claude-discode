@@ -38,13 +38,16 @@ case "$MODE" in
       exit 0
     fi
     echo "[apply] Installing superpowers plugin via Claude Code plugin manager..."
-    if claude plugin install superpowers 2>>"$LOG"; then
+    if claude plugin install superpowers@claude-plugins-official 2>>"$LOG"; then
       echo "✓ superpowers installed"
       exit 0
     else
       echo "✗ plugin install failed." >&2
-      echo "  Manual fallback:" >&2
-      echo "    git clone https://github.com/anthropics/claude-plugins-official ~/.claude/plugins/cache/claude-plugins-official" >&2
+      echo "  Likely cause: marketplace not registered. Try:" >&2
+      echo "    claude plugin marketplace update claude-plugins-official" >&2
+      echo "    # or" >&2
+      echo "    claude plugin marketplace add anthropics/claude-plugins-official" >&2
+      echo "  Then retry: claude plugin install superpowers@claude-plugins-official" >&2
       echo "  See: ATTRIBUTIONS.md (superpowers entry)" >&2
       exit 2
     fi

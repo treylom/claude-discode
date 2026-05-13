@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# claude-discode healthcheck — v2.1 Phase progress + v1.0.0 exit code / log / redact 보강
+# claude-discode healthcheck — v2.3 Phase progress + v1.0.0 exit code / log / redact 보강
 # Exit codes: 0 = all required OK / 1 = required FAIL / 2 = intentional NOT YET only
-set -e
+set -euo pipefail
 
 LOG="${HOME}/.claude-discode-setup.log"
 

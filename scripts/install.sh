@@ -42,8 +42,13 @@ case "$MODE" in
   *)               echo "unknown arg: $MODE" >&2; usage; exit 2 ;;
 esac
 
-# redact helper (log 안 home path 가림)
-redact() { sed -E "s|$HOME|/HOME|g; s|/Users/[^/]+|/Users/REDACTED|g; s|/home/[^/]+|/home/REDACTED|g"; }
+# redact helper — log / 출력 안 user-specific path 가림 (PII 안 안)
+# $HOME 안 metacharacter escape + Windows path (WSL cross-mount) 도 cover
+redact() {
+  local home_esc
+  home_esc=$(printf '%s\n' "${HOME:-/HOME}" | sed 's/[]\/$*.^|[]/\\&/g')
+  sed -E "s|${home_esc}|/HOME|g; s|/Users/[^/]+|/Users/REDACTED|g; s|/home/[^/]+|/home/REDACTED|g; s|C:\\\\Users\\\\[^\\\\]+|C:\\\\Users\\\\REDACTED|g; s|/mnt/c/Users/[^/]+|/mnt/c/Users/REDACTED|g"
+}
 
 echo "===== claude-discode v2.3 install (mode=$MODE) =====" | tee -a "$LOG"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] install.sh start mode=$MODE" >> "$LOG"

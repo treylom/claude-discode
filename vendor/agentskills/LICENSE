@@ -1,8 +1,11 @@
 # Vendored license — claude-discode v2.3
-# Origin: github.com/agentskills-io/agent-skills-in-action
-# License: Apache License 2.0
+# Origin: github.com/agentskills/agentskills (primary SoT, 18.5k stars)
+# License: Apache-2.0 (code) + CC-BY-4.0 (documentation) dual
 # Vendored at: 2026-05-13
-# Note: SPDX 표준 Apache 2.0 본문 (https://www.apache.org/licenses/LICENSE-2.0.txt)
+# Note 1: 아래 본문 = Apache License 2.0 (code portion 의 license)
+#         SPDX 표준 본 https://www.apache.org/licenses/LICENSE-2.0.txt
+# Note 2: vendored SKILL-SPEC.md = docs portion → CC-BY-4.0 적용 (별도 attribution)
+#         CC-BY-4.0 full text: https://creativecommons.org/licenses/by/4.0/legalcode
 
 
                                  Apache License

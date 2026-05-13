@@ -8,6 +8,8 @@ claude-discode is a single `bash install.sh` plugin that boots a working Claude 
 
 ## 🛠️ v2.3 Zero-config Install (NEW — 2026-05-13)
 
+**Prerequisite:** Claude Code CLI already installed + authenticated (https://claude.ai/code). `install.sh` 의 `install-superpowers.sh` step 안 `claude` CLI 호출.
+
 For learners who prefer **single-command setup** (no wizard, no choices):
 
 ```bash
@@ -313,15 +315,20 @@ If your bot's responses don't reflect the persona, the SessionStart hook is like
 
 This safely merges the bot-session-init.sh hook into `~/.claude/settings.json` while preserving any existing hooks.
 
-### GraphRAG server won't start
+### GraphRAG server won't start (v2.3 — vendor 의존 + ~/.cache venv)
 
 ```bash
-bash scripts/install-graphrag.sh --check     # health + venv + requirements report
-bash scripts/install-graphrag.sh --preflight # Python / disk / port / Docker probe
-bash scripts/install-graphrag.sh --apply     # venv + pip install + nohup uvicorn
+bash scripts/install-graphrag.sh --check     # python3 + vendor SoT + requirements + venv + server health
+bash scripts/install-graphrag.sh --preflight # Python 3.10+ / disk 5GB+ / port 8400 / vendor SoT check
+bash scripts/install-graphrag.sh --apply     # venv 생성 + pip install + nohup uvicorn
 ```
 
-The `--apply` mode creates `.venv`, installs `scripts/requirements.txt`, and starts `uvicorn search_server:app --host 127.0.0.1 --port 8400` in the background. Logs go to `$VAULT/.team-os/graphrag/graphrag.log`.
+The `--apply` mode (v2.3):
+- venv 위치 = `~/.cache/claude-discode/graphrag/venv` (writable home cache)
+- vendor SoT = `<claude-discode>/vendor/graphrag/scripts/` (vault SoT 와 동등 박제, 21 file)
+- requirements = `vendor/graphrag/scripts/requirements.txt` (7 deps: networkx / louvain / pyyaml / fastapi / uvicorn / numpy / httpx)
+- entry = `uvicorn search_server:app --host 127.0.0.1 --port 8400` (background nohup)
+- log = `~/.cache/claude-discode/graphrag/run/graphrag.log`
 
 ---
 

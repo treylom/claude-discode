@@ -32,8 +32,18 @@ jobs:
       - name: Verify scripts are executable
         run: chmod +x scripts/install-*.sh scripts/install.sh scripts/healthcheck.sh
 
-      - name: install.sh --check (dry)
-        run: bash scripts/install.sh --check || true
+      - name: install.sh --check (allows superpowers missing in CI — Claude Code CLI not installed)
+        run: |
+          set +e
+          bash scripts/install.sh --check
+          rc=$?
+          # CI 안 superpowers / obsidian-cli optional fail OK — required (ripgrep / graphrag) 만 strict
+          # rc=1 → required FAIL (block) / rc=0 → all OK
+          if [ "$rc" -ne 0 ] && [ "$rc" -ne 1 ]; then
+            echo "install.sh --check unexpected exit code: $rc"; exit 1
+          fi
+          # rc=1 시 sub-installer log 확인 — superpowers/obsidian-cli optional 만 fail OK
+          echo "install.sh --check exit code: $rc (CI permits required fail on superpowers/obsidian-cli pre-install)"
 
       - name: install-ripgrep.sh --apply
         run: bash scripts/install-ripgrep.sh --apply
@@ -46,11 +56,26 @@ jobs:
           source ~/.cache/claude-discode/graphrag/venv/bin/activate
           python -c "import networkx, community, fastapi, uvicorn, numpy, httpx; print('GraphRAG deps OK')"
 
-      - name: healthcheck.sh
-        run: bash scripts/healthcheck.sh || echo "healthcheck exit code = $?"
+      - name: healthcheck.sh (exit 0 = all OK, exit 2 = NOT YET OK, exit 1 = required FAIL block)
+        run: |
+          set +e
+          bash scripts/healthcheck.sh
+          rc=$?
+          if [ "$rc" -eq 0 ] || [ "$rc" -eq 2 ]; then
+            echo "healthcheck OK (exit $rc)"
+          else
+            echo "healthcheck FAIL — exit $rc"; exit 1
+          fi
 
-      - name: install-dense-embedding.sh --check (no install — saves CI time)
-        run: bash scripts/install-dense-embedding.sh --check || true
+      - name: install-dense-embedding.sh --check (CI 안 not installed — exit 1 expected)
+        run: |
+          set +e
+          bash scripts/install-dense-embedding.sh --check
+          rc=$?
+          # Dense optional — exit 1 (missing) 도 CI 안 OK
+          if [ "$rc" -ne 0 ] && [ "$rc" -ne 1 ]; then
+            echo "install-dense-embedding.sh --check unexpected exit code: $rc"; exit 1
+          fi
 
       - name: Show ATTRIBUTIONS.md (15+ deps matrix)
         run: head -100 ATTRIBUTIONS.md

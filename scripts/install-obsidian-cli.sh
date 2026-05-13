@@ -4,7 +4,7 @@
 # 출처: obsidian.md (proprietary GUI, 별도 download 필요)
 # CLI 후보 (3-binary detect): obsidian-cli / obsidian / notesmd-cli
 # 본 script 는 GUI 자체 vendor 불가 (proprietary) — install_obsidian() 안 brew cask / WSL Windows guide / Linux .deb 안내.
-set -e
+set -euo pipefail
 
 OS="$(uname -s)"
 WSL=0

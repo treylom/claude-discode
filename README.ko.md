@@ -8,6 +8,8 @@ WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Clau
 
 ## 🛠️ v2.3 Zero-config 설치 (NEW — 2026-05-13)
 
+**Prerequisite:** Claude Code CLI 이미 install + auth 의무 (https://claude.ai/code). `install.sh` 의 `install-superpowers.sh` step 안 `claude` CLI 호출.
+
 wizard 안 거치고 **single command 으로 install** 원하는 learner 용:
 
 ```bash
@@ -334,15 +336,20 @@ git push
 
 봇에 다시 DM → 새 코드 발급.
 
-### GraphRAG 서버가 안 뜨는 경우 (v2.1.1)
+### GraphRAG 서버가 안 뜨는 경우 (v2.3 — vendor 의존 + ~/.cache venv)
 
 ```bash
-bash scripts/install-graphrag.sh --check     # health + venv + requirements 점검
-bash scripts/install-graphrag.sh --preflight # Python / disk / port / Docker probe
-bash scripts/install-graphrag.sh --apply     # venv + pip install + nohup uvicorn 진입
+bash scripts/install-graphrag.sh --check     # python3 + vendor SoT + requirements + venv + server health
+bash scripts/install-graphrag.sh --preflight # Python 3.10+ / disk 5GB+ / port 8400 / vendor SoT 점검
+bash scripts/install-graphrag.sh --apply     # venv 생성 + pip install + nohup uvicorn
 ```
 
-`--apply` 가 `.venv` 생성 + `scripts/requirements.txt` 설치 + `uvicorn search_server:app --host 127.0.0.1 --port 8400` 백그라운드 실행. 로그 → `$VAULT/.team-os/graphrag/graphrag.log`.
+`--apply` 의 동작 (v2.3):
+- venv 위치 = `~/.cache/claude-discode/graphrag/venv` (writable home cache)
+- vendor SoT = `<claude-discode>/vendor/graphrag/scripts/` (vault SoT 와 동등 박제, 21 file)
+- requirements = `vendor/graphrag/scripts/requirements.txt` (7 deps: networkx / louvain / pyyaml / fastapi / uvicorn / numpy / httpx)
+- entry = `uvicorn search_server:app --host 127.0.0.1 --port 8400` (background nohup)
+- log = `~/.cache/claude-discode/graphrag/run/graphrag.log`
 
 ---
 
