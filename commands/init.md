@@ -1,0 +1,45 @@
+---
+description: claude-discode 환경 감지 + 8 Phase progressive install wizard (사용자 v2.1 spec)
+allowedTools: Bash, AskUserQuestion, Read
+---
+
+# /claude-discode:init
+
+$ARGUMENTS
+
+## Purpose
+
+vault 상태 / OS / 도구 / 자원 감지 → 8 Phase progressive journey 추천 (현재 가능 / 권장 / 나중). 사용자 y/n 선택 후 install dispatch.
+
+## 8 Phase 진행 (Phase 0~7, 사용자 v2.1 spec)
+
+| Phase | trigger | install |
+|---|---|---|
+| 0 | vault 미설치 | Obsidian app (link 안내) |
+| 1 | vault 시작 | ripgrep (default Tier 4) |
+| 2 | Zettelkasten 시도 | obsidian-cli (Tier 3) |
+| 3 | 100+ 노트 의미 검색 갈증 | vault-search MCP (Tier 2) |
+| 4 | 500+ 권유 / 1000+ strong / 옵션 언제나 | GraphRAG (Tier 1) |
+| 5 | 2000+ 노트 혼란 | km-at Mode R preflight (read-only) |
+| 6 | 3000+ + GraphRAG installed | Dashboard 시각화 (선택, 외부 link) |
+| 7 | advanced | 하이브리드 4채널 (선택, Journey-12/13) |
+
+## Flow
+
+1. `bash $CLAUDE_DISCODE_HOME/scripts/claude-discode-init.sh` 실행 — env detect + Phase 추천 + interactive prompt
+2. 사용자가 y 선택한 Phase 마다 해당 install script dispatch:
+   - phase-2-cli-install → `scripts/install-obsidian-cli.sh`
+   - phase-3-mcp → `scripts/install-vault-search.sh --apply`
+   - phase-4-graphrag / strong → `scripts/install-graphrag.sh --apply`
+   - phase-5-mode-r-preflight → km-at Skill 의 Mode R preflight (read-only 진단)
+3. 완료 후 healthcheck 실행
+
+## Fallback
+
+CI/headless 환경:
+- `--non-interactive` flag → Phase 추천만 출력
+- `CLAUDE_DISCODE_INIT_AUTO=<phase1>,<phase2>` env → auto install (prompt skip)
+
+## 옵션 언제나 제공 (사용자 spec Q2)
+
+GraphRAG 가 vault 노트 수 < 500 인 경우에도 `--force-phase phase-4-graphrag` flag 또는 wizard 안 "옵션 강제 진행" 선택지로 install 가능. preflight (Python 3.10+ / disk 5GB+ / port 8400) 통과만 의무.
