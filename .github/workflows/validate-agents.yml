@@ -1,0 +1,44 @@
+name: validate-agents
+on:
+  pull_request:
+    paths:
+      - '.agents/**'
+      - 'agents.yaml'
+      - 'schemas/**'
+      - 'scripts/validate-agents.sh'
+      - 'scripts/check-agents-index.mjs'
+      - 'scripts/generate-agents-index.mjs'
+      - 'hermes-plugin/plugin.yaml'
+      - 'tests/agents/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install validators
+        run: |
+          npm install -g ajv-cli ajv-formats js-yaml
+          sudo apt-get update
+          sudo apt-get install -y jq
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/download/v4.40.5/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Schema validate (all .agents/*.yaml)
+        run: bash scripts/validate-agents.sh
+
+      - name: Index consistency
+        run: |
+          node scripts/generate-agents-index.mjs --apply
+          node scripts/check-agents-index.mjs
+
+      - name: Plugin sync (hermes-plugin/plugin.yaml ↔ .agents/*.yaml)
+        run: bash tests/agents/test-plugin-sync.sh
+
+      - name: All-yamls test
+        run: bash tests/agents/test-all-yamls.sh
