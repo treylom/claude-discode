@@ -1,0 +1,17 @@
+name: claude-discode-km-plain
+description: Knowledge Manager headless variant — no AskUserQuestion prompts, suitable for CI/cron unattended ingestion.
+version: 1.0.0
+license: MIT
+homepage: https://github.com/treylom/claude-discode
+provides_tools:
+  - claude_discode_km_plain
+provides_commands:
+  - /claude-discode:km
+tier: internal
+model: opus[1m]
+allowedTools:
+  - Bash
+  - Read
+  - Write
+  - Glob
+  - Grep

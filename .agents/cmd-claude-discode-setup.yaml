@@ -1,0 +1,10 @@
+name: cmd-claude-discode-setup
+description: Slash command /claude-discode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes claude-discode-bootstrap skill.
+version: 1.0.0
+provides_commands:
+  - /claude-discode:setup
+tier: external
+allowedTools:
+  - Bash
+  - AskUserQuestion
+  - Write

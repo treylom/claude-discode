@@ -1,0 +1,13 @@
+name: claude-discode-meetings
+description: Meeting room scaffolder — creates .claude-meetings/<date>-<topic>/ with 00-agenda + outcome templates. Discord-native team workflow.
+version: 1.0.0
+license: MIT
+homepage: https://github.com/treylom/claude-discode
+provides_tools:
+  - claude_discode_meetings
+tier: external
+model: opus[1m]
+allowedTools:
+  - Bash
+  - Write
+  - Read
