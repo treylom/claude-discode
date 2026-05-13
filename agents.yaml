@@ -1,73 +1,14 @@
 index_version: 1
 generated_at: '2026-05-13'
-count: 14
+count: 17
 agents:
-  - name: claude-discode-bootstrap
+  - name: bootstrap
     version: 1.0.0
     tier: external
     description: >-
       Plugin first-run bootstrap — verifies tools, registers vault_root, prints status table. Triggered on
       /claude-discode:setup or first session_start.
-    file: .agents/claude-discode-bootstrap.yaml
-  - name: claude-discode-codex-bridge
-    version: 1.0.0
-    tier: experimental
-    description: >-
-      Codex CLI / Codex Exec bridge — invokes OpenAI Codex with shared runtime, captures task output to .claude-bridge/,
-      returns to caller.
-    file: .agents/claude-discode-codex-bridge.yaml
-  - name: claude-discode-km-at
-    version: 1.0.0
-    tier: experimental
-    description: >-
-      Knowledge Manager Agent Teams variant — Mode R (Reorganization) workflow with category lead + worker split via
-      tofu-at pattern. Advanced KM for team vaults.
-    file: .agents/claude-discode-km-at.yaml
-  - name: claude-discode-km-bootstrap
-    version: 1.0.0
-    tier: external
-    description: >-
-      One-shot environment installer for the 4-Tier search stack — installs Obsidian CLI (optional), vault-search MCP,
-      GraphRAG server (optional), records vault_root.
-    file: .agents/claude-discode-km-bootstrap.yaml
-  - name: claude-discode-km-lite
-    version: 1.0.0
-    tier: external
-    description: >-
-      Knowledge Manager lite — Phase 1 (ingestion) + Phase 2 (extract/classify) for individual vault. Default KM variant
-      per docs/01-mode-i.md.
-    file: .agents/claude-discode-km-lite.yaml
-  - name: claude-discode-km-plain
-    version: 1.0.0
-    tier: internal
-    description: Knowledge Manager headless variant — no AskUserQuestion prompts, suitable for CI/cron unattended ingestion.
-    file: .agents/claude-discode-km-plain.yaml
-  - name: claude-discode-meetings
-    version: 1.0.0
-    tier: external
-    description: >-
-      Meeting room scaffolder — creates .claude-meetings/<date>-<topic>/ with 00-agenda + outcome templates.
-      Discord-native team workflow.
-    file: .agents/claude-discode-meetings.yaml
-  - name: claude-discode-model-router
-    version: 1.0.0
-    tier: external
-    description: 검색 결과 후 응답 생성 시 task complexity 따라 LLM 모델 선택 (haiku/sonnet/opus 또는 codex). dispatcher 가 query 분석 → 자동 routing.
-    file: .agents/claude-discode-model-router.yaml
-  - name: claude-discode-search
-    version: 1.0.0
-    tier: external
-    description: >-
-      4-Tier vault search dispatcher — Tier 1 GraphRAG (FastAPI semantic + graph) → Tier 2 vault-search MCP (embedding)
-      → Tier 3 Obsidian CLI (index) → Tier 4 ripgrep (literal). 정확도 우선 fallback. v2.0 정정 — 사용자 spec.
-    file: .agents/claude-discode-search.yaml
-  - name: claude-discode-shared-memory
-    version: 1.0.0
-    tier: internal
-    description: >-
-      Shared memory index manager — maintains .claude-memory/shared/SHARED-INDEX.md across machines, append-only writes
-      with conflict markers.
-    file: .agents/claude-discode-shared-memory.yaml
+    file: .agents/bootstrap.yaml
   - name: cmd-claude-discode-km-bootstrap
     version: 1.0.0
     tier: external
@@ -92,3 +33,83 @@ agents:
       Slash command /claude-discode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes
       claude-discode-bootstrap skill.
     file: .agents/cmd-claude-discode-setup.yaml
+  - name: codex-exec-bridge
+    version: 1.0.0
+    tier: experimental
+    description: >-
+      Codex CLI / Codex Exec bridge — invokes OpenAI Codex with shared runtime, captures task output to .claude-bridge/,
+      returns to caller.
+    file: .agents/codex-exec-bridge.yaml
+  - name: init
+    version: 1.0.0
+    tier: core
+    description: >-
+      8 Phase progressive install wizard — env detect + vault note count + tools/resources 기반 Phase 추천
+      (current/recommended/later). 사용자 v2.1 spec.
+    file: .agents/init.yaml
+  - name: knowledge-manager-at
+    version: 1.0.0
+    tier: experimental
+    description: >-
+      Knowledge Manager Agent Teams variant — Mode R (Reorganization) workflow with category lead + worker split via
+      tofu-at pattern. Advanced KM for team vaults.
+    file: .agents/knowledge-manager-at.yaml
+  - name: knowledge-manager-bootstrap
+    version: 1.0.0
+    tier: external
+    description: >-
+      One-shot environment installer for the 4-Tier search stack — installs Obsidian CLI (optional), vault-search MCP,
+      GraphRAG server (optional), records vault_root.
+    file: .agents/knowledge-manager-bootstrap.yaml
+  - name: knowledge-manager-lite
+    version: 1.0.0
+    tier: external
+    description: >-
+      Knowledge Manager lite — Phase 1 (ingestion) + Phase 2 (extract/classify) for individual vault. Default KM variant
+      per docs/01-mode-i.md.
+    file: .agents/knowledge-manager-lite.yaml
+  - name: knowledge-manager-plain
+    version: 1.0.0
+    tier: internal
+    description: Knowledge Manager headless variant — no AskUserQuestion prompts, suitable for CI/cron unattended ingestion.
+    file: .agents/knowledge-manager-plain.yaml
+  - name: knowledge-manager
+    version: 2.2.0
+    tier: external
+    description: >-
+      Knowledge Manager — vault 7-Layer Fusion + Karpathy Pipeline + agent-office/km-tools 풀 본문 (vault
+      `.claude/commands/knowledge-manager.md` mirror). Mode I/R/G 모두 지원, 단일 에이전트 순차 처리. v2.2 옵션 C pure Mirror.
+    file: .agents/knowledge-manager.yaml
+  - name: meetings
+    version: 1.0.0
+    tier: external
+    description: >-
+      Meeting room scaffolder — creates .claude-meetings/<date>-<topic>/ with 00-agenda + outcome templates.
+      Discord-native team workflow.
+    file: .agents/meetings.yaml
+  - name: model-router
+    version: 1.0.0
+    tier: external
+    description: 검색 결과 후 응답 생성 시 task complexity 따라 LLM 모델 선택 (haiku/sonnet/opus 또는 codex). dispatcher 가 query 분석 → 자동 routing.
+    file: .agents/model-router.yaml
+  - name: search-lite
+    version: 2.2.0
+    tier: external
+    description: >-
+      Search Lite — Obsidian CLI / MCP / Grep 3-Tier Cascade (GraphRAG 의존 없음). vault `.claude/commands/search-lite.md`
+      mirror. v2.2 옵션 C pure Mirror.
+    file: .agents/search-lite.yaml
+  - name: search
+    version: 1.0.0
+    tier: external
+    description: >-
+      4-Tier vault search dispatcher — Tier 1 GraphRAG (FastAPI semantic + graph) → Tier 2 vault-search MCP (embedding)
+      → Tier 3 Obsidian CLI (index) → Tier 4 ripgrep (literal). 정확도 우선 fallback. v2.0 정정 — 사용자 spec.
+    file: .agents/search.yaml
+  - name: shared-memory
+    version: 1.0.0
+    tier: internal
+    description: >-
+      Shared memory index manager — maintains .claude-memory/shared/SHARED-INDEX.md across machines, append-only writes
+      with conflict markers.
+    file: .agents/shared-memory.yaml

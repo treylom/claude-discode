@@ -1,10 +1,10 @@
-name: claude-discode-bootstrap
+name: bootstrap
 description: Plugin first-run bootstrap — verifies tools, registers vault_root, prints status table. Triggered on /claude-discode:setup or first session_start.
 version: 1.0.0
 license: MIT
 homepage: https://github.com/treylom/claude-discode
 provides_tools:
-  - claude_discode_bootstrap
+  - bootstrap
 provides_commands:
   - /claude-discode:setup
 provides_hooks:

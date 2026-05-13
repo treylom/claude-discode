@@ -1,4 +1,4 @@
-name: claude-discode-codex-bridge
+name: codex-exec-bridge
 description: Codex CLI / Codex Exec bridge — invokes OpenAI Codex with shared runtime, captures task output to .claude-bridge/, returns to caller.
 version: 1.0.0
 license: MIT

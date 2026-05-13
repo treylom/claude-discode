@@ -1,10 +1,10 @@
-name: claude-discode-km-at
+name: knowledge-manager-at
 description: Knowledge Manager Agent Teams variant — Mode R (Reorganization) workflow with category lead + worker split via tofu-at pattern. Advanced KM for team vaults.
 version: 1.0.0
 license: MIT
 homepage: https://github.com/treylom/claude-discode
 provides_tools:
-  - claude_discode_km_at
+  - knowledge_manager_at
 provides_commands:
   - /claude-discode:km
 tier: experimental
