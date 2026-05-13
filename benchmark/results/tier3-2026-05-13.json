@@ -1,4 +1,11 @@
-{
-  "skipped": true,
-  "reason": "vault-search MCP not configured"
-}
+[
+  {
+    "query_id": "q01-nuriflow-arr",
+    "tier": 3,
+    "latency_ms": 35,
+    "recall_at_5": 0.0,
+    "cost_tokens": 0,
+    "setup_time_min": 5,
+    "kg_depth": 0
+  }
+]
