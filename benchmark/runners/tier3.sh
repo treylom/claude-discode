@@ -14,23 +14,35 @@ while [ $# -gt 0 ]; do
 done
 [ -n "$OUT" ] || { echo "FAIL: --output required"; exit 1; }
 
-if ! command -v obsidian-cli >/dev/null 2>&1; then
-  jq -n '{ "skipped": true, "reason": "obsidian-cli not installed" }' > "$OUT"
-  echo "tier3 SKIPPED: obsidian-cli missing"
+# v2.0.2 — 3 binary 중 하나 있으면 OK (obsidian-cli / obsidian / notesmd-cli)
+if ! command -v obsidian-cli >/dev/null 2>&1 \
+  && ! command -v obsidian >/dev/null 2>&1 \
+  && ! command -v notesmd-cli >/dev/null 2>&1; then
+  jq -n '{ "skipped": true, "reason": "Obsidian CLI not installed (obsidian-cli / obsidian / notesmd-cli)" }' > "$OUT"
+  echo "tier3 SKIPPED: Obsidian CLI missing (3 binary 중 하나 필요)"
   exit 0
 fi
 
 FIX="${FIXTURE:-$(cd "$HERE/../fixtures" && pwd)/queries.yaml}"
 RESULTS=()
 
-# v2.0.1 — Mac binary (KEY=VALUE) + npm binary (POSIX flags) syntax fallback + stdin redirect
-# (v1.0 잠재 bug fix: stdin consumption 으로 while loop 1회 후 break + Mac obsidian-cli syntax mismatch)
+# v2.0.2 — binary 이름 detection (codex xhigh review verdict: NEEDS_PATCH_v2.0.2)
+# 공식 Obsidian CLI (Obsidian.app 번들, /opt/homebrew/bin/obsidian-cli symlink) = KEY=VALUE syntax
+# Yakitrak/notesmd-cli (별도 binary 이름) = search-content + --no-interactive --format json
+# (v1.0 잠재 bug fix: stdin consumption + Mac obsidian-cli syntax mismatch + Yakitrak binary 이름 정정)
 search_obsidian() {
   local qtext="$1"
-  # Mac obsidian-cli (Obsidian.app 번들) — KEY=VALUE syntax
-  obsidian-cli search "query=$qtext" "limit=5" "format=text" </dev/null 2>/dev/null && return 0
-  # npm obsidian-cli (Yakitrak 등) — POSIX flag syntax
-  obsidian-cli search --limit 5 -- "$qtext" </dev/null 2>/dev/null && return 0
+  # 1순위: 공식 Obsidian CLI — obsidian-cli (homebrew symlink) 또는 obsidian (PATH 직접)
+  if command -v obsidian-cli >/dev/null 2>&1; then
+    obsidian-cli search "query=$qtext" "limit=5" "format=text" </dev/null 2>/dev/null && return 0
+  fi
+  if command -v obsidian >/dev/null 2>&1; then
+    obsidian search "query=$qtext" "limit=5" "format=text" </dev/null 2>/dev/null && return 0
+  fi
+  # 2순위: Yakitrak/notesmd-cli — search-content 형식 (https://github.com/Yakitrak/notesmd-cli)
+  if command -v notesmd-cli >/dev/null 2>&1; then
+    notesmd-cli search-content "$qtext" --no-interactive --format json </dev/null 2>/dev/null && return 0
+  fi
   return 1
 }
 
