@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # install-obsidian-cli.sh — Obsidian CLI / app detect + install (Tier 3 fallback).
-# v2.1.1: v1.0.0 install 로직 + v2.0.2 3-binary detection + v2.1 --json wizard 모드 통합
+# v2.3: v2.1.1 backbone + 출처 명시.
+# 출처: obsidian.md (proprietary GUI, 별도 download 필요)
+# CLI 후보 (3-binary detect): obsidian-cli / obsidian / notesmd-cli
+# 본 script 는 GUI 자체 vendor 불가 (proprietary) — install_obsidian() 안 brew cask / WSL Windows guide / Linux .deb 안내.
 set -e
 
 OS="$(uname -s)"
