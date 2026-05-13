@@ -24,8 +24,8 @@
     "provides_commands": { "type": "array", "items": { "type": "string" } },
     "tier": {
       "type": "string",
-      "enum": ["external", "internal", "experimental", "deprecated"],
-      "description": "external = 학생/사용자 안전 / internal = 운영 / experimental = PoC / deprecated = graduate inverse"
+      "enum": ["external", "internal", "experimental", "deprecated", "core"],
+      "description": "external = 학생/사용자 안전 / internal = 운영 / experimental = PoC / deprecated = graduate inverse / core = v2.1 기본 install 의무 (init wizard 등)"
     },
     "model": { "type": "string" },
     "allowedTools": { "type": "array", "items": { "type": "string" } },
@@ -56,6 +56,31 @@
           "items": { "enum": ["latency_ms", "recall_at_k", "cost_tokens", "setup_time_min", "kg_depth"] }
         },
         "baseline_tier": { "type": "integer", "minimum": 1, "maximum": 4 }
+      },
+      "additionalProperties": false
+    },
+    "phases": {
+      "type": "object",
+      "description": "v2.1 km-at Mode R preflight workflow (read-only preflight + dry_run_required apply)",
+      "properties": {
+        "preflight": {
+          "type": "object",
+          "properties": {
+            "auto": { "type": "boolean" },
+            "scope": { "type": "string", "enum": ["read-only", "read-write"] },
+            "checks": { "type": "array", "items": { "type": "string" } },
+            "output": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "apply": {
+          "type": "object",
+          "properties": {
+            "auto": { "type": "boolean" },
+            "dry_run_required": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     }
