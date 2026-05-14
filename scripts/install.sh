@@ -54,7 +54,8 @@ echo "===== claude-discode v2.3 install (mode=$MODE) =====" | tee -a "$LOG"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] install.sh start mode=$MODE" >> "$LOG"
 
 SCRIPTS=(install-superpowers.sh install-ripgrep.sh install-obsidian-cli.sh install-graphrag.sh install-dense-embedding.sh)
-OPTIONAL=(install-obsidian-cli.sh install-dense-embedding.sh)
+# v2.3.2: superpowers 도 optional 분류 — Claude Code CLI 미설치 환경 (CI 등) 안 graceful (codex Axis B IMPORTANT — CI policy 일치)
+OPTIONAL=(install-superpowers.sh install-obsidian-cli.sh install-dense-embedding.sh)
 
 FAILED=()
 OPTIONAL_FAIL=()

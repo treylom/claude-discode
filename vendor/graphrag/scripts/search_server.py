@@ -76,6 +76,12 @@ def _load_runtime_state(db_path: Path = DEFAULT_DB_PATH) -> dict[str, Any]:
 
 
 def _get_graph(app: FastAPI):
+    # v2.3.2: conn=None graceful — graph build requires DB anchor
+    if getattr(app.state, "conn", None) is None:
+        raise HTTPException(
+            status_code=503,
+            detail="GraphRAG index not built. Run vault index build first, then POST /reload or restart server.",
+        )
     if getattr(app.state, "graph", None) is None:
         app.state.graph = build_networkx_graph(app.state.conn)
     return app.state.graph
@@ -137,17 +143,58 @@ app.add_middleware(
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "models_ready": _models_ready.is_set()}
+    # v2.3.2: liveness only — process up 확인용. readiness gate 아님.
+    # CI / Docker healthcheck 는 /ready 사용 의무.
+    db_ready = getattr(app.state, "conn", None) is not None
+    search_ready = db_ready and _models_ready.is_set()
+    return {
+        "status": "ok",
+        "models_ready": _models_ready.is_set(),
+        "db_ready": db_ready,
+        "search_ready": search_ready,
+    }
+
+
+@app.get("/ready")
+async def ready():
+    # v2.3.2: readiness gate 별도 endpoint — CI / Docker HEALTHCHECK 의무 URL.
+    # axis C 2-round debate (codex R2) 권고: /health 가 liveness-only false-positive readiness 차단.
+    if getattr(app.state, "conn", None) is None:
+        raise HTTPException(
+            status_code=503,
+            detail={"ready": False, "reason": "db_not_ready", "hint": "vault index not built — run vault index build + POST /reload"},
+        )
+    if not _models_ready.is_set():
+        raise HTTPException(
+            status_code=503,
+            detail={"ready": False, "reason": "warmup_in_progress"},
+        )
+    return {"ready": True, "db_path": app.state.db_path}
 
 
 @app.post("/reload")
 async def reload_models():
+    # v2.3.2: reload 시 models_ready clear + background warmup re-start
     _clear_model_caches()
-    _replace_runtime_state(app, _load_runtime_state(Path(app.state.db_path)))
+    _models_ready.clear()
+    new_state = _load_runtime_state(Path(app.state.db_path))
+    _replace_runtime_state(app, new_state)
+
+    # background warmup re-execution (lifespan 안 logic 동등)
+    def _reload_warmup():
+        if new_state["conn"] is None:
+            _models_ready.set()
+            return
+        _warm_models()
+        _models_ready.set()
+
+    threading.Thread(target=_reload_warmup, daemon=True).start()
+
     return {
         "status": "reloaded",
         "db_path": app.state.db_path,
         "index_dir": app.state.index_dir,
+        "db_ready": new_state["conn"] is not None,
     }
 
 
@@ -166,6 +213,17 @@ async def search(
         raise HTTPException(
             status_code=400,
             detail=f"Invalid mode: {mode}. Valid: {sorted(VALID_SEARCH_MODES)}",
+        )
+
+    # v2.3.2: conn=None graceful — DB anchor 없으면 503 (fresh env / vault index 미build)
+    if app.state.conn is None:
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "error": "GraphRAG index not built",
+                "message": "Vault index has not been built. Build index first, then POST /reload or restart server.",
+                "db_path": app.state.db_path,
+            },
         )
 
     # P1: Wait for background model warmup (up to 60s)
@@ -201,11 +259,21 @@ async def search_entities(
     q: str = Query(..., min_length=1),
     top_k: int = Query(10, ge=1, le=100),
 ):
-    # P3: Cross-lingual query expansion for entity search
-    # Append English/Korean equivalents so the multilingual embedding
-    # model gets both language signals for better recall
-    expanded_q = graph_search.expand_query_cross_lingual(q)
-    raw_results = embedding_index.search_entities(expanded_q, app.state.index_dir, top_k=top_k)
+    # v2.3.2: entity index 파일 부분 corrupt / missing 시 graceful 503 (uncaught 500 방지)
+    try:
+        # P3: Cross-lingual query expansion for entity search
+        expanded_q = graph_search.expand_query_cross_lingual(q)
+        raw_results = embedding_index.search_entities(expanded_q, app.state.index_dir, top_k=top_k)
+    except (FileNotFoundError, ImportError, ValueError, OSError) as exc:
+        # entity_embeddings.npy / entity_meta.json missing / corrupt / load fail
+        raise HTTPException(
+            status_code=503,
+            detail={
+                "error": "Entity index not built",
+                "message": f"Entity index unavailable: {type(exc).__name__}. Build index first, then POST /reload.",
+                "index_dir": str(app.state.index_dir),
+            },
+        )
     results = [
         {
             **row,

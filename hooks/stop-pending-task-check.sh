@@ -25,11 +25,29 @@
 # - count == 0 시 exit 0 (silent)
 set -euo pipefail
 
+# v2.3.2: stdin JSON parse + Stop event filter + recursive bypass + cwd fallback
 # Session info (Claude Code 안 stdin 으로 hook 호출 시 JSON 전달)
-input="$(cat)"
+input="$(cat 2>/dev/null || true)"
 
-# vault path (env override 가능)
-VAULT="${CLAUDE_DISCODE_VAULT:-${VAULT:-${HOME}/obsidian-ai-vault}}"
+# JSON parse (jq 있을 때만 — 없으면 graceful skip 안 단순 trigger)
+if command -v jq >/dev/null 2>&1 && [[ -n "$input" ]]; then
+  event="$(jq -r '.hook_event_name // empty' <<<"$input" 2>/dev/null || true)"
+  active="$(jq -r '.stop_hook_active // false' <<<"$input" 2>/dev/null || true)"
+  cwd="$(jq -r '.cwd // empty' <<<"$input" 2>/dev/null || true)"
+
+  # Stop event 가 아니거나 recursive Stop hook 활성 시 silent skip
+  if [[ -n "$event" && "$event" != "Stop" ]]; then
+    exit 0
+  fi
+  if [[ "$active" == "true" ]]; then
+    exit 0
+  fi
+else
+  cwd=""
+fi
+
+# vault path (env override > stdin cwd > default)
+VAULT="${CLAUDE_DISCODE_VAULT:-${VAULT:-${cwd:-${HOME}/obsidian-ai-vault}}}"
 PLAN_DIR="${VAULT}/docs/superpowers/plans"
 
 if [[ ! -d "$PLAN_DIR" ]]; then
@@ -41,7 +59,8 @@ fi
 pending=0
 declare -a pending_files=()
 while IFS= read -r -d '' plan; do
-  n=$(grep -c '^- \[ \]' "$plan" 2>/dev/null || true)
+  # v2.3.2: regex 안 indented + `* [ ]` task 도 catch
+  n=$(grep -Ec '^[[:space:]]*[-*][[:space:]]+\[[[:space:]]\]' "$plan" 2>/dev/null || true)
   if [[ "${n:-0}" -gt 0 ]]; then
     pending=$(( pending + n ))
     pending_files+=("$(basename "$plan"): $n")

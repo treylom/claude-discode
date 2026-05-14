@@ -37,8 +37,9 @@ esac
 preflight() {
   local fail=0
   echo "[preflight] Python 3.10+ check..."
-  if ! python3 --version 2>&1 | grep -qE "3\.(1[0-9]|[2-9])"; then
-    echo "  ✗ Python 3.10+ 필요" >&2; fail=1
+  # v2.3.2: regex 안 3.9 false pass 정정 — sys.version_info tuple compare 사용
+  if ! python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null; then
+    echo "  ✗ Python 3.10+ 필요 (vendored code uses 3.10 syntax: Path | str)" >&2; fail=1
   else
     echo "  ✓ $(python3 --version 2>&1)"
   fi
@@ -117,26 +118,64 @@ if [ ! -d "$GRAPHRAG_VENDOR/scripts" ]; then
 fi
 
 mkdir -p "$GRAPHRAG_RUN"
-[ -d "$GRAPHRAG_VENV" ] || { echo "[apply] creating venv at $GRAPHRAG_VENV..."; python3 -m venv "$GRAPHRAG_VENV"; }
-echo "[apply] pip install requirements (quiet)..."
-"$GRAPHRAG_VENV/bin/pip" install --quiet --upgrade pip
-"$GRAPHRAG_VENV/bin/pip" install --quiet -r "$GRAPHRAG_VENDOR/scripts/requirements.txt"
 
-if curl -s --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then
-  echo "[apply] GraphRAG server already running on port $PORT — skip start"
+# v2.3.2: flock — concurrent --apply 안 race condition 차단 (codex Axis B CRITICAL)
+LOCK="$GRAPHRAG_RUN/install.lock"
+PIDFILE="$GRAPHRAG_RUN/graphrag.pid"
+exec 9>"$LOCK"
+if command -v flock >/dev/null 2>&1; then
+  flock -n 9 || { echo "[apply] another GraphRAG install is running (flock $LOCK)" >&2; exit 7; }
+fi
+
+# v2.3.2: venv idempotency — partial venv corruption recovery
+if [ ! -x "$GRAPHRAG_VENV/bin/python" ] || [ ! -x "$GRAPHRAG_VENV/bin/pip" ]; then
+  echo "[apply] creating venv at $GRAPHRAG_VENV (atomic rename for idempotency)..."
+  rm -rf "$GRAPHRAG_VENV.tmp"
+  python3 -m venv "$GRAPHRAG_VENV.tmp"
+  rm -rf "$GRAPHRAG_VENV"
+  mv "$GRAPHRAG_VENV.tmp" "$GRAPHRAG_VENV"
+fi
+echo "[apply] pip install requirements (quiet)..."
+"$GRAPHRAG_VENV/bin/python" -m pip install --quiet --upgrade pip
+"$GRAPHRAG_VENV/bin/python" -m pip install --quiet --retries 3 --timeout 60 -r "$GRAPHRAG_VENDOR/scripts/requirements.txt"
+
+# v2.3.2: post-lock health probe (concurrent install 안 두 번째 안 already healthy)
+if curl -fsS --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then
+  echo "[apply] GraphRAG server already healthy on port $PORT — skip start"
   exit 0
 fi
+
+# v2.3.2: port occupied but non-GraphRAG = explicit fail (안 안전 mask)
+if command -v nc >/dev/null 2>&1 && nc -z 127.0.0.1 "$PORT" 2>/dev/null; then
+  echo "[apply] port $PORT is occupied but /health is not GraphRAG" >&2
+  echo "  Manual: 본 port 사용 process 확인 + cleanup 의무" >&2
+  exit 7
+fi
+
+# v2.3.2: cleanup trap — failed health 시 orphan uvicorn 방지
+STARTED_PID=""
+cleanup() {
+  if [ -n "$STARTED_PID" ] && kill -0 "$STARTED_PID" 2>/dev/null; then
+    kill "$STARTED_PID" 2>/dev/null || true
+    sleep 1
+    kill -9 "$STARTED_PID" 2>/dev/null || true
+  fi
+}
+trap cleanup INT TERM EXIT
 
 echo "[apply] starting GraphRAG server (uvicorn, background)..."
 nohup "$GRAPHRAG_VENV/bin/python" -m uvicorn --app-dir "$GRAPHRAG_VENDOR/scripts" "$ENTRY_MODULE" \
   --host 127.0.0.1 --port "$PORT" >"$GRAPHRAG_RUN/graphrag.log" 2>&1 &
-PID=$!
+STARTED_PID=$!
+PID=$STARTED_PID
 echo "[apply] pid=$PID — waiting for health (10s)..."
 
 for _ in 1 2 3 4 5 6 7 8 9 10; do
   sleep 1
-  if curl -s --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then
+  if curl -fsS --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then
     echo "[apply] ✓ GraphRAG server running on port $PORT (pid=$PID)"
+    echo "$PID" > "$PIDFILE"
+    trap - INT TERM EXIT
     exit 0
   fi
 done
@@ -144,4 +183,5 @@ done
 echo "[apply] ⚠ server not responding after 10s — check $GRAPHRAG_RUN/graphrag.log" >&2
 echo "[apply] last 5 lines of graphrag.log:" >&2
 tail -n 5 "$GRAPHRAG_RUN/graphrag.log" 2>/dev/null >&2 || true
+# cleanup trap 안 spawned uvicorn kill (orphan 차단)
 exit 6

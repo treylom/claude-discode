@@ -43,7 +43,9 @@ case "$MODE" in
         ;;
       Linux)
         if command -v apt-get >/dev/null 2>&1; then
-          echo "[apply] apt-get install ripgrep..."
+          echo "[apply] apt-get update + install ripgrep..."
+          # v2.3.2: stale index 차단 (codex Axis B IMPORTANT)
+          sudo apt-get update -y 2>>"$LOG"
           sudo apt-get install -y ripgrep 2>>"$LOG"
         elif command -v dnf >/dev/null 2>&1; then
           echo "[apply] dnf install ripgrep..."

@@ -30,15 +30,31 @@ import json
 import sqlite3
 from typing import Any
 
+# v2.3.2: import-time raise 제거 — server import 자체 fail 차단.
+# Missing dep 는 build_networkx_graph() 등 caller 안 RuntimeError 안 명시 (lazy guard).
 try:
     import networkx as nx
 except ImportError:
-    raise ImportError("networkx not installed. Run: pip install 'networkx>=3.0'")
+    nx = None  # type: ignore[assignment]
 
 try:
     import community as community_louvain  # python-louvain
 except ImportError:
-    raise ImportError("python-louvain not installed. Run: pip install 'python-louvain>=0.16'")
+    community_louvain = None  # type: ignore[assignment]
+
+
+def _require_networkx() -> None:
+    if nx is None:
+        raise RuntimeError(
+            "networkx not installed. Run: pip install 'networkx>=3.0' (또는 bash scripts/install-graphrag.sh --apply)"
+        )
+
+
+def _require_louvain() -> None:
+    if community_louvain is None:
+        raise RuntimeError(
+            "python-louvain not installed. Run: pip install 'python-louvain>=0.16' (또는 bash scripts/install-graphrag.sh --apply)"
+        )
 
 from graphrag_core import get_connection, close_connection
 
@@ -63,6 +79,7 @@ COMMUNITY_LEVELS: list[tuple[int, float, str]] = [
 
 def build_networkx_graph(conn: sqlite3.Connection) -> "nx.Graph":
     """Build an undirected weighted NetworkX graph from entities + relationships."""
+    _require_networkx()
     G = nx.Graph()
 
     for row in conn.execute(
