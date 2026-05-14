@@ -32,6 +32,17 @@ After install: `bash scripts/healthcheck.sh` (6-phase verification: superpowers 
 
 **Dependency provenance:** full attribution matrix (16 entries — Plugin 1 + Spec doc 2 + External tools 8 + Optional Dense 3 + Vendored Python runtime 1 + claude-discode 1) in [ATTRIBUTIONS.md](ATTRIBUTIONS.md). Cross-license compatibility verified by Phase 1 GPT-5.5 review (MIT + Apache 2.0 + BSD-3 + Unlicense — all permissive, copyleft zero).
 
+**Lessons learned (v2.3.x cycle, 9 shared memory entries):** 본 cycle 의 학습 정착은 vault `AI_Second_Brain/.claude-memory/shared/feedback_*` 안 보존:
+- `feedback_no_student_term` — learner / 사용자 / 수강자 terminology
+- `feedback_autonomy_mode_no_option_questions` — 자율 cycle 옵션 confirm 묻기 zero
+- `feedback_no_turn_marker_continuous_execution` — turn 마감 발화 zero, 연속 실행
+- `feedback_background_task_proactive_polling` — background task active poll (자동 notification 가정 zero)
+- `feedback_debugging_via_codex` — debugging task = codex 위임 의무
+- `feedback_fresh_env_actual_install_verification` — Phase 1+2 정적 검수 한계, Phase 3 actual install 필수 ⭐ critical
+- `feedback_tofu_at_codex_actual_mechanism` — multi-axis parallel = `/tofu-at-codex` (Agent Teams + sonnet workers)
+- `feedback_sonnet_codex_debate_opus_synthesis` — sonnet ↔ codex multi-round debate → opus 종합 mechanism
+- `feedback_no_user_decision_zone_autonomous` — 자율 cycle 안 "사용자 결정 영역" 분류 zero (autonomy 3rd 강화)
+
 ## 🚀 Quickstart (vault-first, v2.1)
 
 ```bash
