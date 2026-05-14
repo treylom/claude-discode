@@ -127,13 +127,13 @@ if command -v flock >/dev/null 2>&1; then
   flock -n 9 || { echo "[apply] another GraphRAG install is running (flock $LOCK)" >&2; exit 7; }
 fi
 
-# v2.3.2: venv idempotency — partial venv corruption recovery
+# v2.3.2.2: venv in-place create (atomic rename 제거 — broken venv 차단)
+# venv internal pyvenv.cfg + symlinks 안 absolute path hardcoded → mv 후 broken.
+# corrupt venv 안 idempotency = rm -rf + 재create.
 if [ ! -x "$GRAPHRAG_VENV/bin/python" ] || [ ! -x "$GRAPHRAG_VENV/bin/pip" ]; then
-  echo "[apply] creating venv at $GRAPHRAG_VENV (atomic rename for idempotency)..."
-  rm -rf "$GRAPHRAG_VENV.tmp"
-  python3 -m venv "$GRAPHRAG_VENV.tmp"
+  echo "[apply] (re)creating venv at $GRAPHRAG_VENV (in-place)..."
   rm -rf "$GRAPHRAG_VENV"
-  mv "$GRAPHRAG_VENV.tmp" "$GRAPHRAG_VENV"
+  python3 -m venv "$GRAPHRAG_VENV"
 fi
 echo "[apply] pip install requirements (verbose for debug)..."
 # v2.3.2.1: --quiet 제거 — silent fail 차단 (CI 안 networkx import fail mystery 검증)
