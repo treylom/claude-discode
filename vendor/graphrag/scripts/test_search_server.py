@@ -59,17 +59,69 @@ class SearchModeTest(unittest.TestCase):
 
 class SearchServerLazyGraphTest(unittest.TestCase):
     def test_load_runtime_state_defers_graph_build(self):
+        # v2.3.3 drift fix: search_server 안 `get_connection` symbol 없음 — 실제 `_open_readonly_connection`.
+        # Path.exists mock 으로 v2.3.1 graceful fix 의 db_p.exists() branch 도 cover.
         import search_server
 
-        with patch.object(search_server, 'get_connection', return_value='CONN') as get_conn, \
+        with patch.object(search_server, '_open_readonly_connection', return_value='CONN') as open_conn, \
+             patch('pathlib.Path.exists', return_value=True), \
              patch.object(search_server, 'build_networkx_graph') as build_graph:
             state = search_server._load_runtime_state()
 
-        get_conn.assert_called_once()
+        open_conn.assert_called_once()
         # _warm_models is now called in background thread (lifespan), not in _load_runtime_state
         build_graph.assert_not_called()
         self.assertEqual(state['conn'], 'CONN')
         self.assertIsNone(state['graph'])
+
+
+class SearchServerV231ConnNoneRegressionTest(unittest.TestCase):
+    """v2.3.1 + v2.3.2 conn=None regression tests (Phase 2 finding 안 backfill)."""
+
+    def test_load_runtime_state_graceful_when_db_missing(self):
+        # v2.3.1: db_path.exists() False 시 conn = None
+        import search_server
+
+        with patch('pathlib.Path.exists', return_value=False):
+            state = search_server._load_runtime_state()
+
+        self.assertIsNone(state['conn'])
+        self.assertIsNone(state['graph'])
+
+    def test_api_search_returns_503_when_conn_none(self):
+        # v2.3.2: /api/search conn=None → HTTPException 503
+        import search_server
+
+        client = TestClient(search_server.app)
+        with patch.object(search_server.app.state, 'conn', None, create=True), \
+             patch.object(search_server._models_ready, 'wait', return_value=True):
+            response = client.get('/api/search', params={'q': 'test', 'mode': 'hybrid'})
+
+        self.assertEqual(response.status_code, 503)
+        self.assertIn('error', response.json()['detail'])
+
+    def test_get_graph_returns_503_when_conn_none(self):
+        # v2.3.2: _get_graph() conn=None → HTTPException 503
+        import search_server
+        from fastapi import HTTPException
+
+        app = SimpleNamespace(state=SimpleNamespace(conn=None, graph=None))
+        with self.assertRaises(HTTPException) as ctx:
+            search_server._get_graph(app)
+        self.assertEqual(ctx.exception.status_code, 503)
+
+    def test_ready_endpoint_returns_503_when_db_not_ready(self):
+        # v2.3.2: /ready endpoint 별도 — conn=None 시 503
+        import search_server
+
+        client = TestClient(search_server.app)
+        with patch.object(search_server.app.state, 'conn', None, create=True):
+            response = client.get('/ready')
+
+        self.assertEqual(response.status_code, 503)
+        detail = response.json()['detail']
+        self.assertFalse(detail['ready'])
+        self.assertEqual(detail['reason'], 'db_not_ready')
 
     def test_get_graph_builds_once_and_reuses_cached_graph(self):
         import search_server
