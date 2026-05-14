@@ -135,9 +135,12 @@ if [ ! -x "$GRAPHRAG_VENV/bin/python" ] || [ ! -x "$GRAPHRAG_VENV/bin/pip" ]; th
   rm -rf "$GRAPHRAG_VENV"
   mv "$GRAPHRAG_VENV.tmp" "$GRAPHRAG_VENV"
 fi
-echo "[apply] pip install requirements (quiet)..."
-"$GRAPHRAG_VENV/bin/python" -m pip install --quiet --upgrade pip
-"$GRAPHRAG_VENV/bin/python" -m pip install --quiet --retries 3 --timeout 60 -r "$GRAPHRAG_VENDOR/scripts/requirements.txt"
+echo "[apply] pip install requirements (verbose for debug)..."
+# v2.3.2.1: --quiet 제거 — silent fail 차단 (CI 안 networkx import fail mystery 검증)
+"$GRAPHRAG_VENV/bin/python" -m pip install --upgrade pip
+"$GRAPHRAG_VENV/bin/python" -m pip install --retries 3 --timeout 60 -r "$GRAPHRAG_VENDOR/scripts/requirements.txt"
+echo "[apply] pip install complete — verifying installed packages..."
+"$GRAPHRAG_VENV/bin/python" -m pip list 2>&1 | grep -iE "networkx|community|louvain|fastapi|uvicorn|numpy|httpx|pyyaml" || true
 
 # v2.3.2: post-lock health probe (concurrent install 안 두 번째 안 already healthy)
 if curl -fsS --connect-timeout 1 "http://127.0.0.1:$PORT/health" 2>/dev/null | grep -q ok; then

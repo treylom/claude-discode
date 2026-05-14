@@ -51,6 +51,13 @@ jobs:
       - name: install-graphrag.sh --apply
         run: bash scripts/install-graphrag.sh --apply
 
+      - name: Show venv pip list (debug visibility)
+        run: |
+          source ~/.cache/claude-discode/graphrag/venv/bin/activate
+          which python
+          which pip
+          python -m pip list 2>&1 || true
+
       - name: Verify GraphRAG deps import
         run: |
           source ~/.cache/claude-discode/graphrag/venv/bin/activate
