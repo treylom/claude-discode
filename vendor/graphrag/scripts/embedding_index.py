@@ -378,7 +378,8 @@ def search_entities(query: str, output_dir: str, top_k: int = 20) -> list[dict[s
     entity_emb_file = out / ENTITY_EMBEDDINGS_FILE
     entity_meta_file = out / ENTITY_META_FILE
 
-    if not entity_emb_file.exists():
+    # v2.3.3: partial index 보호 — emb 파일 있는데 meta 파일 없는 case 안 graceful (CLI / 직접 호출 보호)
+    if not entity_emb_file.exists() or not entity_meta_file.exists():
         return []
 
     vectors = np.load(str(entity_emb_file))

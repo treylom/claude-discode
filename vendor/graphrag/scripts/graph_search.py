@@ -156,6 +156,7 @@ def expand_query_cross_lingual(query: str) -> str:
 _QE_API_BASE = "http://127.0.0.1:8317"
 _QE_API_KEY = "codex-hybrid-team"
 _QE_CACHE: dict[str, dict[str, Any]] = {}
+_QE_CACHE_LOCK = threading.Lock()  # v2.3.3: cache get/set/evict 안 race 차단
 _QE_CACHE_MAX = 200
 
 _QE_DEFAULT = {"expanded_terms": [], "english_query": "", "intent": "lookup"}
@@ -1160,6 +1161,7 @@ def _rrf_score(
 # ---------------------------------------------------------------------------
 
 _HYBRID_CACHE: dict[tuple[str, int, tuple[float, float, float, float]], list[SearchResult]] = {}
+_HYBRID_CACHE_LOCK = threading.Lock()  # v2.3.3: background warmup + /reload + concurrent /api/search race 차단
 _HYBRID_CACHE_MAX = 100
 _ALIAS_RERANK_BOOST = 0.0  # R19 DISCARD: disabled (infra retained). Lesson: CE dominates, boost ineffective.
 RERANK_POOL_MULTIPLIER = 3  # R12b: sparse-only 3x expansion — dense/entity already hit top-10, sparse needs more BM25 coverage for gold at rank 20-40
@@ -1167,11 +1169,13 @@ RERANK_POOL_MULTIPLIER = 3  # R12b: sparse-only 3x expansion — dense/entity al
 
 def clear_hybrid_cache() -> None:
     """Clear cached hybrid search results."""
-    _HYBRID_CACHE.clear()
+    # v2.3.3: lock wrap — concurrent /api/search + /reload TOCTOU 차단
+    with _HYBRID_CACHE_LOCK:
+        _HYBRID_CACHE.clear()
 
 
 def hybrid_search(
-    conn: sqlite3.Connection,
+    conn: "sqlite3.Connection | None",
     query: str,
     output_dir: str = DEFAULT_INDEX_DIR,
     top_k: int = 20,
@@ -1190,9 +1194,14 @@ def hybrid_search(
     3. Decomposed sparse: FTS5 over sub-queries from _decompose_query()
     4. Entity dense: embedding_index.search_entities() over entity descriptions
     """
+    # v2.3.3: function-level conn=None guard — CLI 경로 / 직접 호출 / future caller 보호
+    if conn is None:
+        return []
+
     weights = (dense_weight, sparse_weight, decomposed_weight, entity_weight)
     cache_key = (query, top_k, weights)
-    cached_results = _HYBRID_CACHE.get(cache_key)
+    with _HYBRID_CACHE_LOCK:  # v2.3.3: get atomic
+        cached_results = _HYBRID_CACHE.get(cache_key)
     if cached_results is not None:
         return [dict(result) for result in cached_results]
 
@@ -1581,10 +1590,15 @@ def hybrid_search(
                     results = results[:rerank_slice_size]
                     break
 
-    if len(_HYBRID_CACHE) >= _HYBRID_CACHE_MAX:
-        oldest_key = next(iter(_HYBRID_CACHE))
-        del _HYBRID_CACHE[oldest_key]
-    _HYBRID_CACHE[cache_key] = [dict(result) for result in results]
+    # v2.3.3: evict + set atomic — TOCTOU race 차단 (next(iter(_HYBRID_CACHE)) 안 StopIteration / del 안 KeyError)
+    with _HYBRID_CACHE_LOCK:
+        if len(_HYBRID_CACHE) >= _HYBRID_CACHE_MAX:
+            try:
+                oldest_key = next(iter(_HYBRID_CACHE))
+                del _HYBRID_CACHE[oldest_key]
+            except (StopIteration, KeyError):
+                pass
+        _HYBRID_CACHE[cache_key] = [dict(result) for result in results]
     return results
 
 
@@ -1789,8 +1803,9 @@ def community_rescore(
                     entity_communities[name].add(parent[0])
             else:
                 entity_communities[name] = set()
-    except sqlite3.OperationalError:
-        return results  # communities table may not exist
+    except (sqlite3.OperationalError, AttributeError):
+        # v2.3.3: AttributeError catch — conn=None case 안 'NoneType' has no attribute 'execute' 차단
+        return results  # communities table may not exist 또는 conn=None
 
     # Calculate community overlap score for each result
     for r in results:
