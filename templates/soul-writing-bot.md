@@ -98,4 +98,4 @@ triggers:
 
 ## 변경 이력
 
-- <YYYY-MM-DD>: 초기 작성 (claude-discode wizard 로 생성)
+- <YYYY-MM-DD>: 초기 작성 (thiscode wizard 로 생성)

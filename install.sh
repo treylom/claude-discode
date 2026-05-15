@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# claude-discode installer
+# thiscode installer
 # 환경: WSL Ubuntu / Linux native / macOS 자동 detect 후 분기
 #
 # 사용:
-#   curl -fsSL https://raw.githubusercontent.com/<owner>/claude-discode/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/<owner>/thiscode/main/install.sh | bash
 #   또는 git clone 후 ./install.sh
 #
 # 10 step (Zettelkasten WSL2-tmux 가이드 기반 + Codex + Obsidian CLI 추가):
@@ -13,10 +13,10 @@
 #   4.   Claude Code 전역 설치
 #   4.5  Codex CLI 전역 설치 (@openai/codex) — codex 호출 layer 의존
 #   5.   oh-my-tmux (gpakosz/.tmux) 자동 install
-#   6.   (선택) claude-discode tmux.conf.local 적용
+#   6.   (선택) thiscode tmux.conf.local 적용
 #   6.5  Obsidian CLI 환경 분기 안내 — vault 3-Tier 폴백 1순위
-#   7.   claude-discode plugin install 안내 (marketplace + slash 7종)
-#   8.   첫 봇 wizard 안내 (Claude Code 안 /claude-discode:start)
+#   7.   thiscode plugin install 안내 (marketplace + slash 7종)
+#   8.   첫 봇 wizard 안내 (Claude Code 안 /thiscode:start)
 
 set -euo pipefail
 
@@ -29,7 +29,7 @@ BLUE='\033[0;34m'
 BOLD='\033[1m'
 NC='\033[0m'
 
-log()  { printf "${BLUE}[claude-discode]${NC} %s\n" "$*"; }
+log()  { printf "${BLUE}[thiscode]${NC} %s\n" "$*"; }
 ok()   { printf "  ${GREEN}✓${NC} %s\n" "$*"; }
 warn() { printf "  ${YELLOW}⚠${NC} %s\n" "$*"; }
 err()  { printf "  ${RED}✗${NC} %s\n" "$*" >&2; }
@@ -39,7 +39,7 @@ step() { printf "\n${BOLD}${BLUE}━━━ Step %s/10 ━━━${NC} ${BOLD}%s${
 
 ENV_KIND=""    # wsl / linux / macos
 PKG_MGR=""     # apt / dnf / yum / brew / pacman
-REPO_DIR=""    # claude-discode 레포 루트 (curl 경로 시 추후 git clone 으로 채워짐)
+REPO_DIR=""    # thiscode 레포 루트 (curl 경로 시 추후 git clone 으로 채워짐)
 
 # ---------------------------------------------------------------- Step 1
 
@@ -194,16 +194,16 @@ install_oh_my_tmux() {
 # ---------------------------------------------------------------- Step 6
 
 apply_our_tmux_conf() {
-  step 6 "claude-discode tmux.conf.local 적용 (선택)"
+  step 6 "thiscode tmux.conf.local 적용 (선택)"
 
   local src="$REPO_DIR/configs/tmux.conf.local"
 
   if [ -z "$REPO_DIR" ] || [ ! -f "$src" ]; then
-    warn "claude-discode 레포가 로컬에 없음 → 본 step skip (Step 7 의 git clone 이후 다시 실행 가능)"
+    warn "thiscode 레포가 로컬에 없음 → 본 step skip (Step 7 의 git clone 이후 다시 실행 가능)"
     return
   fi
 
-  printf "\n  claude-discode 의 tmux.conf.local 을 사용하시겠어요? (y/N) "
+  printf "\n  thiscode 의 tmux.conf.local 을 사용하시겠어요? (y/N) "
   read -r ans
   if [[ "$ans" =~ ^[Yy]$ ]]; then
     if [ -f "$HOME/.tmux.conf.local" ]; then
@@ -211,7 +211,7 @@ apply_our_tmux_conf() {
       ok "기존 파일 백업: ~/.tmux.conf.local.bak"
     fi
     cp "$src" "$HOME/.tmux.conf.local"
-    ok "claude-discode 의 tmux.conf.local 적용 완료"
+    ok "thiscode 의 tmux.conf.local 적용 완료"
   else
     ok "user override 유지 (~/.tmux.conf.local)"
   fi
@@ -220,34 +220,34 @@ apply_our_tmux_conf() {
 # ---------------------------------------------------------------- Step 7
 
 install_plugin() {
-  step 7 "claude-discode plugin install 안내"
+  step 7 "thiscode plugin install 안내"
 
   cat <<'EOF'
 
   Claude Code 안에서 (REPL 진입 후):
 
-      /plugin marketplace add treylom/claude-discode
-      /plugin install claude-discode@claude-discode-marketplace
+      /plugin marketplace add treylom/ThisCode
+      /plugin install thiscode@thiscode-marketplace
 
   install 직후 자동 인식되는 슬래시 7종:
 
-      /claude-discode:start          — 메인 wizard (환경 + 봇 + 첫 대화)
-      /claude-discode:install-hooks  — SessionStart + UserPromptSubmit hook merge
-      /claude-discode:create-bot     — 신규 봇 디렉토리 + .env + soul.md 자동 셋업
-      /claude-discode:add-bot        — 추가 봇 1개 신설
-      /claude-discode:open-meeting   — 회의실 폴더 신설 (다 봇 협업 4-file)
-      /claude-discode:codex-check    — Codex CLI 검증 (호출 layer 활성)
-      /claude-discode:self-update    — 자가 업데이트 (git fetch behind 비교)
+      /thiscode:start          — 메인 wizard (환경 + 봇 + 첫 대화)
+      /thiscode:install-hooks  — SessionStart + UserPromptSubmit hook merge
+      /thiscode:create-bot     — 신규 봇 디렉토리 + .env + soul.md 자동 셋업
+      /thiscode:add-bot        — 추가 봇 1개 신설
+      /thiscode:open-meeting   — 회의실 폴더 신설 (다 봇 협업 4-file)
+      /thiscode:codex-check    — Codex CLI 검증 (호출 layer 활성)
+      /thiscode:self-update    — 자가 업데이트 (git fetch behind 비교)
 
   또는 로컬 git clone (검증·테스트용):
 
-      git clone https://github.com/treylom/claude-discode.git \
-        ~/.claude/plugins/cache/local/claude-discode
+      git clone https://github.com/treylom/ThisCode.git \
+        ~/.claude/plugins/cache/local/thiscode
 
   prereq: jq (Step 2 에서 자동 설치) — slash 의 hook merge 가 settings.json 안전 병합에 사용.
 
 EOF
-  warn "순정 Claude Code 라면 /claude-discode:install-hooks 먼저 실행 권장 (SessionStart hook 부재 시 soul.md 고아 회귀 차단)"
+  warn "순정 Claude Code 라면 /thiscode:install-hooks 먼저 실행 권장 (SessionStart hook 부재 시 soul.md 고아 회귀 차단)"
 }
 
 # ---------------------------------------------------------------- Step 8
@@ -268,7 +268,7 @@ print_next_steps() {
   ║       cd ~/<project> && claude                                ║
   ║                                                                ║
   ║  3. Claude Code 안에서 wizard 시동                             ║
-  ║       /claude-discode:start                                   ║
+  ║       /thiscode:start                                   ║
   ║                                                                ║
   ║     wizard 가 단계별로 안내합니다                                ║
   ║       - Discord 봇 생성 (Developer Portal)                     ║
@@ -291,7 +291,7 @@ main() {
     REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   fi
 
-  log "claude-discode 설치 시작"
+  log "thiscode 설치 시작"
   log "환경 자동 detect 진행"
 
   detect_env
@@ -305,7 +305,7 @@ main() {
   install_plugin
   print_next_steps
 
-  log "claude-discode 설치 종료"
+  log "thiscode 설치 종료"
 }
 
 # ---------------------------------------------------------------- Step 6.5 (NEW)
@@ -360,7 +360,7 @@ EOF
     ok "Obsidian CLI: $(obsidian --version 2>&1 | head -1)"
   else
     warn "Obsidian CLI 설치 안 됨 — 3-Tier 폴백의 Tier 2 (MCP) 또는 Tier 3 (Write/Read/Grep) 으로 작동"
-    warn "Obsidian 사용 안 하시면 본 단계 skip OK — claude-discode 대부분 작동"
+    warn "Obsidian 사용 안 하시면 본 단계 skip OK — thiscode 대부분 작동"
   fi
 
   # vault 경로 설정 안내
@@ -389,7 +389,7 @@ install_codex_cli() {
 
   ok "Codex CLI: $(codex --version 2>&1 | head -1)"
   warn "다음 단계로 가기 전, 다른 터미널에서 'codex login' 으로 OAuth 인증해주세요"
-  warn "Claude Code 안 install 후 /claude-discode:codex-check 슬래시로 검증 가능"
+  warn "Claude Code 안 install 후 /thiscode:codex-check 슬래시로 검증 가능"
 }
 
 main "$@"

@@ -1,9 +1,0 @@
-name: cmd-claude-discode-search
-description: Slash command /claude-discode:search — 4-Tier search dispatcher (forwards to claude-discode-search skill).
-version: 1.0.0
-provides_commands:
-  - /claude-discode:search
-tier: external
-allowedTools:
-  - Bash
-  - mcp__vault-search__*

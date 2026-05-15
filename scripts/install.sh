@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# install.sh — claude-discode v2.3 top-level orchestrator
+# install.sh — thiscode v2.3 top-level orchestrator
 # 진정 zero-config: `bash install.sh --apply` 1회 → 모든 외부 dep 해결.
 # 순서: superpowers (plugin) → ripgrep → obsidian-cli → graphrag → dense-embedding
-# 출처 명기: claude-discode/ATTRIBUTIONS.md 참조 (15 deps).
+# 출처 명기: thiscode/ATTRIBUTIONS.md 참조 (15 deps).
 set -euo pipefail
 
 MODE="${1:---check}"
-LOG="${HOME}/.claude-discode-setup.log"
+LOG="${HOME}/.thiscode-setup.log"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # OS detect — Windows native (Cygwin / MINGW / MSYS) → WSL 안내 후 종료
@@ -17,7 +17,7 @@ case "$OS" in
 
 ⚠️  Windows native (Cygwin / Git Bash / MSYS) 감지.
 
-claude-discode v2.3 은 WSL 2 (Ubuntu 22.04+) required.
+thiscode v2.3 은 WSL 2 (Ubuntu 22.04+) required.
 PowerShell port 는 v2.4 후속 cycle 안 평가 예정.
 
 WSL 설치: https://docs.microsoft.com/windows/wsl/install
@@ -50,7 +50,7 @@ redact() {
   sed -E "s|${home_esc}|/HOME|g; s|/Users/[^/]+|/Users/REDACTED|g; s|/home/[^/]+|/home/REDACTED|g; s|C:\\\\Users\\\\[^\\\\]+|C:\\\\Users\\\\REDACTED|g; s|/mnt/c/Users/[^/]+|/mnt/c/Users/REDACTED|g"
 }
 
-echo "===== claude-discode v2.3 install (mode=$MODE) =====" | tee -a "$LOG"
+echo "===== thiscode v2.3 install (mode=$MODE) =====" | tee -a "$LOG"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] install.sh start mode=$MODE" >> "$LOG"
 
 SCRIPTS=(install-superpowers.sh install-ripgrep.sh install-obsidian-cli.sh install-graphrag.sh install-dense-embedding.sh)

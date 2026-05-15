@@ -1,6 +1,6 @@
-# 5-axis Benchmark — claude-discode 4-Tier Search
+# 5-axis Benchmark — thiscode 4-Tier Search
 
-본 benchmark 는 claude-discode 의 4-Tier search 가 `obsidian-cli` 단독 / Claude `/search` / vault-search MCP 단독 대비 어떤 trade-off 를 보이는지 5 차원으로 측정합니다.
+본 benchmark 는 thiscode 의 4-Tier search 가 `obsidian-cli` 단독 / Claude `/search` / vault-search MCP 단독 대비 어떤 trade-off 를 보이는지 5 차원으로 측정합니다.
 
 ## ⚠ 본인 vault 측정이 정공법
 
@@ -22,7 +22,7 @@ python3 benchmark/report-generator.py --print-only
 
 ## GraphRAG (Tier 1) 본인 vault 사용
 
-Tier 1 GraphRAG 가 본인 vault 를 인덱싱해야 의미 있는 recall + kg_depth 측정 가능. claude-discode 의 `scripts/install-graphrag.sh` 는 본인 vault 인덱싱 + 서버 띄움까지 자동화 (CLAUDE_DISCODE_VAULT env 또는 `--vault` flag).
+Tier 1 GraphRAG 가 본인 vault 를 인덱싱해야 의미 있는 recall + kg_depth 측정 가능. thiscode 의 `scripts/install-graphrag.sh` 는 본인 vault 인덱싱 + 서버 띄움까지 자동화 (CLAUDE_DISCODE_VAULT env 또는 `--vault` flag).
 
 ```bash
 CLAUDE_DISCODE_VAULT=~/your-vault \

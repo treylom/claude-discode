@@ -2,7 +2,7 @@
 # Dogfood orchestrator — run all 3 sandbox scenarios + report.
 set -e
 
-ROOT="${CLAUDE_DISCODE_HOME:-/claude-discode}"
+ROOT="${CLAUDE_DISCODE_HOME:-/thiscode}"
 HERE="$ROOT/tests/dogfood"
 LOG="$HERE/dogfood-results-$(date +%Y-%m-%d).md"
 

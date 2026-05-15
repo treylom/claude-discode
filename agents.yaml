@@ -1,5 +1,5 @@
 index_version: 1
-generated_at: '2026-05-13'
+generated_at: '2026-05-15'
 count: 17
 agents:
   - name: bootstrap
@@ -7,32 +7,30 @@ agents:
     tier: external
     description: >-
       Plugin first-run bootstrap — verifies tools, registers vault_root, prints status table. Triggered on
-      /claude-discode:setup or first session_start.
+      /thiscode:setup or first session_start.
     file: .agents/bootstrap.yaml
-  - name: cmd-claude-discode-km-bootstrap
+  - name: cmd-thiscode-km-bootstrap
     version: 1.0.0
     tier: external
-    description: Slash command /claude-discode:km-bootstrap — one-shot installer wrapper for the 4-Tier search stack.
-    file: .agents/cmd-claude-discode-km-bootstrap.yaml
-  - name: cmd-claude-discode-km
+    description: Slash command /thiscode:km-bootstrap — one-shot installer wrapper for the 4-Tier search stack.
+    file: .agents/cmd-thiscode-km-bootstrap.yaml
+  - name: cmd-thiscode-km
+    version: 1.0.0
+    tier: external
+    description: Slash command /thiscode:km — dispatches to km-lite (default) / km-at / km-plain based on flags. Wizard if no args.
+    file: .agents/cmd-thiscode-km.yaml
+  - name: cmd-thiscode-search
+    version: 1.0.0
+    tier: external
+    description: Slash command /thiscode:search — 4-Tier search dispatcher (forwards to thiscode-search skill).
+    file: .agents/cmd-thiscode-search.yaml
+  - name: cmd-thiscode-setup
     version: 1.0.0
     tier: external
     description: >-
-      Slash command /claude-discode:km — dispatches to km-lite (default) / km-at / km-plain based on flags. Wizard if no
-      args.
-    file: .agents/cmd-claude-discode-km.yaml
-  - name: cmd-claude-discode-search
-    version: 1.0.0
-    tier: external
-    description: Slash command /claude-discode:search — 4-Tier search dispatcher (forwards to claude-discode-search skill).
-    file: .agents/cmd-claude-discode-search.yaml
-  - name: cmd-claude-discode-setup
-    version: 1.0.0
-    tier: external
-    description: >-
-      Slash command /claude-discode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes
-      claude-discode-bootstrap skill.
-    file: .agents/cmd-claude-discode-setup.yaml
+      Slash command /thiscode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes
+      thiscode-bootstrap skill.
+    file: .agents/cmd-thiscode-setup.yaml
   - name: codex-exec-bridge
     version: 1.0.0
     tier: experimental

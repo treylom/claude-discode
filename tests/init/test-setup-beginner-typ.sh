@@ -2,7 +2,7 @@
 set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
-grep -q "claude-discode-init\|wizard\|8 Phase" "$ROOT/docs/SETUP-BEGINNER.typ" || { echo "FAIL: typ wizard section 누락"; exit 1; }
+grep -q "thiscode-init\|wizard\|8 Phase" "$ROOT/docs/SETUP-BEGINNER.typ" || { echo "FAIL: typ wizard section 누락"; exit 1; }
 test -f "$ROOT/docs/SETUP-BEGINNER.pdf" || { echo "FAIL: PDF 없음"; exit 1; }
 
 # PDF mtime 가 typ 보다 새로움 (recompile 확인)

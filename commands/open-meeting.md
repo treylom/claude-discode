@@ -4,7 +4,7 @@ allowed-tools: Bash Read Write AskUserQuestion
 disable-model-invocation: true
 ---
 
-# /claude-discode:open-meeting — 회의실 신설
+# /thiscode:open-meeting — 회의실 신설
 
 > 다 봇 협업 또는 깊은 brainstorming 진행 시 영구 기록용 폴더 신설.
 

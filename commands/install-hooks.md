@@ -1,10 +1,10 @@
 ---
-description: claude-discode 의 SessionStart + UserPromptSubmit hooks 를 ~/.claude/settings.json 에 안전 merge (기존 hook 보존)
+description: thiscode 의 SessionStart + UserPromptSubmit hooks 를 ~/.claude/settings.json 에 안전 merge (기존 hook 보존)
 allowed-tools: Bash Read Write Edit AskUserQuestion
 disable-model-invocation: true
 ---
 
-# /claude-discode:install-hooks — hook 등록
+# /thiscode:install-hooks — hook 등록
 
 > 순정 Claude Code 에서 soul.md / WD memory / 슬래시 detect / 회귀 self-check 자동 작동을 위해 hooks 를 `~/.claude/settings.json` 에 등록. 기존 사용자 hook 보존 (jq merge).
 
@@ -29,15 +29,15 @@ $ARGUMENTS
 
 ## 진행 흐름
 
-### Step 1. claude-discode plugin 위치 detect
+### Step 1. thiscode plugin 위치 detect
 
 ```bash
 # Claude Code marketplace install 시 표준 경로
-PLUGIN_DIR="$HOME/.claude/plugins/marketplaces/claude-discode-marketplace"
-[ -d "$PLUGIN_DIR/hooks" ] || PLUGIN_DIR="$HOME/code/claude-discode"   # 로컬 clone fallback
+PLUGIN_DIR="$HOME/.claude/plugins/marketplaces/thiscode-marketplace"
+[ -d "$PLUGIN_DIR/hooks" ] || PLUGIN_DIR="$HOME/code/thiscode"   # 로컬 clone fallback
 
 if [ ! -f "$PLUGIN_DIR/hooks/bot-session-init.sh" ]; then
-  echo "❌ claude-discode 의 hooks/ 못 찾음 — plugin install 먼저"
+  echo "❌ thiscode 의 hooks/ 못 찾음 — plugin install 먼저"
   exit 1
 fi
 ```
@@ -91,18 +91,18 @@ PATCH=$(cat <<EOF
 EOF
 )
 
-# 기존 hook 보존 + claude-discode hook append
+# 기존 hook 보존 + thiscode hook append
 jq -s '.[0] * .[1] | .hooks.SessionStart = ((.[0].hooks.SessionStart // []) + (.[1].hooks.SessionStart // []) | unique_by(.hooks[0].command)) | .hooks.UserPromptSubmit = ((.[0].hooks.UserPromptSubmit // []) + (.[1].hooks.UserPromptSubmit // []) | unique_by(.hooks[0].command))' \
   "$SETTINGS" <(echo "$PATCH") > "$SETTINGS.tmp"
 mv "$SETTINGS.tmp" "$SETTINGS"
 ```
 
-⚠️ jq merge 정확성 보장 — agent 가 사용자 기존 settings.json 의 hook 들을 보존하면서 claude-discode hook 만 추가.
+⚠️ jq merge 정확성 보장 — agent 가 사용자 기존 settings.json 의 hook 들을 보존하면서 thiscode hook 만 추가.
 
 복잡 시 fallback (manual merge 안내):
 
 ```
-사용자 ~/.claude/settings.json 가 비어있거나 claude-discode hook 만 등록 시:
+사용자 ~/.claude/settings.json 가 비어있거나 thiscode hook 만 등록 시:
 - 위 PATCH 를 그대로 settings.json 으로 작성
 
 기존 hook 있는 경우:

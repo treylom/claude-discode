@@ -55,14 +55,14 @@ jobs:
 
       - name: Show venv pip list (debug visibility)
         run: |
-          source ~/.cache/claude-discode/graphrag/venv/bin/activate
+          source ~/.cache/thiscode/graphrag/venv/bin/activate
           which python
           which pip
           python -m pip list 2>&1 || true
 
       - name: Verify GraphRAG deps import
         run: |
-          source ~/.cache/claude-discode/graphrag/venv/bin/activate
+          source ~/.cache/thiscode/graphrag/venv/bin/activate
           python -c "import networkx, community, fastapi, uvicorn, numpy, httpx; print('GraphRAG deps OK')"
 
       - name: healthcheck.sh (exit 0 = all OK, exit 2 = NOT YET OK, exit 1 = required FAIL block)
@@ -93,10 +93,10 @@ jobs:
         if: failure()
         run: |
           echo "=== graphrag.log ==="
-          cat ~/.cache/claude-discode/graphrag/run/graphrag.log 2>&1 || echo "(no graphrag.log)"
+          cat ~/.cache/thiscode/graphrag/run/graphrag.log 2>&1 || echo "(no graphrag.log)"
           echo ""
           echo "=== setup log (last 50 lines) ==="
-          tail -n 50 ~/.claude-discode-setup.log 2>&1 || echo "(no setup log)"
+          tail -n 50 ~/.thiscode-setup.log 2>&1 || echo "(no setup log)"
           echo ""
           echo "=== uvicorn process check ==="
           ps aux | grep -i uvicorn || echo "(no uvicorn process)"

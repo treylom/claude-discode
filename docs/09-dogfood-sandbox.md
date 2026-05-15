@@ -5,20 +5,20 @@ order: 9
 
 # Dogfood Sandbox
 
-WSL Ubuntu 20.04 환경에 가까운 Docker 컨테이너에서 claude-discode 의 4-Tier search + KM 흐름을 자동 검증.
+WSL Ubuntu 20.04 환경에 가까운 Docker 컨테이너에서 thiscode 의 4-Tier search + KM 흐름을 자동 검증.
 
 ## 빌드 + 실행
 
 ```bash
 # 1. sandbox 컨테이너 build (한 번만)
-docker build -t claude-discode-sandbox -f sandbox/Dockerfile .
+docker build -t thiscode-sandbox -f sandbox/Dockerfile .
 
 # 2. (선택) docker-compose 사용
 docker compose -f sandbox/docker-compose.yaml up -d
 docker compose -f sandbox/docker-compose.yaml exec sandbox bash
 
 # 3. 컨테이너 안에서 전체 dogfood 실행
-bash /claude-discode/tests/dogfood/run-all.sh
+bash /thiscode/tests/dogfood/run-all.sh
 ```
 
 ## 시나리오

@@ -1,5 +1,5 @@
 {
-  "name": "@treylom/claude-discode",
+  "name": "@treylom/thiscode",
   "version": "1.0.0",
   "type": "module",
   "description": "KM ingestion + 4-Tier vault search (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). Multi-harness: Claude Code / Hermes / Gemini / OpenCode.",
@@ -13,11 +13,11 @@
     "graphrag",
     "obsidian"
   ],
-  "homepage": "https://github.com/treylom/claude-discode#readme",
-  "bugs": "https://github.com/treylom/claude-discode/issues",
+  "homepage": "https://github.com/treylom/ThisCode#readme",
+  "bugs": "https://github.com/treylom/ThisCode/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/treylom/claude-discode.git"
+    "url": "git+https://github.com/treylom/ThisCode.git"
   },
   "license": "MIT",
   "author": "tofukyung (김재경)",
@@ -40,7 +40,7 @@
     "install.sh"
   ],
   "bin": {
-    "claude-discode-km-version": "scripts/km-version.sh"
+    "thiscode-km-version": "scripts/km-version.sh"
   },
   "scripts": {
     "validate": "bash scripts/validate-agents.sh",

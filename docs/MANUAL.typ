@@ -19,7 +19,7 @@
 
 #align(center)[
   #v(1.5em)
-  #text(size: 24pt, weight: "bold")[claude-discode v2.0 매뉴얼]
+  #text(size: 24pt, weight: "bold")[thiscode v2.0 매뉴얼]
   #v(0.3em)
   #text(size: 14pt, fill: rgb("#555"))[설치 + 핵심 기능 8 sections]
   #v(1em)
@@ -36,7 +36,7 @@
 
 #pagebreak()
 
-= claude-discode 가 뭐예요?
+= thiscode 가 뭐예요?
 
 Claude Code + Discord 봇 + Codex 호출 + 4-Tier vault search 가 통합된 Knowledge Manager 플러그인.
 
@@ -49,19 +49,19 @@ Claude Code + Discord 봇 + Codex 호출 + 4-Tier vault search 가 통합된 Kno
 ```bash
 # 1. Prereq (node 18+, jq, git)
 # 2. Plugin install
-git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
 
 # 3. Tier 2 MCP (5분, 권장)
-bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
+bash ~/.claude/plugins/thiscode/scripts/install-vault-search.sh --apply
 
 # 4. Tier 3 Obsidian CLI (선택, Obsidian 사용자만)
-bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+bash ~/.claude/plugins/thiscode/scripts/install-obsidian-cli.sh
 
 # 5. Tier 1 GraphRAG (선택, advanced 25분)
-bash ~/.claude/plugins/claude-discode/scripts/install-graphrag.sh --apply
+bash ~/.claude/plugins/thiscode/scripts/install-graphrag.sh --apply
 
 # 6. Healthcheck
-bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
+bash ~/.claude/plugins/thiscode/scripts/healthcheck.sh
 ```
 
 자세한 분기 가이드: SETUP-BEGINNER.md
@@ -86,9 +86,9 @@ dispatcher 가 Tier 1 시도 → 결과 부족 시 Tier 2 → ... 순서 fallbac
 
 3 variant:
 
-- `/claude-discode:km` (lite, default) — 개인 vault
-- `/claude-discode:km at` (experimental) — 팀 vault + Agent Teams
-- `/claude-discode:km plain` (internal) — CI/cron headless
+- `/thiscode:km` (lite, default) — 개인 vault
+- `/thiscode:km at` (experimental) — 팀 vault + Agent Teams
+- `/thiscode:km plain` (internal) — CI/cron headless
 
 #pagebreak()
 
@@ -111,7 +111,7 @@ dispatcher 가 Tier 1 시도 → 결과 부족 시 Tier 2 → ... 순서 fallbac
 
 = 회의실 / Codex Bridge / 공유메모리 / Hook
 
-- `/claude-discode:meetings` — 회의록 폴더 + 4-file template 자동
+- `/thiscode:meetings` — 회의록 폴더 + 4-file template 자동
 - `/codex` — OpenAI Codex 호출 bridge (second opinion)
 - shared-memory — 4-tier 공유 메모리 (T1 git / T2 machine / T3 project / T4 per-bot)
 - SessionStart hook — soul.md 자동 inject

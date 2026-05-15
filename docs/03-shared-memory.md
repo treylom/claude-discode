@@ -1,6 +1,6 @@
 # 03. 공유 메모리 — 4-tier 시스템
 
-> 봇 N 개 + 머신 M 개 + 회의 K 개를 운영하면서 "어디에 무엇을 쓰는지" 가 가장 큰 결정. claude-discode 의 공유 메모리 시스템은 vault SHARED-INDEX.md 패턴 일반화.
+> 봇 N 개 + 머신 M 개 + 회의 K 개를 운영하면서 "어디에 무엇을 쓰는지" 가 가장 큰 결정. thiscode 의 공유 메모리 시스템은 vault SHARED-INDEX.md 패턴 일반화.
 
 ## 왜 분리하는가
 
@@ -149,6 +149,6 @@ Q: 공유 메모리 위치 어떻게 하실래요?
 
 ## 관련 자원
 
-- skill: [../skills/claude-discode-shared-memory/SKILL.md](../skills/claude-discode-shared-memory/SKILL.md)
+- skill: [../skills/thiscode-shared-memory/SKILL.md](../skills/thiscode-shared-memory/SKILL.md)
 - 회의실: [05-meeting-thread-protocol.md] (예정)
 - vault 실 예시: `<vault>/.claude-memory/shared/SHARED-INDEX.md`

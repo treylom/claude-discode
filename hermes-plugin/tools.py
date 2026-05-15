@@ -1,4 +1,4 @@
-"""Tool handlers for the claude-discode Hermes plugin.
+"""Tool handlers for the thiscode Hermes plugin.
 
 All handlers shell out to the canonical bash dispatchers vendored in ../scripts/
 and ../skills/*/references/*.md.sh — so behavior stays byte-identical with the
@@ -16,8 +16,8 @@ from pathlib import Path
 PLUGIN_DIR = Path(__file__).resolve().parent
 REPO_ROOT = PLUGIN_DIR.parent
 
-SEARCH_DISPATCHER = REPO_ROOT / "skills" / "claude-discode-search" / "references" / "tier-implementations.md.sh"
-KM_LITE_CORE = REPO_ROOT / "skills" / "claude-discode-km-lite" / "references" / "extract-and-classify.md.sh"
+SEARCH_DISPATCHER = REPO_ROOT / "skills" / "thiscode-search" / "references" / "tier-implementations.md.sh"
+KM_LITE_CORE = REPO_ROOT / "skills" / "thiscode-km-lite" / "references" / "extract-and-classify.md.sh"
 DRIFT_CHECK = REPO_ROOT / "scripts" / "km-version.sh"
 
 
@@ -63,12 +63,12 @@ def handle_ingest(args: dict, **_kwargs) -> str:
 
 
 def session_start_drift_check(*_args, **_kwargs) -> dict:
-    """Emit a drift warning to the session if claude-discode contracts diverge from the vault mirror."""
+    """Emit a drift warning to the session if thiscode contracts diverge from the vault mirror."""
     res = _run(["bash", str(DRIFT_CHECK)], timeout=5)
     if not res["ok"]:
         return {
             "context": (
-                "claude-discode contract drift detected — run `bash {}` for details.".format(DRIFT_CHECK)
+                "thiscode contract drift detected — run `bash {}` for details.".format(DRIFT_CHECK)
             )
         }
     return {}

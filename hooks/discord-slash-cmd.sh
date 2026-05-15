@@ -11,7 +11,7 @@
 #         "hooks": [
 #           {
 #             "type": "command",
-#             "command": "bash ~/.claude/plugins/claude-discode/hooks/discord-slash-cmd.sh",
+#             "command": "bash ~/.claude/plugins/thiscode/hooks/discord-slash-cmd.sh",
 #             "timeout": 5
 #           }
 #         ]

@@ -1,14 +1,14 @@
-# 🚀 claude-discode 처음이세요? 5단계로 끝납니다
+# 🚀 thiscode 처음이세요? 5단계로 끝납니다
 
 > 이 가이드는 컴퓨터 기초만 있으면 따라할 수 있습니다.
 > 막히면 각 step 의 "❓ 실패 시" 박스 참고. 그래도 안 되면 마지막 단계에서 GitHub Issue 등록 (1분).
 
 ## 0단계: wizard 진입 (v2.1 추천)
 
-가장 쉬운 방법은 `claude-discode init` wizard — vault / 도구 / 자원 자동 감지 + 8 Phase 추천.
+가장 쉬운 방법은 `thiscode init` wizard — vault / 도구 / 자원 자동 감지 + 8 Phase 추천.
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/claude-discode-init.sh
+bash ~/.claude/plugins/thiscode/scripts/thiscode-init.sh
 ```
 
 wizard 가 물어보는 항목:
@@ -51,13 +51,13 @@ git --version
 
 ```bash
 mkdir -p ~/.claude/plugins
-git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
 ```
 
 **✅ 성공 모습:**
 
 ```
-Cloning into '/Users/.../claude-discode'...
+Cloning into '/Users/.../thiscode'...
 remote: Enumerating objects: ...
 Receiving objects: 100% (...), done.
 ```
@@ -65,14 +65,14 @@ Receiving objects: 100% (...), done.
 **❌ 실패 시:**
 
 - "Permission denied" → `mkdir ~/.claude/plugins` 권한 확인
-- "already exists" → 이미 설치됨. `cd ~/.claude/plugins/claude-discode && git pull` 로 update
+- "already exists" → 이미 설치됨. `cd ~/.claude/plugins/thiscode && git pull` 로 update
 
 ---
 
 ## 2단계: 검색 MCP 설치 (5분, 권장)
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
+bash ~/.claude/plugins/thiscode/scripts/install-vault-search.sh --apply
 ```
 
 **✅ 성공 모습:** `vault-search added to claude config` 메시지
@@ -99,7 +99,7 @@ claude mcp list | grep vault-search
 ### 3-A. Obsidian CLI 설치 (Obsidian 사용자만)
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+bash ~/.claude/plugins/thiscode/scripts/install-obsidian-cli.sh
 ```
 
 **✅ 성공 모습:** 마지막 줄에 `obsidian-cli installed at /usr/local/bin/obsidian-cli` 비슷한 출력
@@ -139,8 +139,8 @@ which obsidian-cli
 
 ```bash
 docker --version   # 검증: Docker 설치 확인
-docker pull ghcr.io/treylom/claude-discode-graphrag:v1.0
-docker run -d -p 8400:8400 -v ~/vault:/vault --name claude-discode-graphrag ghcr.io/treylom/claude-discode-graphrag:v1.0
+docker pull ghcr.io/treylom/ThisCode-graphrag:v1.0
+docker run -d -p 8400:8400 -v ~/vault:/vault --name thiscode-graphrag ghcr.io/treylom/ThisCode-graphrag:v1.0
 ```
 
 **✅ 성공 모습:**
@@ -159,7 +159,7 @@ curl localhost:8400/health
 
 ```bash
 python3 --version   # 검증: 3.10+
-bash ~/.claude/plugins/claude-discode/scripts/install-graphrag.sh --apply
+bash ~/.claude/plugins/thiscode/scripts/install-graphrag.sh --apply
 ```
 
 설치 시간 5-10분 + 첫 indexing 15분 = 총 ~25분.
@@ -176,13 +176,13 @@ bash ~/.claude/plugins/claude-discode/scripts/install-graphrag.sh --apply
 ## 🎉 마지막 단계: 모든 게 잘 됐는지 확인
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
+bash ~/.claude/plugins/thiscode/scripts/healthcheck.sh
 ```
 
 **✅ 성공 모습 (예시 — 본인 선택에 따라 SKIP 표기):**
 
 ```
-claude-discode healthcheck v1.0
+thiscode healthcheck v1.0
 ─────────────────────────────────
 ✓ Tier 4 (ripgrep)  : OK
 ✓ Tier 3 (MCP)      : OK
@@ -195,24 +195,24 @@ all required checks passed ✅
 **❌ 실패 시:**
 
 ```bash
-cat ~/.claude-discode-setup.log
+cat ~/.thiscode-setup.log
 ```
 
 이 파일 내용을 복사해서 GitHub Issue 등록:
-👉 https://github.com/treylom/claude-discode/issues/new?template=setup-failure.yml
+👉 https://github.com/treylom/ThisCode/issues/new?template=setup-failure.yml
 
 ## 잘 됐나요? 첫 사용 해보기
 
 Claude Code 안에서:
 
 ```
-/claude-discode:search "안녕 첫 검색"
+/thiscode:search "안녕 첫 검색"
 ```
 
 또는 sample-vault 에서 테스트:
 
 ```
-/claude-discode:search "NuriFlow ARR" --vault ~/.claude/plugins/claude-discode/sample-vault
+/thiscode:search "NuriFlow ARR" --vault ~/.claude/plugins/thiscode/sample-vault
 ```
 
 축하합니다! 🎉
@@ -234,8 +234,8 @@ A. Tier 4 (ripgrep) + Tier 2 (Obsidian) 는 100% 무료. Tier 3 (MCP) 도 무료
 A. README 의 5-axis benchmark 표 참고. 짧게: Tier 1 GraphRAG 는 recall +44% / Tier 2 obsidian-cli 단독 대비.
 
 **Q. 피드백 / 강의 후기 어디 남기나요?**
-A. GitHub Discussions Feedback category: https://github.com/treylom/claude-discode/discussions/categories/feedback (Round 3 outcome). 5 질문 schema 로 2분 응답 → v1.1 graduate decision 에 반영.
+A. GitHub Discussions Feedback category: https://github.com/treylom/ThisCode/discussions/categories/feedback (Round 3 outcome). 5 질문 schema 로 2분 응답 → v1.1 graduate decision 에 반영.
 
 **Q. 도움이 필요해요!**
-A. GitHub Issue: https://github.com/treylom/claude-discode/issues
+A. GitHub Issue: https://github.com/treylom/ThisCode/issues
    강의 학생: 강의 Discord 채널

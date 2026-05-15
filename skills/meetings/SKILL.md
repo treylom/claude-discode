@@ -10,7 +10,7 @@ metadata:
     tags: [Meetings, Discord, BotOrchestration]
 ---
 
-# claude-discode-meetings
+# thiscode-meetings
 
 > **사용 시점**: 봇 2개 이상이 협업하는 회의·brainstorming 진행 시. agenda + 10분 이상 cap + 영구 기록 필요.
 
@@ -64,7 +64,7 @@ token = os.environ['DISCORD_BOT_TOKEN']
 H = {
     'Authorization': f'Bot {token}',
     'Content-Type': 'application/json',
-    'User-Agent': 'DiscordBot (claude-discode 0.1.0)'
+    'User-Agent': 'DiscordBot (thiscode 0.1.0)'
 }
 
 def post(url, body):
@@ -157,5 +157,5 @@ agent 가 회의 진행 중 `02-progress.md` 에 timeline (KST) 기록. decision
 ## 관련 자원
 
 - 한국어 강의 가이드: [../../docs/05-meeting-thread-protocol.md](../../docs/05-meeting-thread-protocol.md) (예정)
-- 공유 메모리 skill: [../claude-discode-shared-memory/SKILL.md](../claude-discode-shared-memory/SKILL.md)
+- 공유 메모리 skill: [../thiscode-shared-memory/SKILL.md](../thiscode-shared-memory/SKILL.md)
 - slash command: [../../commands/open-meeting.md](../../commands/open-meeting.md)

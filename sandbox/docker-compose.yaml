@@ -3,15 +3,15 @@ services:
     build:
       context: ..
       dockerfile: sandbox/Dockerfile
-    image: claude-discode-sandbox
-    container_name: claude-discode-sandbox
-    working_dir: /claude-discode
+    image: thiscode-sandbox
+    container_name: thiscode-sandbox
+    working_dir: /thiscode
     volumes:
-      - ..:/claude-discode
+      - ..:/thiscode
       - sandbox-home:/root
     environment:
-      CLAUDE_DISCODE_HOME: /claude-discode
-      CLAUDE_DISCODE_VAULT: /claude-discode/sample-vault
+      CLAUDE_DISCODE_HOME: /thiscode
+      CLAUDE_DISCODE_VAULT: /thiscode/sample-vault
       CLAUDE_DISCODE_HEADLESS: "1"
     stdin_open: true
     tty: true

@@ -3,7 +3,7 @@
 # Note: MCP cannot be called from bash; this scenario covers config installation only.
 set -e
 
-ROOT="${CLAUDE_DISCODE_HOME:-/claude-discode}"
+ROOT="${CLAUDE_DISCODE_HOME:-/thiscode}"
 
 echo "[Dog-2] install-vault-search.sh dry-run + apply (build skipped for sandbox)"
 HOME_DIR=$(mktemp -d)

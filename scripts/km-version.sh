@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# km-version.sh — compare claude-discode contracts vs vault mirror, warn on drift.
+# km-version.sh — compare thiscode contracts vs vault mirror, warn on drift.
 set -e
 
-PLUGIN_DIR="${CLAUDE_DISCODE_HOME:-$HOME/code/claude-discode}/contracts"
+PLUGIN_DIR="${CLAUDE_DISCODE_HOME:-$HOME/code/thiscode}/contracts"
 VAULT_DIR="${CLAUDE_DISCODE_VAULT:-/Users/tofu_mac/obsidian-ai-vault}/.claude/reference/contracts"
 
 if [ ! -d "$PLUGIN_DIR" ]; then
@@ -11,7 +11,7 @@ if [ ! -d "$PLUGIN_DIR" ]; then
 fi
 
 if [ ! -d "$VAULT_DIR" ]; then
-  echo "vault mirror missing: $VAULT_DIR — run /claude-discode:km-bootstrap" >&2
+  echo "vault mirror missing: $VAULT_DIR — run /thiscode:km-bootstrap" >&2
   exit 2
 fi
 

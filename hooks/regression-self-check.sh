@@ -11,7 +11,7 @@
 #         "hooks": [
 #           {
 #             "type": "command",
-#             "command": "bash ~/.claude/plugins/claude-discode/hooks/regression-self-check.sh",
+#             "command": "bash ~/.claude/plugins/thiscode/hooks/regression-self-check.sh",
 #             "timeout": 3
 #           }
 #         ]

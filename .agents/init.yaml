@@ -2,13 +2,13 @@ name: init
 description: 8 Phase progressive install wizard — env detect + vault note count + tools/resources 기반 Phase 추천 (current/recommended/later). 사용자 v2.1 spec.
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 
 provides_tools:
   - init
 
 provides_commands:
-  - /claude-discode:init
+  - /thiscode:init
 
 tier: core
 model: sonnet

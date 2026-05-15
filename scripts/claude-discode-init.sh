@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# claude-discode init — env detect + Phase 추천 + y/n wizard
+# thiscode init — env detect + Phase 추천 + y/n wizard
 set -e
 
 DETECT_ONLY=0

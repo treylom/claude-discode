@@ -1,5 +1,5 @@
 ---
-title: claude-discode Codex Adversarial Verify (2nd round)
+title: thiscode Codex Adversarial Verify (2nd round)
 date: 2026-05-12
 reviewer: codex review --base HEAD~7 (gpt-5.5) + Karpathy self-review (Claude Code docs cross-check)
 commits_reviewed: 7 (732ed4c → f5ad7d6)
@@ -38,7 +38,7 @@ verdict: ❌ Needs fixes (3 critical/high)
 **근거**: Codex review 안 직접 인용:
 > If a user follows this optional SessionStart hook, starting Claude runs `claude -p`, which starts another Claude process that reads the same settings and fires SessionStart again. That can recurse until timeouts/process limits instead of performing a lightweight update check.
 
-**위치**: `commands/self-update.md:92` — `"command": "claude -p '/claude-discode:self-update'"`
+**위치**: `commands/self-update.md:92` — `"command": "claude -p '/thiscode:self-update'"`
 
 **메커니즘**: 사용자가 본 hook 등록 → claude 진입 → SessionStart fire → `claude -p` 실행 → 자식 process 가 같은 settings.json 읽음 → 다시 SessionStart fire → 무한 재귀 / 프로세스 한도 초과.
 
@@ -49,7 +49,7 @@ verdict: ❌ Needs fixes (3 critical/high)
 ### H1. UserPromptSubmit hook dedupe 누락 (Codex P2)
 
 **근거**: Codex review 안 직접 인용:
-> When `/claude-discode:install-hooks` is run more than once, this merge appends a fresh UserPromptSubmit entry every time while only SessionStart is deduped. In that scenario the slash detector and regression self-check run repeatedly for every prompt, duplicating injected context/output and making the command noisy.
+> When `/thiscode:install-hooks` is run more than once, this merge appends a fresh UserPromptSubmit entry every time while only SessionStart is deduped. In that scenario the slash detector and regression self-check run repeatedly for every prompt, duplicating injected context/output and making the command noisy.
 
 **위치**: `commands/install-hooks.md:94` — jq merge 안:
 

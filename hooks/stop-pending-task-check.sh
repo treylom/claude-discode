@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # stop-pending-task-check.sh — Claude Code Stop hook
-# claude-discode v2.3 — session 종료 시 pending task 확인 + 사용자 알림
+# thiscode v2.3 — session 종료 시 pending task 확인 + 사용자 알림
 #
 # 본 hook 의 의도: 자율 cycle 안 미완 task 남기지 않게 사용자 visibility 보장.
 # 2026-05-13 재경님 spec (Discord 1504151646719185077).
@@ -75,7 +75,7 @@ fi
 # 미완 task 발견 — stderr 알림 + exit 2 (deny session end + Claude Code 안 가시)
 cat >&2 <<EOF
 
-⚠️  claude-discode Stop hook — pending task ${pending}건 감지
+⚠️  thiscode Stop hook — pending task ${pending}건 감지
 
 미완 plan doc:
 $(printf '  - %s\n' "${pending_files[@]}")

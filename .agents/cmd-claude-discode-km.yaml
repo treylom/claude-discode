@@ -1,9 +1,0 @@
-name: cmd-claude-discode-km
-description: Slash command /claude-discode:km — dispatches to km-lite (default) / km-at / km-plain based on flags. Wizard if no args.
-version: 1.0.0
-provides_commands:
-  - /claude-discode:km
-tier: external
-allowedTools:
-  - Bash
-  - AskUserQuestion

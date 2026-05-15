@@ -7,7 +7,7 @@ status: draft (v0.2.0)
 
 # 강의 영상 Chapter 매핑
 
-> SHARED-INDEX.md 30+ 디버깅 학습 + claude-discode 어제 회의 §5 spec 을 영상 강의 chapter 구조로 정리. Phase 1/2/3 × 학습 곡선.
+> SHARED-INDEX.md 30+ 디버깅 학습 + thiscode 어제 회의 §5 spec 을 영상 강의 chapter 구조로 정리. Phase 1/2/3 × 학습 곡선.
 
 ## Phase 1 — 입문 (학생이 첫 봇을 띄움)
 
@@ -49,7 +49,7 @@ status: draft (v0.2.0)
 - 영상 길이: 9 min.
 
 ### C8. MOC-Map 진입점 + GraphRAG 4-Tier search
-- 학습: claude-discode 4-Tier (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). MOC 우선 라우팅.
+- 학습: thiscode 4-Tier (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). MOC 우선 라우팅.
 - contract: `contracts/search-fallback-4tier.md` v0.1.0.
 - 영상 길이: 12-15 min.
 
@@ -58,7 +58,7 @@ status: draft (v0.2.0)
 - 영상 길이: 10 min.
 
 ### C10. 4-Tier search drift 감지 (km-version.sh)
-- 학습: claude-discode contract ↔ vault mirror version 비교. SessionStart hook 으로 warning.
+- 학습: thiscode contract ↔ vault mirror version 비교. SessionStart hook 으로 warning.
 - 영상 길이: 5 min.
 
 ## Phase 3 — 심화 (Agent Teams + Codex + 자가 업데이트 + 운영)
@@ -160,8 +160,8 @@ status: draft (v0.2.0)
 
 - vault SHARED-INDEX.md — 본 카테고리의 fact source
 - `contracts/{search-fallback-4tier, km-mode-spec, km-variant-matrix}.md` — Phase 2-3 핵심 spec
-- 어제 회의 03-outcome.md §5 — claude-discode plugin spec 의 영상 mapping 초안
-- 본 사이클 outcome (`AI_Second_Brain/.claude-meetings/2026-05-12-claude-discode-plugin/03-outcome.md` 2026-05-13 followup)
+- 어제 회의 03-outcome.md §5 — thiscode plugin spec 의 영상 mapping 초안
+- 본 사이클 outcome (`AI_Second_Brain/.claude-meetings/2026-05-12-thiscode-plugin/03-outcome.md` 2026-05-13 followup)
 
 ## 잔존 작업 (chapter 본문 실제 작성)
 

@@ -4,7 +4,7 @@ description: "vault 통합 검색 — GraphRAG 기반, quick(즉답) / deep(분�
 allowedTools: Bash, Read, Glob, Grep
 ---
 
-> **Contract**: `.claude/reference/contracts/search-fallback-4tier.md` v0.1.0. Tier 순서·인터페이스는 본 contract 와 일치해야 함. drift 감지: `~/code/claude-discode/scripts/km-version.sh`.
+> **Contract**: `.claude/reference/contracts/search-fallback-4tier.md` v0.1.0. Tier 순서·인터페이스는 본 contract 와 일치해야 함. drift 감지: `~/code/thiscode/scripts/km-version.sh`.
 
 # /search — vault 통합 검색
 

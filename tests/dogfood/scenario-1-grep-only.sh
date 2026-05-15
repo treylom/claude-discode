@@ -2,9 +2,9 @@
 # Dog-1: Obsidian absent + ripgrep only. Expect Tier 4 notice on search.
 set -e
 
-ROOT="${CLAUDE_DISCODE_HOME:-/claude-discode}"
+ROOT="${CLAUDE_DISCODE_HOME:-/thiscode}"
 VAULT="${CLAUDE_DISCODE_VAULT:-$ROOT/sample-vault}"
-DISP="$ROOT/skills/claude-discode-search/references/tier-implementations.md.sh"
+DISP="$ROOT/skills/thiscode-search/references/tier-implementations.md.sh"
 
 if [ ! -d "$VAULT" ]; then
   echo "scenario-1 SKIP: sample-vault not present at $VAULT (run Phase A first)"

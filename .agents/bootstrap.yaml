@@ -1,12 +1,12 @@
 name: bootstrap
-description: Plugin first-run bootstrap — verifies tools, registers vault_root, prints status table. Triggered on /claude-discode:setup or first session_start.
+description: Plugin first-run bootstrap — verifies tools, registers vault_root, prints status table. Triggered on /thiscode:setup or first session_start.
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 provides_tools:
   - bootstrap
 provides_commands:
-  - /claude-discode:setup
+  - /thiscode:setup
 provides_hooks:
   - on_session_start
 tier: external

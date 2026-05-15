@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# claude-discode healthcheck — v2.3 Phase progress + v1.0.0 exit code / log / redact 보강
+# thiscode healthcheck — v2.3 Phase progress + v1.0.0 exit code / log / redact 보강
 # Exit codes: 0 = all required OK / 1 = required FAIL / 2 = intentional NOT YET only
 set -euo pipefail
 
-LOG="${HOME}/.claude-discode-setup.log"
+LOG="${HOME}/.thiscode-setup.log"
 
 # Redact user-specific paths in log entries (v1.0.0 Round 2 outcome)
 redact() {
@@ -42,7 +42,7 @@ phase_check() {
   fi
 }
 
-echo "claude-discode healthcheck v2.3 — Phase progress"
+echo "thiscode healthcheck v2.3 — Phase progress"
 echo "─────────────────────────────────"
 
 phase_check "Phase 0" "superpowers (plugin)"          "claude plugin list 2>/dev/null | grep -qi superpowers" "optional"
@@ -50,7 +50,7 @@ phase_check "Phase 1" "ripgrep (Tier 4)"              "command -v rg || command 
 phase_check "Phase 2" "obsidian-cli (Tier 3)"         "command -v obsidian-cli || command -v obsidian || command -v notesmd-cli" "optional"
 phase_check "Phase 3" "vault-search MCP (Tier 2)"     "jq -e '.mcpServers.\"vault-search\"' ${HOME}/.config/claude/claude_desktop_config.json 2>/dev/null" "optional"
 phase_check "Phase 4" "GraphRAG (Tier 1)"             "curl -fsS http://localhost:8400/health 2>/dev/null" "optional"
-phase_check "Phase 5" "Dense embedding (4-channel)"   "${HOME}/.cache/claude-discode/graphrag/venv/bin/python -c 'import torch, transformers, sentence_transformers' 2>/dev/null" "optional"
+phase_check "Phase 5" "Dense embedding (4-channel)"   "${HOME}/.cache/thiscode/graphrag/venv/bin/python -c 'import torch, transformers, sentence_transformers' 2>/dev/null" "optional"
 
 echo "─────────────────────────────────"
 if [ "$fail" -eq 0 ]; then

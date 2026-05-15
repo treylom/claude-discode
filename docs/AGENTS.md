@@ -1,6 +1,6 @@
 # Agent Spec — Custom Hybrid v1.0
 
-claude-discode 의 모든 skill + command 는 `.agents/<name>.yaml` 파일 1개로 정의됩니다. 본 문서는 spec 구조를 설명합니다.
+thiscode 의 모든 skill + command 는 `.agents/<name>.yaml` 파일 1개로 정의됩니다. 본 문서는 spec 구조를 설명합니다.
 
 ## 5 Block 구조
 
@@ -11,11 +11,11 @@ YAML 은 의미 단위로 5 block 으로 나뉩니다.
 `name`, `description`, `version`, `license`, `homepage` — Claude / Cursor / Aider 모두 인식 가능한 portable metadata.
 
 ```yaml
-name: claude-discode-search
+name: thiscode-search
 description: 4-Tier vault search ...
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 ```
 
 ### Block B — Hermes provides_* (lifecycle registration)
@@ -25,10 +25,10 @@ homepage: https://github.com/treylom/claude-discode
 ```yaml
 provides_tools: [claude_discode_search]
 provides_hooks: [on_session_start]
-provides_commands: [/claude-discode:search]
+provides_commands: [/thiscode:search]
 ```
 
-### Block C — claude-discode extension (classroom policy)
+### Block C — thiscode extension (classroom policy)
 
 강의 / 외부 사용 시 학생이 안전하게 쓸 수 있도록 release tier + model 권장 + 허용 도구를 명시.
 
@@ -92,7 +92,7 @@ benchmark:
 3. `npm run index` — `agents.yaml` index 갱신
 4. PR 생성 — `.github/workflows/validate-agents.yml` 가 자동 검증
 
-## v2.0 신규 — `claude-discode-model-router`
+## v2.0 신규 — `thiscode-model-router`
 
 검색 결과 받은 후 응답 생성 시 task complexity 따라 LLM 모델 선택:
 
@@ -116,7 +116,7 @@ benchmark:
 | tier | 의미 | 학생 노출 | 비고 |
 |---|---|---|---|
 | `external` | 강의 / 외부 사용자 안전 | ✅ | gates 통과 + benchmark 결과 README 표 노출 |
-| `internal` | 운영자 전용 | 부분 | docs 에만 명시, `/claude-discode:setup` 메뉴 hidden |
+| `internal` | 운영자 전용 | 부분 | docs 에만 명시, `/thiscode:setup` 메뉴 hidden |
 | `experimental` | PoC / 미검증 | ❌ | README 표 제외, `experimental` badge 표시 |
 | `deprecated` | 사용 중단 예정 | ⚠ | graduate inverse — 6 month deprecation timeline (LangChain agent-protocol 패턴) |
 

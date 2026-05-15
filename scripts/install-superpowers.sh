@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# install-superpowers.sh — claude-discode v2.3
+# install-superpowers.sh — thiscode v2.3
 # Anthropic 공식 superpowers plugin install via Claude Code plugin manager.
 # 출처: github.com/anthropics/claude-plugins-official/superpowers (MIT)
 # 본 script 는 plugin manager 호출 wrapper — plugin marketplace 가용성 의존.
 set -euo pipefail
 
 MODE="${1:---apply}"
-LOG="${HOME}/.claude-discode-setup.log"
+LOG="${HOME}/.thiscode-setup.log"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] install-superpowers.sh mode=$MODE" >> "$LOG"
 
 usage() {

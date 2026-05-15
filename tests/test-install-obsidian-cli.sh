@@ -2,7 +2,7 @@
 # Test: install-obsidian-cli.sh detects Obsidian and gracefully skips when missing.
 set -e
 
-SCRIPT="$HOME/code/claude-discode/scripts/install-obsidian-cli.sh"
+SCRIPT="$HOME/code/thiscode/scripts/install-obsidian-cli.sh"
 
 # Case A: detect on host (present or missing — both are valid outcomes)
 OUT=$(bash "$SCRIPT" --check 2>&1 || true)

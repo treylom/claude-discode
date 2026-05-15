@@ -1,0 +1,9 @@
+name: cmd-thiscode-search
+description: Slash command /thiscode:search — 4-Tier search dispatcher (forwards to thiscode-search skill).
+version: 1.0.0
+provides_commands:
+  - /thiscode:search
+tier: external
+allowedTools:
+  - Bash
+  - mcp__vault-search__*

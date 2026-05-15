@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# install-ripgrep.sh — claude-discode v2.3
+# install-ripgrep.sh — thiscode v2.3
 # ripgrep install — multi package manager (brew / apt / dnf / apk).
 # 출처: github.com/BurntSushi/ripgrep (Unlicense + MIT dual)
 # Windows native = scoop install ripgrep (사용자 manual, 본 script 안 미지원).
 set -euo pipefail
 
 MODE="${1:---apply}"
-LOG="${HOME}/.claude-discode-setup.log"
+LOG="${HOME}/.thiscode-setup.log"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] install-ripgrep.sh mode=$MODE" >> "$LOG"
 
 usage() {

@@ -12,7 +12,7 @@ vault 안 노트 조작 시 3 가지 방법 비교:
 | 2 | **Obsidian MCP server** | Claude Code agent 가 도구 형태로 호출, programmatic | MCP server 설치 + 인증 필요 |
 | 3 | **Write/Read/Grep** | 의존성 0, 어디서나 작동 | wikilink 안 업데이트, 메타데이터 손상 가능 |
 
-→ **1 → 2 → 3 폴백** 패턴. claude-discode 의 skills/agents 가 본 순서대로 시도.
+→ **1 → 2 → 3 폴백** 패턴. thiscode 의 skills/agents 가 본 순서대로 시도.
 
 ## 환경별 install
 
@@ -85,7 +85,7 @@ VAULT="/mnt/c/Users/<windows-user>/Documents/Obsidian/<vault-name>"
 
 ## 3-Tier 폴백 패턴 — Claude Code 안에서
 
-claude-discode 의 skills 가 vault 접근 시 자동 시도:
+thiscode 의 skills 가 vault 접근 시 자동 시도:
 
 ```python
 # Pseudocode (실제 skill 안 진행)
@@ -151,7 +151,7 @@ URL encoding 주의 (space → `%20`, `/` → `%2F`).
 
 ## 자가 검증 5-step
 
-`/claude-discode:start` wizard 의 일부 (또는 manual):
+`/thiscode:start` wizard 의 일부 (또는 manual):
 
 ```bash
 # Step 1. binary 존재
@@ -176,5 +176,5 @@ claude mcp list 2>&1 | grep -i obsidian
 - vault `<vault>/.claude/skills/vault-navigation.md` — vault 구조 + 태그 체계
 - vault `<vault>/.claude/skills/km-archive-reorganization.md` — Obsidian CLI 3-Tier 폴백 패턴 예시
 - vault `<vault>/.claude-memory/machine-mac/project_search_fallback_mac_weak.md` — Mac GraphRAG 약점
-- claude-discode skill: [../skills/claude-discode-bootstrap/SKILL.md](../skills/claude-discode-bootstrap/SKILL.md)
+- thiscode skill: [../skills/thiscode-bootstrap/SKILL.md](../skills/thiscode-bootstrap/SKILL.md)
 - 메인 wizard: [../commands/start.md](../commands/start.md)

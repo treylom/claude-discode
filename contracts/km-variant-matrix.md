@@ -16,5 +16,5 @@ date: 2026-05-13
 
 - Headless environment ($CLAUDE_DISCODE_HEADLESS=1) → force `plain`.
 - User did not specify variant + interactive → `lite` (Phase 1·2 default).
-- User explicit `/claude-discode:km --variant at` → `at` (after env check for jq+km-tools).
+- User explicit `/thiscode:km --variant at` → `at` (after env check for jq+km-tools).
 - Mode R requested + variant ≠ at → suggest `--variant at` + abort.

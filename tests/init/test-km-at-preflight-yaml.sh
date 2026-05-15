@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-YAML="$ROOT/.agents/claude-discode-km-at.yaml"
+YAML="$ROOT/.agents/thiscode-km-at.yaml"
 
 yq -e '.phases.preflight.auto == true' "$YAML" >/dev/null || { echo "FAIL: phases.preflight.auto missing"; exit 1; }
 yq -e '.phases.preflight.scope == "read-only"' "$YAML" >/dev/null || { echo "FAIL: read-only scope missing"; exit 1; }

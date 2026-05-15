@@ -1,10 +1,10 @@
-# claude-discode
+# ThisCode
 
 > Claude Code + Discord bot + Codex CLI bridge plugin — designed for Fastcampus curriculum and personal vault automation.
 >
 > 🇰🇷 **한국어 버전**: [README.ko.md](README.ko.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (developer) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (beginner) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0)
 
-claude-discode is a single `bash install.sh` plugin that boots a working Claude Code + tmux + oh-my-tmux environment on WSL / Linux / macOS and pairs a Discord bot end-to-end — but its core value is a **4-Tier vault search fallback** (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) with **LLM model routing** (Haiku/Sonnet/Opus + Codex path). Discord is secondary; vault-first.
+thiscode is a single `bash install.sh` plugin that boots a working Claude Code + tmux + oh-my-tmux environment on WSL / Linux / macOS and pairs a Discord bot end-to-end — but its core value is a **4-Tier vault search fallback** (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) with **LLM model routing** (Haiku/Sonnet/Opus + Codex path). Discord is secondary; vault-first.
 
 ## 🛠️ v2.3 Zero-config Install (NEW — 2026-05-13)
 
@@ -13,8 +13,8 @@ claude-discode is a single `bash install.sh` plugin that boots a working Claude 
 For learners who prefer **single-command setup** (no wizard, no choices):
 
 ```bash
-git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
-cd ~/.claude/plugins/claude-discode
+git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
+cd ~/.claude/plugins/thiscode
 bash scripts/install.sh --apply
 ```
 
@@ -30,7 +30,7 @@ After install: `bash scripts/healthcheck.sh` (6-phase verification: superpowers 
 
 **Windows users:** WSL 2 (Ubuntu 22.04+) **required**. Native Windows (Cygwin / Git Bash / MSYS) is detected by `install.sh` and instructed to use WSL. PowerShell port is planned for v2.4 cycle.
 
-**Dependency provenance:** full attribution matrix (16 entries — Plugin 1 + Spec doc 2 + External tools 8 + Optional Dense 3 + Vendored Python runtime 1 + claude-discode 1) in [ATTRIBUTIONS.md](ATTRIBUTIONS.md). Cross-license compatibility verified by Phase 1 GPT-5.5 review (MIT + Apache 2.0 + BSD-3 + Unlicense — all permissive, copyleft zero).
+**Dependency provenance:** full attribution matrix (16 entries — Plugin 1 + Spec doc 2 + External tools 8 + Optional Dense 3 + Vendored Python runtime 1 + thiscode 1) in [ATTRIBUTIONS.md](ATTRIBUTIONS.md). Cross-license compatibility verified by Phase 1 GPT-5.5 review (MIT + Apache 2.0 + BSD-3 + Unlicense — all permissive, copyleft zero).
 
 **Lessons learned (v2.3.x cycle, 9 shared memory entries):** 본 cycle 의 학습 정착은 vault `AI_Second_Brain/.claude-memory/shared/feedback_*` 안 보존:
 - `feedback_no_student_term` — learner / 사용자 / 수강자 terminology
@@ -46,14 +46,14 @@ After install: `bash scripts/healthcheck.sh` (6-phase verification: superpowers 
 ## 🚀 Quickstart (vault-first, v2.1)
 
 ```bash
-# 1. Install claude-discode as a Claude Code plugin
-git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+# 1. Install thiscode as a Claude Code plugin
+git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
 
 # 2. Run the wizard — auto-detects env + recommends a Phase
-bash ~/.claude/plugins/claude-discode/scripts/claude-discode-init.sh
+bash ~/.claude/plugins/thiscode/scripts/thiscode-init.sh
 
 # Or inside Claude Code:
-/claude-discode:init
+/thiscode:init
 ```
 
 The wizard detects your vault state / installed tools / resource limits, then recommends an **8-Phase progressive journey**:
@@ -74,7 +74,7 @@ Discord bot integration and tmux-based Agent Teams are **opt-in extras**. The 4-
 
 ## 📊 4-Tier Search Benchmark
 
-How does claude-discode's 4-Tier search trade off against vanilla `obsidian-cli` / `/search` / `/vault-search`? Measured on 5 axes. **Measure it against your own vault** — the headline numbers below are aggregates; your hardware / vault size / content distribution will shift them.
+How does thiscode's 4-Tier search trade off against vanilla `obsidian-cli` / `/search` / `/vault-search`? Measured on 5 axes. **Measure it against your own vault** — the headline numbers below are aggregates; your hardware / vault size / content distribution will shift them.
 
 ```bash
 # Measure against your own vault (Tier 1 GraphRAG requires a running server)
@@ -97,7 +97,7 @@ Expected envelope (reference only — your numbers will differ):
 
 ## 🧠 LLM model routing (v2.0)
 
-After retrieval, claude-discode picks a model by task complexity:
+After retrieval, thiscode picks a model by task complexity:
 
 | Task | Claude users | GPT / [Codex](docs/GLOSSARY.md#codex) users |
 |---|---|---|
@@ -120,14 +120,14 @@ After retrieval, claude-discode picks a model by task complexity:
 ### Step 1. Env detect + auto install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/treylom/claude-discode/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/treylom/ThisCode/main/install.sh | bash
 ```
 
 Or git clone then run locally:
 
 ```bash
-git clone https://github.com/treylom/claude-discode.git ~/code/claude-discode
-cd ~/code/claude-discode && bash install.sh
+git clone https://github.com/treylom/ThisCode.git ~/code/thiscode
+cd ~/code/thiscode && bash install.sh
 ```
 
 `install.sh` runs 10 steps:
@@ -140,34 +140,34 @@ cd ~/code/claude-discode && bash install.sh
 | 4 | Claude Code global install | npm |
 | 4.5 | **Codex CLI** (`@openai/codex`) global install — bridge dependency | npm |
 | 5 | oh-my-tmux (`gpakosz/.tmux`) auto install | git |
-| 6 | (optional) claude-discode `tmux.conf.local` apply | user confirm |
+| 6 | (optional) thiscode `tmux.conf.local` apply | user confirm |
 | 6.5 | **Obsidian CLI** (Mac brew cask / WSL Windows native / Linux snap·flatpak·deb) — Tier 3 fallback | brew / snap / manual |
 | 7 | Claude Code plugin install guidance (marketplace + slash commands) | (slash inside Claude Code) |
-| 8 | First bot wizard guidance (`/claude-discode:start`) | (slash inside Claude Code) |
+| 8 | First bot wizard guidance (`/thiscode:start`) | (slash inside Claude Code) |
 
 Plugin slash commands auto-detected after install:
 
-- `/claude-discode:init` — **v2.1 wizard** (env detect + 8-Phase recommend)
-- `/claude-discode:start` — main wizard (env detect + bot setup + first conversation)
-- `/claude-discode:install-hooks` — SessionStart + UserPromptSubmit hook safe-merge into `~/.claude/settings.json`
-- `/claude-discode:create-bot` — new bot directory + .env + soul.md template
-- `/claude-discode:add-bot` — add one additional bot
-- `/claude-discode:open-meeting` — create a meeting folder (multi-bot 4-file standard)
-- `/claude-discode:codex-check` — Codex CLI bridge verification
-- `/claude-discode:self-update` — self-update check (git fetch behind)
+- `/thiscode:init` — **v2.1 wizard** (env detect + 8-Phase recommend)
+- `/thiscode:start` — main wizard (env detect + bot setup + first conversation)
+- `/thiscode:install-hooks` — SessionStart + UserPromptSubmit hook safe-merge into `~/.claude/settings.json`
+- `/thiscode:create-bot` — new bot directory + .env + soul.md template
+- `/thiscode:add-bot` — add one additional bot
+- `/thiscode:open-meeting` — create a meeting folder (multi-bot 4-file standard)
+- `/thiscode:codex-check` — Codex CLI bridge verification
+- `/thiscode:self-update` — self-update check (git fetch behind)
 
 Pristine Claude Code bootstrap (no hooks, no bots yet):
 
 ```
-1. /claude-discode:install-hooks   # Register SessionStart + UserPromptSubmit hooks
-2. /claude-discode:create-bot      # First bot directory + soul.md setup
-3. /claude-discode:start           # Main wizard (Discord pairing + first conversation)
-4. /claude-discode:codex-check     # Verify Codex CLI active (optional)
+1. /thiscode:install-hooks   # Register SessionStart + UserPromptSubmit hooks
+2. /thiscode:create-bot      # First bot directory + soul.md setup
+3. /thiscode:start           # Main wizard (Discord pairing + first conversation)
+4. /thiscode:codex-check     # Verify Codex CLI active (optional)
 ```
 
 ## 📦 Operations know-how guide (docs/)
 
-claude-discode bundles the author's vault operations playbook:
+thiscode bundles the author's vault operations playbook:
 
 - [03-shared-memory.md](docs/03-shared-memory.md) — **4-tier shared memory** (T1 git-tracked / T2 machine-specific / T3 project-meetings / T4 per-bot WD)
 - [04-obsidian-cli.md](docs/04-obsidian-cli.md) — **Obsidian CLI setup** (Mac brew / WSL Windows native / Linux snap·flatpak·deb) + 3-Tier fallback (CLI → MCP → Write/Read/Grep) + known bugs / workarounds
@@ -190,7 +190,7 @@ cd ~/<project> && claude                  # 🐧 🤖
 Inside Claude Code:
 
 ```
-/claude-discode:start                     # 🤖 wizard entry
+/thiscode:start                     # 🤖 wizard entry
 ```
 
 The wizard walks you through Discord bot creation (Developer Portal), token entry, persona selection (`soul.md` template), and pairing + first conversation verification.
@@ -213,15 +213,15 @@ The wizard walks you through Discord bot creation (Developer Portal), token entr
 ## 🧩 Repository structure
 
 ```
-claude-discode/
+thiscode/
 ├── install.sh                            # Env auto-detect + 10-step automation
 ├── README.md                              # This file (English, default)
 ├── README.ko.md                           # Korean version
 ├── LICENSE                                # MIT
 ├── .claude-plugin/
-│   ├── marketplace.json                   # claude-discode-marketplace
+│   ├── marketplace.json                   # thiscode-marketplace
 │   └── plugin.json
-├── commands/                              # Slash commands (incl. /claude-discode:init)
+├── commands/                              # Slash commands (incl. /thiscode:init)
 ├── skills/                                # 12 skill (v2.2 vault-mirror policy)
 │   ├── knowledge-manager/                 # vault 풀 7-Layer Fusion (1161 lines)
 │   ├── knowledge-manager-at/              # Agent Teams variant (1189 lines)
@@ -254,12 +254,12 @@ claude-discode/
 Fresh WSL Ubuntu or macOS, setting up Claude Code for the first time.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/treylom/claude-discode/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/treylom/ThisCode/main/install.sh | bash
 ```
 
 ### Scenario B. Add Discord bot to an existing Claude Code user
 
-Pair a Discord bot with a custom persona — Write `soul.md`, create the bot, run `/claude-discode:start`.
+Pair a Discord bot with a custom persona — Write `soul.md`, create the bot, run `/thiscode:start`.
 
 ### Scenario C. Fastcampus curriculum learner
 
@@ -321,7 +321,7 @@ DM the bot again → it issues a fresh code.
 If your bot's responses don't reflect the persona, the SessionStart hook is likely not registered:
 
 ```
-/claude-discode:install-hooks
+/thiscode:install-hooks
 ```
 
 This safely merges the bot-session-init.sh hook into `~/.claude/settings.json` while preserving any existing hooks.
@@ -335,11 +335,11 @@ bash scripts/install-graphrag.sh --apply     # venv 생성 + pip install + nohup
 ```
 
 The `--apply` mode (v2.3):
-- venv 위치 = `~/.cache/claude-discode/graphrag/venv` (writable home cache)
-- vendor SoT = `<claude-discode>/vendor/graphrag/scripts/` (vault SoT 와 동등 박제, 21 file)
+- venv 위치 = `~/.cache/thiscode/graphrag/venv` (writable home cache)
+- vendor SoT = `<thiscode>/vendor/graphrag/scripts/` (vault SoT 와 동등 박제, 21 file)
 - requirements = `vendor/graphrag/scripts/requirements.txt` (7 deps: networkx / louvain / pyyaml / fastapi / uvicorn / numpy / httpx)
 - entry = `uvicorn search_server:app --host 127.0.0.1 --port 8400` (background nohup)
-- log = `~/.cache/claude-discode/graphrag/run/graphrag.log`
+- log = `~/.cache/thiscode/graphrag/run/graphrag.log`
 
 ---
 
@@ -353,24 +353,24 @@ The `--apply` mode (v2.3):
 
 ### Skills (agentskills.io-standard)
 
-- `claude-discode-init` — v2.1 onboarding wizard (env detect + 8-Phase recommend)
-- `claude-discode-bootstrap` — installer wizard helper
-- `claude-discode-shared-memory` — 4-tier memory policy + Read-before-Edit
-- `claude-discode-meetings` — 4-file meeting protocol + SOURCE FACT cross-check + Discord REST API threads
-- `claude-discode-codex-bridge` — Codex CLI subprocess + `/tofu-at-codex` v2.2 reference
-- `claude-discode-km-at` — km-at Mode R preflight (read-only diagnostics + dry-run apply)
+- `thiscode-init` — v2.1 onboarding wizard (env detect + 8-Phase recommend)
+- `thiscode-bootstrap` — installer wizard helper
+- `thiscode-shared-memory` — 4-tier memory policy + Read-before-Edit
+- `thiscode-meetings` — 4-file meeting protocol + SOURCE FACT cross-check + Discord REST API threads
+- `thiscode-codex-bridge` — Codex CLI subprocess + `/tofu-at-codex` v2.2 reference
+- `thiscode-km-at` — km-at Mode R preflight (read-only diagnostics + dry-run apply)
 
 ### Codex CLI bridge
 
-claude-discode includes Codex CLI as a first-class bridge layer:
+thiscode includes Codex CLI as a first-class bridge layer:
 
 - `codex --version` and `codex exec --no-stream --model gpt-5.5` as subprocess
 - Use cases: adversarial review, second-opinion code review, large-scale parallel research
-- Verified via `/claude-discode:codex-check`
+- Verified via `/thiscode:codex-check`
 
 ### Custom Hybrid v1.0 agent spec
 
-`schemas/agent-spec.json` defines a per-agent contract registry combining agentskills.io base + Hermes `provides_*` + claude-discode classroom policy + dynamic gates + benchmark integration. v2.1 adds `tier: core` (init wizard) and `phases:` for km-at Mode R preflight workflow.
+`schemas/agent-spec.json` defines a per-agent contract registry combining agentskills.io base + Hermes `provides_*` + thiscode classroom policy + dynamic gates + benchmark integration. v2.1 adds `tier: core` (init wizard) and `phases:` for km-at Mode R preflight workflow.
 
 ---
 

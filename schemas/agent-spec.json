@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2019-09/schema",
-  "$id": "https://github.com/treylom/claude-discode/schemas/agent-spec.json",
-  "title": "claude-discode Agent Spec (Custom Hybrid v1.0)",
-  "description": "Per-agent contract registry. agentskills.io base + Hermes provides_* + claude-discode classroom policy + dynamic gates + benchmark integration.",
+  "$id": "https://github.com/treylom/ThisCode/schemas/agent-spec.json",
+  "title": "thiscode Agent Spec (Custom Hybrid v1.0)",
+  "description": "Per-agent contract registry. agentskills.io base + Hermes provides_* + thiscode classroom policy + dynamic gates + benchmark integration.",
   "type": "object",
   "required": ["name", "description", "version", "tier"],
   "properties": {

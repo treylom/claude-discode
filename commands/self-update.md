@@ -1,12 +1,12 @@
 ---
-description: claude-discode 플러그인 자가 업데이트 체크 (git fetch + behind 알림) — 메인봇 SessionStart 시 자동 호출 가능
+description: thiscode 플러그인 자가 업데이트 체크 (git fetch + behind 알림) — 메인봇 SessionStart 시 자동 호출 가능
 allowed-tools: Bash Read
 disable-model-invocation: true
 ---
 
-# /claude-discode:self-update — 자가 업데이트 체크
+# /thiscode:self-update — 자가 업데이트 체크
 
-> 메인봇 시작 시 또는 수동으로 claude-discode 레포의 latest commit 과 로컬 차이를 점검.
+> 메인봇 시작 시 또는 수동으로 thiscode 레포의 latest commit 과 로컬 차이를 점검.
 
 $ARGUMENTS
 
@@ -18,16 +18,16 @@ $ARGUMENTS
 
 ```bash
 # Claude Code marketplace install 시 표준 경로
-PLUGIN_DIR="$HOME/.claude/plugins/marketplaces/claude-discode-marketplace"
+PLUGIN_DIR="$HOME/.claude/plugins/marketplaces/thiscode-marketplace"
 # 또는 사용자 로컬 clone 위치
-LOCAL_CLONE="$HOME/code/claude-discode"
+LOCAL_CLONE="$HOME/code/thiscode"
 
 if [ -d "$PLUGIN_DIR" ]; then
   TARGET="$PLUGIN_DIR"
 elif [ -d "$LOCAL_CLONE" ]; then
   TARGET="$LOCAL_CLONE"
 else
-  echo "claude-discode 미설치"
+  echo "thiscode 미설치"
   exit 1
 fi
 ```
@@ -58,7 +58,7 @@ BEHIND=$(git rev-list --count HEAD..origin/main)
 
 agent 가 사용자에게 안내:
 - `up-to-date`: 조용히 종료 (변화 없음)
-- `behind N`: "N 개 commit 뒤처져 있어요. `/claude-discode:self-update pull` 로 업데이트 받을 수 있습니다"
+- `behind N`: "N 개 commit 뒤처져 있어요. `/thiscode:self-update pull` 로 업데이트 받을 수 있습니다"
 - `ahead M`: 사용자가 local 수정 가지고 있음 — manual review 필요
 - `diverged`: rebase 또는 reset 필요 — manual
 
@@ -92,7 +92,7 @@ fi
         "hooks": [
           {
             "type": "command",
-            "command": "cd $HOME/.claude/plugins/cache/local/claude-discode 2>/dev/null && git fetch --quiet origin 2>/dev/null && BEHIND=$(git rev-list HEAD..origin/main --count 2>/dev/null) && [ \"${BEHIND:-0}\" -gt 0 ] && echo \"⚠ claude-discode behind by $BEHIND commits — /claude-discode:self-update 실행 권장\" || true",
+            "command": "cd $HOME/.claude/plugins/cache/local/thiscode 2>/dev/null && git fetch --quiet origin 2>/dev/null && BEHIND=$(git rev-list HEAD..origin/main --count 2>/dev/null) && [ \"${BEHIND:-0}\" -gt 0 ] && echo \"⚠ thiscode behind by $BEHIND commits — /thiscode:self-update 실행 권장\" || true",
             "timeout": 5
           }
         ]
@@ -102,7 +102,7 @@ fi
 }
 ```
 
-→ 매 세션 시작 시 자동 update check (bash 직접, claude 재귀 invoke 회피). behind 시만 stdout 알림 — claude 가 본 알림을 attention pool 에 흡수. `/claude-discode:self-update` 는 사용자 명시 호출 (`disable-model-invocation: true`).
+→ 매 세션 시작 시 자동 update check (bash 직접, claude 재귀 invoke 회피). behind 시만 stdout 알림 — claude 가 본 알림을 attention pool 에 흡수. `/thiscode:self-update` 는 사용자 명시 호출 (`disable-model-invocation: true`).
 
 ---
 

@@ -4,17 +4,17 @@ description: Plain knowledge manager — same as km-lite but never asks the user
 allowedTools: Read, Write, WebFetch, Bash, Glob, Grep
 ---
 
-# claude-discode-km-plain
+# thiscode-km-plain
 
 > Implements Mode I from `contracts/km-mode-spec.md`. Plain variant per `contracts/km-variant-matrix.md` (no AskUserQuestion).
 
 ## Trigger
 - $CLAUDE_DISCODE_HEADLESS=1 + any KM Mode I request
-- `/claude-discode:km --variant plain ...`
+- `/thiscode:km --variant plain ...`
 
 ## Workflow
 
-1. Read `~/.claude-discode-config` for vault_root. If missing, write to `$HOME/Inbox/` with notice.
+1. Read `~/.thiscode-config` for vault_root. If missing, write to `$HOME/Inbox/` with notice.
 2. Extract (URL/file/text) — same as km-lite Step 2.
 3. Generate frontmatter — same as km-lite Step 3, but auto-derive tags from title only (no AskUserQuestion).
 4. Determine sub-folder: always `Inbox/`.

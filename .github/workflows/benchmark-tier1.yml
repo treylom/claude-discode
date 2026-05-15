@@ -27,8 +27,8 @@ jobs:
 
       - name: Start GraphRAG Docker (placeholder — replace with real image when published)
         run: |
-          # TODO v1.1: docker pull ghcr.io/treylom/claude-discode-graphrag:latest
-          # docker run -d -p 8400:8400 -v ./sample-vault:/vault --name graphrag ghcr.io/treylom/claude-discode-graphrag:latest
+          # TODO v1.1: docker pull ghcr.io/treylom/ThisCode-graphrag:latest
+          # docker run -d -p 8400:8400 -v ./sample-vault:/vault --name graphrag ghcr.io/treylom/ThisCode-graphrag:latest
           echo "Tier 1 Docker image pending v1.1 — emitting placeholder result"
           mkdir -p benchmark/results
           jq -n '{ "skipped": true, "reason": "Tier 1 Docker image pending v1.1 release" }' > benchmark/results/tier1-placeholder.json

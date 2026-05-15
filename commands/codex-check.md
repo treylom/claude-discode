@@ -1,12 +1,12 @@
 ---
-description: Codex CLI 설치 + OAuth 인증 + 모델 picker 검증 (claude-discode 의 Codex 호출 layer 가 동작하는지 확인)
+description: Codex CLI 설치 + OAuth 인증 + 모델 picker 검증 (thiscode 의 Codex 호출 layer 가 동작하는지 확인)
 allowed-tools: Bash Read AskUserQuestion
 disable-model-invocation: true
 ---
 
-# /claude-discode:codex-check — Codex CLI 검증
+# /thiscode:codex-check — Codex CLI 검증
 
-> claude-discode 의 codex 호출 layer (`/tofu-at-codex`, `codex-exec-bridge` skill, subprocess `codex exec` 패턴) 가 동작하려면 Codex CLI 가 install + login + 모델 picker 정상이어야 함. 본 슬래시가 5 step 으로 검증.
+> thiscode 의 codex 호출 layer (`/tofu-at-codex`, `codex-exec-bridge` skill, subprocess `codex exec` 패턴) 가 동작하려면 Codex CLI 가 install + login + 모델 picker 정상이어야 함. 본 슬래시가 5 step 으로 검증.
 
 $ARGUMENTS
 
@@ -62,7 +62,7 @@ codex exec --no-stream "ping" 2>&1 | head -10
 
 ### Step 5. /tofu-at-codex 슬래시 호환성 (선택)
 
-claude-discode 의 `/tofu-at-codex` 또는 `codex-exec-bridge` skill 이 install 되어 있다면:
+thiscode 의 `/tofu-at-codex` 또는 `codex-exec-bridge` skill 이 install 되어 있다면:
 
 ```bash
 # .claude/scripts/setup-tofu-at-codex.sh 존재 시

@@ -13,11 +13,11 @@ body:
   - type: textarea
     id: log
     attributes:
-      label: 셋업 로그 (~/.claude-discode-setup.log 내용)
+      label: 셋업 로그 (~/.thiscode-setup.log 내용)
       description: |
         아래 명령으로 로그를 복사한 후 붙여넣기:
         ```bash
-        cat ~/.claude-discode-setup.log
+        cat ~/.thiscode-setup.log
         ```
         (로그는 자동으로 user path 가 REDACTED 처리됩니다.)
       render: shell

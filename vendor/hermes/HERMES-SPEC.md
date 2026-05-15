@@ -3,7 +3,7 @@
 > **Origin:** github.com/NousResearch/hermes-agent
 > **License:** MIT (see `LICENSE`)
 > **Vendored at:** 2026-05-13 (latest upstream update 2026-05-13)
-> **Vendored by:** claude-discode v2.3
+> **Vendored by:** thiscode v2.3
 >
 > 본 doc 은 Hermes Agent 의 agent spec 요약 — closed-loop learning platform architecture. full repo 는 origin 참조.
 
@@ -90,9 +90,9 @@ Built-in cron scheduling 안 unattended task ("daily reports, nightly backups, w
 
 Linux / macOS / WSL2 / Termux 안 unified single command 으로 작동. Windows native = early beta. Full docs: hermes-agent.nousresearch.com/docs.
 
-## 10. claude-discode 와의 관계
+## 10. thiscode 와의 관계
 
-claude-discode 의 agent spec design (agents.yaml + .agents/*.yaml hybrid) 의 reference 본 Hermes agent loop architecture. claude-discode 본 vendor 본문 = agent spec 작성 / 검증 시 reference SoT.
+thiscode 의 agent spec design (agents.yaml + .agents/*.yaml hybrid) 의 reference 본 Hermes agent loop architecture. thiscode 본 vendor 본문 = agent spec 작성 / 검증 시 reference SoT.
 
 본 spec 의 변경 추적 = pin version (vendored at 2026-05-13). 변경 시 manual sync (v2.4 cycle 안 평가).
 

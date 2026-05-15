@@ -1,6 +1,6 @@
-# Architecture — claude-discode v1.0
+# Architecture — thiscode v1.0
 
-claude-discode 의 구조 + 흐름을 mermaid 차트로 시각화. GitHub 에서 자동 render — 별도 도구 불필요.
+thiscode 의 구조 + 흐름을 mermaid 차트로 시각화. GitHub 에서 자동 render — 별도 도구 불필요.
 
 ## 1. 4-Tier Search Fallback
 
@@ -40,7 +40,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    User([사용자]) -->|`/claude-discode:km`| Disp{KM dispatcher}
+    User([사용자]) -->|`/thiscode:km`| Disp{KM dispatcher}
 
     Disp -->|default<br/>개인 vault| Lite[KM lite<br/>Phase 1 + 2<br/>tier: external]
     Disp -->|`--at`<br/>팀 vault 100+ files| AT[KM at<br/>Agent Teams<br/>category lead + worker<br/>tier: experimental]
@@ -66,7 +66,7 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    Cmd[/`/claude-discode:meetings new spec-review`/] --> Mkdir[.claude-meetings/2026-05-13-spec-review/ 생성]
+    Cmd[/`/thiscode:meetings new spec-review`/] --> Mkdir[.claude-meetings/2026-05-13-spec-review/ 생성]
 
     Mkdir --> F1[00-agenda.md<br/>의제 + 참가자 + 시간]
     Mkdir --> F2[01-spec.md<br/>baseline 결정]
@@ -85,7 +85,7 @@ flowchart TB
     class F1,F2,F3,F4 file
 ```
 
-본 매뉴얼 자체가 outcome 예시: `.claude-meetings/2026-05-13-claude-discode-yaml-v1.0/` → 3 라운드 GPT-5.5 토론 → 12 decisions → v1.0 spec 확정 → 19 task 실행 → release.
+본 매뉴얼 자체가 outcome 예시: `.claude-meetings/2026-05-13-thiscode-yaml-v1.0/` → 3 라운드 GPT-5.5 토론 → 12 decisions → v1.0 spec 확정 → 19 task 실행 → release.
 
 ---
 
@@ -97,7 +97,7 @@ flowchart TB
 flowchart TD
     YAML([.agents/your-agent.yaml]) --> BA[Block A<br/>agentskills.io base<br/>name + description + version + license]
     YAML --> BB[Block B<br/>Hermes provides_*<br/>tools + hooks + commands]
-    YAML --> BC[Block C<br/>claude-discode extension<br/>tier + model + allowedTools]
+    YAML --> BC[Block C<br/>thiscode extension<br/>tier + model + allowedTools]
     YAML --> BD[Block D<br/>Dynamic gates<br/>expr + evaluator simple/cel]
     YAML --> BE[Block E<br/>Benchmark integration<br/>fixtures + axes + baseline_tier]
 
@@ -111,7 +111,7 @@ flowchart TD
     class BA,BB,BC,BD,BE block
 ```
 
-각 Block 책임 분리 — Block A 만 cross-tool portable, Block C/D/E 는 claude-discode 전용 extension.
+각 Block 책임 분리 — Block A 만 cross-tool portable, Block C/D/E 는 thiscode 전용 extension.
 
 ---
 
@@ -155,11 +155,11 @@ flowchart LR
         Vault[(vault)]
     end
 
-    subgraph Plugin[claude-discode plugin]
-        Search[/claude-discode:search<br/>4-Tier dispatcher/]
-        KM[/claude-discode:km<br/>lite/at/plain/]
-        Meet[/claude-discode:meetings<br/>회의실/]
-        Setup[/claude-discode:setup<br/>bootstrap/]
+    subgraph Plugin[thiscode plugin]
+        Search[/thiscode:search<br/>4-Tier dispatcher/]
+        KM[/thiscode:km<br/>lite/at/plain/]
+        Meet[/thiscode:meetings<br/>회의실/]
+        Setup[/thiscode:setup<br/>bootstrap/]
     end
 
     subgraph Backend[검색 backend]

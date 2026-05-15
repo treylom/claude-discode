@@ -9,7 +9,7 @@ cat > "$TMPDIR/.config/claude/claude_desktop_config.json" <<'JSON'
 { "mcpServers": { "other-mcp": { "command": "node", "args": ["/some/path"] } } }
 JSON
 
-SCRIPT="$HOME/code/claude-discode/scripts/install-vault-search.sh"
+SCRIPT="$HOME/code/thiscode/scripts/install-vault-search.sh"
 
 # Dry-run: verify output mentions adding vault-search
 HOME="$TMPDIR" bash "$SCRIPT" --dry-run | \

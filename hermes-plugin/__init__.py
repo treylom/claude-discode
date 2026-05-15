@@ -1,8 +1,8 @@
-"""claude-discode — Hermes plugin entry point.
+"""thiscode — Hermes plugin entry point.
 
-Wires the claude-discode 4-Tier search + KM ingestion tools into Hermes Agent.
-Bridges to the bash-based dispatcher in ../skills/claude-discode-search/references/
-and the km-lite variant in ../skills/claude-discode-km-lite/references/ via subprocess.
+Wires the thiscode 4-Tier search + KM ingestion tools into Hermes Agent.
+Bridges to the bash-based dispatcher in ../skills/thiscode-search/references/
+and the km-lite variant in ../skills/thiscode-km-lite/references/ via subprocess.
 """
 
 from . import schemas, tools
@@ -22,5 +22,5 @@ def register(ctx):
         handler=tools.handle_ingest,
     )
     ctx.register_hook("on_session_start", tools.session_start_drift_check)
-    ctx.register_command("/claude-discode-search", tools.cmd_search)
-    ctx.register_command("/claude-discode-km", tools.cmd_km)
+    ctx.register_command("/thiscode-search", tools.cmd_search)
+    ctx.register_command("/thiscode-km", tools.cmd_km)

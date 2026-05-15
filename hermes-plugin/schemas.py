@@ -1,4 +1,4 @@
-"""JSON-schema definitions for claude-discode Hermes tools."""
+"""JSON-schema definitions for thiscode Hermes tools."""
 
 SEARCH_SCHEMA = {
     "type": "object",

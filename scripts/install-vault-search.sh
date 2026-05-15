@@ -15,7 +15,7 @@ Usage: $0 [--dry-run | --apply | --recommend-only]
 Env:
   VAULT                  vault root (default: \$HOME/obsidian-ai-vault)
   CLAUDE_CONFIG_DIR      Claude config dir (default: \$HOME/.config/claude)
-  CLAUDE_DISCODE_HOME    claude-discode repo root (default: \$HOME/code/claude-discode)
+  CLAUDE_DISCODE_HOME    thiscode repo root (default: \$HOME/code/thiscode)
   CLAUDE_DISCODE_SKIP_BUILD  1 = skip clone + npm (use existing vendor dir)
 EOF
 }
@@ -55,7 +55,7 @@ fi
 note_count_check || true
 
 CFG="${CLAUDE_CONFIG_DIR:-$HOME/.config/claude}/claude_desktop_config.json"
-REPO_DIR="${CLAUDE_DISCODE_HOME:-$HOME/code/claude-discode}/vendor/vault-search-mcp"
+REPO_DIR="${CLAUDE_DISCODE_HOME:-$HOME/code/thiscode}/vendor/vault-search-mcp"
 SKIP_BUILD="${CLAUDE_DISCODE_SKIP_BUILD:-0}"
 
 # Stage 1: clone or update the MCP source
@@ -64,7 +64,7 @@ if [ "$MODE" = "apply" ] && [ "$SKIP_BUILD" = "0" ]; then
     echo "[stage1] cloning vault-search-mcp → $REPO_DIR"
     mkdir -p "$(dirname "$REPO_DIR")"
     if ! git clone https://github.com/treylom/vault-search-mcp "$REPO_DIR" 2>/dev/null; then
-      echo "[stage1] clone failed — TODO: vendor vault-search-mcp into claude-discode/vendor/ first" >&2
+      echo "[stage1] clone failed — TODO: vendor vault-search-mcp into thiscode/vendor/ first" >&2
       echo "         See: docs/SETUP.md#tier-2 for manual install" >&2
       exit 3
     fi

@@ -11,7 +11,7 @@ type: atomic
 MCP details here.
 MD
 
-DISP="$HOME/code/claude-discode/skills/claude-discode-search/references/tier-implementations.md.sh"
+DISP="$HOME/code/thiscode/skills/thiscode-search/references/tier-implementations.md.sh"
 
 # T2.1 — cascade must produce a non-empty response (Tier 1 if GraphRAG server is up, else Tier 4)
 CLAUDE_DISCODE_VAULT="$TMPDIR/vault" bash "$DISP" "MCP" > "$TMPDIR/out.txt" 2>&1 || true

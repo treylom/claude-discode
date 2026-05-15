@@ -1,10 +1,10 @@
 ---
-description: claude-discode 메인 wizard — 환경 인식 + Discord 봇 셋업 + 첫 대화 검증
+description: thiscode 메인 wizard — 환경 인식 + Discord 봇 셋업 + 첫 대화 검증
 allowed-tools: Bash Read Write Edit AskUserQuestion Skill
 disable-model-invocation: true
 ---
 
-# /claude-discode:start — 메인 wizard
+# /thiscode:start — 메인 wizard
 
 > 새 머신에 Claude Code + Discord 봇 통합 환경을 처음 셋업할 때 진입점.
 
@@ -22,7 +22,7 @@ Step 1-5. 본 wizard         → 환경 + Discord 봇 + 페어링 (아래 흐름
 순정 Claude Code 에 hook 이 없으면 soul.md 가 단순 markdown 파일로 방치 → 페르소나 inject 안 됨 (5/12 회귀 R5). hooks 먼저 등록.
 
 ```bash
-/claude-discode:install-hooks   # 본 wizard 진입 전 실행 권장 (한 번만)
+/thiscode:install-hooks   # 본 wizard 진입 전 실행 권장 (한 번만)
 ```
 
 이미 vault 운영 중인 사용자 (기존 hook 존재) 는 본 step skip.
@@ -39,7 +39,7 @@ grep -i microsoft /proc/version 2>/dev/null && echo "WSL"
 command -v tmux git curl node claude     # 의존 도구 확인
 ```
 
-부족한 도구 있으면 `bash install.sh` 실행 안내 (또는 `curl -fsSL https://raw.githubusercontent.com/treylom/claude-discode/main/install.sh | bash`).
+부족한 도구 있으면 `bash install.sh` 실행 안내 (또는 `curl -fsSL https://raw.githubusercontent.com/treylom/ThisCode/main/install.sh | bash`).
 
 ### Step 2. Discord 봇 생성 안내 (사용자 수동)
 
@@ -54,11 +54,11 @@ command -v tmux git curl node claude     # 의존 도구 확인
 
 ### Step 3-4. 봇 디렉토리 + soul.md 자동 셋업 (자동화 권장)
 
-본 두 step 은 `/claude-discode:create-bot` 슬래시가 일괄 처리합니다 (대화형). 수동으로 하고 싶을 때만 아래 manual 흐름 참고.
+본 두 step 은 `/thiscode:create-bot` 슬래시가 일괄 처리합니다 (대화형). 수동으로 하고 싶을 때만 아래 manual 흐름 참고.
 
 ```bash
 # 자동화 — 권장
-/claude-discode:create-bot
+/thiscode:create-bot
 ```
 
 `create-bot` 가 묻는 항목:
@@ -132,9 +132,9 @@ Discord 앱에서 봇에 DM:
 
 추가 봇 / 회의실 / 자가 업데이트 / Codex 검증:
 
-- `/claude-discode:add-bot` — 추가 봇 1개 신설
-- `/claude-discode:open-meeting` — 회의실 폴더 신설 (다 봇 협업 4-file)
-- `/claude-discode:codex-check` — Codex CLI 검증 (호출 layer 활성)
-- `/claude-discode:self-update` — 메인봇 시작 시 git pull 체크
-- `/claude-discode:install-hooks` — hook 재정비 (settings.json drift 시)
-- `/claude-discode:create-bot` — 추가 봇 자동 셋업 반복
+- `/thiscode:add-bot` — 추가 봇 1개 신설
+- `/thiscode:open-meeting` — 회의실 폴더 신설 (다 봇 협업 4-file)
+- `/thiscode:codex-check` — Codex CLI 검증 (호출 layer 활성)
+- `/thiscode:self-update` — 메인봇 시작 시 git pull 체크
+- `/thiscode:install-hooks` — hook 재정비 (settings.json drift 시)
+- `/thiscode:create-bot` — 추가 봇 자동 셋업 반복

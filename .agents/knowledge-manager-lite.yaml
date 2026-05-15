@@ -2,12 +2,12 @@ name: knowledge-manager-lite
 description: Knowledge Manager lite — Phase 1 (ingestion) + Phase 2 (extract/classify) for individual vault. Default KM variant per docs/01-mode-i.md.
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 provides_tools:
   - knowledge_manager_lite
   - claude_discode_ingest
 provides_commands:
-  - /claude-discode:km
+  - /thiscode:km
 tier: external
 model: opus[1m]
 allowedTools:

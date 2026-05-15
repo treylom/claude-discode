@@ -6,7 +6,7 @@ date: 2026-05-13
 
 # 4-Tier Search Fallback Contract
 
-Both `claude-discode-search` (plugin) and `.claude/commands/search.md` (vault) MUST follow this Tier order and interface.
+Both `thiscode-search` (plugin) and `.claude/commands/search.md` (vault) MUST follow this Tier order and interface.
 
 ## Tier Order (fixed — drift forbidden)
 
@@ -55,7 +55,7 @@ Response: file list + matched lines. Output MUST include `[Tier 4: 텍스트 검
 
 If all 4 Tiers fail, output:
 ```
-4-Tier search 전부 실패 — /claude-discode:km-bootstrap 으로 환경 설치 안내
+4-Tier search 전부 실패 — /thiscode:km-bootstrap 으로 환경 설치 안내
 ```
 
 ## MOC priority routing

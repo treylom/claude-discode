@@ -2,7 +2,7 @@ name: codex-exec-bridge
 description: Codex CLI / Codex Exec bridge — invokes OpenAI Codex with shared runtime, captures task output to .claude-bridge/, returns to caller.
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 provides_tools:
   - claude_discode_codex_invoke
 tier: experimental

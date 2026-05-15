@@ -2,7 +2,7 @@
 # Dog-3: GraphRAG check (server probably down in sandbox — script must exit ≤4).
 set -e
 
-ROOT="${CLAUDE_DISCODE_HOME:-/claude-discode}"
+ROOT="${CLAUDE_DISCODE_HOME:-/thiscode}"
 
 echo "[Dog-3] install-graphrag.sh --check (server expected down)"
 set +e

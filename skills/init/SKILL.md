@@ -1,10 +1,10 @@
 ---
 name: init
-description: 환경 감지 + 8 Phase progressive install wizard — claude-discode 첫 install 시 vault 상태 / 도구 / 자원 자동 detect 후 추천. Use when user runs /claude-discode:init or first-time install.
+description: 환경 감지 + 8 Phase progressive install wizard — thiscode 첫 install 시 vault 상태 / 도구 / 자원 자동 detect 후 추천. Use when user runs /thiscode:init or first-time install.
 allowedTools: Bash, AskUserQuestion, Read
 ---
 
-# claude-discode-init
+# thiscode-init
 
 > obsidian-cli → GraphRAG 점진 진행을 학생이 자연스럽게 따라가도록 wizard 형 install 진입점 (사용자 v2.1 spec).
 
@@ -15,7 +15,7 @@ allowedTools: Bash, AskUserQuestion, Read
 
 ## Workflow
 
-1. **env detect** — `scripts/claude-discode-init.sh --detect-only --json` 호출, OS / vault / tools / resources 9 keys JSON 출력
+1. **env detect** — `scripts/thiscode-init.sh --detect-only --json` 호출, OS / vault / tools / resources 9 keys JSON 출력
 2. **Phase 추천** — note_count + 도구 + 자원 multi-axis 알고리즘:
    - current: 현재 가능 (의무 install)
    - recommended: 권장 (사용자 y/n)
@@ -30,7 +30,7 @@ allowedTools: Bash, AskUserQuestion, Read
 
 ## Non-interactive (CI/headless)
 
-- `claude-discode-init.sh --non-interactive` → Phase 추천만, install skip
+- `thiscode-init.sh --non-interactive` → Phase 추천만, install skip
 - `CLAUDE_DISCODE_INIT_AUTO=phase-X,phase-Y` env → auto install (prompt skip)
 
 ## 옵션 언제나 (사용자 spec Q2)

@@ -2,7 +2,7 @@ name: shared-memory
 description: Shared memory index manager — maintains .claude-memory/shared/SHARED-INDEX.md across machines, append-only writes with conflict markers.
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 provides_tools:
   - shared_memory
 tier: internal

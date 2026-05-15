@@ -24,7 +24,7 @@
 
 #align(center)[
   #v(2em)
-  #text(size: 26pt, weight: "bold")[claude-discode 짱쉬운 셋업 가이드]
+  #text(size: 26pt, weight: "bold")[thiscode 짱쉬운 셋업 가이드]
   #v(0.5em)
   #text(size: 16pt, fill: rgb("#555"))[처음 써보는 분도 5단계로 완성]
   #v(2em)
@@ -64,7 +64,7 @@
 
 == 4-Tier 검색이 뭔가요?
 
-claude-discode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 도구가 답 못 찾으면 더 정확한 도구로 넘어갑니다.
+thiscode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 도구가 답 못 찾으면 더 정확한 도구로 넘어갑니다.
 
 #box(fill: rgb("#f8f9fa"), inset: 10pt, radius: 4pt, width: 100%)[
   - #text(weight: "bold")[Tier 4 — ripgrep] (기본, 0분 셋업) — 문자열 일치, 매우 빠름
@@ -83,10 +83,10 @@ claude-discode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 
 
 = 0단계: wizard 진입 (v2.1 추천)
 
-가장 쉬운 방법은 `claude-discode init` wizard — vault / 도구 / 자원 자동 감지 + 8 Phase 추천.
+가장 쉬운 방법은 `thiscode init` wizard — vault / 도구 / 자원 자동 감지 + 8 Phase 추천.
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/claude-discode-init.sh
+bash ~/.claude/plugins/thiscode/scripts/thiscode-init.sh
 ```
 
 wizard 가 물어보는 항목:
@@ -156,7 +156,7 @@ git --version
 
 ```bash
 mkdir -p ~/.claude/plugins
-git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-discode
+git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
 ```
 
 #v(0.3em)
@@ -164,7 +164,7 @@ git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-dis
 #box(fill: rgb("#e8f5e9"), inset: 8pt, radius: 4pt)[
   #text(weight: "bold", fill: rgb("#2c8a3d"))[✓ 성공 모습]
   ```
-  Cloning into '/Users/.../claude-discode'...
+  Cloning into '/Users/.../thiscode'...
   remote: Enumerating objects: ...
   Receiving objects: 100% (...), done.
   ```
@@ -175,13 +175,13 @@ git clone https://github.com/treylom/claude-discode ~/.claude/plugins/claude-dis
 #box(fill: rgb("#fde8e8"), inset: 8pt, radius: 4pt)[
   #text(weight: "bold", fill: rgb("#c53030"))[❌ 실패 시]
   - "Permission denied" → `mkdir ~/.claude/plugins` 권한 확인
-  - "already exists" → 이미 설치됨. `cd ~/.claude/plugins/claude-discode && git pull` 로 update
+  - "already exists" → 이미 설치됨. `cd ~/.claude/plugins/thiscode && git pull` 로 update
 ]
 
 = Step 2 — 검색 MCP 설치 (5분, 권장)
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-vault-search.sh --apply
+bash ~/.claude/plugins/thiscode/scripts/install-vault-search.sh --apply
 claude mcp list | grep vault-search
 ```
 
@@ -210,7 +210,7 @@ claude mcp list | grep vault-search
 == 3-A. Obsidian CLI 설치 (Obsidian 사용자만)
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/install-obsidian-cli.sh
+bash ~/.claude/plugins/thiscode/scripts/install-obsidian-cli.sh
 which obsidian-cli
 ```
 
@@ -253,10 +253,10 @@ $arrow$ 바로 Step 5 로
 
 ```bash
 docker --version
-docker pull ghcr.io/treylom/claude-discode-graphrag:v1.0
+docker pull ghcr.io/treylom/ThisCode-graphrag:v1.0
 docker run -d -p 8400:8400 -v ~/vault:/vault \
-  --name claude-discode-graphrag \
-  ghcr.io/treylom/claude-discode-graphrag:v1.0
+  --name thiscode-graphrag \
+  ghcr.io/treylom/ThisCode-graphrag:v1.0
 curl localhost:8400/health
 ```
 
@@ -274,7 +274,7 @@ curl localhost:8400/health
 
 ```bash
 python3 --version
-bash ~/.claude/plugins/claude-discode/scripts/install-graphrag.sh --apply
+bash ~/.claude/plugins/thiscode/scripts/install-graphrag.sh --apply
 curl localhost:8400/health
 ```
 
@@ -289,13 +289,13 @@ curl localhost:8400/health
 = Step 5 — 모든 게 잘 됐는지 확인 🎉
 
 ```bash
-bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
+bash ~/.claude/plugins/thiscode/scripts/healthcheck.sh
 ```
 
 #box(fill: rgb("#e8f5e9"), inset: 8pt, radius: 4pt)[
   #text(weight: "bold", fill: rgb("#2c8a3d"))[✓ 성공 모습 — 본인 선택에 따라 SKIP 표기]
   ```
-  claude-discode healthcheck v1.0
+  thiscode healthcheck v1.0
   ─────────────────────────────────
   ✓ Tier 4 (ripgrep)  : OK
   ✓ Tier 2 (MCP)      : OK
@@ -309,10 +309,10 @@ bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
 #box(fill: rgb("#fde8e8"), inset: 8pt, radius: 4pt)[
   #text(weight: "bold", fill: rgb("#c53030"))[❌ 실패 시]
   ```bash
-  cat ~/.claude-discode-setup.log
+  cat ~/.thiscode-setup.log
   ```
   이 파일 내용을 복사해서 GitHub Issue 등록:
-  https://github.com/treylom/claude-discode/issues/new?template=setup-failure.yml
+  https://github.com/treylom/ThisCode/issues/new?template=setup-failure.yml
 ]
 
 = 첫 사용 해보기
@@ -320,14 +320,14 @@ bash ~/.claude/plugins/claude-discode/scripts/healthcheck.sh
 Claude Code 안에서:
 
 ```
-/claude-discode:search "안녕 첫 검색"
+/thiscode:search "안녕 첫 검색"
 ```
 
 또는 sample-vault 에서 테스트:
 
 ```
-/claude-discode:search "NuriFlow ARR" \
-  --vault ~/.claude/plugins/claude-discode/sample-vault
+/thiscode:search "NuriFlow ARR" \
+  --vault ~/.claude/plugins/thiscode/sample-vault
 ```
 
 축하합니다! 🎉
@@ -358,7 +358,7 @@ README 의 5-axis benchmark 표 참고:
 
 == Q5. 피드백 / 강의 후기 어디 남기나요?
 
-GitHub Discussions Feedback category: https://github.com/treylom/claude-discode/discussions/categories/feedback
+GitHub Discussions Feedback category: https://github.com/treylom/ThisCode/discussions/categories/feedback
 
 5 질문 schema 로 2분 응답 → v1.1 graduate decision 에 반영됩니다.
 
@@ -368,7 +368,7 @@ GitHub Discussions Feedback category: https://github.com/treylom/claude-discode/
   #box(fill: rgb("#f0f4ff"), inset: 14pt, radius: 6pt, width: 70%)[
     #text(weight: "bold")[도움이 필요하면]
     #v(0.5em)
-    - GitHub Issue: https://github.com/treylom/claude-discode/issues
+    - GitHub Issue: https://github.com/treylom/ThisCode/issues
     - 강의 학생: 강의 Discord 채널
     - 문서: SETUP.md (개발자용) / AGENTS.md (Custom Hybrid v1.0 spec) / BENCHMARK.md (5-axis 해석)
   ]

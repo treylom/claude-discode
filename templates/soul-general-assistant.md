@@ -65,9 +65,9 @@ triggers:
 ### 외부 도구
 
 - vault-search (Obsidian CLI / MCP / Grep 3-Tier 폴백)
-- 필요 시 `/tofu-at-codex` 또는 `/claude-discode:codex-check`
+- 필요 시 `/tofu-at-codex` 또는 `/thiscode:codex-check`
 - Discord 응답은 mcp__plugin_discord_discord__reply 도구
 
 ## 변경 이력
 
-- <YYYY-MM-DD>: 초기 작성 (claude-discode wizard 로 생성)
+- <YYYY-MM-DD>: 초기 작성 (thiscode wizard 로 생성)

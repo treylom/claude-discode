@@ -1,4 +1,4 @@
-name: claude-discode
+name: thiscode
 version: 1.0.0
 description: KM ingestion + 4-Tier vault search (GraphRAG → Obsidian CLI → vault-search MCP → ripgrep). Discord-friendly knowledge manager for individual + team vaults.
 # Aggregated from .agents/*.yaml (source of truth — see scripts/generate-agents-index.mjs)
@@ -17,12 +17,12 @@ provides_tools:
 provides_hooks:
   - on_session_start
 provides_commands:
-  - /claude-discode:km
-  - /claude-discode:km-bootstrap
-  - /claude-discode:search
-  - /claude-discode:setup
+  - /thiscode:km
+  - /thiscode:km-bootstrap
+  - /thiscode:search
+  - /thiscode:setup
 author: 김재경 (tofukyung)
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 license: MIT
 platforms:
   - macos

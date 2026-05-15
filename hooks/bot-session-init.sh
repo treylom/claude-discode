@@ -12,7 +12,7 @@
 #         "hooks": [
 #           {
 #             "type": "command",
-#             "command": "bash ~/.claude/plugins/claude-discode/hooks/bot-session-init.sh",
+#             "command": "bash ~/.claude/plugins/thiscode/hooks/bot-session-init.sh",
 #             "timeout": 10
 #           }
 #         ]
@@ -50,12 +50,12 @@ MEM_INDEX="$MEM_DIR/MEMORY.md"
 
 # 공유 메모리 인덱스 detect (사용자 환경별 분기)
 #   1. CLAUDE_DISCODE_VAULT 환경변수 (vault 사용자 설정)
-#   2. $HOME/.claude-discode/shared-memory/ (vault 없는 사용자 default)
+#   2. $HOME/.thiscode/shared-memory/ (vault 없는 사용자 default)
 SHARED_INDEX=""
 if [ -n "${CLAUDE_DISCODE_VAULT:-}" ] && [ -f "${CLAUDE_DISCODE_VAULT}/.claude-memory/shared/SHARED-INDEX.md" ]; then
   SHARED_INDEX="${CLAUDE_DISCODE_VAULT}/.claude-memory/shared/SHARED-INDEX.md"
-elif [ -f "$HOME/.claude-discode/shared-memory/SHARED-INDEX.md" ]; then
-  SHARED_INDEX="$HOME/.claude-discode/shared-memory/SHARED-INDEX.md"
+elif [ -f "$HOME/.thiscode/shared-memory/SHARED-INDEX.md" ]; then
+  SHARED_INDEX="$HOME/.thiscode/shared-memory/SHARED-INDEX.md"
 fi
 
 SECTIONS=""
@@ -70,8 +70,8 @@ ${SOUL_CONTENT}
 "
 else
   SECTIONS+="=== [${BOT}] soul.md: MISSING at ${SOUL_FILE} ===
-봇 페르소나 파일 미발견. claude-discode wizard 로 다시 생성하거나 직접 작성.
-template 위치: <claude-discode>/templates/soul-*.md
+봇 페르소나 파일 미발견. thiscode wizard 로 다시 생성하거나 직접 작성.
+template 위치: <thiscode>/templates/soul-*.md
 
 "
 fi

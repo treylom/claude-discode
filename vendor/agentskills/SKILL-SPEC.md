@@ -3,7 +3,7 @@
 > **Origin:** github.com/agentskills/agentskills (primary SoT, 18.5k stars)
 > **License:** Apache-2.0 (code) + CC-BY-4.0 (documentation) dual
 > **Vendored at:** 2026-05-13 (latest upstream update 2026-05-13)
-> **Vendored by:** claude-discode v2.3
+> **Vendored by:** thiscode v2.3
 >
 > 본 doc 은 SKILL.md open standard 의 핵심 spec 요약 (docs portion). full repo 는 origin 참조.
 > 본 vendored 본문 = docs portion → **CC-BY-4.0 attribution 의무**: derived from github.com/agentskills/agentskills documentation.
@@ -49,9 +49,9 @@ allowedTools: <tool list>
 - **Documentation site** = agentskills.io
 - **Reference skills** = `/skills-ref` 폴더 안 primary repo
 
-## 6. claude-discode 와의 관계
+## 6. thiscode 와의 관계
 
-claude-discode 자체 12 skill 은 본 SKILL.md standard frontmatter 형식 따름 (name + description + allowedTools 필드). 본 standard 의 vendor 본문 = claude-discode 안 skill 작성 / 검증 시 reference SoT.
+thiscode 자체 12 skill 은 본 SKILL.md standard frontmatter 형식 따름 (name + description + allowedTools 필드). 본 standard 의 vendor 본문 = thiscode 안 skill 작성 / 검증 시 reference SoT.
 
 본 spec 의 변경 추적 = pin version (vendored at 2026-05-13). 변경 시 manual sync (v2.4 cycle 안 평가).
 

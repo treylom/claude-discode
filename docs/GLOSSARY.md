@@ -1,4 +1,4 @@
-# GLOSSARY — claude-discode 용어집
+# GLOSSARY — thiscode 용어집
 
 > 가이드북 / docs / README 본문에서 첫 등장 시 본 GLOSSARY 의 해당 용어에 link 됩니다 (예: `[embedding](GLOSSARY.md#embedding)`).
 
@@ -20,7 +20,7 @@ LLM 에게 주는 명령어 / 질문 text.
 LLM 이 생성한 응답 text.
 
 ### temperature
-LLM 응답의 무작위성 (0=결정적, 1=창의적). claude-discode 검색 응답은 보통 0.2~0.5.
+LLM 응답의 무작위성 (0=결정적, 1=창의적). thiscode 검색 응답은 보통 0.2~0.5.
 
 ### embedding
 단어 / 문장을 숫자 벡터로 변환한 표현. 예: "ARR" = [0.23, -0.45, 0.81, ...] (384-dim). 의미가 비슷한 단어는 벡터가 가까움.
@@ -66,7 +66,7 @@ entity (개체) + relation (관계) 그래프. 예: NuriFlow --[CEO of]--> John.
 Retrieval Augmented Generation — 검색 결과를 LLM 에게 context 로 주고 답변 생성.
 
 ### GraphRAG
-RAG + knowledge graph 통합. Microsoft Research 가 2024 발표한 패턴. claude-discode Tier 1 의 backbone.
+RAG + knowledge graph 통합. Microsoft Research 가 2024 발표한 패턴. thiscode Tier 1 의 backbone.
 
 ### chunk
 문서를 LLM context 에 들어갈 크기 (예: 500 token) 로 자른 단위.
@@ -80,7 +80,7 @@ RAG + knowledge graph 통합. Microsoft Research 가 2024 발표한 패턴. clau
 Model Context Protocol — Anthropic 이 정의한 외부 도구 ↔ LLM 연결 표준. vault-search MCP = vault 안 검색 도구를 Claude Code 에 plug-in.
 
 ### CEL
-Common Expression Language — Google 이 만든 식 평가 언어. Kubernetes / Envoy 등 사용. claude-discode 의 `gates.expr` 의 evaluator 옵션.
+Common Expression Language — Google 이 만든 식 평가 언어. Kubernetes / Envoy 등 사용. thiscode 의 `gates.expr` 의 evaluator 옵션.
 
 ### fixture
 테스트용 미리 만든 데이터. benchmark/fixtures/queries.yaml = 20 query + expected hits.
@@ -94,7 +94,7 @@ Common Expression Language — Google 이 만든 식 평가 언어. Kubernetes /
 ## Plugin / Agent / Tier
 
 ### Tier
-계층. claude-discode 4-Tier search 의 fallback 계층 (Tier 1=GraphRAG → Tier 2=MCP → Tier 3=CLI → Tier 4=ripgrep).
+계층. thiscode 4-Tier search 의 fallback 계층 (Tier 1=GraphRAG → Tier 2=MCP → Tier 3=CLI → Tier 4=ripgrep).
 
 ### fallback
 대체. 한 Tier 결과 부족 시 다음 Tier 시도.
@@ -115,13 +115,13 @@ Claude Code 의 task 단위 정의 (`.claude/skills/<name>/SKILL.md`).
 Claude Code 에 등록되는 skill + command + hook 묶음.
 
 ### slash command
-`/claude-discode:search` 같은 명령. Claude Code 안에서 입력.
+`/thiscode:search` 같은 명령. Claude Code 안에서 입력.
 
 ### YAML
 "YAML Ain't Markup Language" — 사람이 읽기 쉬운 설정 파일 형식.
 
 ### Custom Hybrid (v1.0)
-claude-discode 의 agent spec 형식 — agentskills.io base + Hermes provides_* + 자체 extension.
+thiscode 의 agent spec 형식 — agentskills.io base + Hermes provides_* + 자체 extension.
 
 ### graduate (v1.0 → v1.1)
 strict spec lock 후 dogfood feedback 받고 다음 major 로 upgrade.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# install-dense-embedding.sh — claude-discode v2.3
+# install-dense-embedding.sh — thiscode v2.3
 # Dense channel (4-channel RRF) — torch + transformers + sentence-transformers
 # 출처:
 #   PyTorch: github.com/pytorch/pytorch (BSD-3)
@@ -10,8 +10,8 @@
 set -euo pipefail
 
 MODE="${1:---apply}"
-LOG="${HOME}/.claude-discode-setup.log"
-VENV="${CLAUDE_DISCODE_VENV:-${HOME}/.cache/claude-discode/graphrag/venv}"
+LOG="${HOME}/.thiscode-setup.log"
+VENV="${CLAUDE_DISCODE_VENV:-${HOME}/.cache/thiscode/graphrag/venv}"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] install-dense-embedding.sh mode=$MODE" >> "$LOG"
 
 usage() {

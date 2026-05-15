@@ -92,7 +92,7 @@ triggers:
 
 본 template 은 다른 4 template (general-assistant / research-bot / writing-bot / schedule-bot) 의 공통 anatomy 추출:
 
-1. **YAML frontmatter** (name / description / version / created / triggers) — claude-discode SessionStart hook 이 자동 read
+1. **YAML frontmatter** (name / description / version / created / triggers) — thiscode SessionStart hook 이 자동 read
 2. **강제 페르소나 규율 표** (어휘 + 시그니처 + 완료 서명 + Why)
 3. **정체성** (한 두 줄)
 4. **Core Trait** (다른 봇과 차별점)
@@ -108,4 +108,4 @@ triggers:
 
 ## 변경 이력
 
-- <YYYY-MM-DD>: 초기 작성 (claude-discode wizard 로 생성, custom anatomy 기반)
+- <YYYY-MM-DD>: 초기 작성 (thiscode wizard 로 생성, custom anatomy 기반)

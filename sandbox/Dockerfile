@@ -1,10 +1,10 @@
-# claude-discode dogfood sandbox — WSL Ubuntu 20.04 mimic
+# thiscode dogfood sandbox — WSL Ubuntu 20.04 mimic
 #
-# Build:  docker build -t claude-discode-sandbox -f sandbox/Dockerfile .
-# Run:    docker run -it --rm -v "$PWD":/claude-discode claude-discode-sandbox bash
+# Build:  docker build -t thiscode-sandbox -f sandbox/Dockerfile .
+# Run:    docker run -it --rm -v "$PWD":/thiscode thiscode-sandbox bash
 #
 # Inside the container, run:
-#   bash /claude-discode/tests/dogfood/run-all.sh
+#   bash /thiscode/tests/dogfood/run-all.sh
 
 FROM ubuntu:20.04
 
@@ -32,6 +32,6 @@ RUN mkdir -p "$NVM_DIR" && \
     ln -sf "$(which npm)" /usr/local/bin/npm
 
 # Placeholder for Claude Code install — dogfood scenarios install on demand
-WORKDIR /claude-discode
+WORKDIR /thiscode
 
 CMD ["bash"]

@@ -2,7 +2,7 @@
 # Test: install-graphrag.sh detects Python venv requirements and exits cleanly on missing deps.
 set -e
 
-SCRIPT="$HOME/code/claude-discode/scripts/install-graphrag.sh"
+SCRIPT="$HOME/code/thiscode/scripts/install-graphrag.sh"
 
 # Case A: --check prints required deps
 OUT=$(bash "$SCRIPT" --check 2>&1 || true)

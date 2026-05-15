@@ -1,5 +1,5 @@
 {
-  "name": "claude-discode",
+  "name": "thiscode",
   "version": "0.2.0",
   "description": "KM ingestion + 4-Tier vault search packaged for Gemini CLI / OpenCode / multi-harness use.",
   "contextFileName": "GEMINI.md",

@@ -2,11 +2,11 @@ name: knowledge-manager-plain
 description: Knowledge Manager headless variant — no AskUserQuestion prompts, suitable for CI/cron unattended ingestion.
 version: 1.0.0
 license: MIT
-homepage: https://github.com/treylom/claude-discode
+homepage: https://github.com/treylom/ThisCode
 provides_tools:
   - knowledge_manager_plain
 provides_commands:
-  - /claude-discode:km
+  - /thiscode:km
 tier: internal
 model: opus[1m]
 allowedTools:

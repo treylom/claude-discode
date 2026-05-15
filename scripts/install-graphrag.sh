@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# install-graphrag.sh — claude-discode v2.3
+# install-graphrag.sh — thiscode v2.3
 # GraphRAG FastAPI server (port 8400) — Tier 1 search 백엔드
-# v2.3: v2.1.1 backbone + vault SoT 의존 → claude-discode vendor/graphrag/ 의존 정정
-#       venv 위치 = ~/.cache/claude-discode/graphrag/venv (writable home cache)
-# 출처: claude-discode/vendor/graphrag/ ← obsidian-ai-vault `.team-os/graphrag/` vendor 박제
+# v2.3: v2.1.1 backbone + vault SoT 의존 → thiscode vendor/graphrag/ 의존 정정
+#       venv 위치 = ~/.cache/thiscode/graphrag/venv (writable home cache)
+# 출처: thiscode/vendor/graphrag/ ← obsidian-ai-vault `.team-os/graphrag/` vendor 박제
 # RRF 가중치: α=0.3 (Dense) / β=0.4 (Sparse) / γ=0.15 (Decomposed) / δ=0.15 (Entity)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_DISCODE_HOME="${CLAUDE_DISCODE_HOME:-$(cd "$SCRIPT_DIR/.." && pwd)}"
 GRAPHRAG_VENDOR="$CLAUDE_DISCODE_HOME/vendor/graphrag"
-GRAPHRAG_VENV="${HOME}/.cache/claude-discode/graphrag/venv"
-GRAPHRAG_RUN="${HOME}/.cache/claude-discode/graphrag/run"
+GRAPHRAG_VENV="${HOME}/.cache/thiscode/graphrag/venv"
+GRAPHRAG_RUN="${HOME}/.cache/thiscode/graphrag/run"
 ENTRY_MODULE="search_server:app"
 PORT=8400
 
@@ -112,7 +112,7 @@ fi
 preflight || { echo "[apply] preflight FAILED — fix issues above" >&2; exit 1; }
 
 if [ ! -d "$GRAPHRAG_VENDOR/scripts" ]; then
-  echo "vendor/graphrag/scripts/ missing — claude-discode repo corrupted?" >&2
+  echo "vendor/graphrag/scripts/ missing — thiscode repo corrupted?" >&2
   echo "  Expected: $GRAPHRAG_VENDOR/scripts/ (vendored from vault SoT)" >&2
   exit 5
 fi

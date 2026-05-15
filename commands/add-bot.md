@@ -4,7 +4,7 @@ allowed-tools: Bash Read Write Edit AskUserQuestion
 disable-model-invocation: true
 ---
 
-# /claude-discode:add-bot — 추가 봇 신설
+# /thiscode:add-bot — 추가 봇 신설
 
 > 메인 봇 이미 작동 중인 사용자가 워커 봇 / 전문 봇 추가할 때.
 
@@ -25,7 +25,7 @@ $ARGUMENTS
 
 ### Step 2. Discord Developer Portal — 새 Application + Bot
 
-`/claude-discode:start` Step 2 와 동일:
+`/thiscode:start` Step 2 와 동일:
 1. New Application → 이름 = 봇 이름
 2. Bot 탭 → Reset Token → 토큰 복사
 3. OAuth2 URL Generator → 같은 권한

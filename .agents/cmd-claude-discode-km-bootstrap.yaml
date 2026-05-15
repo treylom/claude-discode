@@ -1,8 +1,0 @@
-name: cmd-claude-discode-km-bootstrap
-description: Slash command /claude-discode:km-bootstrap — one-shot installer wrapper for the 4-Tier search stack.
-version: 1.0.0
-provides_commands:
-  - /claude-discode:km-bootstrap
-tier: external
-allowedTools:
-  - Bash

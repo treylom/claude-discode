@@ -4,11 +4,11 @@ description: One-shot environment installer for the 4-Tier search stack — inst
 allowedTools: Bash, AskUserQuestion, Write, Read
 ---
 
-# claude-discode-km-bootstrap
+# thiscode-km-bootstrap
 
 ## Trigger
-- Slash: `/claude-discode:km-bootstrap`
-- Failure escalation from `claude-discode-search` when all 4 Tiers fail
+- Slash: `/thiscode:km-bootstrap`
+- Failure escalation from `thiscode-search` when all 4 Tiers fail
 
 ## Workflow
 
@@ -17,17 +17,17 @@ allowedTools: Bash, AskUserQuestion, Write, Read
    - Obsidian (`scripts/install-obsidian-cli.sh --check`)
    - vault-search MCP (`scripts/install-vault-search.sh --dry-run`)
    - GraphRAG server (`scripts/install-graphrag.sh --check`)
-3. Detect vault_root candidates (cwd / $CLAUDE_DISCODE_VAULT env / `~/.claude-discode-config` / `~/obsidian-ai-vault` / `~/Documents/Obsidian`).
+3. Detect vault_root candidates (cwd / $CLAUDE_DISCODE_VAULT env / `~/.thiscode-config` / `~/obsidian-ai-vault` / `~/Documents/Obsidian`).
 4. AskUserQuestion 1회: vault_root 확정 (multiple choice from candidates + Other).
-5. Write `~/.claude-discode-config` with selected vault_root.
+5. Write `~/.thiscode-config` with selected vault_root.
 6. AskUserQuestion 1회: install matrix (Obsidian only / +vault-search MCP / +GraphRAG (full)).
 7. Run corresponding `install-*.sh --apply` scripts in order.
-8. Verify by calling `claude-discode-search` with sample query.
+8. Verify by calling `thiscode-search` with sample query.
 9. Print install summary + next-step suggestions.
 
 ## Config file format
 
-`~/.claude-discode-config`:
+`~/.thiscode-config`:
 ```yaml
 vault_root: /Users/tofu_mac/obsidian-ai-vault
 search:

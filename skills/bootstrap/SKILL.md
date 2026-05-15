@@ -11,7 +11,7 @@ metadata:
     requires_tools: [bash]
 ---
 
-# claude-discode bootstrap
+# thiscode bootstrap
 
 > **사용 시점**: 새 머신에 Claude Code + Discord 봇 통합 환경을 처음 세팅할 때.
 
@@ -24,7 +24,7 @@ metadata:
 1. **환경 인식** — `uname` + `/proc/version` + 패키지 매니저 자동 detect
 2. **install.sh 실행** — 8-step 자동화 (tmux + nvm + Node.js LTS + Claude Code + oh-my-tmux)
 3. **Claude Code 인증** — `claude auth login` 브라우저 OAuth
-4. **첫 봇 wizard 시동** — 추후 `/claude-discode:start` 슬래시 커맨드 (v0.2)
+4. **첫 봇 wizard 시동** — 추후 `/thiscode:start` 슬래시 커맨드 (v0.2)
 
 ---
 
@@ -45,14 +45,14 @@ agent 는 위 출력으로 OS / WSL / 패키지 매니저를 자동 판단합니
 다음 명령을 사용자에게 제시:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/treylom/claude-discode/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/treylom/ThisCode/main/install.sh | bash
 ```
 
 또는 git clone 후 로컬 실행:
 
 ```bash
-git clone https://github.com/treylom/claude-discode.git ~/code/claude-discode
-cd ~/code/claude-discode && bash install.sh
+git clone https://github.com/treylom/ThisCode.git ~/code/thiscode
+cd ~/code/thiscode && bash install.sh
 ```
 
 install.sh 가 자동으로 다음 진행:
@@ -61,7 +61,7 @@ install.sh 가 자동으로 다음 진행:
 3. nvm + Node.js LTS
 4. Claude Code 전역 설치
 5. oh-my-tmux (`gpakosz/.tmux`) 자동 install
-6. (선택) `claude-discode` 의 `tmux.conf.local` 적용 — user confirm 후 백업 자동
+6. (선택) `thiscode` 의 `tmux.conf.local` 적용 — user confirm 후 백업 자동
 7. Claude Code plugin install 안내
 8. 첫 봇 wizard 안내
 
@@ -82,7 +82,7 @@ cd ~/<project> && claude                   # 🐧 🤖
 Claude Code 안에서:
 
 ```
-/claude-discode:start                       # 🤖 wizard 진입 (v0.2 에 신설 예정)
+/thiscode:start                       # 🤖 wizard 진입 (v0.2 에 신설 예정)
 ```
 
 wizard 가 단계별 안내:
