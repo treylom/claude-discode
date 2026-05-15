@@ -4,6 +4,10 @@
 >
 > 🇰🇷 **한국어 버전**: [README.ko.md](README.ko.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (developer) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (beginner) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0)
 
+![ThisCode + ThisCodex architecture](assets/architecture.png)
+
+> **New here?** This one picture is the whole idea: run a Claude Code bot (**ThisCode**) and a Codex bot (**ThisCodex**) from **Discord**, both sharing the same Obsidian vault, memory, and rules. Start with the Setup links above — no prior setup knowledge assumed.
+
 thiscode is a single `bash install.sh` plugin that boots a working Claude Code + tmux + oh-my-tmux environment on WSL / Linux / macOS and pairs a Discord bot end-to-end — but its core value is a **4-Tier vault search fallback** (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) with **LLM model routing** (Haiku/Sonnet/Opus + Codex path). Discord is secondary; vault-first.
 
 ## 🛠️ v2.3 Zero-config Install (NEW — 2026-05-13)

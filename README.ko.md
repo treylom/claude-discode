@@ -4,6 +4,10 @@
 >
 > 🌐 **English version**: [README.md](README.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (개발자) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (초보자) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0)
 
+![ThisCode + ThisCodex 구조](assets/architecture.png)
+
+> **처음 오셨나요?** 이 그림 한 장이 전부입니다 — **디스코드**에서 Claude Code 봇(**ThisCode**)과 Codex 봇(**ThisCodex**)을 운영하고, 둘이 같은 옵시디언 볼트·메모리·규칙을 공유합니다. 사전 지식 없이 위 Setup 링크부터 따라오시면 됩니다.
+
 WSL / Linux native / macOS 어느 환경이든 `bash install.sh` 한 줄로 Claude Code + tmux + oh-my-tmux 까지 세팅하고, Discord 봇 1개 띄워 첫 대화까지 검증하는 플러그인입니다.
 
 ## 🛠️ v2.3 Zero-config 설치 (NEW — 2026-05-13)
