@@ -2,7 +2,7 @@
 
 > Claude Code + Discord bot + Codex CLI bridge plugin — designed for Fastcampus curriculum and personal vault automation.
 >
-> 🇰🇷 **한국어 버전**: [README.ko.md](README.ko.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (developer) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (beginner) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0)
+> 🇰🇷 **한국어 버전**: [README.ko.md](README.ko.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (developer) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (beginner) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0) · 📄 **[전체 정리 한 장 (HTML)](docs/SUMMARY.html)**
 
 ![ThisCode + ThisCodex architecture](assets/architecture.png)
 

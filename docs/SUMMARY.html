@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThisCode + ThisCodex — 최종 정리</title>
+<style>
+  :root{--bg:#F8F7F4;--ink:#1f2430;--mut:#5a6072;--amber:#F59E0B;--teal:#0EA5A5;--purple:#7C3AED;--green:#16A34A;--card:#fff;--line:#e7e4dd}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",Roboto,sans-serif}
+  .wrap{max-width:920px;margin:0 auto;padding:40px 22px 80px}
+  h1{font-size:30px;margin:.2em 0 .1em;letter-spacing:-.5px}
+  h2{font-size:21px;margin:2.2em 0 .6em;padding-bottom:.3em;border-bottom:2px solid var(--line)}
+  .sub{color:var(--mut);font-size:15px;margin:0 0 22px}
+  img.hero{width:100%;border-radius:14px;border:1px solid var(--line);margin:18px 0 6px;background:#fff}
+  .cap{color:var(--mut);font-size:13px;text-align:center;margin:0 0 24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:10px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:14.5px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--mut);font-weight:600}
+  code{background:#efece4;padding:1.5px 6px;border-radius:5px;font-size:13.5px;font-family:"SF Mono",Menlo,Consolas,monospace}
+  pre{background:#1f2430;color:#e9e6df;padding:14px 16px;border-radius:10px;overflow:auto;font-size:13px;line-height:1.55}
+  .ok{color:var(--green);font-weight:700}.park{color:var(--amber);font-weight:700}
+  .pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mut);margin-right:6px}
+  a{color:var(--purple);text-decoration:none}a:hover{text-decoration:underline}
+  .lead{font-size:17px}
+  .foot{color:var(--mut);font-size:13px;margin-top:40px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>ThisCode + ThisCodex</h1>
+  <p class="sub">한 작업공간, 두 에이전트 — 디스코드에서 Claude Code 봇과 Codex 봇을 함께 운영하고, 같은 옵시디언 볼트·메모리·규칙을 공유하는 재현 가능한 세팅. <b>최종 정리</b> (2026-05-16)</p>
+
+  <img class="hero" src="../assets/architecture.png" alt="ThisCode + ThisCodex 구조 인포그래픽">
+  <p class="cap">그림 한 장이 전체 개념입니다 — Discord ↔ (ThisCode = Claude Code 봇 / ThisCodex = Codex 봇) ↔ Obsidian 볼트 · 공유 메모리 · rules</p>
+
+  <p class="lead">사전 지식 없이 따라올 수 있게 정리했습니다. 프레임워크가 아니라 <b>출처가 달린 검증된 building block(구성 부품) 모음</b>입니다.</p>
+
+  <h2>1. 두 레포가 뭔가요</h2>
+  <div class="grid">
+    <div class="card"><b>ThisCode</b> <span class="pill">Claude Code 쪽</span><br>
+      <code>bash install.sh</code> 한 줄로 Claude Code + tmux + Discord 봇 환경을 세팅하는 종합 배포물. 핵심 가치는 4-Tier 볼트 검색(GraphRAG→vault-search→Obsidian CLI→ripgrep) + 모델 라우팅. 멀티 에이전트·옵시디언·rules 종합.<br>
+      <a href="https://github.com/treylom/ThisCode">github.com/treylom/ThisCode</a></div>
+    <div class="card"><b>ThisCodex</b> <span class="pill">Codex 쪽</span><br>
+      OpenAI <code>codex</code> CLI 에이전트를 Claude Code 봇과 <b>똑같이</b> 동작하게 만드는 검증된 패턴 + 설치형 skill(<code>skills/thiscodex/</code>). 두 런타임 공통 규칙(이식성·rules·멀티에이전트)도 여기.<br>
+      <a href="https://github.com/treylom/ThisCodex">github.com/treylom/ThisCodex</a></div>
+  </div>
+
+  <h2>2. 무엇이 되나 (전부 실측 검증)</h2>
+  <table>
+    <tr><th>기능</th><th>상태</th><th>방식</th></tr>
+    <tr><td>Codex/Claude CLI를 상시 디스코드 봇으로</td><td class="ok">✅</td><td><code>app-server</code>(화면 없는 실행) + 파이썬 bridge(다리) + discord.py</td></tr>
+    <tr><td>멀티 클라이언트 동일 스레드 (봇 대화를 터미널 화면으로 관전·개입)</td><td class="ok">✅</td><td>같은 app-server에 <code>codex resume &lt;스레드ID&gt; --remote</code></td></tr>
+    <tr><td>페르소나·볼트 규칙 자동 로드</td><td class="ok">✅</td><td><code>project_doc_fallback_filenames=["SOUL.md","AGENTS.md"]</code></td></tr>
+    <tr><td>봇끼리 호출 + 회의 규율 + 세션시작 주입</td><td class="ok">✅</td><td><code>bot-roster.yaml</code> 단일 기준 파일</td></tr>
+    <tr><td>전체 권한(yolo) 실행</td><td class="ok">✅</td><td><code>thread/start</code><b>와</b> <code>thread/resume</code> 둘 다 danger-full-access 전송</td></tr>
+    <tr><td>이미지 생성 / 웹 조회</td><td class="ok">✅</td><td>codex 내장 <code>image_gen</code> / <code>web.run</code></td></tr>
+    <tr><td><code>computer_use</code>/<code>browser_use</code></td><td class="park">⏸️ 보류</td><td>flag는 <code>stable,true</code>지만 <b>공식 codex 명령/서브커맨드가 없어 호출 가능 도구가 아님</b> — <a href="https://github.com/openai/codex/issues/20851">openai/codex#20851</a> 대기. 우회 없이 정직 명시</td></tr>
+  </table>
+
+  <h2>3. 구조</h2>
+  <pre>tmux 세션
+├─ 윈도우: infra
+│    codex app-server (화면 없는 LLM 런타임, ws://127.0.0.1:4222)
+│       ▲│ JSON-RPC over WebSocket
+│       │▼
+│    bot.py  ──discord.py on_message──▶ 디스코드
+│       - thread/start  (danger-full-access, approvalPolicy=never)
+│       - thread/resume (.codex-thread-id → 같은 파라미터 재전송) ← 핵심
+│       - 매 턴 &lt;channel …&gt; 주입 → codex가 mcp__discord__reply 호출
+└─ 윈도우: codex
+     codex resume "$(cat .codex-thread-id)" --remote ws://127.0.0.1:4222
+     → 운영자가 같은 대화 스레드를 보고 직접 개입 (멀티 클라이언트 동일 스레드)</pre>
+  <p style="color:var(--mut);font-size:14px">Claude Code 봇도 모양이 같습니다. 들어오는 이벤트 주입이 <code>claude</code> 내장 vs Codex는 작은 파이썬 bridge. 나가는 응답은 동일.</p>
+
+  <h2>4. 빠른 시작 (ThisCodex / Codex 쪽)</h2>
+  <ol>
+    <li>사전: <code>codex</code> CLI · <code>tmux</code> · Python3+<code>websockets</code> · Discord 플러그인 · <code>gh auth login</code></li>
+    <li><code>~/.codex/config.toml</code>에 <code>project_doc_fallback_filenames</code> + discord MCP 설정</li>
+    <li>봇 폴더에 <code>SOUL.md</code>(페르소나) + <code>AGENTS.md</code>(규칙 — <code>rules/INDEX.md</code>만 가리킴)</li>
+    <li><b>동봉된 <code>scripts/launch.sh</code> 사용</b> — 2-윈도우 런처. codex 창은 <b>항상</b> <code>codex resume &lt;브리지 스레드ID&gt; --remote</code> (빈 <code>codex --remote</code> 금지 — Troubleshooting 참고). 직접 만들지 말 것</li>
+    <li>설치형 skill: <code>~/.agents/skills/thiscodex/</code> 복사 또는 <code>codex plugin marketplace add treylom/ThisCodex</code></li>
+  </ol>
+
+  <h2>5. 왜 봇 하나가 아닌가 — 멀티 에이전트 규칙</h2>
+  <p><code>bot-roster.yaml</code>(단일 기준 파일, 세션 시작 시 주입)에 사는 규칙으로 Claude Code + Codex 에이전트가 공존합니다.</p>
+  <ul>
+    <li><b>봇끼리 호출</b>: 공용 채널에서 다른 봇 대상은 <b>반드시</b> <code>&lt;@user_id&gt;</code> mention 또는 reply (없으면 받는 봇이 조용히 버림). user_id는 봇 토큰에서 결정적 추출 — 추측 금지</li>
+    <li><b>회의 = 전용 스레드</b>: 봇 2개↑·10분↑·안건 중 2개면 전용 스레드</li>
+    <li><b>세션 시작 주입</b>: 단일 렌더러가 같은 좌표·규칙을 Claude Code 봇과 Codex 봇 양쪽에 주입</li>
+    <li><b>access 매트릭스</b>: 신규 봇 합류 시 각 봇 allowlist에 신규 봇 user_id 추가(양방향). 변경은 운영자 신뢰 경로로만</li>
+  </ul>
+
+  <h2>6. Progressive-Disclosure rules (규칙을 다 안 넣기)</h2>
+  <p>규칙을 <code>CLAUDE.md</code>/<code>soul.md</code>/메모리에 전부 front-load하면 context가 비대해져 recall이 떨어집니다. 그래서 <code>rules/INDEX.md</code> 라우터 하나만 항상 로드하고, <b>상황 트리거가 맞을 때 그 rule 파일을 그때 읽어</b> 적용합니다. 메모리는 학습 경위, rule 파일은 적용 spec(1:1 cross-link). 우선순위: <b>사용자 지시 &gt; rule 파일 &gt; 인라인 기본</b>.</p>
+
+  <h2>7. Claude Code ↔ Codex 이식성</h2>
+  <p>본인 자작 스킬은 <code>~/.agents/skills/&lt;name&gt;/SKILL.md</code>로 복사·동기화. 플러그인/프레임워크 스킬(예: superpowers)은 <b>그쪽 upstream의 자체 codex 경로로 설치</b>(hand-symlink 금지) — superpowers는 <code>obra/superpowers</code> <code>.codex-plugin/plugin.json</code> → 공식 Codex marketplace. 원칙: <b>이식 전 원본 레포의 플랫폼별 패키징을 먼저 확인</b>.</p>
+
+  <h2>8. 근거 (모든 ✅ 추적됨)</h2>
+  <ul>
+    <li>Codex 봇 동등성 + 9 디버깅 사이클: vault 회의록 <code>2026-05-15-codex-discord-bot-poc</code></li>
+    <li>멀티 클라이언트 동일 스레드: 2번째 WS 클라이언트 붙여 검증</li>
+    <li><code>computer_use</code> 미노출: <code>codex features list</code>(플래그 true) vs #20851(데스크톱 앱 번들 MCP 전용) vs 깨끗한 app-server 턴(도구목록에 브라우저/컴퓨터 도구 없음) — 6신호 수렴</li>
+    <li>resume-sandbox 버그: <code>thread/resume</code> 시 sandbox 재전송 안 하면 조용히 권한 격하 → 재전송으로 수정</li>
+    <li>codex-TUI fresh-session 버그: 런처가 <code>codex --remote</code>(빈 세션)로 뜨면 infra는 잡고 TUI는 안 잡힘 → <code>scripts/launch.sh</code> 3 불변식으로 구조적 방지(Troubleshooting)</li>
+  </ul>
+
+  <h2>9. 플랫폼 / 보안</h2>
+  <p><b>macOS / Linux / WSL2</b> 전부 지원(WSL은 실측 검증). 네이티브 윈도우는 WSL 경유. <code>computer_use</code>만 macOS 한정인데 어차피 보류 상태라 실질 기능은 3 플랫폼 동등. 본인이 통제하는 머신 + 신뢰 가능한 비공개 디스코드에서만 사용. <code>computer_use</code>가 CLI에 노출되면 신뢰 불가 텍스트를 LLM "데이터 취급" 지시로만 막지 말 것 — 코드레벨 기본거부·URL 허용목록·일회용 프로필·감사로그 필수.</p>
+
+  <p class="foot">ThisCode &amp; ThisCodex — treylom · MIT · 2026-05-16 최종 정리. 상세는 각 레포 README(영/한) + <code>docs/</code> 참조. 본 페이지는 self-contained HTML(의존성 없음) — 그대로 공유/배포 가능.</p>
+
+</div>
+</body>
+</html>

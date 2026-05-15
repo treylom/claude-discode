@@ -2,7 +2,7 @@
 
 > Claude Code + Discord 봇 + codex 호출 통합 플러그인 — 패스트캠퍼스 강의용
 >
-> 🌐 **English version**: [README.md](README.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (개발자) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (초보자) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0)
+> 🌐 **English version**: [README.md](README.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (개발자) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (초보자) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0) · 📄 **[전체 정리 한 장 (HTML)](docs/SUMMARY.html)**
 
 ![ThisCode + ThisCodex 구조](assets/architecture.png)
 
