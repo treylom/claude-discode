@@ -502,7 +502,7 @@ Write({ file_path: "{vault_absolute_path}/적절한/경로/파일명.md", conten
 # 기본 URL 정리 (기본 프리셋: 상세, 전체균형, 3-tier, 최대)
 /knowledge-manager-lite https://example.com/article
 
-# 빠른 요약 (강의용 최소 프리셋)
+# 빠른 요약 (최소 프리셋)
 /knowledge-manager-lite https://threads.net/@user/post/123 빠르게
 
 # 상세 분석

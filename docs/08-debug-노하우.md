@@ -1,6 +1,6 @@
 # 08. 디버깅 노하우 — 24+ 카테고리
 
-> thiscode 의 강의 콘텐츠 핵심 자산. vault SHARED-INDEX.md + `agent-korea-daily/디버깅.md` #1~#85 누적 회귀 DB 기반.
+> thiscode 운영 노하우 핵심 자산. vault SHARED-INDEX.md + `agent-korea-daily/디버깅.md` #1~#85 누적 회귀 DB 기반.
 
 ## 카테고리 분류
 

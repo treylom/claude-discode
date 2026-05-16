@@ -1,6 +1,6 @@
 # ThisCode
 
-> Claude Code + Discord 봇 + codex 호출 통합 플러그인 — 패스트캠퍼스 강의용
+> Claude Code + Discord 봇 + codex 호출 통합 플러그인 — 개인 vault 자동화 + 멀티에이전트 운영
 >
 > 🌐 **English version**: [README.md](README.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (개발자) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (초보자) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0) · ⚙️ **[설정 가이드](docs/SETUP-CONFIG-GUIDE.md)** (CLAUDE.md · soul.md · rules · Skills 2.0) · 📄 **[전체 정리 한 장 (HTML)](docs/SUMMARY.html)** · 🤝 **[ThisCodex](https://github.com/treylom/ThisCodex)** (Codex 동반 런타임)
 
@@ -285,9 +285,9 @@ curl -fsSL https://raw.githubusercontent.com/treylom/ThisCode/main/install.sh | 
 - Discord 봇 생성 + 페어링
 - tmux session 운영 패턴 학습
 
-### 시나리오 C. 패스트캠퍼스 강의 수강생
+### 시나리오 C. 신규 도입자 — 자기 속도로
 
-강의 수강생이 본 레포를 그대로 따라하며 자기 머신에 Claude Code + 봇 환경 셋업.
+처음 도입하는 사용자가 본 레포를 그대로 따라하며 자기 머신에 Claude Code + 봇 환경 셋업.
 
 ---
 
@@ -359,7 +359,7 @@ bash scripts/install-graphrag.sh --apply     # venv 생성 + pip install + nohup
 
 ## 🤝 기여
 
-본 레포는 패스트캠퍼스 강의용 + `treylom` 의 vault 운영 경험 종합. 
+본 레포는 `treylom` 의 vault 운영 경험 종합. 
 
 - PR / issue 환영
 - 디버깅 노하우 공유 환영

@@ -1,6 +1,6 @@
 # ThisCode
 
-> Claude Code + Discord bot + Codex CLI bridge plugin — designed for Fastcampus curriculum and personal vault automation.
+> Claude Code + Discord bot + Codex CLI bridge plugin — personal vault automation + multi-agent ops.
 >
 > 🇰🇷 **한국어 버전**: [README.ko.md](README.ko.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (developer) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (beginner) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0) · ⚙️ **[Config Guide](docs/SETUP-CONFIG-GUIDE.md)** (CLAUDE.md · soul.md · rules · Skills 2.0) · 📄 **[전체 정리 한 장 (HTML)](docs/SUMMARY.html)** · 🤝 **[ThisCodex](https://github.com/treylom/ThisCodex)** (Codex companion)
 
@@ -265,7 +265,7 @@ curl -fsSL https://raw.githubusercontent.com/treylom/ThisCode/main/install.sh | 
 
 Pair a Discord bot with a custom persona — Write `soul.md`, create the bot, run `/thiscode:start`.
 
-### Scenario C. Fastcampus curriculum learner
+### Scenario C. New adopter — self-paced
 
 Follow the wizard. The 8-Phase journey takes you from ripgrep-only to GraphRAG-with-Mode-R-preflight at your own pace.
 
@@ -380,7 +380,7 @@ thiscode includes Codex CLI as a first-class bridge layer:
 
 ## 🤝 Contributing
 
-This repo is for Fastcampus course content + the author's (`treylom`) vault operations experience.
+This repo distills the author's (`treylom`) vault operations experience.
 
 - PRs and issues welcome
 - Debugging know-how contributions welcome
