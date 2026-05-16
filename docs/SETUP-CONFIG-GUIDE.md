@@ -79,7 +79,10 @@ repo** — superpowers adds `/using-superpowers` (the interview driver).
    from the closest `templates/soul-*.md` (the persona — §2 shape). `/prompt`
    is mandatory here precisely because these two files *are* prompts (the
    bot's standing instruction); ad-hoc authoring is the exact regression §6
-   exists to stop.
+   exists to stop. Also **scaffold the bot's `rules/`** by copying the bundled
+   `rules/` skeleton (INDEX router + generic topical stubs) into the bot WD —
+   the meta file points only at `rules/INDEX.md` (§3); the stubs get filled in
+   the next step, not inlined.
 3. **Run the `/using-superpowers` advancement interview.** The AI invokes
    `/using-superpowers`, which routes to the brainstorming skill to interview
    you and refine the drafts — **one decision at a time**, not a wall of
@@ -363,7 +366,9 @@ A. Do only the three steps in "In one minute" first. Skip §1-§6 detail until s
    금지)해 얇은 `CLAUDE.md`/`AGENTS.md`(업무지시서, §1 형태) + 가장 가까운
    `templates/soul-*.md` 기반 `soul.md`(페르소나, §2 형태) 생성. 이 두
    파일이 곧 prompt(봇 상시 지시)이므로 `/prompt` 강제 — 즉흥 작성이 §6 이
-   막으려는 회귀.
+   막으려는 회귀. 동시에 **봇 `rules/` 스캐폴드**: 번들 `rules/` 스켈레톤
+   (INDEX 라우터 + generic topical 스텁)을 봇 WD 로 복사 — 메타 파일은
+   `rules/INDEX.md` 만 가리키고(§3), 스텁은 다음 단계에서 채움(inline ❌).
 3. **`/using-superpowers` 고도화 인터뷰** — `/using-superpowers` 호출 →
    brainstorming 스킬로 라우팅돼 사용자 인터뷰로 초안 정련. **한 번에 한
    결정씩**(질문 폭탄 ❌): 이 봇의 역할/범위(직접 vs 위임) · 페르소나·말투
