@@ -86,7 +86,7 @@ thiscode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 도구
 가장 쉬운 방법은 `thiscode init` wizard — vault / 도구 / 자원 자동 감지 + 8 Phase 추천.
 
 ```bash
-bash ~/.claude/plugins/thiscode/scripts/thiscode-init.sh
+bash ~/.claude/plugins/thiscode/scripts/claude-discode-init.sh
 ```
 
 wizard 가 물어보는 항목:

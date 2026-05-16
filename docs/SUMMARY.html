@@ -82,7 +82,7 @@
     <li>사전: <code>codex</code> CLI · <code>tmux</code> · Python3+<code>websockets</code> · Discord 플러그인 · <code>gh auth login</code></li>
     <li><code>~/.codex/config.toml</code>에 <code>project_doc_fallback_filenames</code> + discord MCP 설정</li>
     <li>봇 폴더에 <code>SOUL.md</code>(페르소나) + <code>AGENTS.md</code>(규칙 — <code>rules/INDEX.md</code>만 가리킴)</li>
-    <li><b>동봉된 <code>scripts/launch.sh</code> 사용</b> — 2-윈도우 런처. codex 창은 <b>항상</b> <code>codex resume &lt;브리지 스레드ID&gt; --remote</code> (빈 <code>codex --remote</code> 금지 — Troubleshooting 참고). 직접 만들지 말 것</li>
+    <li><b>동봉된 <code>ThisCodex/scripts/launch.sh</code> 사용</b> — 2-윈도우 런처. codex 창은 <b>항상</b> <code>codex resume &lt;브리지 스레드ID&gt; --remote</code> (빈 <code>codex --remote</code> 금지 — Troubleshooting 참고). 직접 만들지 말 것</li>
     <li>설치형 skill: <code>~/.agents/skills/thiscodex/</code> 복사 또는 <code>codex plugin marketplace add treylom/ThisCodex</code></li>
   </ol>
 
@@ -107,7 +107,7 @@
     <li>멀티 클라이언트 동일 스레드: 2번째 WS 클라이언트 붙여 검증</li>
     <li><code>computer_use</code> 미노출: <code>codex features list</code>(플래그 true) vs #20851(데스크톱 앱 번들 MCP 전용) vs 깨끗한 app-server 턴(도구목록에 브라우저/컴퓨터 도구 없음) — 6신호 수렴</li>
     <li>resume-sandbox 버그: <code>thread/resume</code> 시 sandbox 재전송 안 하면 조용히 권한 격하 → 재전송으로 수정</li>
-    <li>codex-TUI fresh-session 버그: 런처가 <code>codex --remote</code>(빈 세션)로 뜨면 infra는 잡고 TUI는 안 잡힘 → <code>scripts/launch.sh</code> 3 불변식으로 구조적 방지(Troubleshooting)</li>
+    <li>codex-TUI fresh-session 버그: 런처가 <code>codex --remote</code>(빈 세션)로 뜨면 infra는 잡고 TUI는 안 잡힘 → <code>ThisCodex/scripts/launch.sh</code> 3 불변식으로 구조적 방지(Troubleshooting)</li>
   </ul>
 
   <h2>9. 플랫폼 / 보안</h2>

@@ -54,7 +54,7 @@ After install: `bash scripts/healthcheck.sh` (6-phase verification: superpowers 
 git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
 
 # 2. Run the wizard — auto-detects env + recommends a Phase
-bash ~/.claude/plugins/thiscode/scripts/thiscode-init.sh
+bash ~/.claude/plugins/thiscode/scripts/claude-discode-init.sh
 
 # Or inside Claude Code:
 /thiscode:init

@@ -156,6 +156,6 @@ agent 가 회의 진행 중 `02-progress.md` 에 timeline (KST) 기록. decision
 
 ## 관련 자원
 
-- 한국어 강의 가이드: [../../docs/05-meeting-thread-protocol.md](../../docs/05-meeting-thread-protocol.md) (예정)
-- 공유 메모리 skill: [../thiscode-shared-memory/SKILL.md](../thiscode-shared-memory/SKILL.md)
+- 회의 스레드·채널 거버넌스 규약: `docs/05-meeting-thread-protocol.md` (예정 — 스트레인지 도메인, channel-governance 컨벤션 기반)
+- 공유 메모리 skill: [../shared-memory/SKILL.md](../shared-memory/SKILL.md)
 - slash command: [../../commands/open-meeting.md](../../commands/open-meeting.md)

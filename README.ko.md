@@ -43,7 +43,7 @@ Install 후: `bash scripts/healthcheck.sh` (6-phase 검증: superpowers + ripgre
 git clone https://github.com/treylom/ThisCode ~/.claude/plugins/thiscode
 
 # 2. wizard 진입 — env 자동 감지 + Phase 추천
-bash ~/.claude/plugins/thiscode/scripts/thiscode-init.sh
+bash ~/.claude/plugins/thiscode/scripts/claude-discode-init.sh
 
 # 또는 Claude Code 안에서
 /thiscode:init

@@ -18,8 +18,7 @@ order: 6
 1. vault 안 `.team-os/graphrag/` 폴더 신설 (또는 git clone 으로 가져옴)
 2. `python3 -m venv .venv`
 3. `.venv/bin/pip install -r requirements.txt`
-4. `.venv/bin/python scripts/build_index.py` (최초 한 번)
-5. `.venv/bin/python scripts/serve.py &` (FastAPI port 8400 띄움)
+4. `bash scripts/install-graphrag.sh --apply` — vendor(`vendor/graphrag/scripts/`)에서 인덱스 빌드 + `search_server` 기동(자동)
 
 ## 검증
 
@@ -30,5 +29,5 @@ curl http://127.0.0.1:8400/health
 
 ## 문제 해결
 
-- 8400 포트 충돌: `serve.py --port 8401` 후 `thiscode-search` 설정에서 endpoint 변경
+- 8400 포트 충돌: `GRAPHRAG_PORT=8401 bash scripts/install-graphrag.sh --apply` 후 `thiscode-search` 설정에서 endpoint 변경
 - Index build 실패: `--vault-dir` 명시 + frontmatter 검증 (`type:` 누락 노트 점검)

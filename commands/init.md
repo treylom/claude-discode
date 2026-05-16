@@ -26,7 +26,7 @@ vault 상태 / OS / 도구 / 자원 감지 → 8 Phase progressive journey 추�
 
 ## Flow
 
-1. `bash $CLAUDE_DISCODE_HOME/scripts/thiscode-init.sh` 실행 — env detect + Phase 추천 + interactive prompt
+1. `bash $CLAUDE_DISCODE_HOME/scripts/claude-discode-init.sh` 실행 — env detect + Phase 추천 + interactive prompt
 2. 사용자가 y 선택한 Phase 마다 해당 install script dispatch:
    - phase-2-cli-install → `scripts/install-obsidian-cli.sh`
    - phase-3-mcp → `scripts/install-vault-search.sh --apply`
