@@ -1,6 +1,6 @@
 ---
 name: search-lite
-description: "vault 통합 검색 (경량, 배포용) — Obsidian CLI/MCP/Grep 3-Tier Cascade. GraphRAG 의존 없음"
+description: Use when searching the vault in a minimal or distributed environment without GraphRAG — Obsidian CLI / MCP / Grep 3-Tier cascade.
 allowedTools: Bash, Read, Glob, Grep, mcp__obsidian__*
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: knowledge-manager-lite
-description: 지식 관리 에이전트 (경량, 배포용) - AskUserQuestion 없이 키워드 기반 자동 프리셋. 카카오/모바일 알림 제거
+description: Use when running knowledge management in a minimal, distributed, or headless environment — keyword-based auto-preset, no AskUserQuestion, no kakao/mobile notifications.
 allowedTools: Read, Write, Bash, Glob, Grep, mcp__obsidian__*, mcp__notion__*, mcp__playwright__*, mcp__hyperbrowser__*, WebFetch
 ---
 

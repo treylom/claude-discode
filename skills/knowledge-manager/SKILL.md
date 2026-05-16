@@ -1,6 +1,6 @@
 ---
 name: knowledge-manager
-description: 지식 관리 에이전트 - 단일 에이전트 순차 처리 (Agent Teams 미지원 환경용)
+description: Use when the user asks to organize or save researched content into the Obsidian vault in an environment without Agent Teams — single-agent sequential KM pipeline (extract → analyze → structure → store → link).
 allowedTools: Read, Write, Bash, Glob, Grep, mcp__obsidian__*, mcp__notion__*, mcp__playwright__*, mcp__hyperbrowser__*, WebFetch, AskUserQuestion
 ---
 

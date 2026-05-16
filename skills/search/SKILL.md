@@ -1,6 +1,6 @@
 ---
 name: search
-description: "vault 통합 검색 — GraphRAG 기반, quick(즉답) / deep(분석) 답변 깊이 선택"
+description: Use when the user asks to search the vault or find notes by concept — GraphRAG-backed unified search with quick (direct answer) or deep (analysis) depth.
 allowedTools: Bash, Read, Glob, Grep
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: init
-description: 환경 감지 + 8 Phase progressive install wizard — thiscode 첫 install 시 vault 상태 / 도구 / 자원 자동 detect 후 추천. Use when user runs /thiscode:init or first-time install.
+description: Use when the user runs /thiscode:init or first-time installs thiscode — detects env (vault state / tools / resources) and recommends an 8-Phase progressive install.
 allowedTools: Bash, AskUserQuestion, Read
 ---
 

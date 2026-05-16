@@ -1,6 +1,6 @@
 ---
 name: knowledge-manager-at
-description: 지식 관리 에이전트 (Agent Teams) - 풀스케일 병렬 처리 (Category Lead + RALPH + DA)
+description: Use when the user asks to organize or save knowledge into the vault and Agent Teams is available — full parallel KM (Category Lead + RALPH workers + DA cross-check).
 allowedTools: Task, Read, Write, Bash, Glob, Grep, mcp__obsidian__*, mcp__notion__*, mcp__playwright__*, mcp__hyperbrowser__*, WebFetch, AskUserQuestion, TeamCreate, TeamDelete, TaskCreate, TaskUpdate, TaskList, TaskGet, SendMessage
 ---
 
