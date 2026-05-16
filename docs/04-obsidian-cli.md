@@ -176,5 +176,5 @@ claude mcp list 2>&1 | grep -i obsidian
 - vault `<vault>/.claude/skills/vault-navigation.md` — vault 구조 + 태그 체계
 - vault `<vault>/.claude/skills/km-archive-reorganization.md` — Obsidian CLI 3-Tier 폴백 패턴 예시
 - vault `<vault>/.claude-memory/machine-mac/project_search_fallback_mac_weak.md` — Mac GraphRAG 약점
-- thiscode skill: [../skills/thiscode-bootstrap/SKILL.md](../skills/thiscode-bootstrap/SKILL.md)
+- thiscode skill: [../skills/bootstrap/SKILL.md](../skills/bootstrap/SKILL.md)
 - 메인 wizard: [../commands/start.md](../commands/start.md)

@@ -7,7 +7,7 @@ allowedTools: Bash, Read, Glob, Grep, mcp__vault-search__*
 
 $ARGUMENTS
 
-Invokes the `thiscode-search` skill which runs Tier 1→4 per `contracts/search-fallback-4tier.md`.
+Invokes the `search` skill which runs Tier 1→4 per `contracts/search-fallback-4tier.md`.
 
 ## Flags
 - `--quick` / `-q` → 3-5줄 즉답

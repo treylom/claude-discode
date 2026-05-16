@@ -29,5 +29,5 @@ curl http://127.0.0.1:8400/health
 
 ## 문제 해결
 
-- 8400 포트 충돌: `GRAPHRAG_PORT=8401 bash scripts/install-graphrag.sh --apply` 후 `thiscode-search` 설정에서 endpoint 변경
+- 8400 포트 충돌: `GRAPHRAG_PORT=8401 bash scripts/install-graphrag.sh --apply` 후 `search` 설정에서 endpoint 변경
 - Index build 실패: `--vault-dir` 명시 + frontmatter 검증 (`type:` 누락 노트 점검)

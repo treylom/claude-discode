@@ -357,10 +357,10 @@ The `--apply` mode (v2.3):
 
 ### Skills (agentskills.io-standard)
 
-- `thiscode-init` — v2.1 onboarding wizard (env detect + 8-Phase recommend)
-- `thiscode-bootstrap` — installer wizard helper
-- `thiscode-shared-memory` — 4-tier memory policy + Read-before-Edit
-- `thiscode-meetings` — 4-file meeting protocol + SOURCE FACT cross-check + Discord REST API threads
+- `init` — v2.1 onboarding wizard (env detect + 8-Phase recommend)
+- `bootstrap` — installer wizard helper
+- `shared-memory` — 4-tier memory policy + Read-before-Edit
+- `meetings` — 4-file meeting protocol + SOURCE FACT cross-check + Discord REST API threads
 - `thiscode-codex-bridge` — Codex CLI subprocess + `/tofu-at-codex` v2.2 reference
 - `thiscode-km-at` — km-at Mode R preflight (read-only diagnostics + dry-run apply)
 

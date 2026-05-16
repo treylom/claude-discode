@@ -196,5 +196,5 @@ Lead (오케스트레이터·하위 봇) 가 다음 단계 진입 시 직전 산
 
 - vault `<vault>/.claude-memory/shared/SHARED-INDEX.md` (24+ 카테고리 인덱스)
 - vault `<vault>/agent-korea-daily/디버깅.md` (#1~#85 누적 케이스 DB, AK-Tofu 파이프라인 specific)
-- skill: [../skills/thiscode-bootstrap/SKILL.md](../skills/thiscode-bootstrap/SKILL.md)
-- self-check 표: [../skills/thiscode-bootstrap/references/REFERENCE.md] (예정)
+- skill: [../skills/bootstrap/SKILL.md](../skills/bootstrap/SKILL.md)
+- self-check 표: [../skills/bootstrap/references/REFERENCE.md] (예정)

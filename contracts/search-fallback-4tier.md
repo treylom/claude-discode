@@ -6,7 +6,7 @@ date: 2026-05-13
 
 # 4-Tier Search Fallback Contract
 
-Both `thiscode-search` (plugin) and `.claude/commands/search.md` (vault) MUST follow this Tier order and interface.
+Both `search` (plugin) and `.claude/commands/search.md` (vault) MUST follow this Tier order and interface.
 
 ## Tier Order (fixed — drift forbidden)
 

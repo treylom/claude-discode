@@ -149,6 +149,6 @@ Q: 공유 메모리 위치 어떻게 하실래요?
 
 ## 관련 자원
 
-- skill: [../skills/thiscode-shared-memory/SKILL.md](../skills/thiscode-shared-memory/SKILL.md)
+- skill: [../skills/shared-memory/SKILL.md](../skills/shared-memory/SKILL.md)
 - 회의실: [05-meeting-thread-protocol.md] (예정)
 - vault 실 예시: `<vault>/.claude-memory/shared/SHARED-INDEX.md`

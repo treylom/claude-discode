@@ -10,7 +10,7 @@ metadata:
     tags: [Memory, BotOrchestration]
 ---
 
-# thiscode-shared-memory
+# shared-memory
 
 > **사용 시점**: 봇 2개 이상 운영 + 머신 1개 이상 + 회의 진행 시. 공유 메모리를 어디 두고 누가 쓰는지 결정해야 할 때.
 
@@ -74,7 +74,7 @@ cross-machine sync 시 본 폴더는 제외 (rsync exclude pattern).
 
 ## T3 — 회의실 (project-meetings)
 
-thiscode-meetings skill 의 4-file 표준 적용. 자세히는 그 skill 참조.
+meetings skill 의 4-file 표준 적용. 자세히는 그 skill 참조.
 
 ## T4 — per-bot WD memory
 
@@ -124,4 +124,4 @@ SessionStart hook 으로 본 인덱스 자동 주입.
 
 - 한국어 강의 가이드: [../../docs/03-shared-memory.md](../../docs/03-shared-memory.md)
 - vault SHARED-INDEX 실 예시: `<vault>/.claude-memory/shared/SHARED-INDEX.md`
-- 회의실 skill: [../thiscode-meetings/SKILL.md](../thiscode-meetings/SKILL.md)
+- 회의실 skill: [../meetings/SKILL.md](../meetings/SKILL.md)

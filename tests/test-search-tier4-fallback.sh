@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Test: when only ripgrep is available, thiscode-search produces Tier 4 results with notice.
+# Test: when only ripgrep is available, search produces Tier 4 results with notice.
 set -e
 TMPDIR=$(mktemp -d)
 mkdir -p "$TMPDIR/vault"
@@ -11,7 +11,7 @@ type: atomic
 MCP는 Model Context Protocol 의 약자다.
 MD
 
-DISP="$HOME/code/thiscode/skills/thiscode-search/references/tier-implementations.md.sh"
+DISP="$HOME/code/thiscode/skills/search/references/tier-implementations.md.sh"
 
 CLAUDE_DISCODE_VAULT="$TMPDIR/vault" \
   CLAUDE_DISCODE_FORCE_TIER=4 \

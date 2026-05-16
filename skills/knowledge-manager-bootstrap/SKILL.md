@@ -8,7 +8,7 @@ allowedTools: Bash, AskUserQuestion, Write, Read
 
 ## Trigger
 - Slash: `/thiscode:km-bootstrap`
-- Failure escalation from `thiscode-search` when all 4 Tiers fail
+- Failure escalation from `search` when all 4 Tiers fail
 
 ## Workflow
 
@@ -22,7 +22,7 @@ allowedTools: Bash, AskUserQuestion, Write, Read
 5. Write `~/.thiscode-config` with selected vault_root.
 6. AskUserQuestion 1회: install matrix (Obsidian only / +vault-search MCP / +GraphRAG (full)).
 7. Run corresponding `install-*.sh --apply` scripts in order.
-8. Verify by calling `thiscode-search` with sample query.
+8. Verify by calling `search` with sample query.
 9. Print install summary + next-step suggestions.
 
 ## Config file format

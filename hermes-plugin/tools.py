@@ -16,7 +16,7 @@ from pathlib import Path
 PLUGIN_DIR = Path(__file__).resolve().parent
 REPO_ROOT = PLUGIN_DIR.parent
 
-SEARCH_DISPATCHER = REPO_ROOT / "skills" / "thiscode-search" / "references" / "tier-implementations.md.sh"
+SEARCH_DISPATCHER = REPO_ROOT / "skills" / "search" / "references" / "tier-implementations.md.sh"
 KM_LITE_CORE = REPO_ROOT / "skills" / "thiscode-km-lite" / "references" / "extract-and-classify.md.sh"
 DRIFT_CHECK = REPO_ROOT / "scripts" / "km-version.sh"
 

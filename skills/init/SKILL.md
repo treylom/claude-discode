@@ -4,7 +4,7 @@ description: 환경 감지 + 8 Phase progressive install wizard — thiscode 첫
 allowedTools: Bash, AskUserQuestion, Read
 ---
 
-# thiscode-init
+# init
 
 > obsidian-cli → GraphRAG 점진 진행을 학생이 자연스럽게 따라가도록 wizard 형 install 진입점 (사용자 v2.1 spec).
 
@@ -30,7 +30,7 @@ allowedTools: Bash, AskUserQuestion, Read
 
 ## Non-interactive (CI/headless)
 
-- `thiscode-init.sh --non-interactive` → Phase 추천만, install skip
+- `init.sh --non-interactive` → Phase 추천만, install skip
 - `CLAUDE_DISCODE_INIT_AUTO=phase-X,phase-Y` env → auto install (prompt skip)
 
 ## 옵션 언제나 (사용자 spec Q2)

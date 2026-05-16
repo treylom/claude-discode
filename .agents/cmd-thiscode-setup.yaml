@@ -1,5 +1,5 @@
 name: cmd-thiscode-setup
-description: Slash command /thiscode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes thiscode-bootstrap skill.
+description: Slash command /thiscode:setup — interactive bootstrap wizard (Tier 1-4 install choices), invokes bootstrap skill.
 version: 1.0.0
 provides_commands:
   - /thiscode:setup

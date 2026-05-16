@@ -39,7 +39,7 @@ Compares plugin contracts vs the vault mirror at `<vault>/.claude/reference/cont
 
 ## Cross-harness invocation reference
 
-- **Claude Code**: `Skill(thiscode-search)`
+- **Claude Code**: `Skill(search)`
 - **Hermes Agent**: `claude_discode_search` tool (auto-registered via `hermes-plugin/__init__.py`)
 - **Gemini CLI**: read `GEMINI.md` on startup; skills auto-discovered from `skills/`
 - **OpenCode / Goose / Cursor**: standard agentskills.io SKILL.md frontmatter (`name` + `description`) makes them visible

@@ -10,7 +10,7 @@ metadata:
     tags: [Meetings, Discord, BotOrchestration]
 ---
 
-# thiscode-meetings
+# meetings
 
 > **사용 시점**: 봇 2개 이상이 협업하는 회의·brainstorming 진행 시. agenda + 10분 이상 cap + 영구 기록 필요.
 
@@ -156,6 +156,6 @@ agent 가 회의 진행 중 `02-progress.md` 에 timeline (KST) 기록. decision
 
 ## 관련 자원
 
-- 회의 스레드·채널 거버넌스 규약: `docs/05-meeting-thread-protocol.md` (예정 — 스트레인지 도메인, channel-governance 컨벤션 기반)
+- 회의 스레드·채널 거버넌스 규약: [../../docs/05-meeting-thread-protocol.md](../../docs/05-meeting-thread-protocol.md)
 - 공유 메모리 skill: [../shared-memory/SKILL.md](../shared-memory/SKILL.md)
 - slash command: [../../commands/open-meeting.md](../../commands/open-meeting.md)

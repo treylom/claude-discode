@@ -11,7 +11,7 @@ YAML 은 의미 단위로 5 block 으로 나뉩니다.
 `name`, `description`, `version`, `license`, `homepage` — Claude / Cursor / Aider 모두 인식 가능한 portable metadata.
 
 ```yaml
-name: thiscode-search
+name: search
 description: 4-Tier vault search ...
 version: 1.0.0
 license: MIT

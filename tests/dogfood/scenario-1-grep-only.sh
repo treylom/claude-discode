@@ -4,7 +4,7 @@ set -e
 
 ROOT="${CLAUDE_DISCODE_HOME:-/thiscode}"
 VAULT="${CLAUDE_DISCODE_VAULT:-$ROOT/sample-vault}"
-DISP="$ROOT/skills/thiscode-search/references/tier-implementations.md.sh"
+DISP="$ROOT/skills/search/references/tier-implementations.md.sh"
 
 if [ ! -d "$VAULT" ]; then
   echo "scenario-1 SKIP: sample-vault not present at $VAULT (run Phase A first)"
