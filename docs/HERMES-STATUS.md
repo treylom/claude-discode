@@ -24,7 +24,7 @@ The `hermes-plugin/` registers thiscode tools into a Hermes Agent host. Its
 | `handle_search` / `cmd_search` (`claude_discode_search`) | ⏸️ deferred | needs `skills/search/references/tier-implementations.md.sh` |
 | `handle_ingest` / `cmd_km` (`claude_discode_ingest`) | ⏸️ deferred | needs `skills/knowledge-manager-lite/references/extract-and-classify.md.sh` |
 
-**Root cause (verified 2026-05-16, 손석희 cross-validated):** thiscode skills
+**Root cause (verified 2026-05-16, independent cross-validation):** thiscode skills
 are **LLM-instruction documents** (`SKILL.md` + `references/*.md`), not
 executable shell dispatchers. The literate-bash `*.md.sh` dispatchers the
 Hermes handlers shell out to were never vendored to the public repo (they
