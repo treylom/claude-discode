@@ -2,7 +2,7 @@
 
 Wires the thiscode 4-Tier search + KM ingestion tools into Hermes Agent.
 Bridges to the bash-based dispatcher in ../skills/search/references/
-and the km-lite variant in ../skills/thiscode-km-lite/references/ via subprocess.
+and the km-lite variant in ../skills/knowledge-manager-lite/references/ via subprocess.
 """
 
 from . import schemas, tools

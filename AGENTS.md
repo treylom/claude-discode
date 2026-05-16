@@ -12,7 +12,7 @@
 
 | Layer | Target | Entry | Status |
 |---|---|---|---|
-| **L1** | agentskills.io standard | `skills/thiscode-*/SKILL.md` | shipped (v0.1.0) |
+| **L1** | agentskills.io standard | `skills/*/SKILL.md` | shipped (v0.1.0) |
 | **L2** | Hermes Agent | `hermes-plugin/plugin.yaml` + `__init__.py` | shipped (v0.2.0) |
 | **L3** | Gemini CLI / npm | `gemini-extension.json` + `GEMINI.md` + `package.json` | shipped (v0.2.0) |
 | **L3b** | Claude Code marketplace | `.claude-plugin/plugin.json` + `marketplace.json` | shipped (v0.1.0) |

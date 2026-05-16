@@ -8,7 +8,7 @@ INPUT_CONTENT="# Sample Article\n\nThis is the article body about MCP."
 
 CLAUDE_DISCODE_VAULT="$TMPDIR/vault" \
   CLAUDE_DISCODE_NO_OBSIDIAN=1 \
-  bash "$HOME/code/thiscode/skills/thiscode-km-lite/references/extract-and-classify.md.sh" \
+  bash "$HOME/code/thiscode/skills/knowledge-manager-lite/references/extract-and-classify.md.sh" \
     --content "$INPUT_CONTENT" --source-url "https://example.com/x" --title "Sample"
 
 NEW=$(find "$TMPDIR/vault" -name '*.md' 2>/dev/null | head -1)

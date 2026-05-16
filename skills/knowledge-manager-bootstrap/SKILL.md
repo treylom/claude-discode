@@ -4,7 +4,7 @@ description: One-shot environment installer for the 4-Tier search stack — inst
 allowedTools: Bash, AskUserQuestion, Write, Read
 ---
 
-# thiscode-km-bootstrap
+# knowledge-manager-bootstrap
 
 ## Trigger
 - Slash: `/thiscode:km-bootstrap`

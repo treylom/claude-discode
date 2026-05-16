@@ -175,6 +175,7 @@ thiscode bundles the author's vault operations playbook:
 
 - [03-shared-memory.md](docs/03-shared-memory.md) — **4-tier shared memory** (T1 git-tracked / T2 machine-specific / T3 project-meetings / T4 per-bot WD)
 - [04-obsidian-cli.md](docs/04-obsidian-cli.md) — **Obsidian CLI setup** (Mac brew / WSL Windows native / Linux snap·flatpak·deb) + 3-Tier fallback (CLI → MCP → Write/Read/Grep) + known bugs / workarounds
+- [05-meeting-thread-protocol.md](docs/05-meeting-thread-protocol.md) — **meeting thread & channel governance** (new topic = new thread / archive final deliverables only / cross-machine = multiverse)
 - [06-claude-code-server.md](docs/06-claude-code-server.md) — **Claude Code server modes** (`claude -p` headless + MCP server + tmux session vs headless split pattern)
 - [08-debug-노하우.md](docs/08-debug-노하우.md) — **24+ debugging categories** (Workflow / Code Review / Vault Path / Meeting protocol / Security / Time / LLM Prompt / Schedule / Plugins / External Apps / Cross-bot SoP) — Korean only, dense operational learnings
 
@@ -361,8 +362,8 @@ The `--apply` mode (v2.3):
 - `bootstrap` — installer wizard helper
 - `shared-memory` — 4-tier memory policy + Read-before-Edit
 - `meetings` — 4-file meeting protocol + SOURCE FACT cross-check + Discord REST API threads
-- `thiscode-codex-bridge` — Codex CLI subprocess + `/tofu-at-codex` v2.2 reference
-- `thiscode-km-at` — km-at Mode R preflight (read-only diagnostics + dry-run apply)
+- `codex-exec-bridge` — Codex CLI subprocess + `/tofu-at-codex` v2.2 reference
+- `knowledge-manager-at` — km-at Mode R preflight (read-only diagnostics + dry-run apply)
 
 ### Codex CLI bridge
 

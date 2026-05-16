@@ -15,7 +15,7 @@ $ARGUMENTS
    - "아카이브 정리" / "카테고리 재편" / "그래프 구축" keywords → variant = at
    - else → variant = lite (Phase 1·2 default)
 3. Invoke the matching skill via `Skill` tool:
-   - `thiscode-km-lite` / `thiscode-km-at` / `thiscode-km-plain`
+   - `knowledge-manager-lite` / `knowledge-manager-at` / `knowledge-manager-plain`
 4. If skill emits "config missing" → invoke `thiscode-km-bootstrap`.
 
 ## Examples

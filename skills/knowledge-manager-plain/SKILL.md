@@ -4,7 +4,7 @@ description: Plain knowledge manager — same as km-lite but never asks the user
 allowedTools: Read, Write, WebFetch, Bash, Glob, Grep
 ---
 
-# thiscode-km-plain
+# knowledge-manager-plain
 
 > Implements Mode I from `contracts/km-mode-spec.md`. Plain variant per `contracts/km-variant-matrix.md` (no AskUserQuestion).
 

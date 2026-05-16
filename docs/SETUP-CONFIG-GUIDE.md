@@ -103,6 +103,8 @@ Full convention (problem, pattern, how-to-add, Codex variant):
 — the canonical copy lives in the ThisCodex companion repo. Read it once; do
 not duplicate it here.
 
+회의 스레드·채널·대화기록 보관 거버넌스: [05-meeting-thread-protocol.md](05-meeting-thread-protocol.md) (정책 SoT = vault rules/channel-governance.md — 새 주제=새 스레드 / 보관=최종 산출만 / 기기간=멀티버스).
+
 Minimal worked example — a bot that must always reply via a channel tool:
 
 `rules/INDEX.md` (router — the only file the meta file points at):
