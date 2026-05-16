@@ -51,7 +51,9 @@ jobs:
         run: bash scripts/install-ripgrep.sh --apply
 
       - name: install-graphrag.sh --apply
-        run: bash scripts/install-graphrag.sh --apply
+        # CI runners ~7GB < 8GB RAM-gate(#7). RAM 권고는 end-user 대상이고
+        # CI 는 install 경로 자체를 검증하므로 GRAPHRAG_FORCE=1 로 override.
+        run: GRAPHRAG_FORCE=1 bash scripts/install-graphrag.sh --apply
 
       - name: Show venv pip list (debug visibility)
         run: |
