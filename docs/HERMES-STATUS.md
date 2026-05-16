@@ -1,6 +1,6 @@
 # Hermes plugin — status: partial / deferred
 
-> Decision: 재경님 2026-05-16, option ② (redesign to current structure +
+> Decision: maintainer, 2026-05-16, option ② (redesign to current structure +
 > document deferred — do **not** reconstruct the missing dispatchers).
 
 ## TL;DR
