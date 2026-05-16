@@ -163,6 +163,26 @@ imperative form). Walk every box manually before a push. Also grep the diff
 for hardcoded user paths / secrets before any push (see the privacy lesson in
 this repo's history) — never publish without that scan.
 
+## §6 — Force-invoke the `/prompt` skill
+
+The bundled `skills/prompt/` skill must be **mandatorily invoked** for any
+prompt-authoring work (writing/refining a prompt, GPTs/Gems instructions,
+fact-check/research/image prompting) — never free-hand a prompt.
+
+Wire the enforcement into the bot's config so it cannot be skipped:
+
+- In `CLAUDE.md` / `AGENTS.md` (the always-loaded meta), add one line under the
+  rules pointer: *"Prompt-authoring tasks → MUST invoke the `prompt` skill
+  before producing any prompt (no ad-hoc prompts)."*
+- Or add a `rules/INDEX.md` row: `Producing a prompt for a model | prompt-skill.md | Invoke skills/prompt first; never hand-roll`.
+- In `soul.md`, the forced-persona self-check table is the right place for a
+  hard rule (see `templates/soul-custom.md` — a `/prompt` enforcement line is
+  included there).
+
+Why a hard rule: prompt quality regresses to ad-hoc without enforced routing;
+the skill's frameworks (IFCN fact-check base, 5-stage image, GPTs/Gems
+structure) are only applied if the skill is actually entered.
+
 ## See also
 
 - [SETUP.md](SETUP.md) — install (this guide is what comes *after*)

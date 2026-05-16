@@ -63,7 +63,7 @@ thiscode v2.3 가 의존하는 모든 외부 패키지 / repo 의 출처 / licen
 
 GraphRAG core 21 file (`.py` 18 + `.sh` 2 + `requirements.txt` 1) = obsidian-ai-vault `.team-os/graphrag/scripts/` 와 동등 vendor 박제.
 
-- 출처: ë¹ê³µê° vault `.team-os/graphrag/scripts/` (private vault, 2026-05-13 snapshot)
+- 출처: 비공개 vault `.team-os/graphrag/scripts/` (private vault, 2026-05-13 snapshot)
 - License: thiscode 본 repo license (MIT) 와 동등 (treylom own)
 - Update 정책: pin version (vault SoT 변경 시 manual sync, v2.4 cycle 안 변경)
 
@@ -82,3 +82,12 @@ GraphRAG core 21 file (`.py` 18 + `.sh` 2 + `requirements.txt` 1) = obsidian-ai-
 ---
 
 본 매트릭스 변경 시: spec doc §5 동시 update. CI smoke test 안 `pip install -r vendor/graphrag/scripts/requirements.txt` 자동 검증.
+
+## Vendored prompt skill (skills/prompt/)
+
+`/prompt` 생태계 = 공개 upstream **github.com/treylom/prompt-engineering-skills** (MIT) vendor 박제.
+
+- 출처: github.com/treylom/prompt-engineering-skills (public, MIT — see skills/prompt/LICENSE)
+- 반입: commands/prompt.md→references/prompt-generator.md, skills/prompt-engineering-guide.md, examples/, instructions/. **commands/prompt-sync.md 제외** (메인테이너 개인 배포 스크립트·경로, 배포자 무관)
+- Context-Engineering 기반: Muratcan Koylan, Agent-Skills-for-Context-Engineering
+- Update 정책: pin (upstream 변경 시 manual re-vendor + PII 재검증)
