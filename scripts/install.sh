@@ -90,6 +90,9 @@ if [[ ${#FAILED[@]} -eq 0 ]]; then
   fi
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] install.sh DONE" >> "$LOG"
   echo "Next: bash $SCRIPT_DIR/healthcheck.sh"
+  echo "Then (configure the bot's brain — recommended, no hand-writing):"
+  echo "  docs/SETUP-CONFIG-GUIDE.md §0 guided onboarding"
+  echo "  (designate workspace → superpowers → scan → /prompt draft → /using-superpowers interview)"
   exit 0
 else
   echo "✗ required FAIL: ${FAILED[*]}"

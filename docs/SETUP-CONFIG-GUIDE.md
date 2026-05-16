@@ -19,6 +19,96 @@ New here and not a developer? Think of your bot as a **new teammate**:
 
 You do three things: (1) put one job sheet, (2) pick a personality template, (3) point at the handbook. That is the whole setup. Everything below is just the detail of those three.
 
+> **Don't want to hand-write any of it?** Run **§0 guided onboarding** — the
+> installing AI designates your workspace, installs the skill plugin, scans the
+> workspace, and drafts the three files *for* you via an interview. §1-§6 then
+> become reference, not homework.
+
+## §0 — Guided onboarding (first run — recommended)
+
+This is the path for a non-developer. The installing AI runs it **once**, and
+the output is a finished `CLAUDE.md` + `soul.md` per bot — produced by the
+bundled `/prompt` skill and a short `/using-superpowers` interview, not
+hand-written. §1-§6 below are the manual equivalent if you'd rather author by
+hand or audit what the AI produced.
+
+### Prerequisites (do these first, in order)
+
+**0a. Designate the workspace.** The installing AI asks you, in plain words:
+
+- *"Which folder is your Obsidian vault / overall workspace?"* — the root the
+  bots search and store into (**working directory** = 작업 폴더, the folder a
+  bot "lives in").
+- *"For each bot you want, what is its working directory?"* — one bot = one
+  working directory; that folder is where that bot's `CLAUDE.md` + `soul.md`
+  go.
+
+The AI can pre-fill candidates instead of guessing —
+`bash scripts/claude-discode-init.sh --detect-only` autodiscovers a likely
+vault path + note count + RAM/disk; the AI shows it and you confirm or
+correct. A wrong vault root mis-scopes every later step, so this is asked
+**before** anything is scanned or written.
+
+**0b. Install the superpowers plugin** (so the `/prompt` and
+`/using-superpowers` skills the next steps need are loadable — a **plugin** =
+플러그인, an add-on bundle of skills):
+
+```bash
+bash scripts/install-superpowers.sh --apply   # wraps: claude plugin install superpowers@claude-plugins-official
+bash scripts/install-superpowers.sh --check    # verify (exit 0 = present)
+```
+
+`install.sh --apply` already runs this first, so if you ran the top-level
+installer it is done. The bundled `skills/prompt/` itself ships **inside this
+repo** — superpowers adds `/using-superpowers` (the interview driver).
+
+### The guided flow (the installing AI executes this)
+
+1. **Scan the designated workspace.** For the vault root and each bot working
+   directory, the AI reads: folder structure (top ~2 levels), any existing
+   `CLAUDE.md`/`AGENTS.md`/`soul.md`, a *sample* of notes for dominant topics
+   (it does not slurp the whole vault), and which Discord channel/role each
+   bot will own. This grounds the draft in your *actual* workspace, not a
+   generic template.
+2. **Auto-invoke `/prompt` to draft the two meta files.** For each bot working
+   directory, the AI **must** invoke the bundled `skills/prompt/` skill
+   (force-invoke — see §6; never hand-roll) to produce: a thin
+   `CLAUDE.md`/`AGENTS.md` (the job sheet — §1 shape) and a `soul.md` seeded
+   from the closest `templates/soul-*.md` (the persona — §2 shape). `/prompt`
+   is mandatory here precisely because these two files *are* prompts (the
+   bot's standing instruction); ad-hoc authoring is the exact regression §6
+   exists to stop.
+3. **Run the `/using-superpowers` advancement interview.** The AI invokes
+   `/using-superpowers`, which routes to the brainstorming skill to interview
+   you and refine the drafts — **one decision at a time**, not a wall of
+   questions: this bot's role/scope (owns vs. delegates) · persona & voice
+   (template, signature, forced self-check lines) · model id (a real id your
+   harness exposes — not invented) · Discord surface (channel/thread, mention
+   id, meeting-thread governance) · vault scope (search/write paths;
+   Obsidian-present vs. Obsidian-less). Answers are written back into the
+   drafts; the meta file is then pointed at `rules/INDEX.md` (rules are never
+   inlined — §3).
+4. **Verify before declaring done.** `soul.md` frontmatter valid · signature
+   line present · meta file points *only* at `rules/INDEX.md` · `/prompt` was
+   actually entered (not free-handed). Then you continue with the normal §4
+   "how to ask" flow.
+
+**Obsidian-less path:** if at 0a you opt out of Obsidian, steps 0b-3 still
+run, but vault scope is marked *connectivity-only* and the AI tells you
+memory / internal-search quality is **not guaranteed** (mirrors the README
+"Before you start").
+
+### Force-invoke wiring (so a bot actually runs §0 on first setup)
+
+So this is not skippable, wire it the same way §6 wires `/prompt`:
+
+- In `CLAUDE.md`/`AGENTS.md`, under the rules pointer, one line: *"First run /
+  unconfigured working dir → MUST run SETUP-CONFIG-GUIDE §0 guided onboarding
+  (designate workspace → install superpowers → scan → `/prompt` draft →
+  `/using-superpowers` interview) before normal work."*
+- Or a `rules/INDEX.md` row:
+  `First run / WD has no soul.md | onboarding.md | Run SETUP-CONFIG-GUIDE §0: workspace → superpowers → scan → /prompt → /using-superpowers`
+
 ## The three config surfaces (and load order)
 
 A thiscode bot composes its behavior from three files, loaded in this order:
@@ -230,6 +320,63 @@ A. Do only the three steps in "In one minute" first. Skip §1-§6 detail until s
 세 설정 표면과 **로딩 순서**, 각 작성법을 묶어 줍니다. 깊은 내용은 기존
 템플릿·스펙 문서로 링크(필요할 때만 펼치는 progressive disclosure — 점진적
 노출 — 방식, rules 시스템과 동일 철학). 어려운 영어 용어는 첫 등장에 풀이.
+
+### §0 가이드 온보딩 (첫 실행 — 권장, 비개발자용 경로)
+
+직접 안 쓰고 싶으면 이 경로. 설치하는 AI 가 **한 번** 실행하고, 결과물은
+봇별 완성된 `CLAUDE.md` + `soul.md` — 번들된 `/prompt` 스킬과 짧은
+`/using-superpowers` 인터뷰가 만들어 줍니다(손으로 안 씀). 아래 §1~§6 은
+손수 작성/감수하고 싶을 때의 수동 대응판.
+
+**선행(이 순서로 먼저):**
+
+- **0a. 작업공간 지정.** 설치 AI 가 평이하게 물어봄: ① "옵시디언 볼트 /
+  전체 작업 폴더가 어디예요?"(봇이 검색·저장하는 루트 — **working
+  directory** = 작업 폴더) ② "원하는 봇마다 작업 폴더가 어디예요?"(봇 1개 =
+  작업 폴더 1개, 그 폴더에 그 봇의 `CLAUDE.md`+`soul.md` 가 들어감). 추측
+  대신 `bash scripts/claude-discode-init.sh --detect-only` 로 볼트 후보·노트
+  수·RAM/디스크 자동탐지 → 보여주고 사용자가 확인/수정. 볼트 루트가 틀리면
+  이후 전 단계가 어긋나므로 **스캔·작성 전에** 먼저 물어봄.
+- **0b. superpowers 플러그인 설치**(다음 단계가 쓰는 `/prompt`·
+  `/using-superpowers` 스킬 로드용 — **plugin** = 플러그인, 스킬 묶음
+  애드온): `bash scripts/install-superpowers.sh --apply` (확인:
+  `--check`, exit 0=설치됨). `install.sh --apply` 가 이미 맨 처음 실행하므로
+  상위 설치 스크립트를 돌렸다면 완료 상태. 번들 `skills/prompt/` 는 **본
+  레포 안에 동봉**, superpowers 는 인터뷰 구동용 `/using-superpowers` 를 추가.
+
+**가이드 흐름(설치 AI 가 실행):**
+
+1. **지정 작업공간 스캔** — 볼트 루트 + 각 봇 작업폴더의 폴더 구조(상위 ~2
+   레벨)·기존 `CLAUDE.md`/`AGENTS.md`/`soul.md`·노트 *샘플*(전체 흡입 ❌)
+   주제·담당 Discord 채널/역할을 읽음. 일반 템플릿이 아니라 *실제*
+   작업공간에 근거.
+2. **`/prompt` 자동 호출로 메타 2파일 초안** — 봇 작업폴더마다 번들
+   `skills/prompt/` 스킬을 **반드시** 호출(force-invoke, §6 — 손으로 짜기
+   금지)해 얇은 `CLAUDE.md`/`AGENTS.md`(업무지시서, §1 형태) + 가장 가까운
+   `templates/soul-*.md` 기반 `soul.md`(페르소나, §2 형태) 생성. 이 두
+   파일이 곧 prompt(봇 상시 지시)이므로 `/prompt` 강제 — 즉흥 작성이 §6 이
+   막으려는 회귀.
+3. **`/using-superpowers` 고도화 인터뷰** — `/using-superpowers` 호출 →
+   brainstorming 스킬로 라우팅돼 사용자 인터뷰로 초안 정련. **한 번에 한
+   결정씩**(질문 폭탄 ❌): 이 봇의 역할/범위(직접 vs 위임) · 페르소나·말투
+   (템플릿·서명·자가점검 줄) · 모델 id(harness 가 실제 노출하는 id, 지어냄
+   ❌) · Discord 표면(채널/스레드·mention id·회의 스레드 거버넌스) · 볼트
+   범위(검색/쓰기 경로, 옵시디언 유/무). 답을 초안에 반영 후 메타 파일을
+   `rules/INDEX.md` 로 포인팅(규칙 inline ❌ — §3).
+4. **완료 선언 전 검증** — soul.md frontmatter 유효 · 서명 줄 존재 · 메타
+   파일이 `rules/INDEX.md` *만* 가리킴 · `/prompt` 실제 진입(즉흥 ❌). 이후
+   §4 "질문 방법" 흐름으로.
+
+**옵시디언 없는 경로:** 0a 에서 옵시디언 미사용 선택 시 0b~3 은 그대로
+실행하되 볼트 범위=연결 전용 표시 + 메모리/내부검색 품질 미보장 안내
+(README "Before you start" 와 동일).
+
+**강제 호출 배선(봇이 첫 셋업에 §0 을 실제 실행하도록):** §6 가 `/prompt`
+배선하는 것과 동일하게 — `CLAUDE.md`/`AGENTS.md` 규칙 포인터 아래 한 줄:
+*"첫 실행 / 미설정 작업폴더 → 일반 작업 전 SETUP-CONFIG-GUIDE §0 가이드
+온보딩(작업공간 지정 → superpowers 설치 → 스캔 → `/prompt` 초안 →
+`/using-superpowers` 인터뷰) 필수 실행."* 또는 `rules/INDEX.md` 행 1개:
+`첫 실행 / WD 에 soul.md 없음 | onboarding.md | SETUP-CONFIG-GUIDE §0 실행: 작업공간→superpowers→스캔→/prompt→/using-superpowers`
 
 ### 세 설정 표면 + 로딩 순서
 
