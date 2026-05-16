@@ -12,6 +12,7 @@ MCP는 Model Context Protocol 의 약자다.
 MD
 
 DISP="$HOME/code/thiscode/skills/search/references/tier-implementations.md.sh"
+[ -f "$DISP" ] || { echo "SKIP: Hermes search dispatcher deferred — see docs/HERMES-STATUS.md"; exit 0; }
 
 CLAUDE_DISCODE_VAULT="$TMPDIR/vault" \
   CLAUDE_DISCODE_FORCE_TIER=4 \

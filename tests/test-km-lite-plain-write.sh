@@ -6,10 +6,9 @@ mkdir -p "$TMPDIR/vault"
 
 INPUT_CONTENT="# Sample Article\n\nThis is the article body about MCP."
 
-CLAUDE_DISCODE_VAULT="$TMPDIR/vault" \
-  CLAUDE_DISCODE_NO_OBSIDIAN=1 \
-  bash "$HOME/code/thiscode/skills/knowledge-manager-lite/references/extract-and-classify.md.sh" \
-    --content "$INPUT_CONTENT" --source-url "https://example.com/x" --title "Sample"
+DISP="$HOME/code/thiscode/skills/knowledge-manager-lite/references/extract-and-classify.md.sh"
+[ -f "$DISP" ] || { echo "SKIP: Hermes km-lite dispatcher deferred — see docs/HERMES-STATUS.md"; exit 0; }
+CLAUDE_DISCODE_VAULT="$TMPDIR/vault" CLAUDE_DISCODE_NO_OBSIDIAN=1 bash "$DISP" --content "$INPUT_CONTENT" --source-url "https://example.com/x" --title "Sample"
 
 NEW=$(find "$TMPDIR/vault" -name '*.md' 2>/dev/null | head -1)
 [ -n "$NEW" ] || { echo "FAIL: no file written"; exit 1; }

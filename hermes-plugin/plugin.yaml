@@ -30,6 +30,7 @@ platforms:
   - wsl
 requires_env: []
 metadata:
+  hermes_status: "partial/deferred — programmatic search/ingest deferred; see docs/HERMES-STATUS.md. Active: registration + drift-check hook."
   contract_version: "0.1.0"
   contract_path: "contracts/search-fallback-4tier.md"
   agent_spec_version: "1.0.0"

@@ -5,6 +5,7 @@ set -e
 ROOT="${CLAUDE_DISCODE_HOME:-/thiscode}"
 VAULT="${CLAUDE_DISCODE_VAULT:-$ROOT/sample-vault}"
 DISP="$ROOT/skills/search/references/tier-implementations.md.sh"
+[ -f "$DISP" ] || { echo "SKIP Dog-1: Hermes search dispatcher deferred — see docs/HERMES-STATUS.md"; exit 0; }
 
 if [ ! -d "$VAULT" ]; then
   echo "scenario-1 SKIP: sample-vault not present at $VAULT (run Phase A first)"

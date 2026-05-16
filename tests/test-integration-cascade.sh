@@ -12,6 +12,7 @@ MCP details here.
 MD
 
 DISP="$HOME/code/thiscode/skills/search/references/tier-implementations.md.sh"
+[ -f "$DISP" ] || { echo "SKIP: Hermes search dispatcher deferred — see docs/HERMES-STATUS.md"; exit 0; }
 
 # T2.1 — cascade must produce a non-empty response (Tier 1 if GraphRAG server is up, else Tier 4)
 CLAUDE_DISCODE_VAULT="$TMPDIR/vault" bash "$DISP" "MCP" > "$TMPDIR/out.txt" 2>&1 || true

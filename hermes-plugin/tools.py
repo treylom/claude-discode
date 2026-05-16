@@ -1,10 +1,11 @@
 """Tool handlers for the thiscode Hermes plugin.
 
-All handlers shell out to the canonical bash dispatchers vendored in ../scripts/
-and ../skills/*/references/*.md.sh — so behavior stays byte-identical with the
-Claude Code path and the contracts in ../contracts/.
-
-Per Hermes convention, handlers MUST return JSON strings and MUST NOT raise.
+Hermes programmatic search/ingest are DEFERRED (see docs/HERMES-STATUS.md):
+thiscode skills are LLM-instruction (SKILL.md), not shell dispatchers, and the
+literate-bash `.md.sh` dispatchers were never vendored to the public repo.
+Handlers therefore return a structured "deferred" JSON pointing at the
+supported Claude Code path. session_start_drift_check (km-version.sh) is real
+and stays active. Handlers MUST return JSON strings and MUST NOT raise.
 """
 
 import json
@@ -41,6 +42,18 @@ def _run(cmd: list[str], env_extra: dict[str, str] | None = None, timeout: int =
         return {"ok": False, "stdout": "", "stderr": f"missing binary: {exc}", "returncode": -2}
 
 
+_DEFER = {
+    "status": "deferred",
+    "reason": "Hermes programmatic dispatch deferred — thiscode skills are LLM-instruction (SKILL.md), not shell dispatchers; the .md.sh dispatcher was not vendored to the public repo.",
+    "use_instead": "Claude Code: /search or /thiscode:km (or invoke the skill via an LLM agent).",
+    "doc": "docs/HERMES-STATUS.md",
+}
+
+
+def _deferred(extra: dict) -> str:
+    return json.dumps({**_DEFER, **extra})
+
+
 def handle_search(args: dict, **_kwargs) -> str:
     query = args.get("query", "").strip()
     if not query:
@@ -48,6 +61,8 @@ def handle_search(args: dict, **_kwargs) -> str:
     env = {}
     if "force_tier" in args:
         env["CLAUDE_DISCODE_FORCE_TIER"] = str(args["force_tier"])
+    if not SEARCH_DISPATCHER.exists():
+        return _deferred({"query": query})
     res = _run(["bash", str(SEARCH_DISPATCHER), query], env_extra=env)
     return json.dumps({"query": query, **res})
 
@@ -58,6 +73,8 @@ def handle_ingest(args: dict, **_kwargs) -> str:
         if args.get(key):
             flag = {"content": "--content", "source": "--source-url", "title": "--title"}[key]
             cmd.extend([flag, args[key]])
+    if not KM_LITE_CORE.exists():
+        return _deferred({"variant": args.get("variant", "lite")})
     res = _run(cmd)
     return json.dumps({"variant": args.get("variant", "lite"), **res})
 
