@@ -16,7 +16,7 @@ $ARGUMENTS
    - else → variant = lite (Phase 1·2 default)
 3. Invoke the matching skill via `Skill` tool:
    - `knowledge-manager-lite` / `knowledge-manager-at` / `knowledge-manager-plain`
-4. If skill emits "config missing" → invoke `thiscode-km-bootstrap`.
+4. If skill emits "config missing" → invoke the `knowledge-manager-bootstrap` skill.
 
 ## Examples
 

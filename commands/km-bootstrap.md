@@ -5,7 +5,7 @@ allowedTools: Bash, AskUserQuestion, Write, Read
 
 # /thiscode:km-bootstrap
 
-Invokes the `thiscode-km-bootstrap` skill — detects environment, prompts for vault_root + install matrix, runs install-*.sh scripts.
+Invokes the `knowledge-manager-bootstrap` skill — detects environment, prompts for vault_root + install matrix, runs install-*.sh scripts.
 
 Use this command when:
 - 처음 설치

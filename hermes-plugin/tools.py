@@ -17,7 +17,7 @@ PLUGIN_DIR = Path(__file__).resolve().parent
 REPO_ROOT = PLUGIN_DIR.parent
 
 SEARCH_DISPATCHER = REPO_ROOT / "skills" / "search" / "references" / "tier-implementations.md.sh"
-KM_LITE_CORE = REPO_ROOT / "skills" / "thiscode-km-lite" / "references" / "extract-and-classify.md.sh"
+KM_LITE_CORE = REPO_ROOT / "skills" / "knowledge-manager-lite" / "references" / "extract-and-classify.md.sh"
 DRIFT_CHECK = REPO_ROOT / "scripts" / "km-version.sh"
 
 
