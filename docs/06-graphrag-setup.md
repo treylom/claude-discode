@@ -27,6 +27,10 @@ curl http://127.0.0.1:8400/health
 # 응답: {"status":"ok","index_version":"..."}
 ```
 
+## 자원 자동 점검 (RAM)
+
+`install-graphrag.sh` preflight 가 RAM 을 자동 점검합니다. **8GB 미만이면 GraphRAG(Tier 1) 비권장** — 메모리 과다로 thrash 위험. 이 경우 자동으로 **Obsidian CLI(Tier 3) 사용을 권고**하고, `--apply` 는 중단됩니다(`GRAPHRAG_FORCE=1` 로 강행 가능). 저사양 머신은 `bash scripts/install-obsidian-cli.sh` 로 Tier 3 를 쓰세요.
+
 ## 문제 해결
 
 - 8400 포트 충돌: `GRAPHRAG_PORT=8401 bash scripts/install-graphrag.sh --apply` 후 `search` 설정에서 endpoint 변경

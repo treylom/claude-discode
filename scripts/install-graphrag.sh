@@ -52,6 +52,23 @@ preflight() {
   else
     echo "  ✓ ${free_gb}GB free"
   fi
+  echo "[preflight] RAM check (GraphRAG Tier 1 = memory-heavy)..."
+  local ram_gb=0
+  if [ "$(uname)" = "Darwin" ]; then
+    ram_gb=$(( $(sysctl -n hw.memsize 2>/dev/null || echo 0) / 1024 / 1024 / 1024 ))
+  else
+    ram_gb=$(( $(awk '/MemTotal/{print $2}' /proc/meminfo 2>/dev/null || echo 0) / 1024 / 1024 ))
+  fi
+  if [ "${ram_gb:-0}" -lt 8 ]; then
+    echo "  ⚠ RAM ${ram_gb}GB < 8GB 권장. GraphRAG(Dense embedding + FastAPI + index)는 메모리 과다 — 저사양에서 thrash 위험." >&2
+    echo "    → 권고: GraphRAG 미사용, Obsidian CLI(Tier 3) 사용: bash scripts/install-obsidian-cli.sh (검색 품질은 Tier 1보다 낮으나 메모리 안전)" >&2
+    echo "    → 그래도 설치 강행: GRAPHRAG_FORCE=1 $0 --apply" >&2
+    if [ "$MODE" = "apply" ] && [ "${GRAPHRAG_FORCE:-0}" != "1" ]; then
+      echo "  ✗ RAM 부족 — apply 중단 (Obsidian CLI 권고. override: GRAPHRAG_FORCE=1)" >&2; fail=1
+    fi
+  else
+    echo "  ✓ RAM ${ram_gb}GB"
+  fi
   echo "[preflight] port $PORT check..."
   if nc -z localhost "$PORT" 2>/dev/null; then
     echo "  ⚠ port $PORT in use (may be existing GraphRAG — apply will skip start)" >&2
