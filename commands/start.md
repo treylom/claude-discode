@@ -91,9 +91,9 @@ template 5종 중 선택 또는 자유 작성:
 | template | 어울리는 사용 | 파일 |
 |---|---|---|
 | `general-assistant` | 범용 비서 (default) | `templates/soul-general-assistant.md` |
-| `research-bot` | 자료조사·교차검증 (코난 스타일) | `templates/soul-research-bot.md` |
-| `writing-bot` | 글쓰기·퇴고 (글재경 스타일) | `templates/soul-writing-bot.md` |
-| `schedule-bot` | 일정·Todo (스트레인지 스타일) | `templates/soul-schedule-bot.md` |
+| `research-bot` | 자료조사·교차검증 | `templates/soul-research-bot.md` |
+| `writing-bot` | 글쓰기·퇴고 | `templates/soul-writing-bot.md` |
+| `schedule-bot` | 일정·Todo | `templates/soul-schedule-bot.md` |
 | `custom` | 자유 페르소나 (anatomy 가이드 포함) | `templates/soul-custom.md` |
 
 선택 후 다음 위치 생성:
