@@ -3986,7 +3986,7 @@ operation = client.models.generate_videos(
 
 #### Part 5: 실전 활용 예시 (@specal1849)
 
-> **출처**: @specal1849 (패스트캠퍼스 제미나이 강의자)의 Threads 꿀팁 모음
+> **출처**: @specal1849 (community contributor) 의 Threads 꿀팁 모음
 > **추가일**: 2026-01-03
 
 ##### 5.1 동적뷰 (Dynamic View)
@@ -4035,7 +4035,7 @@ operation = client.models.generate_videos(
 
 ###### 스타일 프롬프트 예시
 
-**강의용 슬라이드:**
+**슬라이드:**
 ```
 단계별 안내에 중점을 둔 대담하고 재미있는 스타일의 초보자용 자료 만들어줘
 ```
@@ -6607,7 +6607,7 @@ B2B SaaS 시장의 포지셔닝 전략 보고서를 작성하라.
 
 #### 4. 슬라이드 테마 프롬프팅 (6개 테마)
 
-> 출처: Week-5 강의자료 (두부 @tofukyung)
+> 출처: @tofukyung (community contributor)
 
 같은 내용도 **어떤 세계관으로 포장하느냐**에 따라 전혀 다른 인상을 준다.
 

@@ -122,6 +122,6 @@ SessionStart hook 으로 본 인덱스 자동 주입.
 
 ## 관련 자원
 
-- 한국어 강의 가이드: [../../docs/03-shared-memory.md](../../docs/03-shared-memory.md)
+- 한국어 가이드: [../../docs/03-shared-memory.md](../../docs/03-shared-memory.md)
 - vault SHARED-INDEX 실 예시: `<vault>/.claude-memory/shared/SHARED-INDEX.md`
 - 회의실 skill: [../meetings/SKILL.md](../meetings/SKILL.md)

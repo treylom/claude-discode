@@ -62,7 +62,7 @@ LLM 사용 시점만 발생. ripgrep/CLI = 0, MCP/GraphRAG > 0.
 
 **Tokenizer 고정 (Round 2 outcome)**: OpenAI `tiktoken` 으로 통일 측정. 정확도 ±15%. 표 footnote 에 tokenizer 명시.
 
-### 4. `setup_time_min` — 설치 + 첫 indexing 까지 시간 (학생 self-report cohort 평균)
+### 4. `setup_time_min` — 설치 + 첫 indexing 까지 시간 (사용자 self-report cohort 평균)
 
 | Tier | 기본 | 도구 |
 |---|---|---|
@@ -71,7 +71,7 @@ LLM 사용 시점만 발생. ripgrep/CLI = 0, MCP/GraphRAG > 0.
 | 2 | ~10 min | npm install + MCP config |
 | 1 | ~25 min | Python/Docker + embedding generation |
 
-**측정 (Round 2 outcome)**: GitHub Actions 자동 측정 불가 — cohort metric. 강의 수강생 self-report N=30 평균 + GitHub Discussions Feedback category (Round 3 CC3). bias 인정, "self-reported" footnote.
+**측정 (Round 2 outcome)**: GitHub Actions 자동 측정 불가 — cohort metric. 사용자 self-report N=30 평균 + GitHub Discussions Feedback category (Round 3 CC3). bias 인정, "self-reported" footnote.
 
 ### 5. `kg_depth` — knowledge graph 결과 노드의 평균 graph depth
 
@@ -138,5 +138,5 @@ VAULT=~/Documents/Obsidian/MyVault bash benchmark/runners/run-all.sh
 `benchmark/results/*.json` 3주 (≈21일) 연속 다음 중 1개 발생 시 v1.1 PR 자동 생성:
 
 1. 어떤 metric 이든 ±20% 이상 drift
-2. 강의 수강생 feedback (GitHub Discussions) "재현 성공률 ⚠️/❌" 3건 이상
+2. 사용자 feedback (GitHub Discussions) "재현 성공률 ⚠️/❌" 3건 이상
 3. `tier1-stale > 14 days` badge 14일 이상 지속

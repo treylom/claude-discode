@@ -32,7 +32,7 @@ flowchart TD
     class T4 tier4
 ```
 
-각 Tier 는 독립 설치 가능 — Tier 4 만 깔아도 즉시 작동. 학생이 강의 따라가며 점진적으로 Tier 3 → 2 → 1 추가.
+각 Tier 는 독립 설치 가능 — Tier 4 만 깔아도 즉시 작동. 사용자가 점진적으로 Tier 3 → 2 → 1 추가.
 
 ---
 

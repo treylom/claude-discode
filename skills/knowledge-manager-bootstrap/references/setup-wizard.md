@@ -7,7 +7,7 @@
 
 ## Prompt 2: install matrix
 - header: 설치 범위
-- question: "어느 Tier 까지 설치할까요? 강의 학생은 보통 #2 부터 시작합니다."
+- question: "어느 Tier 까지 설치할까요? 입문 사용자는 보통 #2 부터 시작합니다."
 - options:
   1. Obsidian + grep only (최소)
   2. + vault-search MCP (Tier 3 활성, 추천)

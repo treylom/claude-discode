@@ -38,7 +38,7 @@ Q: "이 콘텐츠의 원저자가 tofukyung인가?"
 YES → Mine/ 하위:
   - 얼룩소 원문           → Mine/얼룩소/
   - @tofukyung Threads    → Mine/Threads/
-  - 강의 자료             → Mine/Lectures/
+  - 참고 자료             → Resources/
   - 에세이/분석/에버그린  → Mine/Essays/
   - 업무 산출물 (CV 등)   → Mine/Projects/
 

@@ -127,7 +127,7 @@ which obsidian-cli
 
 | 선택 | 누가? | 시간 |
 |---|---|---|
-| **A. 지금은 패스** | 빠르게 강의 따라가기, Tier 3 까지만 | 0분 |
+| **A. 지금은 패스** | 빠르게 도입, Tier 3 까지만 | 0분 |
 | **B. 도커로 간편 설치** | 도커 익숙한 사용자 | 10분 |
 | **C. Python 로컬 설치** | 직접 디버깅 원하는 사용자 | 25분 |
 
@@ -233,9 +233,9 @@ A. Tier 4 (ripgrep) + Tier 2 (Obsidian) 는 100% 무료. Tier 3 (MCP) 도 무료
 **Q. 이미 obsidian-cli 만 쓰고 있는데 차이는?**
 A. README 의 5-axis benchmark 표 참고. 짧게: Tier 1 GraphRAG 는 recall +44% / Tier 2 obsidian-cli 단독 대비.
 
-**Q. 피드백 / 강의 후기 어디 남기나요?**
+**Q. 피드백 어디 남기나요?**
 A. GitHub Discussions Feedback category: https://github.com/treylom/ThisCode/discussions/categories/feedback (Round 3 outcome). 5 질문 schema 로 2분 응답 → v1.1 graduate decision 에 반영.
 
 **Q. 도움이 필요해요!**
 A. GitHub Issue: https://github.com/treylom/ThisCode/issues
-   강의 학생: 강의 Discord 채널
+   커뮤니티: GitHub Discussions

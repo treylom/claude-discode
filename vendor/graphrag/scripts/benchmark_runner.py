@@ -39,8 +39,8 @@ QUERIES: list[dict[str, Any]] = [
      "gold_notes": ["AI-기술-MOC", "얼룩소-아카이브-MOC"]},
     {"id": "Q07", "level": "L1", "query": "에이전트 팀 구성하는 방법",
      "gold_notes": ["Agent-Teams-실전사례-시리즈", "Knowledge-Manager-Agent-Teams-Guide-2026-02"]},
-    {"id": "Q08", "level": "L1", "query": "성우하이텍 마스터 강의 내용",
-     "gold_notes": ["성우하이텍-AI강의-MOC"]},
+    {"id": "Q08", "level": "L1", "query": "transformer architecture 핵심 개념",
+     "gold_notes": ["AI-기술-MOC"]},
     {"id": "Q09", "level": "L1", "query": "Anthropic AI Safety 관련 연구",
      "gold_notes": ["Anthropic-Pentagon-AI-군사화-대치-2026-02-MOC", "AI-Safety"]},
     {"id": "Q10", "level": "L1", "query": "Obsidian 자동화 워크플로우",
@@ -61,8 +61,8 @@ QUERIES: list[dict[str, Any]] = [
     # L3 — Corpus-wide Synthesis (3)
     {"id": "Q16", "level": "L3", "query": "내 지식 체계에서 가장 핵심적인 주제 3가지와 그 연결 관계",
      "gold_notes": ["얼룩소-아카이브-MOC", "AI-기술-MOC", "정치-민주주의-MOC"]},
-    {"id": "Q17", "level": "L3", "query": "AI 연구부터 강의, 실무 적용까지의 전체 여정",
-     "gold_notes": ["AI-기술-MOC", "성우하이텍-AI강의-MOC", "Obsidian-GraphRAG-Journey-MOC"]},
+    {"id": "Q17", "level": "L3", "query": "AI 연구부터 실무 적용까지의 전체 여정",
+     "gold_notes": ["AI-기술-MOC", "Obsidian-GraphRAG-Journey-MOC"]},
     {"id": "Q18", "level": "L3", "query": "정치/사회 글쓰기와 AI 기술 연구가 어떻게 연결되는가",
      "gold_notes": ["얼룩소-아카이브-MOC", "AI-기술-MOC", "정치-민주주의-MOC"]},
 ]

@@ -86,7 +86,7 @@ Common Expression Language — Google 이 만든 식 평가 언어. Kubernetes /
 테스트용 미리 만든 데이터. benchmark/fixtures/queries.yaml = 20 query + expected hits.
 
 ### cohort
-집단 / 코호트. 강의 1차 수강생 30명 같은 group. dogfood feedback 시 cohort 단위 분석.
+집단 / 코호트. 초기 사용자 cohort 같은 group. dogfood feedback 시 cohort 단위 분석.
 
 ### dogfood
 "개 사료를 본인이 먹는다" — 본인이 만든 제품을 본인이 직접 사용해 검증.

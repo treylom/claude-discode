@@ -216,7 +216,7 @@ wizard 가 단계별 안내:
 ```
 thiscode/
 ├── install.sh                            # 환경 자동 detect + 10-step 자동화
-├── README.md                              # 영문판 (default, 글로벌 강의 대비)
+├── README.md                              # 영문판 (default, 글로벌 사용자 대비)
 ├── README.ko.md                           # 본 파일 (한국어, v2.1 vault-first)
 ├── LICENSE                                # MIT
 ├── CODEX_REVIEW.md                        # Codex 1차 adversarial review
@@ -363,7 +363,7 @@ bash scripts/install-graphrag.sh --apply     # venv 생성 + pip install + nohup
 
 - PR / issue 환영
 - 디버깅 노하우 공유 환영
-- 강의 수강생 피드백 환영
+- 사용자 피드백 환영
 
 ---
 

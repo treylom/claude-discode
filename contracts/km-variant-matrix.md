@@ -8,7 +8,7 @@ date: 2026-05-13
 
 | Variant | Mode I | Mode R | Mode G | Python deps | Agent Teams | Default for |
 |---|---|---|---|---|---|---|
-| **lite** | ✓ | ✗ (notice) | ✓ read-only | None | No | Phase 1·2 강의 학생 |
+| **lite** | ✓ | ✗ (notice) | ✓ read-only | None | No | Phase 1·2 입문 사용자 |
 | **at** | ✓ | ✓ | ✓ full | km-tools.py + jq | Yes (Category Lead + RALPH + DA) | Phase 3 심화 |
 | **plain** | ✓ | ✗ | ✗ | None | No | fallback (no AskUserQuestion env) |
 

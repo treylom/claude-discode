@@ -30,7 +30,7 @@ provides_commands: [/thiscode:search]
 
 ### Block C — thiscode extension (classroom policy)
 
-강의 / 외부 사용 시 학생이 안전하게 쓸 수 있도록 release tier + model 권장 + 허용 도구를 명시.
+외부 배포 사용 시 사용자가 안전하게 쓸 수 있도록 release tier + model 권장 + 허용 도구를 명시.
 
 ```yaml
 tier: external          # external (학생) | internal (운영) | experimental (PoC) | deprecated (graduate inverse)
@@ -115,7 +115,7 @@ benchmark:
 
 | tier | 의미 | 학생 노출 | 비고 |
 |---|---|---|---|
-| `external` | 강의 / 외부 사용자 안전 | ✅ | gates 통과 + benchmark 결과 README 표 노출 |
+| `external` | 외부 배포 사용자 안전 | ✅ | gates 통과 + benchmark 결과 README 표 노출 |
 | `internal` | 운영자 전용 | 부분 | docs 에만 명시, `/thiscode:setup` 메뉴 hidden |
 | `experimental` | PoC / 미검증 | ❌ | README 표 제외, `experimental` badge 표시 |
 | `deprecated` | 사용 중단 예정 | ⚠ | graduate inverse — 6 month deprecation timeline (LangChain agent-protocol 패턴) |

@@ -122,7 +122,7 @@ wizard 가 단계별 안내:
 - 상세 README: [../../README.md](../../README.md)
 - install.sh 본문: [../../install.sh](../../install.sh)
 - tmux.conf.local: [../../configs/tmux.conf.local](../../configs/tmux.conf.local)
-- 한국어 강의 docs: [../../docs/](../../docs/)
+- 한국어 docs: [../../docs/](../../docs/)
 - gpakosz/.tmux 원본: https://github.com/gpakosz/.tmux
 - agentskills.io 표준: https://agentskills.io/specification
 

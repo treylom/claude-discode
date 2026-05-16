@@ -10,7 +10,7 @@ $ARGUMENTS
 
 > **이 커맨드는 GraphRAG 서버를 사용하지 않습니다.** 로컬에 Python uvicorn 서버나 KuzuDB가 없어도 동작합니다.
 > 풀스펙 버전(`/search`)는 GraphRAG 하이브리드 검색을 사용하며 별도 인프라가 필요합니다.
-> 강의·배포·최소 환경용 버전이 이 `/search-lite`입니다.
+> 배포·최소 환경용 버전이 이 `/search-lite`입니다.
 
 <routing>
 ## Phase 0: 모드 결정
@@ -163,11 +163,11 @@ vault에서 "{query}" 관련 자료를 찾지 못했습니다.
 | 정확도 | 높음 (의미 기반 + 엔티티 그래프) | 중간 (텍스트 매칭 기반) |
 | 속도 | 100-500ms (서버 warm 시) | 50-300ms (vault 크기에 따라) |
 | 설치 | .team-os/graphrag 필요 + 일일 빌드 cron | 설치 불필요 (Obsidian/grep만) |
-| 권장 환경 | 연구/창작/분석 | **강의·배포·개인 PC 최소 환경** |
+| 권장 환경 | 연구/창작/분석 | **배포·개인 PC 최소 환경** |
 </differences_from_full_search>
 
 ---
 
 ## Auto-Learned Patterns
 
-- [2026-04-12] 강의/배포 환경에서 GraphRAG 서버 의존성 없는 경량 검색 커맨드를 `/search`에서 분리 생성 — 3-Tier Cascade(Obsidian CLI → MCP → Grep) 구조로 설치 없이 동작. `/search`와 동일한 QUICK/DEEP/AUTO 라우팅 유지 (source: 2026-04-12-0021)
+- [2026-04-12] 배포 환경에서 GraphRAG 서버 의존성 없는 경량 검색 커맨드를 `/search`에서 분리 생성 — 3-Tier Cascade(Obsidian CLI → MCP → Grep) 구조로 설치 없이 동작. `/search`와 동일한 QUICK/DEEP/AUTO 라우팅 유지 (source: 2026-04-12-0021)

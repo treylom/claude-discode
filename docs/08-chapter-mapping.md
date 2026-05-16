@@ -1,13 +1,13 @@
 ---
-title: 강의 영상 Chapter 매핑 — 디버깅 노하우 30+ 카테고리
+title: 학습 경로 매핑 — 디버깅 노하우 30+ 카테고리
 order: 8
 date: 2026-05-13
 status: draft (v0.2.0)
 ---
 
-# 강의 영상 Chapter 매핑
+# 학습 경로 매핑
 
-> SHARED-INDEX.md 30+ 디버깅 학습 + thiscode 어제 회의 §5 spec 을 영상 강의 chapter 구조로 정리. Phase 1/2/3 × 학습 곡선.
+> SHARED-INDEX.md 30+ 디버깅 학습 + thiscode 어제 회의 §5 spec 을 학습 경로 구조로 정리. Phase 1/2/3 × 학습 곡선.
 
 ## Phase 1 — 입문 (학생이 첫 봇을 띄움)
 
@@ -154,7 +154,7 @@ status: draft (v0.2.0)
 - Phase 3: 10 chapter × 평균 9 min = ~90 min
 - 보조: 10 chapter × 평균 5.5 min = ~55 min
 
-**합계: ~227 min (3 시간 47 분)** — 마스터시트 가이드 "약 15 시간" 의 25% 분량 (디버깅·운영 노하우 슬롯). 나머지 75% 는 KM/search 흐름 + Agent Teams 실습 + 강의 프로젝트.
+**합계: ~227 min (3 시간 47 분)** — 마스터시트 가이드 "약 15 시간" 의 25% 분량 (디버깅·운영 노하우 슬롯). 나머지 75% 는 KM/search 흐름 + Agent Teams 실습 + 실습 프로젝트.
 
 ## Cross-reference
 

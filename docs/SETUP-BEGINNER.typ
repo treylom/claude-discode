@@ -76,7 +76,7 @@ thiscode 의 핵심은 검색을 4단계로 fallback 합니다 — 빠른 도구
 #v(0.5em)
 
 #box(fill: rgb("#e8f5e9"), inset: 8pt, radius: 4pt)[
-  #text(weight: "bold", fill: rgb("#2c8a3d"))[Tip] — 강의 따라가는 학생이라면 Tier 4 + 3 까지만 (3-A) 충분합니다. 익숙해진 후 GraphRAG (4-C) 도전.
+  #text(weight: "bold", fill: rgb("#2c8a3d"))[Tip] — 빠르게 도입하려면 Tier 4 + 3 까지만 (3-A) 충분합니다. 익숙해진 후 GraphRAG (4-C) 도전.
 ]
 
 #pagebreak()
@@ -240,7 +240,7 @@ which obsidian-cli
   align: (left, left, center),
   fill: (_, row) => if row == 0 { rgb("#f0f4ff") } else { none },
   [#text(weight: "bold")[선택]], [#text(weight: "bold")[누가?]], [#text(weight: "bold")[시간]],
-  [4-A], [지금은 패스, 빠르게 강의 따라가기 (Tier 3 까지만)], [0분],
+  [4-A], [지금은 패스, 빠르게 도입 (Tier 3 까지만)], [0분],
   [4-B], [도커 익숙한 사용자], [10분],
   [4-C], [Python 로컬 + 직접 디버깅 원함], [25분],
 )
@@ -356,7 +356,7 @@ README 의 5-axis benchmark 표 참고:
 - Tier 1 GraphRAG = recall +44% / Tier 2 obsidian-cli 단독 대비
 - 단 setup 25분 + LLM 비용
 
-== Q5. 피드백 / 강의 후기 어디 남기나요?
+== Q5. 피드백 어디 남기나요?
 
 GitHub Discussions Feedback category: https://github.com/treylom/ThisCode/discussions/categories/feedback
 
@@ -369,7 +369,7 @@ GitHub Discussions Feedback category: https://github.com/treylom/ThisCode/discus
     #text(weight: "bold")[도움이 필요하면]
     #v(0.5em)
     - GitHub Issue: https://github.com/treylom/ThisCode/issues
-    - 강의 학생: 강의 Discord 채널
+    - 커뮤니티: GitHub Discussions
     - 문서: SETUP.md (개발자용) / AGENTS.md (Custom Hybrid v1.0 spec) / BENCHMARK.md (5-axis 해석)
   ]
 ]
