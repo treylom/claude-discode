@@ -30,6 +30,14 @@ triggers:
 - **프롬프트 작업 = `prompt` 스킬 강제 호출**: LLM 용 프롬프트 작성·개선·리뷰,
   GPTs/Gems instruction, 팩트체크/리서치/이미지 프롬프트 — 어느 것이든 즉흥
   작성 금지, **응답 전 `skills/prompt` 진입**. (근거·배선: `docs/SETUP-CONFIG-GUIDE.md` §6)
+- **능동 completion·진행 보고 (proactive — reactive reply 와 별개)**: 지시받은
+  작업이 **완료 / 부분산출(partial) / 권한대기 / 외부핸드오프 / blocked
+  10~15분+** 상태에 도달하면 사용자·다른 봇이 묻기를 기다리지 말고 **즉시 새
+  메시지로 능동 보고**(완료=산출 경로 / blocked=막힌 지점·필요 권한). "다음
+  단계가 남아 미완"이라는 이유의 침묵 금지 — blocked·partial 도 그 자체가
+  보고 대상 상태. bridge-level heartbeat 가 코드 백업으로 병행되나 본 모델
+  규율이 1차다. (vault 완료 게이트 = `rules/autonomy.md` §2 의 per-bot
+  일반화. ThisCodex bridge 측 = `docs/yolo-bridge-contract.md` heartbeat 절)
 
 ## 정체성
 
