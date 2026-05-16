@@ -3,7 +3,7 @@
   "description": "Claude Code 환경 + Discord 봇 1개 + tmux/oh-my-tmux 통합 셋업 플러그인. WSL/Linux/macOS 자동 detect. 슬래시: /thiscode:start, /thiscode:add-bot, /thiscode:open-meeting, /thiscode:self-update.",
   "version": "0.1.0",
   "author": {
-    "name": "김재경 (treylom)",
+    "name": "treylom",
     "email": "treylom@users.noreply.github.com"
   },
   "homepage": "https://github.com/treylom/ThisCode",

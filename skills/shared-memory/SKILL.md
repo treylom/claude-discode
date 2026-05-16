@@ -4,7 +4,7 @@ description: Use when designing or migrating shared memory across bots and machi
 license: MIT
 compatibility: Obsidian vault 사용자 + plain markdown folder 사용자 양쪽 호환
 metadata:
-  author: 김재경 (treylom)
+  author: treylom
   version: "0.1.0"
   hermes:
     tags: [Memory, BotOrchestration]
@@ -85,7 +85,7 @@ thiscode-meetings skill 의 4-file 표준 적용. 자세히는 그 skill 참조.
 └── ...
 ```
 
-`<encoded-WD>` 는 Claude Code 가 자동 encoding (예: `/Users/tofu_mac/obsidian-ai-vault` → `-Users-tofu-mac-obsidian-ai-vault`).
+`<encoded-WD>` 는 Claude Code 가 자동 encoding (예: `<vault>` → `<encoded-WD>`).
 
 SessionStart hook 으로 본 인덱스 자동 주입.
 

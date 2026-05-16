@@ -220,7 +220,7 @@ def bootstrap_from_vault(
 # ---------------------------------------------------------------------------
 
 def main(
-    vault_path: str = "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain",
+    vault_path: str = "<vault>",
     db_path: str = _DEFAULT_DB,
     cortex_db: str | None = None,
 ) -> None:
@@ -271,7 +271,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Bootstrap GraphRAG index from cortex.db or vault scan")
     parser.add_argument("--db", default=_DEFAULT_DB)
-    parser.add_argument("--vault", default="/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain")
+    parser.add_argument("--vault", default="<vault>")
     parser.add_argument("--cortex", default=None, help="Path to cortex.db (auto-detected if not specified)")
     parser.add_argument("--force", action="store_true", help="Re-bootstrap even if DB has data")
     args = parser.parse_args()

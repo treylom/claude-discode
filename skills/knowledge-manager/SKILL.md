@@ -355,7 +355,7 @@ Main이 입력 소스를 직접 추출합니다. 스킬 참조: `km-content-extr
 
 ## STEP 3: Vault 탐색 (Main 직접 - 순차)
 
-### Phase A0: MOC 우선 탐색 (2026-04-21 재경님 규율)
+### Phase A0: MOC 우선 탐색 (2026-04-21 운영 규율)
 
 > **"상위 MOC부터 보도록."** 원자 노트보다 상위 MOC를 먼저 식별해
 > (1) 기존 카테고리 파악 + (2) 새 노트의 parent 후보 선확정.
@@ -380,7 +380,7 @@ Main이 입력 소스를 직접 추출합니다. 스킬 참조: `km-content-extr
 ```
 1. Hub 노트 식별:
    - Grep으로 [[키워드]] 패턴 검색
-     Grep({ pattern: "\\[\\[.*{키워드}.*\\]\\]", path: "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain" })
+     Grep({ pattern: "\\[\\[.*{키워드}.*\\]\\]", path: "<vault>" })
    - 가장 많이 참조되는 노트 = Hub 노트 (최소 2개 식별)
 
 2. 1-hop 추적:
@@ -732,7 +732,7 @@ Write({ file_path: "{vault_absolute_path}/적절한/경로/파일명.md", conten
 **Mine/ vs Library/ 라우팅**: 노트 생성 전 반드시 아래 규칙으로 경로를 결정합니다.
 
 ```
-Q: "이 콘텐츠의 원저자가 tofukyung(김재경)인가?"
+Q: "이 콘텐츠의 원저자가 tofukyung인가?"
 
 YES → Mine/ 하위:
   - 얼룩소 원문           → Mine/얼룩소/
@@ -751,12 +751,12 @@ NO → Library/ 하위 (기본):
 ```
 
 **판별 시그널 (우선순위)**:
-1. author 필드 = "tofukyung" 또는 "김재경" → Mine/
+1. author 필드 = "tofukyung" → Mine/
 2. source URL에 "@tofukyung" 포함 → Mine/Threads/
 3. tags에 "tofukyung" 포함 → Mine/
 4. 위 해당 없음 → Library/
 
-### 5-0-PLUS. 기존 상위 MOC parent 자동 등록 (2026-04-21 재경님 규율)
+### 5-0-PLUS. 기존 상위 MOC parent 자동 등록 (2026-04-21 운영 규율)
 
 > **"하나의 문서, 복수 MOC 소속."** Phase A0 `candidate_parent_mocs` 중
 > 작성자·주제와 일치하는 MOC를 새 노트 frontmatter `parent` 필드에 복수 등록.
@@ -810,7 +810,7 @@ IF len(candidate_parent_mocs) > 0:
 
 ```
 1. Resources/images/{topic-folder}/ 디렉토리 생성:
-   Bash("mkdir -p /home/tofu/AI/AI_Second_Brain/Resources/images/{topic-folder}/")
+   Bash("mkdir -p <vault>/AI_Second_Brain/Resources/images/{topic-folder}/")
 
 2. 수집된 이미지 다운로드:
    웹 이미지: Bash("curl -sLo '{경로}' '{url}'")
@@ -835,7 +835,7 @@ IF len(candidate_parent_mocs) > 0:
 > 새 노트를 생성하는 것만으로는 지식이 복리로 쌓이지 않는다.
 > 기존 노트에 새 정보를 반영해야 위키가 compounding artifact가 된다.
 
-### 5.5-0. 상위 MOC 역링크 자동 추가 (2026-04-21 재경님 규율)
+### 5.5-0. 상위 MOC 역링크 자동 추가 (2026-04-21 운영 규율)
 
 > 새 노트가 `parent` 필드로 등록한 상위 MOC에 역방향 wikilink 등록. 중복 방지.
 
@@ -1103,12 +1103,12 @@ vault에 전용 페이지가 없는 주요 엔티티를 식별:
 
 ```bash
 # Obsidian vault 파일 시스템 동기화 (touch로 mtime 갱신)
-find "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain" -name "*.md" -newer /tmp/.km-sync-marker -exec touch {} + 2>/dev/null
+find "<vault>" -name "*.md" -newer /tmp/.km-sync-marker -exec touch {} + 2>/dev/null
 
 # 또는 rsync로 WSL→Windows 강제 동기화 (생성/수정된 파일만)
 rsync -av --update --include="*.md" --exclude="*" \
-  "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain/Library/" \
-  "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain/Library/" \
+  "<vault>/Library/" \
+  "<vault>/Library/" \
   2>/dev/null || true
 ```
 

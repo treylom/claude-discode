@@ -20,7 +20,7 @@
     "url": "git+https://github.com/treylom/ThisCode.git"
   },
   "license": "MIT",
-  "author": "tofukyung (김재경)",
+  "author": "tofukyung",
   "files": [
     "contracts/",
     "scripts/",

@@ -29,7 +29,7 @@ allowedTools: Bash, AskUserQuestion, Write, Read
 
 `~/.thiscode-config`:
 ```yaml
-vault_root: /Users/tofu_mac/obsidian-ai-vault
+vault_root: <vault>
 search:
   tiers:
     - graphrag

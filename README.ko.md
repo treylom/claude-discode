@@ -359,7 +359,7 @@ bash scripts/install-graphrag.sh --apply     # venv 생성 + pip install + nohup
 
 ## 🤝 기여
 
-본 레포는 패스트캠퍼스 강의용 + 김재경 (`treylom`) 의 vault 운영 경험 종합. 
+본 레포는 패스트캠퍼스 강의용 + `treylom` 의 vault 운영 경험 종합. 
 
 - PR / issue 환영
 - 디버깅 노하우 공유 환영

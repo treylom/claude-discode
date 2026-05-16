@@ -46,19 +46,19 @@ def _get_vault(config: dict, override: str | None = None) -> str:
         return (
             vault_config.get("mac_path")
             or vault_config.get("path")
-            or "/Users/tofu_mac/obsidian-ai-vault/AI_Second_Brain"
+            or "<vault>/AI_Second_Brain"
         )
     elif sys.platform.startswith("linux"):
         # WSL 또는 native Linux
         return (
             vault_config.get("wsl_path")
             or vault_config.get("path")
-            or "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain"
+            or "<vault>"
         )
     else:
         return (
             vault_config.get("path")
-            or "/Users/tofu_mac/obsidian-ai-vault/AI_Second_Brain"
+            or "<vault>/AI_Second_Brain"
         )
 
 

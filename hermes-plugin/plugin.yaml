@@ -21,7 +21,7 @@ provides_commands:
   - /thiscode:km-bootstrap
   - /thiscode:search
   - /thiscode:setup
-author: 김재경 (tofukyung)
+author: tofukyung
 homepage: https://github.com/treylom/ThisCode
 license: MIT
 platforms:

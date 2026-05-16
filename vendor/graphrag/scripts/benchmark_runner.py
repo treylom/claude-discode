@@ -31,8 +31,8 @@ QUERIES: list[dict[str, Any]] = [
      "gold_notes": ["얼룩소-아카이브-MOC"]},
     {"id": "Q04", "level": "L0", "query": "Claude Code 스킬",
      "gold_notes": ["Claude-Code-Skills-2.0-MOC"]},
-    {"id": "Q05", "level": "L0", "query": "김재경",
-     "gold_notes": ["김재경-aboutme-MOC", "tofukyung-persona-MOC"]},
+    {"id": "Q05", "level": "L0", "query": "tofukyung",
+     "gold_notes": ["tofukyung-aboutme-MOC", "tofukyung-persona-MOC"]},
 
     # L1 — Relationship Exploration (5)
     {"id": "Q06", "level": "L1", "query": "얼룩소에서 AI에 대해 쓴 글",

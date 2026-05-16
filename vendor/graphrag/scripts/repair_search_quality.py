@@ -22,7 +22,7 @@ from pathlib import Path
 
 _PROJECT_DIR = Path(__file__).resolve().parents[3]
 DEFAULT_DB_PATH = _PROJECT_DIR / ".team-os/graphrag/index/vault_graph.db"
-DEFAULT_VAULT_PATH = Path("/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain")
+DEFAULT_VAULT_PATH = Path("<vault>")
 
 # Exclude rule — re-export from vault_filter.py (single source of truth)
 from vault_filter import EXCLUDE_DIRS, is_excluded_path

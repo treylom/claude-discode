@@ -3,7 +3,7 @@
 set -e
 
 PLUGIN_DIR="${CLAUDE_DISCODE_HOME:-$HOME/code/thiscode}/contracts"
-VAULT_DIR="${CLAUDE_DISCODE_VAULT:-/Users/tofu_mac/obsidian-ai-vault}/.claude/reference/contracts"
+VAULT_DIR="${CLAUDE_DISCODE_VAULT:-$HOME/obsidian-ai-vault}/.claude/reference/contracts"
 
 if [ ! -d "$PLUGIN_DIR" ]; then
   echo "plugin contracts dir missing: $PLUGIN_DIR" >&2

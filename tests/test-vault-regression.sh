@@ -2,7 +2,7 @@
 # T4 — vault regression: existing /knowledge-manager + /search still work after mirror align.
 set -e
 
-VAULT=/Users/tofu_mac/obsidian-ai-vault
+VAULT=$HOME/obsidian-ai-vault
 
 # T4.1 — /knowledge-manager.md still references 7-Layer + Mode I/R/G
 grep -qE "7-Layer|Mode I|Mode R|Mode G" "$VAULT/.claude/commands/knowledge-manager.md" || \

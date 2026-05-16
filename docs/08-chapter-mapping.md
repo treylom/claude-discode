@@ -144,7 +144,7 @@ status: draft (v0.2.0)
 - 영상 길이: 7 min.
 
 ### C30. typst-report Windows vault 동시 복사
-- 학습: WSL 경로 + `/mnt/c/Users/...` 동시 복사 의무 (재경님 Obsidian 리뷰 위함).
+- 학습: WSL 경로 + `/mnt/c/Users/...` 동시 복사 의무 (운영자 Obsidian 리뷰 위함).
 - 영상 길이: 4 min.
 
 ## 영상 총량 추정

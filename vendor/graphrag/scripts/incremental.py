@@ -212,7 +212,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Incremental GraphRAG update")
     parser.add_argument("--db", default=_DEFAULT_DB)
-    parser.add_argument("--vault", default="/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain")
+    parser.add_argument("--vault", default="<vault>")
     parser.add_argument("--llm", action="store_true", help="Enable LLM extraction")
     parser.add_argument("--dry-run", action="store_true", help="Detect changes only, don't update")
     args = parser.parse_args()

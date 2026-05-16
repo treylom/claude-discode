@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-F=/Users/tofu_mac/code/thiscode/docs/GLOSSARY.md
+F=$HOME/code/ThisCode/docs/GLOSSARY.md
 test -f "$F" || { echo "FAIL: GLOSSARY.md not found"; exit 1; }
 TERMS=$(grep -E "^### " "$F" | wc -l)
 [ "$TERMS" -ge 30 ] || { echo "FAIL: expected 30+ terms, got $TERMS"; exit 1; }

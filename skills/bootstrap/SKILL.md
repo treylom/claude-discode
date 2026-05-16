@@ -4,7 +4,7 @@ description: Use when setting up a fresh Claude Code environment with Discord bo
 license: MIT
 compatibility: WSL Ubuntu 20.04+ / Linux native (Debian, Ubuntu, Fedora, Arch) / macOS (tmux >= 2.6 required)
 metadata:
-  author: 김재경 (treylom)
+  author: treylom
   version: "0.1.0"
   hermes:
     tags: [Setup, Discord, Coding]

@@ -63,7 +63,7 @@ thiscode v2.3 가 의존하는 모든 외부 패키지 / repo 의 출처 / licen
 
 GraphRAG core 21 file (`.py` 18 + `.sh` 2 + `requirements.txt` 1) = obsidian-ai-vault `.team-os/graphrag/scripts/` 와 동등 vendor 박제.
 
-- 출처: github.com/treylom/obsidian-ai-vault `.team-os/graphrag/scripts/` (private vault, 2026-05-13 snapshot)
+- 출처: ë¹ê³µê° vault `.team-os/graphrag/scripts/` (private vault, 2026-05-13 snapshot)
 - License: thiscode 본 repo license (MIT) 와 동등 (treylom own)
 - Update 정책: pin version (vault SoT 변경 시 manual sync, v2.4 cycle 안 변경)
 

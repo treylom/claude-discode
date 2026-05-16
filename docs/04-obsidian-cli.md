@@ -73,7 +73,7 @@ VAULT="$HOME/Documents/<vault-name>"
 
 ```bash
 VAULT="/mnt/c/Users/<windows-user>/Documents/Obsidian/<vault-name>"
-# 예: /mnt/c/Users/treyl/Documents/Obsidian/Second_Brain
+# 예: <vault>
 ```
 
 ⚠️ **경로 정규화 주의**: Claude Code 슬래시 (`/search`, `/knowledge-manager`) 가 vault root 기준 **상대 경로** 만 받음. 다음 패턴 금지:

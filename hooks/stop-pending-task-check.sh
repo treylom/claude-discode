@@ -3,7 +3,7 @@
 # thiscode v2.3 — session 종료 시 pending task 확인 + 사용자 알림
 #
 # 본 hook 의 의도: 자율 cycle 안 미완 task 남기지 않게 사용자 visibility 보장.
-# 2026-05-13 재경님 spec (Discord 1504151646719185077).
+# 2026-05-13 spec.
 #
 # 설치 방법 (사용자 ~/.claude/hooks/ 안):
 #   1. 본 file cp ~/.claude/hooks/stop-pending-task-check.sh

@@ -4,7 +4,7 @@ description: Use when launching multi-bot collaboration meetings with permanent 
 license: MIT
 compatibility: Discord 봇 운영 환경 + 회의 polled audience ≥2 봇
 metadata:
-  author: 김재경 (treylom)
+  author: treylom
   version: "0.1.0"
   hermes:
     tags: [Meetings, Discord, BotOrchestration]

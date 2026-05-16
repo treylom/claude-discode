@@ -2,7 +2,7 @@
   "name": "thiscode-marketplace",
   "description": "Claude Code + Discord 봇 + codex 호출 통합 플러그인 마켓플레이스 — 패스트캠퍼스 강의용",
   "owner": {
-    "name": "김재경 (treylom)",
+    "name": "treylom",
     "email": "treylom@users.noreply.github.com"
   },
   "plugins": [
@@ -12,7 +12,7 @@
       "version": "0.1.0",
       "source": "./",
       "author": {
-        "name": "김재경 (treylom)",
+        "name": "treylom",
         "email": "treylom@users.noreply.github.com"
       }
     }

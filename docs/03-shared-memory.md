@@ -78,7 +78,7 @@ machine-mac/
 
 machine-wsl/
 ├── WSL-INDEX.md
-├── env-paths.md            # /home/tofu/AI 등
+├── env-paths.md            # <vault> 등
 └── hardware-spec.md
 ```
 

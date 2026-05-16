@@ -35,7 +35,7 @@ from graphrag_core import get_connection, close_connection
 # ---------------------------------------------------------------------------
 
 # Vault root for resolving wikilink targets to actual note files
-_VAULT_ROOT = os.environ.get("VAULT_ROOT", "/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain")
+_VAULT_ROOT = os.environ.get("VAULT_ROOT", "<vault>")
 
 # Pre-built lookup: note stem (filename without .md) → relative path
 # Lazily initialized on first call to _resolve_note_path

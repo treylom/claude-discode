@@ -909,7 +909,7 @@ Write({ file_path: "{vault_absolute_path}/적절한/경로/파일명.md", conten
 **Mine/ vs Library/ 라우팅**: 노트 생성 전 반드시 아래 규칙으로 경로를 결정합니다.
 
 ```
-Q: "이 콘텐츠의 원저자가 tofukyung(김재경)인가?"
+Q: "이 콘텐츠의 원저자가 tofukyung인가?"
 
 YES → Mine/ 하위:
   - 얼룩소 원문           → Mine/얼룩소/
@@ -928,7 +928,7 @@ NO → Library/ 하위 (기본):
 ```
 
 **판별 시그널 (우선순위)**:
-1. author 필드 = "tofukyung" 또는 "김재경" → Mine/
+1. author 필드 = "tofukyung" → Mine/
 2. source URL에 "@tofukyung" 포함 → Mine/Threads/
 3. tags에 "tofukyung" 포함 → Mine/
 4. 위 해당 없음 → Library/
@@ -968,15 +968,15 @@ NO → Library/ 하위 (기본):
    - 각 이미지의 Type, Source, URL/Path, Context, Placement 확인
 
 2. Resources/images/{topic-folder}/ 디렉토리 생성:
-   Bash("mkdir -p /home/tofu/AI/AI_Second_Brain/Resources/images/{topic-folder}/")
+   Bash("mkdir -p <vault>/AI_Second_Brain/Resources/images/{topic-folder}/")
 
 3. 각 이미지 다운로드/복사:
 
    웹 이미지:
-   Bash("curl -sLo '/home/tofu/AI/AI_Second_Brain/Resources/images/{topic-folder}/{NN}-{descriptive-name}.{ext}' '{url}'")
+   Bash("curl -sLo '<vault>/AI_Second_Brain/Resources/images/{topic-folder}/{NN}-{descriptive-name}.{ext}' '{url}'")
 
    PDF 이미지 (marker 출력):
-   Bash("cp km-temp/{name}/images/{file} '/home/tofu/AI/AI_Second_Brain/Resources/images/{topic-folder}/{NN}-{descriptive-name}.{ext}'")
+   Bash("cp km-temp/{name}/images/{file} '<vault>/AI_Second_Brain/Resources/images/{topic-folder}/{NN}-{descriptive-name}.{ext}'")
 
 4. 다운로드 실패 시 Playwright 스크린샷 폴백:
    - 원본 URL로 navigate

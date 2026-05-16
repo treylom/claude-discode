@@ -372,7 +372,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Frontmatter ↔ GraphRAG DB sync")
     parser.add_argument("--db", default=_DEFAULT_DB)
-    parser.add_argument("--vault", default="/mnt/c/Users/treyl/Documents/Obsidian/Second_Brain")
+    parser.add_argument("--vault", default="<vault>")
     sub = parser.add_subparsers(dest="direction", required=True)
 
     p_to_fm = sub.add_parser("to-frontmatter", help="DB → frontmatter (default dry-run)")
