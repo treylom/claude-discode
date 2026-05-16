@@ -26,6 +26,8 @@ You do three things: (1) put one job sheet, (2) pick a personality template, (3)
 
 ## §0 — Guided onboarding (first run — recommended)
 
+![Onboarding decision path — designate workspace → install superpowers → scan → /prompt draft → /using-superpowers interview, with the Obsidian-less branch](../assets/onboarding-decision-path.png)
+
 This is the path for a non-developer. The installing AI runs it **once**, and
 the output is a finished `CLAUDE.md` + `soul.md` per bot — produced by the
 bundled `/prompt` skill and a short `/using-superpowers` interview, not
@@ -110,6 +112,8 @@ So this is not skippable, wire it the same way §6 wires `/prompt`:
   `First run / WD has no soul.md | onboarding.md | Run SETUP-CONFIG-GUIDE §0: workspace → superpowers → scan → /prompt → /using-superpowers`
 
 ## The three config surfaces (and load order)
+
+![Three config surfaces and load order — CLAUDE.md/AGENTS.md/GEMINI.md → soul.md → rules/INDEX.md → memory/meetings](../assets/config-surfaces-loading-order.png)
 
 A thiscode bot composes its behavior from three files, loaded in this order:
 
@@ -205,6 +209,8 @@ not duplicate it here.
 
 회의 스레드·채널·대화기록 보관 거버넌스: [05-meeting-thread-protocol.md](05-meeting-thread-protocol.md) (정책 SoT = vault rules/channel-governance.md — 새 주제=새 스레드 / 보관=최종 산출만 / 기기간=멀티버스).
 
+![Companion + channel governance — ThisCode ↔ ThisCodex pairing, new-topic thread / archive-final-only / cross-machine multiverse](../assets/companion-governance.png)
+
 Minimal worked example — a bot that must always reply via a channel tool:
 
 `rules/INDEX.md` (router — the only file the meta file points at):
@@ -223,6 +229,8 @@ Each turn: scan INDEX triggers → match → Read that one file → apply. No ma
 proceed. Rules are paid for (in context) only when relevant.
 
 ## §4 — How to set up & how to ask (first run)
+
+![4-Tier vault search with Obsidian-less degradation — GraphRAG → vault-search MCP → Obsidian CLI → ripgrep fallback](../assets/search-fallback-4tier.png)
 
 After install + the three files above:
 

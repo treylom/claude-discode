@@ -4,9 +4,11 @@
 >
 > 🌐 **English version**: [README.md](README.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (개발자) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (초보자) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0) · ⚙️ **[설정 가이드](docs/SETUP-CONFIG-GUIDE.md)** (CLAUDE.md · soul.md · rules · Skills 2.0) · 📄 **[전체 정리 한 장 (HTML)](docs/SUMMARY.html)** · 🤝 **[ThisCodex](https://github.com/treylom/ThisCodex)** (Codex 동반 런타임)
 
-![ThisCode + ThisCodex 구조](assets/architecture.png)
+![ThisCode 핵심 그림 — 구조화된 옵시디언 볼트, 작업 디렉토리별 적합한 봇, 디스코드로 운영, 봇끼리 협업](assets/core-mental-model.png)
 
 > **처음 오셨나요?** 핵심은 — **구조화된 옵시디언 볼트**를 두고, **각 작업 디렉토리에 적합한 봇**을 배치해, **디스코드**로 그 봇들을 쓰고 **봇끼리 협업**하게 하는 것입니다. 공유 메모리·검색은 부가 효과지 핵심이 아닙니다. 사전 지식 없이 위 Setup 링크부터 따라오시면 됩니다.
+
+![ThisCode + ThisCodex 상세 배선 (tmux · app-server · 디스코드 · 볼트)](assets/architecture.png)
 
 WSL / Linux / macOS 어디서든 `bash install.sh` 한 줄로 Claude Code + tmux 환경을 세팅합니다. **핵심 가치**: *구조화된 옵시디언 볼트* 안에서 *각 작업 디렉토리에 적합한 봇*을 두고, *디스코드*로 쓰며, *봇끼리 협업*하게 하는 것. 4-Tier 볼트 검색(GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) + LLM 모델 라우팅은 그 봇들을 쓸모 있게 만드는 보조 기능이지 핵심이 아닙니다.
 

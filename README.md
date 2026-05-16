@@ -4,9 +4,11 @@
 >
 > 🇰🇷 **한국어 버전**: [README.ko.md](README.ko.md) · 📘 **Setup**: [docs/SETUP.md](docs/SETUP.md) (developer) · 🌱 [docs/SETUP-BEGINNER.md](docs/SETUP-BEGINNER.md) (beginner) · 🧩 [docs/AGENTS.md](docs/AGENTS.md) (Custom Hybrid v1.0) · ⚙️ **[Config Guide](docs/SETUP-CONFIG-GUIDE.md)** (CLAUDE.md · soul.md · rules · Skills 2.0) · 📄 **[전체 정리 한 장 (HTML)](docs/SUMMARY.html)** · 🤝 **[ThisCodex](https://github.com/treylom/ThisCodex)** (Codex companion)
 
-![ThisCode + ThisCodex architecture](assets/architecture.png)
+![ThisCode core idea — a structured Obsidian vault, the right bot per working directory, driven from Discord, bots collaborating](assets/core-mental-model.png)
 
 > **New here?** Core idea: keep a **structured Obsidian vault**, put the **right bot in each working directory**, drive them from **Discord**, and let the bots coordinate with each other. Shared memory / search are supporting payoffs — not the headline. Start with the Setup links above — no prior knowledge assumed.
+
+![ThisCode + ThisCodex detailed wiring (tmux · app-server · Discord · vault)](assets/architecture.png)
 
 `bash install.sh` boots a Claude Code + tmux environment (WSL / Linux / macOS). **Core value**: a *structured Obsidian vault* where each working directory gets an *appropriate bot*, all usable from *Discord*, with bots that can *talk to each other*. The 4-Tier vault search (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) + LLM model routing are the capabilities that make those bots useful — supporting, not the point.
 
