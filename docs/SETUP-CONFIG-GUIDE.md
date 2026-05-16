@@ -9,6 +9,16 @@
 > Hard English terms are glossed in parentheses on first use, for non-developer
 > readers. 🇰🇷 Korean mirror at the bottom (`## 한국어`).
 
+## In one minute (plain words)
+
+New here and not a developer? Think of your bot as a **new teammate**:
+
+- **CLAUDE.md / AGENTS.md / GEMINI.md** = their *one-page job sheet* — what the project is, where they sit, and "check the handbook when the situation calls for it." Keep it short.
+- **soul.md** = their *personality & voice* — copy a ready-made template, fill the blanks.
+- **rules/** = the *company handbook* — they do NOT memorize it; they open the one page that matches the moment.
+
+You do three things: (1) put one job sheet, (2) pick a personality template, (3) point at the handbook. That is the whole setup. Everything below is just the detail of those three.
+
 ## The three config surfaces (and load order)
 
 A thiscode bot composes its behavior from three files, loaded in this order:
@@ -185,6 +195,26 @@ Why a hard rule: prompt quality regresses to ad-hoc without enforced routing;
 the skill's frameworks (IFCN fact-check base, 5-stage image, GPTs/Gems
 structure) are only applied if the skill is actually entered.
 
+## Stuck? — friendly FAQ
+
+**Q. The bot ignores its personality / signature.**
+A. Open `soul.md`. Is the top `---` block (frontmatter) filled and valid? Is the completion-signature line still there? Missing signature is the #1 cause.
+
+**Q. The bot did not follow a rule I expected.**
+A. A rule only loads when its trigger row in `rules/INDEX.md` matches the situation. Check that a row actually describes your case; if not, add one.
+
+**Q. Where do I put these files?**
+A. The job sheet (`CLAUDE.md`/`AGENTS.md`) at the project/bot root; `soul.md` in the bot working dir; `rules/` next to it. The load order at the top of this guide shows the sequence.
+
+**Q. Do I really need Obsidian?**
+A. For full memory + internal search, yes — recommended. Without it a plain Discord bot still works for basic connectivity, but memory/search quality is not guaranteed (see the README "Before you start").
+
+**Q. What model id do I write in soul.md?**
+A. A real id your tool exposes (e.g. an Opus/Sonnet/Haiku id for Claude Code, a gpt-5.x id for Codex). Not a made-up name.
+
+**Q. It still feels overwhelming.**
+A. Do only the three steps in "In one minute" first. Skip §1-§6 detail until something breaks; this guide is a reference, not a checklist to finish in one sitting.
+
 ## See also
 
 - [SETUP.md](SETUP.md) — install (this guide is what comes *after*)
@@ -240,3 +270,21 @@ orphan 디렉토리 없음 · 깨진 reference 없음 · 명령형 어조 · ref
 `disable-model-invocation: true`. **본 체크리스트가 곧 표준**(Anthropic
 Skills 2.0 12-check 루브릭). push 전 매 항목 수동 확인 + diff 에서 하드코딩
 경로·시크릿 grep 검사 필수(본 레포 history 의 privacy 교훈 — 미검사 publish 금지).
+
+### 1분 설명 (비개발자용)
+
+봇을 **새 팀원**이라고 생각하세요:
+- `CLAUDE.md/AGENTS.md/GEMINI.md` = 한 장짜리 **업무 지시서**(프로젝트가 뭔지·어디 앉는지·"상황 맞으면 매뉴얼 펴봐"). 짧게.
+- `soul.md` = **성격·말투**. 완성 템플릿 복사 후 빈칸 채우기.
+- `rules/` = **사내 매뉴얼**. 통째로 외우지 않고, 그 순간에 맞는 한 페이지만 펴봄.
+
+할 일 3개: ① 지시서 1장 ② 성격 템플릿 1개 ③ 매뉴얼 가리키기. 이게 전부입니다. 아래는 그 3개의 세부일 뿐.
+
+### 막히면? — 자주 묻는 질문
+
+- **봇이 성격/서명을 무시해요** → `soul.md` 맨 위 `---` 블록 채워졌는지 + 완료 서명 줄 남아있는지 (서명 누락이 1순위 원인).
+- **기대한 규칙을 안 따라요** → 규칙은 `rules/INDEX.md` 트리거 행이 상황과 맞을 때만 로드. 내 상황 설명하는 행 있는지 확인, 없으면 추가.
+- **파일 어디 둬요?** → 지시서=프로젝트/봇 루트, `soul.md`=봇 작업폴더, `rules/`=그 옆. 맨 위 로딩 순서 그림 참고.
+- **옵시디언 꼭 필요해요?** → 메모리·내부검색 제대로 쓰려면 권장. 없이도 단순 연결은 되지만 품질 미보장.
+- **모델 id 뭘 써요?** → 도구가 실제 노출하는 id(Claude=Opus/Sonnet/Haiku id, Codex=gpt-5.x id). 지어낸 이름 ❌.
+- **너무 복잡해요** → 위 "1분 설명" 3단계만 먼저. 뭔가 깨지기 전엔 §1~§6 세부 skip. 이 문서는 한 번에 끝낼 체크리스트가 아니라 참조용.
