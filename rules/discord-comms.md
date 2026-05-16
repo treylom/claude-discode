@@ -16,6 +16,12 @@ Trigger: any moment you respond/report/notify to an external channel
 - In a shared channel, a message aimed at another bot **must** carry its
   `<@user_id>` mention or a `reply_to` — otherwise the receiving bot silently
   drops it. Derive user_ids deterministically; never guess/invent bot names.
+- **Split-message retag**: if a long message is auto-split into 2+ parts,
+  re-include the recipient `<@user_id>` mention at the head of **every**
+  continuation part. A continuation without the mention is silently dropped
+  (= effectively unsent). Self-check: if the send result reports "N parts",
+  verify each part carries the mention; prefer compressing to one part. Ask
+  other bots to do the same when their reports are truncated.
 
 ## 3. Meeting / topic threads
 - ≥2 bots · ≥10 min · has an agenda (2-of-3) → spin a dedicated thread; the

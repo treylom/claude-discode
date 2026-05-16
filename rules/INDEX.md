@@ -19,6 +19,7 @@
 | Starting a build/design / debug / verify task | [skill-process.md](skill-process.md) | Invoke the relevant skill BEFORE responding. Root cause before fix. Design before implement (unless user said "proceed") |
 | Porting a tool/skill / deploying / pushing / adding an MCP | [porting-infra.md](porting-infra.md) | Check upstream before hand-rolling. Secret-scan before any push. MCP health-check |
 | Writing a persona response (voice) | [voice.md](voice.md) | Keep the persona's voice + completion signature every response; no echo drift |
+| Delegating to / waiting on a bot · asserting a bot's identity/health · multi-agent coordination | [orchestration.md](orchestration.md) | Verify bot identity (chain-load guard), don't assume; teammate idle = drive not wait; meeting = adopt domain frames, no solo lock |
 
 ## Splitting principle
 - One file = one situation cluster. Loaded on demand, so each file is focused

@@ -1,0 +1,37 @@
+# Rule: multi-agent orchestration
+
+Trigger: delegating to / waiting on another bot, convening a meeting,
+asserting another bot's identity or health, or coordinating multiple agents.
+
+## 1. Bot identity = verify, never assume
+- A bot's identity SoT is the persona injected at session start for **its own**
+  `<bot>` (derived from its state dir / `~/.../discord-<bot>`), plus its own
+  working-directory context file.
+- **Chain-load guard**: agent runtimes load every context file from cwd up to
+  the repo root. If a shared/root context file (`CLAUDE.md` / `AGENTS.md` /
+  `GEMINI.md`) also doubles as one specific bot's WD meta ("I am X"), every
+  other bot whose WD sits under that root chain-loads it and can absorb that
+  identity. Put an **identity guard at the very top** of any such file: "this
+  identity block applies only when `<bot>` == X; otherwise ignore it — your
+  identity is your own injected persona + your own WD context." A bot speaking
+  in another bot's voice / self-referring as another bot = this guard missing.
+- The orchestrator **verifies** a teammate's session/identity/health (live
+  check, source-fact) before delegating or waiting. "It's probably working" by
+  assumption, then waiting, is dereliction.
+
+## 2. Drive, don't idle (collaboration-boundary distinction)
+- Teammate is the gate but idle/blocked → orchestrator actively re-engages:
+  supply an executable input (e.g. collect the *data* yourself so the
+  teammate's judgement step is unblocked), run non-gating tracks in parallel.
+- Distinguish: **blocked on a user decision** → summarize, report, stop (no
+  polling). **Teammate idle / oversight** → not a stop; drive and verify. Do
+  not conflate the two into passive waiting.
+
+## 3. Meeting facilitation (no solo lock)
+- Convener does not force its own frame; adopt each bot's domain prep frame as
+  that domain's SoT, register frames separately, keep your draft as one input.
+- Lock only after: gate teammate's output → meeting consensus → independent
+  review → second-track review → maintainer sign-off. No single step skipped.
+
+▶ Fill in: how `<bot>` is derived in your setup; your identity-guard location;
+your independent-review + second-track reviewers; your maintainer sign-off path.

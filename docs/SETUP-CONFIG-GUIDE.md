@@ -231,6 +231,52 @@ Minimal worked example — a bot that must always reply via a channel tool:
 Each turn: scan INDEX triggers → match → Read that one file → apply. No match →
 proceed. Rules are paid for (in context) only when relevant.
 
+## §3.5 — Runtime ops tools (memory archival + meeting watchdog)
+
+Two stdlib-only tools ship in `scripts/`. **Invocation contract** (the `+x`
+bit is convenience, never load-bearing):
+- **Manual run from the repo root** — relative is fine:
+  `python3 scripts/<tool>.py …`
+- **launchd / hook / any scheduler** — the working directory is NOT
+  guaranteed, so you **MUST** use the absolute path:
+  `python3 /absolute/path/to/<repo>/scripts/<tool>.py …`
+  (e.g. launchd plist `ProgramArguments` =
+  `["python3", "<repo>/scripts/memory_dreaming.py", "--scan"]`,
+  `["python3", "<repo>/scripts/meeting_watchdog.py", "check", "<thread_id>"]`).
+  A relative `scripts/...` in a scheduler is a recurrence trap — do not.
+
+The relative `python3 scripts/<tool>.py` examples below are **manual,
+repo-root** form; for any unattended/scheduled caller substitute the
+absolute path above.
+
+**memory-dreaming** — reversible memory archival (*move, never delete*).
+Plain intro: [memory-dreaming.md](memory-dreaming.md).
+- `python3 scripts/memory_dreaming.py --scan` = default dry-run report (no
+  changes). `--apply` is gated (corpus-baseline precondition fail-closed +
+  dry-run cycle counter). `--restore <slug>` = checksum-verified undo.
+  `--recalibrate` = Phase0 corpus measurement.
+- Weekly-enforced via three layers: a YAML manifest
+  (`~/.claude-memory-archive/dreaming-schedule.yaml`) + a session-start
+  overdue check + a launchd weekly job; any one down, the others hold the
+  cadence. Fresh install sets `next_due = install + 7d` (not instantly
+  overdue).
+- Safe defaults: nothing auto-archives unless high-confidence (per-run
+  capped); ambiguous → human review; behavioral (`user`/`feedback`) memory
+  is an unconditional keep; voice/persona memory is never auto-banded.
+- Codex memory tier (`~/.codex/memories`) is picked up automatically; the
+  cold subdir is `MEMORY_DREAMING_CODEX_SUB` (shipped default `codex`).
+
+**meeting-watchdog** — enforce progress on a created meeting thread.
+- `python3 scripts/meeting_watchdog.py start <thread_id> --goal <…>
+  --tasks-total N`, then a launchd ~5-min `check <thread_id>`, plus
+  `beat <thread_id> --tasks-done M --goal-met true|false` pushed by the
+  orchestrator (only it can read `/goal` + task state). Also `status` /
+  `stop`.
+- Terminates ONLY when the goal is met AND all tasks complete. Fail-closed
+  = keep-active: a corrupt/absent manifest never terminates a live meeting.
+  Discord post is best-effort; `MEETING_WATCHDOG_SIGNATURE` (default empty)
+  optionally appends a persona signature.
+
 ## §4 — How to set up & how to ask (first run)
 
 ![4-Tier vault search with Obsidian-less degradation — GraphRAG → vault-search MCP → Obsidian CLI → ripgrep fallback](../assets/search-fallback-4tier.png)
