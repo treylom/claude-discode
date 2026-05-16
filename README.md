@@ -6,9 +6,11 @@
 
 ![ThisCode + ThisCodex architecture](assets/architecture.png)
 
-> **New here?** This one picture is the whole idea: run a Claude Code bot (**ThisCode**) and a Codex bot (**ThisCodex**) from **Discord**, both sharing the same Obsidian vault, memory, and rules. Start with the Setup links above — no prior setup knowledge assumed.
+> **New here?** Core idea: keep a **structured Obsidian vault**, put the **right bot in each working directory**, drive them from **Discord**, and let the bots coordinate with each other. Shared memory / search are supporting payoffs — not the headline. Start with the Setup links above — no prior knowledge assumed.
 
-thiscode is a single `bash install.sh` plugin that boots a working Claude Code + tmux + oh-my-tmux environment on WSL / Linux / macOS and pairs a Discord bot end-to-end — but its core value is a **4-Tier vault search fallback** (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) with **LLM model routing** (Haiku/Sonnet/Opus + Codex path). Discord is secondary; vault-first.
+`bash install.sh` boots a Claude Code + tmux environment (WSL / Linux / macOS). **Core value**: a *structured Obsidian vault* where each working directory gets an *appropriate bot*, all usable from *Discord*, with bots that can *talk to each other*. The 4-Tier vault search (GraphRAG → vault-search MCP → Obsidian CLI → ripgrep) + LLM model routing are the capabilities that make those bots useful — supporting, not the point.
+
+> **Before you start (recommended):** (1) lay out your Obsidian **folder structure** first; (2) **install Obsidian** for full memory + internal-search. **No Obsidian?** You can still wire a plain Discord bot for connectivity only — but vault memory and internal-search quality are **not guaranteed** without it.
 
 ## 🛠️ v2.3 Zero-config Install (NEW — 2026-05-13)
 
