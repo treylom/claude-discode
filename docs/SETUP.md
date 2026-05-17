@@ -25,6 +25,39 @@ advanced (1-line installer): `curl -fsSL https://raw.githubusercontent.com/treyl
 
 troubleshooting: `~/.claude/plugins/` 디렉토리 없으면 `mkdir -p ~/.claude/plugins` 먼저
 
+## 2.5 Codex에서 KM 쓰기 (Codex 봇 사용자만, 3분)
+
+§2 의 plugin install 은 **Claude Code** 에 ThisCode skills(`knowledge-manager`
+계열 등)를 노출합니다. **Codex CLI 봇은 그 경로를 읽지 않습니다** — Codex 의
+개인 skill 스캔 경로는 `~/.agents/skills/` 입니다(Claude Code `~/.claude/skills/`
+↔ Codex `~/.agents/skills/` 1:1, [ThisCodex/docs/skill-portability.md](https://github.com/treylom/ThisCodex/blob/master/docs/skill-portability.md) §1·§2).
+
+ThisCode 가 skill 의 **단일 기준 출처(SoT)** 입니다. Codex 에서 쓰려면 그
+SoT 를 `~/.agents/skills/` 로 단방향 sync 합니다(복사본은 편집 ❌):
+
+```bash
+bash ~/.claude/plugins/thiscode/scripts/sync-skills-to-codex.sh --check   # 미리보기 + 호환성
+bash ~/.claude/plugins/thiscode/scripts/sync-skills-to-codex.sh --apply   # ~/.agents/skills/ 로 복사
+```
+
+검증: 새 Codex 세션 또는 `codex exec` 의 active skill 목록에 KM 이 뜨는지
+확인. `knowledge-manager-lite` / `-plain` 부터 smoke.
+
+### Codex 호환성 매트릭스 (정직 고지 — 노출 ≠ full 동작)
+
+KM 일부는 Claude Code 전용 도구에 의존하므로 Codex 에서는 노출돼도 저하/미지원입니다:
+
+| Skill | Codex | 사유 |
+|---|---|---|
+| `knowledge-manager-plain` | ✅ **지원** | `AskUserQuestion` 無, 외부 MCP 의존 최소 |
+| `knowledge-manager-lite` | ✅ **지원** | `AskUserQuestion` 無 (`mcp__obsidian` 미노출 시 plain write fallback) |
+| `knowledge-manager` (full) | ⚠️ **degraded** | `AskUserQuestion` + `mcp__obsidian/notion/playwright/*` 의존 → 대화형 설정·Obsidian MCP 없으면 저하 |
+| `knowledge-manager-bootstrap` | ⚠️ **degraded** | `AskUserQuestion` 으로 vault_root·install matrix 확정 → Codex 미노출 시 env/기본값 필요 |
+| `knowledge-manager-at` | ❌ **미지원** | Agent Teams(`TeamCreate`·`SendMessage`·`Task*`) = Claude Code 전용, Codex 미노출 |
+
+→ Codex 봇은 **`-lite`/`-plain` 우선** 사용. `full`·`-at` 가 필요한 작업은
+Claude Code 봇(ThisCode plugin)으로 라우팅하세요.
+
 ## 3. Tier 2 — vault-search MCP (5분, 권장)
 
 ```bash
